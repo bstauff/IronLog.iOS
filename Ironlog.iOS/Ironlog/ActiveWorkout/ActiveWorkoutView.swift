@@ -17,14 +17,31 @@ struct ActiveWorkoutView: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack {
-                MovementView(movement: activeWorkout.mainMovement)
-                MovementView(movement: activeWorkout.supplementalMovement)
-                ForEach(0..<activeWorkout.assistanceMovements.count) { index in
-                    MovementView(movement: activeWorkout.assistanceMovements[index])
+        TabView {
+            ScrollView {
+                VStack {
+                    MovementView(movement: activeWorkout.mainMovement)
                 }
-                
+            }.tabItem {
+                Label("Main", systemImage: "list.dash")
+            }
+            
+            ScrollView {
+                VStack {
+                    MovementView(movement: activeWorkout.supplementalMovement)
+                }
+            }.tabItem {
+                Label("Supplemental", systemImage: "list.dash")
+            }
+            
+            ScrollView {
+                VStack {
+                    ForEach(0..<activeWorkout.assistanceMovements.count) { index in
+                        MovementView(movement: activeWorkout.assistanceMovements[index])
+                    }
+                }
+            }.tabItem {
+                Label("Assistance", systemImage: "list.dash")
             }
         }
     }
