@@ -1,0 +1,616 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		053FDDDA272F2DC5002D6D9D /* IronlogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053FDDD9272F2DC5002D6D9D /* IronlogApp.swift */; };
+		053FDDDC272F2DC5002D6D9D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053FDDDB272F2DC5002D6D9D /* ContentView.swift */; };
+		053FDDDE272F2DC5002D6D9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 053FDDDD272F2DC5002D6D9D /* Assets.xcassets */; };
+		053FDDE1272F2DC5002D6D9D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 053FDDE0272F2DC5002D6D9D /* Preview Assets.xcassets */; };
+		053FDDEB272F2DC5002D6D9D /* IronlogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053FDDEA272F2DC5002D6D9D /* IronlogTests.swift */; };
+		053FDDF5272F2DC5002D6D9D /* IronlogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053FDDF4272F2DC5002D6D9D /* IronlogUITests.swift */; };
+		053FDDF7272F2DC5002D6D9D /* IronlogUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053FDDF6272F2DC5002D6D9D /* IronlogUITestsLaunchTests.swift */; };
+		053FDE05272F4517002D6D9D /* Movement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053FDE04272F4517002D6D9D /* Movement.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		053FDDE7272F2DC5002D6D9D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 053FDDCE272F2DC5002D6D9D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 053FDDD5272F2DC5002D6D9D;
+			remoteInfo = Ironlog;
+		};
+		053FDDF1272F2DC5002D6D9D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 053FDDCE272F2DC5002D6D9D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 053FDDD5272F2DC5002D6D9D;
+			remoteInfo = Ironlog;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		053FDDD6272F2DC5002D6D9D /* Ironlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ironlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		053FDDD9272F2DC5002D6D9D /* IronlogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronlogApp.swift; sourceTree = "<group>"; };
+		053FDDDB272F2DC5002D6D9D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		053FDDDD272F2DC5002D6D9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		053FDDE0272F2DC5002D6D9D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		053FDDE6272F2DC5002D6D9D /* IronlogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IronlogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		053FDDEA272F2DC5002D6D9D /* IronlogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronlogTests.swift; sourceTree = "<group>"; };
+		053FDDF0272F2DC5002D6D9D /* IronlogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IronlogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		053FDDF4272F2DC5002D6D9D /* IronlogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronlogUITests.swift; sourceTree = "<group>"; };
+		053FDDF6272F2DC5002D6D9D /* IronlogUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronlogUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		053FDE04272F4517002D6D9D /* Movement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movement.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		053FDDD3272F2DC5002D6D9D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		053FDDE3272F2DC5002D6D9D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		053FDDED272F2DC5002D6D9D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		053FDDCD272F2DC5002D6D9D = {
+			isa = PBXGroup;
+			children = (
+				053FDE03272F44F0002D6D9D /* IronlogModel */,
+				053FDDD8272F2DC5002D6D9D /* Ironlog */,
+				053FDDE9272F2DC5002D6D9D /* IronlogTests */,
+				053FDDF3272F2DC5002D6D9D /* IronlogUITests */,
+				053FDDD7272F2DC5002D6D9D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		053FDDD7272F2DC5002D6D9D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				053FDDD6272F2DC5002D6D9D /* Ironlog.app */,
+				053FDDE6272F2DC5002D6D9D /* IronlogTests.xctest */,
+				053FDDF0272F2DC5002D6D9D /* IronlogUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		053FDDD8272F2DC5002D6D9D /* Ironlog */ = {
+			isa = PBXGroup;
+			children = (
+				053FDDD9272F2DC5002D6D9D /* IronlogApp.swift */,
+				053FDDDB272F2DC5002D6D9D /* ContentView.swift */,
+				053FDDDD272F2DC5002D6D9D /* Assets.xcassets */,
+				053FDDDF272F2DC5002D6D9D /* Preview Content */,
+			);
+			path = Ironlog;
+			sourceTree = "<group>";
+		};
+		053FDDDF272F2DC5002D6D9D /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				053FDDE0272F2DC5002D6D9D /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		053FDDE9272F2DC5002D6D9D /* IronlogTests */ = {
+			isa = PBXGroup;
+			children = (
+				053FDDEA272F2DC5002D6D9D /* IronlogTests.swift */,
+			);
+			path = IronlogTests;
+			sourceTree = "<group>";
+		};
+		053FDDF3272F2DC5002D6D9D /* IronlogUITests */ = {
+			isa = PBXGroup;
+			children = (
+				053FDDF4272F2DC5002D6D9D /* IronlogUITests.swift */,
+				053FDDF6272F2DC5002D6D9D /* IronlogUITestsLaunchTests.swift */,
+			);
+			path = IronlogUITests;
+			sourceTree = "<group>";
+		};
+		053FDE03272F44F0002D6D9D /* IronlogModel */ = {
+			isa = PBXGroup;
+			children = (
+				053FDE04272F4517002D6D9D /* Movement.swift */,
+			);
+			path = IronlogModel;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		053FDDD5272F2DC5002D6D9D /* Ironlog */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 053FDDFA272F2DC5002D6D9D /* Build configuration list for PBXNativeTarget "Ironlog" */;
+			buildPhases = (
+				053FDDD2272F2DC5002D6D9D /* Sources */,
+				053FDDD3272F2DC5002D6D9D /* Frameworks */,
+				053FDDD4272F2DC5002D6D9D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Ironlog;
+			productName = Ironlog;
+			productReference = 053FDDD6272F2DC5002D6D9D /* Ironlog.app */;
+			productType = "com.apple.product-type.application";
+		};
+		053FDDE5272F2DC5002D6D9D /* IronlogTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 053FDDFD272F2DC5002D6D9D /* Build configuration list for PBXNativeTarget "IronlogTests" */;
+			buildPhases = (
+				053FDDE2272F2DC5002D6D9D /* Sources */,
+				053FDDE3272F2DC5002D6D9D /* Frameworks */,
+				053FDDE4272F2DC5002D6D9D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				053FDDE8272F2DC5002D6D9D /* PBXTargetDependency */,
+			);
+			name = IronlogTests;
+			productName = IronlogTests;
+			productReference = 053FDDE6272F2DC5002D6D9D /* IronlogTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		053FDDEF272F2DC5002D6D9D /* IronlogUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 053FDE00272F2DC5002D6D9D /* Build configuration list for PBXNativeTarget "IronlogUITests" */;
+			buildPhases = (
+				053FDDEC272F2DC5002D6D9D /* Sources */,
+				053FDDED272F2DC5002D6D9D /* Frameworks */,
+				053FDDEE272F2DC5002D6D9D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				053FDDF2272F2DC5002D6D9D /* PBXTargetDependency */,
+			);
+			name = IronlogUITests;
+			productName = IronlogUITests;
+			productReference = 053FDDF0272F2DC5002D6D9D /* IronlogUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		053FDDCE272F2DC5002D6D9D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1310;
+				LastUpgradeCheck = 1310;
+				TargetAttributes = {
+					053FDDD5272F2DC5002D6D9D = {
+						CreatedOnToolsVersion = 13.1;
+					};
+					053FDDE5272F2DC5002D6D9D = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = 053FDDD5272F2DC5002D6D9D;
+					};
+					053FDDEF272F2DC5002D6D9D = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = 053FDDD5272F2DC5002D6D9D;
+					};
+				};
+			};
+			buildConfigurationList = 053FDDD1272F2DC5002D6D9D /* Build configuration list for PBXProject "Ironlog" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 053FDDCD272F2DC5002D6D9D;
+			productRefGroup = 053FDDD7272F2DC5002D6D9D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				053FDDD5272F2DC5002D6D9D /* Ironlog */,
+				053FDDE5272F2DC5002D6D9D /* IronlogTests */,
+				053FDDEF272F2DC5002D6D9D /* IronlogUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		053FDDD4272F2DC5002D6D9D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				053FDDE1272F2DC5002D6D9D /* Preview Assets.xcassets in Resources */,
+				053FDDDE272F2DC5002D6D9D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		053FDDE4272F2DC5002D6D9D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		053FDDEE272F2DC5002D6D9D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		053FDDD2272F2DC5002D6D9D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				053FDDDC272F2DC5002D6D9D /* ContentView.swift in Sources */,
+				053FDDDA272F2DC5002D6D9D /* IronlogApp.swift in Sources */,
+				053FDE05272F4517002D6D9D /* Movement.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		053FDDE2272F2DC5002D6D9D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				053FDDEB272F2DC5002D6D9D /* IronlogTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		053FDDEC272F2DC5002D6D9D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				053FDDF5272F2DC5002D6D9D /* IronlogUITests.swift in Sources */,
+				053FDDF7272F2DC5002D6D9D /* IronlogUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		053FDDE8272F2DC5002D6D9D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 053FDDD5272F2DC5002D6D9D /* Ironlog */;
+			targetProxy = 053FDDE7272F2DC5002D6D9D /* PBXContainerItemProxy */;
+		};
+		053FDDF2272F2DC5002D6D9D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 053FDDD5272F2DC5002D6D9D /* Ironlog */;
+			targetProxy = 053FDDF1272F2DC5002D6D9D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		053FDDF8272F2DC5002D6D9D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		053FDDF9272F2DC5002D6D9D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		053FDDFB272F2DC5002D6D9D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Ironlog/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = braynesoft.Ironlog;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		053FDDFC272F2DC5002D6D9D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Ironlog/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = braynesoft.Ironlog;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		053FDDFE272F2DC5002D6D9D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = braynesoft.IronlogTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ironlog.app/Ironlog";
+			};
+			name = Debug;
+		};
+		053FDDFF272F2DC5002D6D9D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = braynesoft.IronlogTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ironlog.app/Ironlog";
+			};
+			name = Release;
+		};
+		053FDE01272F2DC5002D6D9D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = braynesoft.IronlogUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Ironlog;
+			};
+			name = Debug;
+		};
+		053FDE02272F2DC5002D6D9D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = braynesoft.IronlogUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Ironlog;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		053FDDD1272F2DC5002D6D9D /* Build configuration list for PBXProject "Ironlog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				053FDDF8272F2DC5002D6D9D /* Debug */,
+				053FDDF9272F2DC5002D6D9D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		053FDDFA272F2DC5002D6D9D /* Build configuration list for PBXNativeTarget "Ironlog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				053FDDFB272F2DC5002D6D9D /* Debug */,
+				053FDDFC272F2DC5002D6D9D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		053FDDFD272F2DC5002D6D9D /* Build configuration list for PBXNativeTarget "IronlogTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				053FDDFE272F2DC5002D6D9D /* Debug */,
+				053FDDFF272F2DC5002D6D9D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		053FDE00272F2DC5002D6D9D /* Build configuration list for PBXNativeTarget "IronlogUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				053FDE01272F2DC5002D6D9D /* Debug */,
+				053FDE02272F2DC5002D6D9D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 053FDDCE272F2DC5002D6D9D /* Project object */;
+}
