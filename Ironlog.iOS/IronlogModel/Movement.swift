@@ -9,18 +9,18 @@ import Foundation
 
 struct Movement {
     let movementName: String;
-    let weight: Int;
+    let sets: [Set];
 }
 
 struct Set {
+    let weight: Int;
     let reps: Int;
-    let movement: Movement;
 }
 
 struct Workout {
-    let mainSets: [Set];
-    let supplementalSets: [Set];
-    let assistanceSets: [Set];
+    let mainSets: [Movement];
+    let supplementalSets: [Movement];
+    let assistanceSets: [Movement];
 }
 
 struct DailyPlan {

@@ -38,10 +38,11 @@ struct ContentView_Previews: PreviewProvider {
             Workout(
                 mainSets: [
                     Set(
-                        reps: 10,
+                        reps: 5,
                         movement: Movement(
                             movementName: "Squat",
-                            weight: 250))],
+                            weight: 155)),
+                    Set(reps: 5, movement: Movement(movementName: "Squat", weight: 175))],
                 supplementalSets: [
                     Set(
                         reps: 10,
