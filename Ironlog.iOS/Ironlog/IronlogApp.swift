@@ -11,7 +11,8 @@ import SwiftUI
 struct IronlogApp: App {
     var body: some Scene {
         WindowGroup {
-            ActiveWorkoutView(activeWorkout: Workout(mainMovement: <#T##Movement#>, supplementalMovement: <#T##Movement#>, assistanceMovements: <#T##[Movement]#>))
+            let mockWorkout = MockDataWorkoutService().getWorkouts()
+            ActiveWorkoutView(activeWorkout: mockWorkout)
         }
     }
 }
