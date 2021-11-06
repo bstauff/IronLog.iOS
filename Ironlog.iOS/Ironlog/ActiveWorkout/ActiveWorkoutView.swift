@@ -17,8 +17,15 @@ struct ActiveWorkoutView: View {
     }
     
     var body: some View {
-        VStack {
-            Text("Movements")
+        ScrollView {
+            VStack {
+                MovementView(movement: activeWorkout.mainMovement)
+                MovementView(movement: activeWorkout.supplementalMovement)
+                ForEach(0..<activeWorkout.assistanceMovements.count) { index in
+                    MovementView(movement: activeWorkout.assistanceMovements[index])
+                }
+                
+            }
         }
     }
 }
@@ -26,28 +33,9 @@ struct ActiveWorkoutView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let sampleWorkout = Workout(
-            mainMovement: Movement(
-                movementName: "Squat",
-                sets: [
-                    Set(weight: 255, reps: 5),
-                    Set(weight: 275, reps: 3),
-                    Set(weight:275, reps: 1)]),
-            supplementalMovement: Movement(
-                movementName: "Squat",
-                sets: [
-                    Set(weight: 175, reps: 5),
-                    Set(weight: 175, reps: 5),
-                    Set(weight: 175, reps: 5),
-                    Set(weight: 175, reps: 5),
-                    Set(weight: 175, reps: 5)
-                ]
-            ),
-            assistanceMovements: [
-                Movement(movementName: "Tricep Pushdown", sets: [Set(weight: 45, reps: 12)])
-            ]
-        )
+        let workoutService = MockDataWorkoutService()
         
-        ActiveWorkoutView(activeWorkout: sampleWorkout)
+        
+        ActiveWorkoutView(activeWorkout: workoutService.getWorkouts())
     }
 }
