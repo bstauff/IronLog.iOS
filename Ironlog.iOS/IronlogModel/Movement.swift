@@ -18,9 +18,9 @@ struct Set {
 }
 
 struct Workout {
-    let mainSets: [Movement];
-    let supplementalSets: [Movement];
-    let assistanceSets: [Movement];
+    let mainMovement: Movement;
+    let supplementalMovement: Movement;
+    let assistanceMovements: [Movement];
 }
 
 struct DailyPlan {

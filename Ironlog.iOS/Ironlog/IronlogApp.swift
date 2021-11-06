@@ -11,11 +11,7 @@ import SwiftUI
 struct IronlogApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(
-                workout: Workout(
-                    mainSets: [], supplementalSets: [], assistanceSets: []
-                )
-            )
+            ActiveWorkoutView(activeWorkout: Workout(mainMovement: <#T##Movement#>, supplementalMovement: <#T##Movement#>, assistanceMovements: <#T##[Movement]#>))
         }
     }
 }
