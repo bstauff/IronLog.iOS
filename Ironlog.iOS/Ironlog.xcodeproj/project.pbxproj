@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		053B93472736F79000551377 /* MovementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053B93462736F79000551377 /* MovementView.swift */; };
+		053B934A2736FE9200551377 /* WorkoutServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053B93492736FE9200551377 /* WorkoutServiceProtocol.swift */; };
+		053B934C2737000500551377 /* MockDataWorkoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053B934B2737000500551377 /* MockDataWorkoutService.swift */; };
 		053FDDDA272F2DC5002D6D9D /* IronlogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053FDDD9272F2DC5002D6D9D /* IronlogApp.swift */; };
-		053FDDDC272F2DC5002D6D9D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053FDDDB272F2DC5002D6D9D /* ContentView.swift */; };
+		053FDDDC272F2DC5002D6D9D /* ActiveWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053FDDDB272F2DC5002D6D9D /* ActiveWorkoutView.swift */; };
 		053FDDDE272F2DC5002D6D9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 053FDDDD272F2DC5002D6D9D /* Assets.xcassets */; };
 		053FDDE1272F2DC5002D6D9D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 053FDDE0272F2DC5002D6D9D /* Preview Assets.xcassets */; };
 		053FDDEB272F2DC5002D6D9D /* IronlogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053FDDEA272F2DC5002D6D9D /* IronlogTests.swift */; };
@@ -35,9 +38,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		053B93462736F79000551377 /* MovementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementView.swift; sourceTree = "<group>"; };
+		053B93492736FE9200551377 /* WorkoutServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutServiceProtocol.swift; sourceTree = "<group>"; };
+		053B934B2737000500551377 /* MockDataWorkoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataWorkoutService.swift; sourceTree = "<group>"; };
 		053FDDD6272F2DC5002D6D9D /* Ironlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ironlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		053FDDD9272F2DC5002D6D9D /* IronlogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronlogApp.swift; sourceTree = "<group>"; };
-		053FDDDB272F2DC5002D6D9D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		053FDDDB272F2DC5002D6D9D /* ActiveWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveWorkoutView.swift; sourceTree = "<group>"; };
 		053FDDDD272F2DC5002D6D9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		053FDDE0272F2DC5002D6D9D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		053FDDE6272F2DC5002D6D9D /* IronlogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IronlogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,9 +79,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		053B93442736F5B100551377 /* ActiveWorkout */ = {
+			isa = PBXGroup;
+			children = (
+				053FDDDB272F2DC5002D6D9D /* ActiveWorkoutView.swift */,
+			);
+			path = ActiveWorkout;
+			sourceTree = "<group>";
+		};
+		053B93452736F76800551377 /* Movement */ = {
+			isa = PBXGroup;
+			children = (
+				053B93462736F79000551377 /* MovementView.swift */,
+			);
+			path = Movement;
+			sourceTree = "<group>";
+		};
+		053B93482736FDF100551377 /* IronlogServices */ = {
+			isa = PBXGroup;
+			children = (
+				053B93492736FE9200551377 /* WorkoutServiceProtocol.swift */,
+				053B934B2737000500551377 /* MockDataWorkoutService.swift */,
+			);
+			path = IronlogServices;
+			sourceTree = "<group>";
+		};
 		053FDDCD272F2DC5002D6D9D = {
 			isa = PBXGroup;
 			children = (
+				053B93482736FDF100551377 /* IronlogServices */,
 				053FDE03272F44F0002D6D9D /* IronlogModel */,
 				053FDDD8272F2DC5002D6D9D /* Ironlog */,
 				053FDDE9272F2DC5002D6D9D /* IronlogTests */,
@@ -97,8 +129,9 @@
 		053FDDD8272F2DC5002D6D9D /* Ironlog */ = {
 			isa = PBXGroup;
 			children = (
+				053B93452736F76800551377 /* Movement */,
+				053B93442736F5B100551377 /* ActiveWorkout */,
 				053FDDD9272F2DC5002D6D9D /* IronlogApp.swift */,
-				053FDDDB272F2DC5002D6D9D /* ContentView.swift */,
 				053FDDDD272F2DC5002D6D9D /* Assets.xcassets */,
 				053FDDDF272F2DC5002D6D9D /* Preview Content */,
 			);
@@ -268,7 +301,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				053FDDDC272F2DC5002D6D9D /* ContentView.swift in Sources */,
+				053B93472736F79000551377 /* MovementView.swift in Sources */,
+				053B934A2736FE9200551377 /* WorkoutServiceProtocol.swift in Sources */,
+				053FDDDC272F2DC5002D6D9D /* ActiveWorkoutView.swift in Sources */,
+				053B934C2737000500551377 /* MockDataWorkoutService.swift in Sources */,
 				053FDDDA272F2DC5002D6D9D /* IronlogApp.swift in Sources */,
 				053FDE05272F4517002D6D9D /* Movement.swift in Sources */,
 			);

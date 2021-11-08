@@ -8,22 +8,23 @@
 import Foundation
 
 struct Movement {
-    let movementName: String;
-    let sets: [Set];
+    var movementName: String
+    var sets: [Set]
 }
 
 struct Set {
-    let weight: Int;
-    let reps: Int;
+    var weight: Int
+    var reps: Int
+    var isComplete: Bool = false
 }
 
 struct Workout {
-    let mainSets: [Movement];
-    let supplementalSets: [Movement];
-    let assistanceSets: [Movement];
+    var mainMovement: Movement
+    var supplementalMovement: Movement
+    var assistanceMovements: [Movement]
 }
 
 struct DailyPlan {
-    let workout: Workout;
-    let datetime: Date;
+    var workout: Workout
+    var datetime: Date
 }
