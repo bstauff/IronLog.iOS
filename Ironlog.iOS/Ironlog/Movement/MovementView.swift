@@ -16,7 +16,7 @@ struct MovementView: View {
     
     var body: some View {
         VStack {
-            Text(movement.movementName)
+            Text(movement.lift.liftName)
             Divider()
             ForEach(0..<movement.sets.count) {index in
                 HStack {
@@ -42,9 +42,9 @@ struct MovementView: View {
 
 struct Movement_Previews: PreviewProvider {
     static var previews: some View {
-        let mockWorkoutService = MockDataWorkoutService()
-        let workout = mockWorkoutService.getWorkouts()
-        MovementView(movement: workout.mainMovement)
+        let mockWorkoutService = MockLiftingSessionService()
+        let workout = mockWorkoutService.getMovement()
+        MovementView(movement: workout)
         
     }
 }
