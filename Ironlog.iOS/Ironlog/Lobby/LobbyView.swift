@@ -14,7 +14,7 @@ struct LobbyView: View {
             Text("Ironlog").font(.largeTitle)
             NavigationView {
                 VStack(alignment: .leading, spacing: 50) {
-                    NavigationLink(destination: TrainingWeightView()){
+                    NavigationLink(destination: EditMovementsView()){
                         Text("Edit Movements")
                     }
                     NavigationLink(destination: WorkoutPlanner()){
