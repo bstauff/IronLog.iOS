@@ -7,24 +7,29 @@
 
 import Foundation
 
+struct LiftingSession {
+   
+    var liftingSessionID: UInt32
+    var liftingSessionDate: Date
+    
+    var mainWork: Movement
+    var supplementalWork: Movement
+    var assistanceWork: [Movement]
+}
+
+
 struct Movement {
-    var movementName: String
+    var lift: Lift
     var sets: [Set]
+}
+
+struct Lift {
+    var liftName: String
+    var trainingMax: Int
 }
 
 struct Set {
     var weight: Int
     var reps: Int
-    var isComplete: Bool = false
-}
-
-struct Workout {
-    var mainMovement: Movement
-    var supplementalMovement: Movement
-    var assistanceMovements: [Movement]
-}
-
-struct DailyPlan {
-    var workout: Workout
-    var datetime: Date
+    var isComplete: Bool
 }
