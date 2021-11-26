@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LiftingSession {
+struct LiftingSession : Hashable {
    
     var liftingSessionID: UInt32
     var liftingSessionDate: Date
@@ -18,17 +18,13 @@ struct LiftingSession {
 }
 
 
-struct Movement {
+struct Movement : Hashable {
     var lift: Lift
-    var sets: [Set]
+    var sets: [MovementSet]
 }
 
-struct Lift {
-    var liftName: String
-    var trainingMax: Int
-}
 
-struct Set {
+struct MovementSet : Hashable {
     var weight: Int
     var reps: Int
     var isComplete: Bool
