@@ -14,8 +14,8 @@ struct LiftCatalogView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach($liftCatalog.lifts, id: \.self) { lift in
-                    NavigationLink(destination: LiftDetailView(liftToEdit:lift)) {
+                ForEach($liftCatalog.lifts) { $lift in
+                    NavigationLink(destination: LiftDetailView(liftToEdit:$lift)) {
                         Text(lift.liftName)
                     }
                 }

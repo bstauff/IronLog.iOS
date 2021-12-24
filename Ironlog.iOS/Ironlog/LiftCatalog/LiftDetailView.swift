@@ -11,15 +11,12 @@ struct LiftDetailView: View {
     @Binding var liftToEdit:Lift
     
     var body: some View {
-        VStack {
-            Text("Add Lift").font(Font.title)
-            Form {
-                Section(header: Text("Lift Name")) {
-                    TextField("", text: $liftToEdit.liftName)
-                }
-                Section(header: Text("Training Max")) {
-                    TextField("Training Max", value: $liftToEdit.trainingMax, formatter: NumberFormatter())
-                }
+        Form {
+            Section(header: Text("Lift Name")) {
+                TextField("", text: $liftToEdit.liftName)
+            }
+            Section(header: Text("Training Max")) {
+                TextField("Training Max", value: $liftToEdit.trainingMax, formatter: NumberFormatter())
             }
         }
     }
