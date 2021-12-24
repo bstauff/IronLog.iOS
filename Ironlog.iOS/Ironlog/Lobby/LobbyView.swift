@@ -15,7 +15,7 @@ struct LobbyView: View {
             NavigationView {
                 VStack(alignment: .leading, spacing: 50) {
                     NavigationLink(destination: LiftCatalogView()){
-                        Text("Edit Movements")
+                        Text("Lift Catalog")
                     }
                     NavigationLink(destination: WorkoutPlanner()){
                         Text("Workout planner")
