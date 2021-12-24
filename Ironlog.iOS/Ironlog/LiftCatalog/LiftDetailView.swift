@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LiftDetailView: View {
-    @ObservedObject var liftToEdit:Lift
+    @Binding var liftToEdit:Lift
     
     var body: some View {
         VStack {
@@ -27,6 +27,6 @@ struct LiftDetailView: View {
 
 struct LiftDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        LiftDetailView(liftToEdit: Lift(liftName: "fake lift", trainingMax: 250))
+        LiftDetailView(liftToEdit: .constant(Lift(liftName: "fake lift", trainingMax: 250)))
     }
 }

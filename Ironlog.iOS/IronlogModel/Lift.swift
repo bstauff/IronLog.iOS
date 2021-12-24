@@ -7,13 +7,14 @@
 
 import Foundation
 
-class Lift : Hashable, Identifiable, ObservableObject {
-    var id : UUID
-    @Published var liftName: String
-    @Published var trainingMax: Int
+struct Lift : Identifiable, Hashable {
     
-    init(liftName: String, trainingMax: Int) {
-        self.id = UUID()
+    var id : UUID
+    var liftName: String
+    var trainingMax: Int
+    
+    init(liftName: String, trainingMax: Int, id: UUID? = nil) {
+        self.id = id ?? UUID()
         self.liftName = liftName
         self.trainingMax = trainingMax
     }
@@ -23,7 +24,6 @@ class Lift : Hashable, Identifiable, ObservableObject {
     }
     
     static func == (lhs: Lift, rhs: Lift) -> Bool {
-        return lhs.id == rhs.id
+        lhs.id == rhs.id
     }
-    
 }

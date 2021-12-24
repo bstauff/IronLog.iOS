@@ -23,7 +23,7 @@ class LiftCatalog: ObservableObject {
     }
     
     func deleteLift(liftToDelete: Lift) {
-        self.lifts = self.lifts.filter { $0.liftName != liftToDelete.liftName}
+        self.lifts = self.lifts.filter { $0.id != liftToDelete.id}
     }
     
     func deleteIndexes(indexes: IndexSet) {

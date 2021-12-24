@@ -8,11 +8,7 @@
 import SwiftUI
 
 struct MovementView: View {
-    @State private var movement: Movement
-    
-    init(movement: Movement) {
-        self.movement = movement
-    }
+    @State var movement: Movement
     
     var body: some View {
         VStack {
