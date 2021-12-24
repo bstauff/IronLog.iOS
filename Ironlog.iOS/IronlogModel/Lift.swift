@@ -7,7 +7,12 @@
 
 import Foundation
 
-class Lift : Hashable, ObservableObject {
+class Lift : Hashable, Identifiable, ObservableObject {
+    var id: String {
+        get {
+            return self.liftName
+        }
+    }
     
     @Published private(set) var liftName: String
     @Published private(set) var trainingMax: Int
@@ -19,10 +24,11 @@ class Lift : Hashable, ObservableObject {
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(self.liftName)
-        hasher.combine(self.trainingMax)
     }
+    
     static func == (lhs: Lift, rhs: Lift) -> Bool {
-        return lhs.liftName == rhs.liftName &&
-        lhs.trainingMax == rhs.trainingMax
+        return lhs.liftName == rhs.liftName
     }
+    
+    
 }

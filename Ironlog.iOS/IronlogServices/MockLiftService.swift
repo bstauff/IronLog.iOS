@@ -8,6 +8,7 @@
 import Foundation
 
 struct MockLiftService : LiftServiceProtocol {
+    
     func getLiftCatalog() -> LiftCatalog {
        return LiftCatalog(initialLifts: [
             Lift(liftName: "Squat", trainingMax: 350),

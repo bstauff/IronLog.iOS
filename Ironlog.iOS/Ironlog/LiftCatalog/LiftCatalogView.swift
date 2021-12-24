@@ -17,22 +17,25 @@ struct LiftCatalogView: View {
         VStack {
             NavigationView {
                 List {
-                    ForEach(liftCatalog.lifts, id: \.self) { lift in
+                    ForEach(liftCatalog.lifts) { lift in
                         NavigationLink {
                             LiftDetailView(lift: lift)
                         } label: {
                             Text(lift.liftName)
                         }
                     }
-                    .onDelete(perform: deleteLift)
+                    .onDelete(perform: {self.liftCatalog.deleteIndexes(indexes: $0)})
                 }
                 .navigationTitle("Lifts")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {print("bananas")}) {
+                            Image(systemName: "plus")
+                        }
+                    }
+                }
             }
         }
-    }
-    
-    private func deleteLift(at indexSet: IndexSet) {
-        liftCatalog.lifts.remove(atOffsets: indexSet)
     }
 }
 

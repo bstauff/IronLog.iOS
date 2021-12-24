@@ -17,4 +17,16 @@ class LiftCatalog: ObservableObject {
     init(initialLifts startingLifts: [Lift]) {
         self.lifts = startingLifts
     }
+    
+    func addLift(liftToAdd: Lift) {
+        self.lifts.append(liftToAdd)
+    }
+    
+    func deleteLift(liftToDelete: Lift) {
+        self.lifts = self.lifts.filter { $0.liftName != liftToDelete.liftName}
+    }
+    
+    func deleteIndexes(indexes: IndexSet) {
+        self.lifts.remove(atOffsets: indexes)
+    }
 }
