@@ -8,27 +8,22 @@
 import Foundation
 
 class Lift : Hashable, Identifiable, ObservableObject {
-    var id: String {
-        get {
-            return self.liftName
-        }
-    }
-    
-    @Published private(set) var liftName: String
-    @Published private(set) var trainingMax: Int
+    var id : UUID
+    @Published var liftName: String
+    @Published var trainingMax: Int
     
     init(liftName: String, trainingMax: Int) {
+        self.id = UUID()
         self.liftName = liftName
         self.trainingMax = trainingMax
     }
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine(self.liftName)
+        hasher.combine(self.id)
     }
     
     static func == (lhs: Lift, rhs: Lift) -> Bool {
-        return lhs.liftName == rhs.liftName
+        return lhs.id == rhs.id
     }
-    
     
 }

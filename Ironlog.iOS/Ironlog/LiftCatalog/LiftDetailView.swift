@@ -1,24 +1,32 @@
 //
-//  LiftView.swift
+//  AddLiftView.swift
 //  Ironlog
 //
-//  Created by Brian Stauff on 11/26/21.
+//  Created by Brian Stauff on 12/24/21.
 //
 
 import SwiftUI
-struct LiftDetailView: View {
 
-    @ObservedObject var lift: Lift
+struct LiftDetailView: View {
+    @ObservedObject var liftToEdit:Lift
+    
     var body: some View {
-        HStack {
-            Text(lift.liftName)
-            Text(String(lift.trainingMax))
+        VStack {
+            Text("Add Lift").font(Font.title)
+            Form {
+                Section(header: Text("Lift Name")) {
+                    TextField("", text: $liftToEdit.liftName)
+                }
+                Section(header: Text("Training Max")) {
+                    TextField("Training Max", value: $liftToEdit.trainingMax, formatter: NumberFormatter())
+                }
+            }
         }
     }
 }
 
-struct LiftView_Previews: PreviewProvider {
+struct LiftDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        LiftDetailView(lift: Lift(liftName: "Squat", trainingMax: 350))
+        LiftDetailView(liftToEdit: Lift(liftName: "fake lift", trainingMax: 250))
     }
 }

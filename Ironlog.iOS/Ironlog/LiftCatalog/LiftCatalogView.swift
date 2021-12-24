@@ -10,32 +10,37 @@ import SwiftUI
 struct LiftCatalogView: View {
     
     @EnvironmentObject var liftCatalog: LiftCatalog
-   
-    @State private var selectedLift : Lift?
     
     var body: some View {
-        VStack {
-            NavigationView {
-                List {
-                    ForEach(liftCatalog.lifts) { lift in
-                        NavigationLink {
-                            LiftDetailView(lift: lift)
-                        } label: {
-                            Text(lift.liftName)
-                        }
+        NavigationView {
+            List {
+                ForEach(liftCatalog.lifts, id: \.self) { lift in
+                    NavigationLink(destination: LiftDetailView(liftToEdit:lift)) {
+                        Text(lift.liftName)
                     }
-                    .onDelete(perform: {self.liftCatalog.deleteIndexes(indexes: $0)})
                 }
-                .navigationTitle("Lifts")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {print("bananas")}) {
-                            Image(systemName: "plus")
-                        }
-                    }
+                .onDelete(perform: delete)
+            }
+            .navigationTitle("Lift Catalog")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing){
+                    addButton
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    EditButton()
                 }
             }
         }
+    }
+    
+    var addButton: some View {
+        Button("Add") {
+            liftCatalog.addLift(liftToAdd: Lift(liftName: "New Lift", trainingMax: 0))
+        }
+    }
+    
+    private func delete(indexSet: IndexSet) {
+        liftCatalog.deleteIndexes(indexes: indexSet)
     }
 }
 

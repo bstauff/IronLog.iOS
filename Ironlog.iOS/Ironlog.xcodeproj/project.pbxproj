@@ -23,9 +23,9 @@
 		05947E4327518BE600984C49 /* Lift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05947E4227518BE600984C49 /* Lift.swift */; };
 		05947E4527518DC500984C49 /* LiftCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05947E4427518DC500984C49 /* LiftCatalog.swift */; };
 		05947E4A27518E7A00984C49 /* LiftCatalogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05947E4927518E7A00984C49 /* LiftCatalogView.swift */; };
-		05947E4C27518EAE00984C49 /* LiftDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05947E4B27518EAE00984C49 /* LiftDetailView.swift */; };
 		05B4D7FD2739ED91003CA561 /* LobbyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B4D7FC2739ED91003CA561 /* LobbyView.swift */; };
 		05B4D8032739F29B003CA561 /* WorkoutPlanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B4D8022739F29B003CA561 /* WorkoutPlanner.swift */; };
+		05F752F427762A22008739BF /* LiftDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F752F327762A22008739BF /* LiftDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,9 +65,9 @@
 		05947E4227518BE600984C49 /* Lift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lift.swift; sourceTree = "<group>"; };
 		05947E4427518DC500984C49 /* LiftCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftCatalog.swift; sourceTree = "<group>"; };
 		05947E4927518E7A00984C49 /* LiftCatalogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftCatalogView.swift; sourceTree = "<group>"; };
-		05947E4B27518EAE00984C49 /* LiftDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftDetailView.swift; sourceTree = "<group>"; };
 		05B4D7FC2739ED91003CA561 /* LobbyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyView.swift; sourceTree = "<group>"; };
 		05B4D8022739F29B003CA561 /* WorkoutPlanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutPlanner.swift; sourceTree = "<group>"; };
+		05F752F327762A22008739BF /* LiftDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,7 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				05947E4927518E7A00984C49 /* LiftCatalogView.swift */,
-				05947E4B27518EAE00984C49 /* LiftDetailView.swift */,
+				05F752F327762A22008739BF /* LiftDetailView.swift */,
 			);
 			path = LiftCatalog;
 			sourceTree = "<group>";
@@ -350,7 +350,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				05947E4327518BE600984C49 /* Lift.swift in Sources */,
-				05947E4C27518EAE00984C49 /* LiftDetailView.swift in Sources */,
 				05947E41275187D900984C49 /* MockLiftService.swift in Sources */,
 				053B93472736F79000551377 /* MovementView.swift in Sources */,
 				05947E3F2751878700984C49 /* LiftServiceProtocol.swift in Sources */,
@@ -360,6 +359,7 @@
 				053FDDDC272F2DC5002D6D9D /* ActiveLiftingSessionView.swift in Sources */,
 				053B934C2737000500551377 /* MockLiftingSessionService.swift in Sources */,
 				05947E4527518DC500984C49 /* LiftCatalog.swift in Sources */,
+				05F752F427762A22008739BF /* LiftDetailView.swift in Sources */,
 				053FDDDA272F2DC5002D6D9D /* IronlogApp.swift in Sources */,
 				05B4D7FD2739ED91003CA561 /* LobbyView.swift in Sources */,
 				053FDE05272F4517002D6D9D /* LiftingSession.swift in Sources */,
