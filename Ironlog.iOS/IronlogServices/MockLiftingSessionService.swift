@@ -15,9 +15,9 @@ struct MockLiftingSessionService : LiftingDataServiceProtocol {
             trainingMax: 315
         ),
         sets: [
-            Set(weight: 200, reps: 5, isComplete: false),
-            Set(weight: 200, reps: 5, isComplete: false),
-            Set(weight: 200, reps: 5, isComplete: false),
+            MovementSet(weight: 200, reps: 5, isComplete: false),
+            MovementSet(weight: 200, reps: 5, isComplete: false),
+            MovementSet(weight: 200, reps: 5, isComplete: false),
         ]
        )
     }

@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct IronlogApp: App {
+    
+    @StateObject var liftCatalog = MockLiftService().getLiftCatalog()
+    
     var body: some Scene {
         WindowGroup {
-            LobbyView()
+            LobbyView().environmentObject(liftCatalog)
         }
     }
 }

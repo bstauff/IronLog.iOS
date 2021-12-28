@@ -10,22 +10,20 @@ import SwiftUI
 struct LobbyView: View {
     let workoutService = MockLiftingSessionService()
     var body: some View {
-        VStack {
-            Text("Ironlog").font(.largeTitle)
-            NavigationView {
-                VStack(alignment: .leading, spacing: 50) {
-                    NavigationLink(destination: TrainingWeightView()){
-                        Text("Edit Movements")
-                    }
-                    NavigationLink(destination: WorkoutPlanner()){
-                        Text("Workout planner")
-                    }
-                    NavigationLink(destination: ActiveLiftingSessionView(activeLiftingSession: workoutService.getLiftingSession())){
-                        Text("Active Workout")
-                    }
+        NavigationView {
+            List {
+                NavigationLink(destination: LiftCatalogView()){
+                    Text("Lift Catalog")
+                }
+                NavigationLink(destination: WorkoutPlanner()){
+                    Text("Workout planner")
+                }
+                NavigationLink(destination: ActiveLiftingSessionView(activeLiftingSession: workoutService.getLiftingSession())){
+                    Text("Active Workout")
                 }
             }
-            }
+            .navigationTitle("Ironlog")
+        }
     }
 }
 
