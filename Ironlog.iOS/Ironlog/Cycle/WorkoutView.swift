@@ -13,6 +13,7 @@ struct WorkoutView: View {
     @ObservedObject var liftCatalog: LiftCatalog
     @State private var isSheetActive = false
     @State private var draftExercise: Exercise = Exercise()
+    @State private var isShowingExerciseSheet = false
     
     var body: some View {
         NavigationView {
@@ -32,7 +33,11 @@ struct WorkoutView: View {
                     EditButton()
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("add", action: addExercise)
+                    Button("add") {
+                        self.isShowingExerciseSheet = true
+                    }.sheet(isPresented: $isShowingExerciseSheet) {
+                        WorkoutAddExerciseView(liftCatalog: self.liftCatalog, workout: self.workout)
+                    }
                 }
             }
             .navigationTitle(convertDateToString())
