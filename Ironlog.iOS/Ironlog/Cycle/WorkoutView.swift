@@ -16,32 +16,30 @@ struct WorkoutView: View {
     @State private var isShowingExerciseSheet = false
     
     var body: some View {
-        NavigationView {
-            VStack {
-                List {
+        VStack {
+            List {
+                Text(convertDateToString()).font(.largeTitle)
+                HStack {
                     Text("Exercises").font(.headline)
-                    ForEach($workout.exercises){ $exercise in
-                        NavigationLink(
-                            destination: ExerciseView(liftCatalog: liftCatalog, exercise: exercise)) {
-                                ExerciseRowView(exercise: exercise)
-                            }
-                    }
-                }
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("add") {
-                        self.isShowingExerciseSheet = true
-                    }.sheet(isPresented: $isShowingExerciseSheet) {
+                    Spacer()
+                    Button(action: showExerciseSheet) {
+                        Text("Add")
+                    }.sheet(isPresented: $isShowingExerciseSheet){
                         WorkoutAddExerciseView(liftCatalog: self.liftCatalog, workout: self.workout)
                     }
                 }
+                ForEach($workout.exercises){ $exercise in
+                    NavigationLink(
+                        destination: ExerciseView(liftCatalog: liftCatalog, exercise: exercise)) {
+                            ExerciseRowView(exercise: exercise)
+                        }
+                }
             }
-            .navigationTitle(convertDateToString())
         }
+    }
+    
+    func showExerciseSheet() {
+        isShowingExerciseSheet = true
     }
     
     func convertDateToString() -> String {

@@ -26,10 +26,10 @@ struct CycleView: View {
             }
             .navigationTitle("Cycle")
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .navigationBarLeading) {
                     EditButton()
                 }
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button("add") {
                         self.isShowingWorkoutSheet = true
                     }.sheet(isPresented: $isShowingWorkoutSheet) {

@@ -50,7 +50,7 @@ struct WorkoutAddExerciseView: View {
                     
                 }
                 Section {
-                    Button("Add Exercise") {
+                    Button("Save") {
                         guard selectedLift != nil else {
                             isError = true
                             errorMessage = "Must select a lift"
