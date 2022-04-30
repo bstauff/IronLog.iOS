@@ -32,7 +32,7 @@ struct LiftCatalogView: View {
                     Button("add"){
                         isShowingAddSheet = true
                     }.sheet(isPresented: $isShowingAddSheet){
-                        AddLiftView(liftCatalog: self.liftCatalog)
+                        AddLiftSheetView(liftCatalog: self.liftCatalog)
                     }
                 }
             }
