@@ -14,67 +14,72 @@ struct WorkoutAddExerciseView: View {
     @State private var selectedLift: Lift?
     @State private var sets: [ExerciseSet] = []
     
-    @State private var showingAddSetSheet = false
+    @State private var shouldNavigate = false
     
     @State private var isError = false
     @State private var errorMessage = ""
     
     var body: some View {
         NavigationView{
-            Form {
-                Picker("Lift", selection: $selectedLift) {
-                    ForEach($liftCatalog.lifts) { $lift in
-                        Text(lift.name).tag(lift as Lift?)
+            VStack {
+                NavigationLink(
+                    destination:AddSetToExerciseSheet(exerciseSets: $sets),
+                    isActive: $shouldNavigate) {
+                        EmptyView()
                     }
-                }
-                Section {
-                    HStack {
-                        Text("Reps")
-                        Spacer()
-                        Text("Weight")
+                Form {
+                    Picker("Lift", selection: $selectedLift) {
+                        ForEach($liftCatalog.lifts) { $lift in
+                            Text(lift.name).tag(lift as Lift?)
+                        }
                     }
-                    List {
-                        ForEach($sets){ $exerciseSet in
-                            HStack {
-                                Text(String(exerciseSet.reps))
-                                Spacer()
-                                Text(String(exerciseSet.weight))
+                    Section {
+                        HStack {
+                            Text("Reps")
+                            Spacer()
+                            Text("Weight")
+                        }
+                        List {
+                            ForEach($sets){ $exerciseSet in
+                                HStack {
+                                    Text(String(exerciseSet.reps))
+                                    Spacer()
+                                    Text(String(exerciseSet.weight))
+                                }
+                            }
+                            Button("Add Set") {
+                                shouldNavigate = true
                             }
                         }
-                        Button("Add Set") {
-                            showingAddSetSheet = true
-                        }.sheet(isPresented: $showingAddSetSheet) {
-                            AddSetToExerciseSheet(exerciseSets: $sets)
-                        }
+                        
                     }
-                    
-                }
-                Section {
-                    Button("Save") {
-                        guard selectedLift != nil else {
-                            isError = true
-                            errorMessage = "Must select a lift"
-                            return
-                        }
-                        
-                        guard !sets.isEmpty else {
-                            isError = true
-                            errorMessage = "Must add sets"
-                            return
-                        }
-                        
-                        let newExercise = Exercise()
-                        newExercise.sets = self.sets
-                        newExercise.lift = self.selectedLift!
-                        
-                        workout.exercises.append(newExercise)
-                        
-                        presentationMode.wrappedValue.dismiss()
-                        
-                    }.buttonStyle(.borderedProminent)
-                        .alert(isPresented: $isError) {
-                            Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
-                        }
+                    Section {
+                        Button("Save") {
+                            guard selectedLift != nil else {
+                                isError = true
+                                errorMessage = "Must select a lift"
+                                return
+                            }
+                            
+                            guard !sets.isEmpty else {
+                                isError = true
+                                errorMessage = "Must add sets"
+                                return
+                            }
+                            
+                            let newExercise = Exercise()
+                            newExercise.sets = self.sets
+                            newExercise.lift = self.selectedLift!
+                            
+                            workout.exercises.append(newExercise)
+                            
+                            presentationMode.wrappedValue.dismiss()
+                            
+                        }.buttonStyle(.borderedProminent)
+                            .alert(isPresented: $isError) {
+                                Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
+                            }
+                    }
                 }
             }
         }
