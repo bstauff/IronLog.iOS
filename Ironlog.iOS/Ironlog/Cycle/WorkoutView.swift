@@ -30,9 +30,12 @@ struct WorkoutView: View {
                 }
                 ForEach($workout.exercises){ $exercise in
                     NavigationLink(
-                        destination: ExerciseView(liftCatalog: liftCatalog, exercise: exercise)) {
+                        destination: EditExerciseView(liftCatalog: liftCatalog, exercise: exercise)) {
                             ExerciseRowView(exercise: exercise)
                         }
+                }
+                .onDelete { indexSet in
+                    workout.exercises.remove(atOffsets: indexSet)
                 }
             }
         }
