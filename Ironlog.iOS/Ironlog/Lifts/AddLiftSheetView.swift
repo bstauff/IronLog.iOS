@@ -35,6 +35,13 @@ struct AddLiftSheetView: View {
                     saveClicked()
                 }
                 .buttonStyle(.borderedProminent)
+                .alert(isPresented: $isError) {
+                    Alert(
+                        title: Text("Error"),
+                        message: Text(errorString),
+                        dismissButton: .default(Text("OK"))
+                    )
+                }
             }
         }
     }
