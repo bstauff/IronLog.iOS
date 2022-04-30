@@ -9,13 +9,14 @@ import SwiftUI
 
 struct LiftCatalogView: View {
     @ObservedObject var liftCatalog: LiftCatalog
+    @State private var isShowingAddSheet = false
     
     var body: some View {
         NavigationView {
             VStack {
                 List {
                     ForEach($liftCatalog.lifts) {$lift in
-                        NavigationLink(lift.name, destination: LiftView(lift: $lift))
+                        NavigationLink(lift.name, destination: EditLiftView(lift: $lift))
                     }
                     .onDelete { indexSet in
                         liftCatalog.lifts.remove(atOffsets: indexSet)
@@ -28,14 +29,14 @@ struct LiftCatalogView: View {
                     EditButton()
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("add", action: addStuff)
+                    Button("add"){
+                        isShowingAddSheet = true
+                    }.sheet(isPresented: $isShowingAddSheet){
+                        AddLiftSheetView(liftCatalog: self.liftCatalog)
+                    }
                 }
             }
         }
-    }
-    
-    func addStuff() {
-        liftCatalog.lifts.append(Lift(name: "new lift", trainingMax: 0))
     }
 }
 

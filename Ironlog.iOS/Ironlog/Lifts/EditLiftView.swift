@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LiftView: View {
+struct EditLiftView: View {
     @Binding var lift: Lift
     
     private let numberFormatter: NumberFormatter = {
@@ -27,9 +27,9 @@ struct LiftView: View {
     }
 }
 
-struct LiftView_Previews: PreviewProvider {
+struct EditLiftView_Previews: PreviewProvider {
     static var previews: some View {
         let lift = Lift(name: "Squat", trainingMax: 315)
-        return LiftView(lift: .constant(lift))
+        return EditLiftView(lift: .constant(lift))
     }
 }
