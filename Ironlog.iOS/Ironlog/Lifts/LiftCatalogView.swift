@@ -8,19 +8,18 @@
 import SwiftUI
 
 struct LiftCatalogView: View {
-    @ObservedObject var liftCatalog: LiftCatalog
+    @FetchRequest(sortDescriptors: []) var lifts: FetchedResults<LiftModel>
+    @Environment(\.managedObjectContext) var moc
     @State private var isShowingAddSheet = false
     
     var body: some View {
         NavigationView {
             VStack {
                 List {
-                    ForEach($liftCatalog.lifts) {$lift in
-                        NavigationLink(lift.name, destination: EditLiftView(lift: $lift))
+                    ForEach(lifts) {lift in
+                        NavigationLink(lift.name!, destination: EditLiftView(lift: lift))
                     }
-                    .onDelete { indexSet in
-                        liftCatalog.lifts.remove(atOffsets: indexSet)
-                    }
+                    .onDelete(perform: deleteLifts)
                 }
             }
             .navigationTitle("Lift Catalog")
@@ -32,11 +31,21 @@ struct LiftCatalogView: View {
                     Button("add"){
                         isShowingAddSheet = true
                     }.sheet(isPresented: $isShowingAddSheet){
-                        AddLiftSheetView(liftCatalog: self.liftCatalog)
+                        AddLiftSheetView()
                     }
                 }
             }
         }
+    }
+    
+    func deleteLifts(offsets: IndexSet) {
+        for offset in offsets {
+            let lift = lifts[offset]
+            
+            moc.delete(lift)
+        }
+        
+        try? moc.save()
     }
 }
 
@@ -51,6 +60,6 @@ struct LiftCatalogView_Previews: PreviewProvider {
         liftCatalog.lifts.append(deadLift)
         liftCatalog.lifts.append(benchLift)
         
-        return LiftCatalogView(liftCatalog: liftCatalog)
+        return LiftCatalogView()
     }
 }

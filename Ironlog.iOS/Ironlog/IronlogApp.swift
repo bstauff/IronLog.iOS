@@ -12,6 +12,8 @@ struct IronlogApp: App {
     @StateObject var liftCatalog = LiftCatalog()
     @StateObject var cyclePlan = Cycle()
     
+    @StateObject private var dataController = DataController()
+    
     var body: some Scene {
         WindowGroup {
             TabView {
@@ -29,10 +31,10 @@ struct IronlogApp: App {
                             Label("Active Workout", systemImage: "flame.circle")
                         }
                 }
-                LiftCatalogView(liftCatalog: liftCatalog).tabItem {
+                LiftCatalogView().tabItem {
                     Label("Lifts", systemImage: "arrow.up.circle")
                 }
-            }
+            }.environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }
 }

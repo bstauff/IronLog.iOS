@@ -31,6 +31,8 @@
 		05A6E7B727C1807700B3113E /* EditLiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A6E7B627C1807700B3113E /* EditLiftView.swift */; };
 		05A6E7BA27C18A1000B3113E /* CycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A6E7B927C18A1000B3113E /* CycleView.swift */; };
 		05A6E7BC27C18B7800B3113E /* WorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A6E7BB27C18B7800B3113E /* WorkoutView.swift */; };
+		05CABDBB2826DC6500A53B98 /* Ironlog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05CABDB92826DC6500A53B98 /* Ironlog.xcdatamodeld */; };
+		05CABDBD2826DC8F00A53B98 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CABDBC2826DC8F00A53B98 /* DataController.swift */; };
 		05E55D3527EFB91600FAD5B7 /* ActiveWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E55D3427EFB91600FAD5B7 /* ActiveWorkoutView.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +81,8 @@
 		05A6E7B627C1807700B3113E /* EditLiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLiftView.swift; sourceTree = "<group>"; };
 		05A6E7B927C18A1000B3113E /* CycleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleView.swift; sourceTree = "<group>"; };
 		05A6E7BB27C18B7800B3113E /* WorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutView.swift; sourceTree = "<group>"; };
+		05CABDBA2826DC6500A53B98 /* Ironlog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Ironlog.xcdatamodel; sourceTree = "<group>"; };
+		05CABDBC2826DC8F00A53B98 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		05E55D3427EFB91600FAD5B7 /* ActiveWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveWorkoutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +114,7 @@
 		053FDDCD272F2DC5002D6D9D = {
 			isa = PBXGroup;
 			children = (
+				05CABDB72826DC5100A53B98 /* Infrastructure */,
 				0555F34627A72E17008D5726 /* Domain */,
 				053FDDD8272F2DC5002D6D9D /* Ironlog */,
 				053FDDE9272F2DC5002D6D9D /* IronlogTests */,
@@ -218,6 +223,23 @@
 				058B1B81281DD0EF00FD87C2 /* EditExerciseView.swift */,
 			);
 			path = Cycle;
+			sourceTree = "<group>";
+		};
+		05CABDB72826DC5100A53B98 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				05CABDB82826DC5800A53B98 /* CoreData */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		05CABDB82826DC5800A53B98 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				05CABDB92826DC6500A53B98 /* Ironlog.xcdatamodeld */,
+				05CABDBC2826DC8F00A53B98 /* DataController.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		05E55D3327EFB8FF00FAD5B7 /* ActiveWorkout */ = {
@@ -364,6 +386,7 @@
 				0554AAE428148A00001E8A58 /* AddSetToExerciseSheet.swift in Sources */,
 				0555F36E27A7479B008D5726 /* ExerciseSet.swift in Sources */,
 				05A6E7B727C1807700B3113E /* EditLiftView.swift in Sources */,
+				05CABDBD2826DC8F00A53B98 /* DataController.swift in Sources */,
 				052C8AC42817883700324E68 /* AddLiftSheetView.swift in Sources */,
 				0555F34827A72E28008D5726 /* Lift.swift in Sources */,
 				05A6E7BA27C18A1000B3113E /* CycleView.swift in Sources */,
@@ -371,6 +394,7 @@
 				0555F36D27A74797008D5726 /* Exercise.swift in Sources */,
 				05E55D3527EFB91600FAD5B7 /* ActiveWorkoutView.swift in Sources */,
 				0555F36F27A7479E008D5726 /* Cycle.swift in Sources */,
+				05CABDBB2826DC6500A53B98 /* Ironlog.xcdatamodeld in Sources */,
 				053FDDDA272F2DC5002D6D9D /* IronlogApp.swift in Sources */,
 				058B1B82281DD0EF00FD87C2 /* EditExerciseView.swift in Sources */,
 				0555F36C27A74790008D5726 /* Workout.swift in Sources */,
@@ -721,6 +745,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		05CABDB92826DC6500A53B98 /* Ironlog.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				05CABDBA2826DC6500A53B98 /* Ironlog.xcdatamodel */,
+			);
+			currentVersion = 05CABDBA2826DC6500A53B98 /* Ironlog.xcdatamodel */;
+			path = Ironlog.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 053FDDCE272F2DC5002D6D9D /* Project object */;
 }

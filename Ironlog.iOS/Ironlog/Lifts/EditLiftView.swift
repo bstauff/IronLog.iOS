@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EditLiftView: View {
-    @Binding var lift: Lift
+    @ObservedObject var lift: LiftModel
     
     private let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -19,7 +19,7 @@ struct EditLiftView: View {
         HStack {
             VStack {
                 Text("Lift Name")
-                TextField("Lift Name", text: $lift.name).textFieldStyle(.roundedBorder)
+                TextField("Lift Name", text: $lift.name.toUnwrapped(defaultValue: "")).textFieldStyle(.roundedBorder)
                 Text("Training Max")
                 TextField("Training Max", value: $lift.trainingMax, formatter: numberFormatter).textFieldStyle(.roundedBorder)
             }
@@ -29,7 +29,13 @@ struct EditLiftView: View {
 
 struct EditLiftView_Previews: PreviewProvider {
     static var previews: some View {
-        let lift = Lift(name: "Squat", trainingMax: 315)
-        return EditLiftView(lift: .constant(lift))
+        let liftModel = LiftModel()
+        return EditLiftView(lift: liftModel)
+    }
+}
+
+extension Binding {
+     func toUnwrapped<T>(defaultValue: T) -> Binding<T> where Value == Optional<T>  {
+        Binding<T>(get: { self.wrappedValue ?? defaultValue }, set: { self.wrappedValue = $0 })
     }
 }

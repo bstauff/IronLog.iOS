@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddLiftSheetView: View {
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var liftCatalog: LiftCatalog
+    @Environment(\.managedObjectContext) var moc
     
     @State private var name: String = ""
     @State private var trainingMax: Int?
@@ -57,18 +57,21 @@ struct AddLiftSheetView: View {
             errorString = "training max required"
             return
         }
-        let newLift = Lift(
-            name: name,
-            trainingMax: trainingMax!
-        )
-        liftCatalog.lifts.append(newLift)
+        
+        let liftToAdd = LiftModel(context: moc)
+        liftToAdd.id = UUID()
+        liftToAdd.trainingMax = Int64(trainingMax!)
+        liftToAdd.name = name
+        
+        try? moc.save()
+        
+        
         presentationMode.wrappedValue.dismiss()
     }
 }
 
 struct AddLiftView_Previews: PreviewProvider {
     static var previews: some View {
-        let liftCatalog = LiftCatalog()
-        AddLiftSheetView(liftCatalog: liftCatalog)
+        AddLiftSheetView()
     }
 }
