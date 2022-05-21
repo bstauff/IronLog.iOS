@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class CoreDataLiftRepository : LiftRepository {
+class CoreDataLiftRepository : LiftRepository{
     
     private let container = NSPersistentContainer(name: "Ironlog")
     
@@ -37,19 +37,35 @@ class CoreDataLiftRepository : LiftRepository {
     func getAllLifts() throws -> [Lift] {
         let fetchRequest = LiftModel.fetchRequest()
         let lifts = try container.viewContext.fetch(fetchRequest)
-        
-        return lifts.map { lift in
-            Lift(name: lift.name!, trainingMax: Int(lift.trainingMax), id: lift.id!)
+
+        var results: [Lift] = []
+
+        for liftModel in lifts {
+            let trainingMax = liftModel.trainingMax
+            let name = liftModel.name
+            let id = liftModel.id
+
+            guard name != nil else {
+                continue
+            }
+
+            guard id != nil else {
+                continue
+            }
+
+            let liftToAdd = Lift(name: name!, trainingMax: Int(trainingMax), id: id!)
+            results.append(liftToAdd)
         }
+
+        return results
     }
     
     private func fetchLift(_ liftId: UUID) throws -> LiftModel? {
         let fetchRequest = LiftModel.fetchRequest()
-        let fetchPred = NSPredicate(format: "id = @a", liftId.uuidString)
+        let fetchPred = NSPredicate(format: "%K == %@","id", liftId as CVarArg)
         fetchRequest.predicate = fetchPred
-        
-        let lifts = try fetchRequest.execute()
-        
+            
+        let lifts = try container.viewContext.fetch(fetchRequest)
         if(lifts.count > 1) {
             throw CoreDataLiftRepositoryError.duplicateLiftsForId
         }
@@ -59,12 +75,14 @@ class CoreDataLiftRepository : LiftRepository {
         }
             
         return lifts[0]
+        
     }
     
     func addLift(lift: Lift) throws {
         let liftModel = LiftModel(context: container.viewContext)
         liftModel.name = lift.name
         liftModel.trainingMax = Int64(lift.trainingMax)
+        liftModel.id = lift.id
         try container.viewContext.save()
     }
     
@@ -89,7 +107,7 @@ class CoreDataLiftRepository : LiftRepository {
         
         liftToUpdate!.name = lift.name
         liftToUpdate!.trainingMax = Int64(lift.trainingMax)
-        
+        try container.viewContext.save()
     }
     
 }

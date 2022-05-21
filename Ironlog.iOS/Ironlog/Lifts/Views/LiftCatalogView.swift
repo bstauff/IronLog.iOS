@@ -8,18 +8,34 @@
 import SwiftUI
 
 struct LiftCatalogView: View {
-    @FetchRequest(sortDescriptors: []) var lifts: FetchedResults<LiftModel>
-    @Environment(\.managedObjectContext) var moc
     @State private var isShowingAddSheet = false
+    
+    @State private var isError = false
+    @State private var errorString = ""
+    
+    @ObservedObject private var liftCatalog: LiftCatalog = LiftCatalog()
+    
+    var liftRepo: LiftRepository
+    
+    init(liftRepo: LiftRepository) {
+        self.liftRepo = liftRepo
+    }
     
     var body: some View {
         NavigationView {
             VStack {
                 List {
-                    ForEach(lifts) {lift in
-                        NavigationLink(lift.name!, destination: EditLiftView(lift: lift))
+                    ForEach(liftCatalog.lifts) {lift in
+                        NavigationLink(lift.name, destination: EditLiftView(lift: lift))
                     }
                     .onDelete(perform: deleteLifts)
+                    .alert(isPresented: $isError) {
+                        Alert(
+                            title: Text("Error"),
+                            message: Text(errorString),
+                            dismissButton: .default(Text("OK"))
+                        )
+                    }
                 }
             }
             .navigationTitle("Lift Catalog")
@@ -31,35 +47,44 @@ struct LiftCatalogView: View {
                     Button("add"){
                         isShowingAddSheet = true
                     }.sheet(isPresented: $isShowingAddSheet){
-                        AddLiftSheetView()
+                        AddLiftView(liftRepo: liftRepo, liftCatalog: liftCatalog)
                     }
                 }
             }
+        }.onAppear(perform: loadLifts)
+    }
+    
+    func loadLifts() {
+        do {
+            let lifts = try liftRepo.getAllLifts()
+            liftCatalog.lifts = lifts
+        } catch {
+            isError = true
+            errorString = "Failed to load lifts"
         }
     }
     
     func deleteLifts(offsets: IndexSet) {
-        for offset in offsets {
-            let lift = lifts[offset]
+        do {
+            for offset in offsets {
+                let liftToDelete = liftCatalog.lifts[offset]
+                
+                try liftRepo.deleteLift(liftId: liftToDelete.id)
+            }
             
-            moc.delete(lift)
+            liftCatalog.lifts.remove(atOffsets: offsets)
+        } catch {
+            isError = true
+            errorString = "Failed to delete.  Please try again."
         }
-        
-        try? moc.save()
     }
 }
 
 struct LiftCatalogView_Previews: PreviewProvider {
     static var previews: some View {
-        let liftCatalog = LiftCatalog()
-        let squatLift = Lift(name: "squat", trainingMax: 315)
-        let deadLift = Lift(name: "dead", trainingMax: 405)
-        let benchLift = Lift(name: "bench", trainingMax: 250)
-        
-        liftCatalog.lifts.append(squatLift)
-        liftCatalog.lifts.append(deadLift)
-        liftCatalog.lifts.append(benchLift)
-        
-        return LiftCatalogView()
+        let liftRepo = CoreDataLiftRepository()
+        let squat = Lift(name: "Squat", trainingMax: 315)
+        try? liftRepo.addLift(lift: squat)
+        return LiftCatalogView(liftRepo: liftRepo)
     }
 }

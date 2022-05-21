@@ -11,8 +11,7 @@ import SwiftUI
 struct IronlogApp: App {
     @StateObject var liftCatalog = LiftCatalog()
     @StateObject var cyclePlan = Cycle()
-    
-    @StateObject private var dataController = DataController()
+    private var liftRepo = CoreDataLiftRepository()
     
     var body: some Scene {
         WindowGroup {
@@ -31,10 +30,10 @@ struct IronlogApp: App {
                             Label("Active Workout", systemImage: "flame.circle")
                         }
                 }
-                LiftCatalogView().tabItem {
+                LiftCatalogView(liftRepo: liftRepo).tabItem {
                     Label("Lifts", systemImage: "arrow.up.circle")
                 }
-            }.environment(\.managedObjectContext, dataController.container.viewContext)
+            }
         }
     }
 }
