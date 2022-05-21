@@ -13,7 +13,7 @@ struct LiftCatalogView: View {
     @State private var isError = false
     @State private var errorString = ""
     
-    @ObservedObject private var liftCatalog: LiftCatalog = LiftCatalog()
+    @StateObject private var liftCatalog: LiftCatalog = LiftCatalog()
     
     var liftRepo: LiftRepository
     
@@ -26,7 +26,7 @@ struct LiftCatalogView: View {
             VStack {
                 List {
                     ForEach(liftCatalog.lifts) {lift in
-                        NavigationLink(lift.name, destination: EditLiftView(lift: lift))
+                        NavigationLink(lift.name, destination: EditLiftView(lift: lift, liftRepository: liftRepo))
                     }
                     .onDelete(perform: deleteLifts)
                     .alert(isPresented: $isError) {
