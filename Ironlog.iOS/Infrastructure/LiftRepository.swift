@@ -9,6 +9,7 @@ import Foundation
 
 protocol LiftRepository {
     func getLift(liftId: UUID) throws -> Lift?
+    func getAllLifts() throws -> [Lift]
     func addLift(lift: Lift) throws
     func deleteLift(liftId: UUID) throws
     func saveLift(lift: Lift) throws

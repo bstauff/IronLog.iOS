@@ -6,3 +6,14 @@
 //
 
 import Foundation
+class LiftCatalogViewModel : ObservableObject {
+    
+    @Published var lifts: [Lift]
+    
+    private var liftRepository: LiftRepository
+    
+    func loadLifts() throws {
+        
+    }
+    
+}

@@ -34,6 +34,15 @@ class CoreDataLiftRepository : LiftRepository {
                 id: liftModel!.id!)
     }
     
+    func getAllLifts() throws -> [Lift] {
+        let fetchRequest = LiftModel.fetchRequest()
+        let lifts = try container.viewContext.fetch(fetchRequest)
+        
+        return lifts.map { lift in
+            Lift(name: lift.name!, trainingMax: Int(lift.trainingMax), id: lift.id!)
+        }
+    }
+    
     private func fetchLift(_ liftId: UUID) throws -> LiftModel? {
         let fetchRequest = LiftModel.fetchRequest()
         let fetchPred = NSPredicate(format: "id = @a", liftId.uuidString)
