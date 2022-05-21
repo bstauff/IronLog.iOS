@@ -26,8 +26,6 @@
 		0555F36D27A74797008D5726 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0555F35127A7394F008D5726 /* Exercise.swift */; };
 		0555F36E27A7479B008D5726 /* ExerciseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0555F35327A73955008D5726 /* ExerciseSet.swift */; };
 		0555F36F27A7479E008D5726 /* Cycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0555F35527A73CDA008D5726 /* Cycle.swift */; };
-		056B4E7A2839779100512A4B /* LiftCatalogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056B4E792839779100512A4B /* LiftCatalogViewModel.swift */; };
-		056B4E7C283985CB00512A4B /* AddLiftViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056B4E7B283985CB00512A4B /* AddLiftViewModel.swift */; };
 		058393A0281456B20045297A /* AddCycleWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0583939F281456B20045297A /* AddCycleWorkoutView.swift */; };
 		058393A2281464CD0045297A /* ActiveWorkoutExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058393A1281464CD0045297A /* ActiveWorkoutExerciseView.swift */; };
 		058B1B82281DD0EF00FD87C2 /* EditExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058B1B81281DD0EF00FD87C2 /* EditExerciseView.swift */; };
@@ -79,8 +77,6 @@
 		0555F35127A7394F008D5726 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		0555F35327A73955008D5726 /* ExerciseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSet.swift; sourceTree = "<group>"; };
 		0555F35527A73CDA008D5726 /* Cycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cycle.swift; sourceTree = "<group>"; };
-		056B4E792839779100512A4B /* LiftCatalogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftCatalogViewModel.swift; sourceTree = "<group>"; };
-		056B4E7B283985CB00512A4B /* AddLiftViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLiftViewModel.swift; sourceTree = "<group>"; };
 		0583939F281456B20045297A /* AddCycleWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCycleWorkoutView.swift; sourceTree = "<group>"; };
 		058393A1281464CD0045297A /* ActiveWorkoutExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveWorkoutExerciseView.swift; sourceTree = "<group>"; };
 		058B1B81281DD0EF00FD87C2 /* EditExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExerciseView.swift; sourceTree = "<group>"; };
@@ -208,30 +204,12 @@
 			path = Workouts;
 			sourceTree = "<group>";
 		};
-		056B4E752839775F00512A4B /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				056B4E792839779100512A4B /* LiftCatalogViewModel.swift */,
-				056B4E7B283985CB00512A4B /* AddLiftViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		056B4E762839776500512A4B /* Views */ = {
+		05A6E7B327C17ED600B3113E /* Lifts */ = {
 			isa = PBXGroup;
 			children = (
 				05A6E7B427C17EF000B3113E /* LiftCatalogView.swift */,
 				05A6E7B627C1807700B3113E /* EditLiftView.swift */,
 				052C8AC32817883700324E68 /* AddLiftView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		05A6E7B327C17ED600B3113E /* Lifts */ = {
-			isa = PBXGroup;
-			children = (
-				056B4E762839776500512A4B /* Views */,
-				056B4E752839775F00512A4B /* ViewModels */,
 			);
 			path = Lifts;
 			sourceTree = "<group>";
@@ -415,9 +393,7 @@
 				05A6E7B727C1807700B3113E /* EditLiftView.swift in Sources */,
 				052C8AC42817883700324E68 /* AddLiftView.swift in Sources */,
 				0555F34827A72E28008D5726 /* Lift.swift in Sources */,
-				056B4E7A2839779100512A4B /* LiftCatalogViewModel.swift in Sources */,
 				05A6E7BA27C18A1000B3113E /* CycleView.swift in Sources */,
-				056B4E7C283985CB00512A4B /* AddLiftViewModel.swift in Sources */,
 				0555F34A27A73107008D5726 /* LiftCatalog.swift in Sources */,
 				0555F36D27A74797008D5726 /* Exercise.swift in Sources */,
 				05E55D3527EFB91600FAD5B7 /* ActiveWorkoutView.swift in Sources */,
