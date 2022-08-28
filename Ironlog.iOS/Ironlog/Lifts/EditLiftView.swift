@@ -14,7 +14,7 @@ struct EditLiftView: View {
     @State private var updatedLiftName: String = ""
     @State private var updatedTrainingMax: Int = 0
     
-    @ObservedObject var lift: Lift
+    @Binding var lift: Lift
     
     private var liftRepository: LiftRepository
     
@@ -23,8 +23,8 @@ struct EditLiftView: View {
         return formatter
     }()
     
-    init(lift: Lift, liftRepository: LiftRepository){
-        self.lift = lift
+    init(lift: Binding<Lift>, liftRepository: LiftRepository){
+        self._lift = lift
         self.liftRepository = liftRepository
     }
     
@@ -44,8 +44,12 @@ struct EditLiftView: View {
                     dismissButton: .default(Text("OK"))
                 )
             }
+        }.onAppear {
+            self.updatedLiftName = lift.name
+            self.updatedTrainingMax = lift.trainingMax
         }
     }
+    
     
     func saveLift() {
         guard updatedLiftName != "" else {
@@ -77,7 +81,7 @@ struct EditLiftView_Previews: PreviewProvider {
     static var previews: some View {
         let liftModel = Lift(name: "squat", trainingMax: 350)
         let liftRepo = CoreDataLiftRepository()
-        return EditLiftView(lift: liftModel, liftRepository: liftRepo)
+        return EditLiftView(lift: .constant(liftModel), liftRepository: liftRepo)
     }
 }
 
