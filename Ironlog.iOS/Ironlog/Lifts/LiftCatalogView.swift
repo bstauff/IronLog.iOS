@@ -27,8 +27,10 @@ struct LiftCatalogView: View {
                 List {
                     ForEach($liftCatalog.lifts) {$lift in
                         NavigationLink(
-                            lift.name,
                             destination: LiftDetailView(lift: $lift, liftRepository: liftRepo))
+                        {
+                            LiftCatalogItem(lift: lift)
+                        }
                     }
                     .onDelete(perform: deleteLifts)
                     .alert(isPresented: $isError) {

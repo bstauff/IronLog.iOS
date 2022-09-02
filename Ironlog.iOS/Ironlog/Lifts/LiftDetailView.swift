@@ -11,6 +11,7 @@ struct LiftDetailView: View {
     @Binding var lift: Lift
     private var liftRepository: LiftRepository
     @State private var isPresentingEditSheet = false
+    @State private var didSaveThrowError = false
     
     init(lift: Binding<Lift>, liftRepository: LiftRepository) {
         self._lift = lift
@@ -29,7 +30,7 @@ struct LiftDetailView: View {
                 isPresentingEditSheet = true
             }
         }
-        .sheet(isPresented: $isPresentingEditSheet) {
+        .sheet(isPresented: $isPresentingEditSheet, onDismiss: saveLift) {
             NavigationView {
                 EditLiftView(lift: $lift, liftRepository: self.liftRepository)
                 .navigationTitle(lift.name)
@@ -47,6 +48,20 @@ struct LiftDetailView: View {
                 }
             }
         }
+        .alert("Woops", isPresented: $didSaveThrowError) {
+            VStack {
+                Text("Failed to save lift")
+                Button("OK", role: .cancel){}
+            }
+        }
+    }
+    
+    private func saveLift() {
+        do {
+            try self.liftRepository.saveLift(lift: lift)
+        } catch {
+            didSaveThrowError = true
+        }
     }
 }
 
@@ -58,4 +73,8 @@ struct LiftDetailView_Previews: PreviewProvider {
             LiftDetailView(lift: .constant(liftModel), liftRepository: liftRepo)
         }
     }
+}
+
+enum MyError : Error {
+    case boom
 }
