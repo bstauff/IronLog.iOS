@@ -10,14 +10,16 @@ import SwiftUI
 @main
 struct IronlogApp: App {
     private var liftRepo = CoreDataLiftRepository()
+    private var workoutRepo = CoreDataWorkoutRepository()
     
     var body: some Scene {
         WindowGroup {
             TabView {
-                CycleView().tabItem {
+                WorkoutsView(workoutRepo: workoutRepo).tabItem {
                     Label("Cycle", systemImage: "list.bullet.circle")
                 }
-                let activeWorkout = cyclePlan.getActiveWorkout()
+                let currentDate = Date()
+                let activeWorkout = workoutRepo.getWorkoutForDate(date: currentDate)
                 if activeWorkout != nil {
                     ActiveWorkoutView(workout: activeWorkout!).tabItem {
                         Label("Active Workout", systemImage: "flame.circle")
