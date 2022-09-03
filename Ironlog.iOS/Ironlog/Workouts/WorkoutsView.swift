@@ -7,20 +7,29 @@
 
 import SwiftUI
 
-struct CycleView: View {
-    @ObservedObject var cycle: Cycle
-    @ObservedObject var liftCatalog: LiftCatalog
+struct WorkoutsView: View {
     @State private var newWorkout: Workout? = nil
     @State private var isShowingWorkoutSheet = false
+    @State private var workouts: [Workout] = []
+    
+    @State private var isError = false
+    @State private var errorString = ""
+    
+    var workoutRepository: WorkoutRepository
+    
+    init(workoutRepo: WorkoutRepository) {
+        self.workoutRepository = workoutRepo
+    }
+    
     var body: some View {
         NavigationView {
             VStack {
                 List {
-                    ForEach($cycle.workouts){ $workout in
+                    ForEach($workouts){ $workout in
                         NavigationLink(getWorkoutDate(workout: workout), destination: WorkoutView(workout: workout, cycle: cycle, liftCatalog: liftCatalog))
                     }
                     .onDelete { indexSet in
-                        cycle.workouts.remove(atOffsets: indexSet)
+                        workouts.remove(atOffsets: indexSet)
                     }
                 }
             }
@@ -44,13 +53,22 @@ struct CycleView: View {
         dateFormatter.dateFormat = "MM/dd/YY"
         return dateFormatter.string(from: workout.date)
     }
+    func loadWorkouts() {
+        do {
+            let workouts = try self.workoutRepository.getAllWorkouts()
+            self.workouts = workouts
+        } catch {
+            isError = true
+            errorString = "Failed to load workouts"
+        }
+        
+    }
 }
 
 
 struct CycleView_Previews: PreviewProvider {
     static var previews: some View {
-        let cycle = Cycle()
-        let liftCatalog = LiftCatalog()
-        return CycleView(cycle: cycle, liftCatalog: liftCatalog)
+        let workoutRepo = CoreDataWorkoutRepository()
+        return WorkoutsView(workoutRepo: workoutRepo)
     }
 }

@@ -9,8 +9,6 @@ import SwiftUI
 
 struct WorkoutView: View {
     @ObservedObject var workout: Workout
-    @ObservedObject var cycle: Cycle
-    @ObservedObject var liftCatalog: LiftCatalog
     @State private var isSheetActive = false
     @State private var draftExercise: Exercise = Exercise()
     @State private var isShowingExerciseSheet = false
@@ -30,7 +28,7 @@ struct WorkoutView: View {
                 }
                 ForEach($workout.exercises){ $exercise in
                     NavigationLink(
-                        destination: EditExerciseView(liftCatalog: liftCatalog, exercise: exercise)) {
+                        destination: EditExerciseView(exercise: exercise)) {
                             ExerciseRowView(exercise: exercise)
                         }
                 }
@@ -68,11 +66,7 @@ struct ExerciseRowView: View {
 struct WorkoutView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let liftCatalog = LiftCatalog()
-        let squatLift = Lift(name: "Squat", trainingMax: 315)
-        liftCatalog.lifts.append(squatLift)
-        
-        return WorkoutView(workout: Workout(date: Date.now), cycle: Cycle(), liftCatalog: liftCatalog)
+        return WorkoutView(workout: Workout(date: Date.now))
             .previewDevice("iPhone 13 Pro")
     }
 }
