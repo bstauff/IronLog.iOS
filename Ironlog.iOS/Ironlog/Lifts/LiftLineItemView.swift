@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-struct LiftCatalogItem: View {
+struct LiftLineItemView: View {
     @ObservedObject var lift: Lift
     var body: some View {
         Text(lift.name)
     }
 }
 
-struct LiftCatalogItem_Previews: PreviewProvider {
+struct LiftLineItemView_Previews: PreviewProvider {
     static var previews: some View {
         let liftModel = Lift(name: "squat", trainingMax: 350)
-        LiftCatalogItem(lift: liftModel)
+        LiftLineItemView(lift: liftModel)
     }
 }
