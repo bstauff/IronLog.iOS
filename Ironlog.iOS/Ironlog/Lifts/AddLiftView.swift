@@ -17,10 +17,10 @@ struct AddLiftView: View {
     @State var liftName: String?
     @State var trainingMax: Int?
         
-    @ObservedObject var liftCatalog: LiftCatalog
+    @Binding var lifts:[Lift]
     
-    init(liftRepo: LiftRepository, liftCatalog: LiftCatalog) {
-        self.liftCatalog = liftCatalog
+    init(liftRepo: LiftRepository, lifts: Binding<[Lift]>) {
+        self._lifts = lifts
         self.repo = liftRepo
     }
     
@@ -75,7 +75,7 @@ struct AddLiftView: View {
             errorString = "failed to save lift"
         }
             
-        liftCatalog.lifts.append(newLift)
+        lifts.append(newLift)
         
         presentationMode.wrappedValue.dismiss()
     }
@@ -84,7 +84,7 @@ struct AddLiftView: View {
 struct AddLiftView_Previews: PreviewProvider {
     static var previews: some View {
         let liftRepo = CoreDataLiftRepository()
-        let liftCatalog = LiftCatalog()
-        AddLiftView(liftRepo: liftRepo, liftCatalog: liftCatalog)
+        let lifts: [Lift] = []
+        AddLiftView(liftRepo: liftRepo, lifts: .constant(lifts))
     }
 }

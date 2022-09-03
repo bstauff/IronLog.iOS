@@ -9,14 +9,12 @@ import SwiftUI
 
 @main
 struct IronlogApp: App {
-    @StateObject var liftCatalog = LiftCatalog()
-    @StateObject var cyclePlan = Cycle()
     private var liftRepo = CoreDataLiftRepository()
     
     var body: some Scene {
         WindowGroup {
             TabView {
-                CycleView(cycle: cyclePlan, liftCatalog: liftCatalog).tabItem {
+                CycleView().tabItem {
                     Label("Cycle", systemImage: "list.bullet.circle")
                 }
                 let activeWorkout = cyclePlan.getActiveWorkout()
@@ -30,7 +28,7 @@ struct IronlogApp: App {
                             Label("Active Workout", systemImage: "flame.circle")
                         }
                 }
-                LiftCatalogView(liftRepo: liftRepo).tabItem {
+                LiftsView(liftRepo: liftRepo).tabItem {
                     Label("Lifts", systemImage: "arrow.up.circle")
                 }
             }

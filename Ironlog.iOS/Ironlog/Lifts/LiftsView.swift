@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct LiftCatalogView: View {
+struct LiftsView: View {
     @State private var isShowingAddSheet = false
     
     @State private var isError = false
     @State private var errorString = ""
     
-    @StateObject private var liftCatalog: LiftCatalog = LiftCatalog()
+    @State private var lifts: [Lift] = []
     
     var liftRepo: LiftRepository
     
@@ -25,11 +25,11 @@ struct LiftCatalogView: View {
         NavigationView {
             VStack {
                 List {
-                    ForEach($liftCatalog.lifts) {$lift in
+                    ForEach($lifts) {$lift in
                         NavigationLink(
                             destination: LiftDetailView(lift: $lift, liftRepository: liftRepo))
                         {
-                            LiftCatalogItem(lift: lift)
+                            LiftLineItemView(lift: lift)
                         }
                     }
                     .onDelete(perform: deleteLifts)
@@ -51,7 +51,7 @@ struct LiftCatalogView: View {
                     Button("add"){
                         isShowingAddSheet = true
                     }.sheet(isPresented: $isShowingAddSheet){
-                        AddLiftView(liftRepo: liftRepo, liftCatalog: liftCatalog)
+                        AddLiftView(liftRepo: liftRepo, lifts: $lifts)
                     }
                 }
             }
@@ -61,7 +61,7 @@ struct LiftCatalogView: View {
     func loadLifts() {
         do {
             let lifts = try liftRepo.getAllLifts()
-            liftCatalog.lifts = lifts
+            self.lifts = lifts
         } catch {
             isError = true
             errorString = "Failed to load lifts"
@@ -71,12 +71,12 @@ struct LiftCatalogView: View {
     func deleteLifts(offsets: IndexSet) {
         do {
             for offset in offsets {
-                let liftToDelete = liftCatalog.lifts[offset]
+                let liftToDelete = self.lifts[offset]
                 
                 try liftRepo.deleteLift(liftId: liftToDelete.id)
             }
             
-            liftCatalog.lifts.remove(atOffsets: offsets)
+            self.lifts.remove(atOffsets: offsets)
         } catch {
             isError = true
             errorString = "Failed to delete.  Please try again."
@@ -84,11 +84,11 @@ struct LiftCatalogView: View {
     }
 }
 
-struct LiftCatalogView_Previews: PreviewProvider {
+struct LiftsView_Previews: PreviewProvider {
     static var previews: some View {
         let liftRepo = CoreDataLiftRepository()
         let squat = Lift(name: "Squat", trainingMax: 315)
         try? liftRepo.addLift(lift: squat)
-        return LiftCatalogView(liftRepo: liftRepo)
+        return LiftsView(liftRepo: liftRepo)
     }
 }
