@@ -17,4 +17,11 @@ class Workout : ObservableObject, Identifiable {
         id = UUID()
         self.exercises = []
     }
+    
+    init(id: UUID, date: Date, exercises: [Exercise], isComplete: Bool){
+        self.id = id
+        self.date = date
+        self.exercises = exercises
+        self.isComplete = isComplete
+    }
 }

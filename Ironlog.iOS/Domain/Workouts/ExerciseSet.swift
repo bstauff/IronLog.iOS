@@ -16,4 +16,9 @@ struct ExerciseSet: Identifiable {
         self.reps = reps
         self.weight = weight
     }
+    init(reps: Int, weight: Int, id: UUID) {
+        self.reps = reps
+        self.weight = weight
+        self.id = id
+    }
 }

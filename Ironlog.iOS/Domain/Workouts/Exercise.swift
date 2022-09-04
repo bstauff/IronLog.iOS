@@ -18,4 +18,16 @@ class Exercise: Identifiable, ObservableObject {
         sets = []
         lift = Lift(name: "New Lift", trainingMax: 0)
     }
+    
+    init(
+        id: UUID,
+        sets: [ExerciseSet],
+        lift: Lift,
+        isComplete: Bool
+    ) {
+        self.id = id
+        self.sets = sets
+        self.lift = lift
+        self.isComplete = isComplete
+    }
 }
