@@ -50,7 +50,7 @@ struct AddWorkoutView: View {
     }
 }
 
-struct AddCycleWorkoutView_Previews: PreviewProvider {
+struct AddWorkoutView_Previews: PreviewProvider {
     static var previews: some View {
         let workouts: [Workout] = []
         let appRepo = CoreDataRepository()

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct WorkoutsView: View {
-    @State private var newWorkout: Workout? = nil
     @State private var isShowingWorkoutSheet = false
     @State private var workouts: [Workout] = []
     
@@ -42,7 +41,7 @@ struct WorkoutsView: View {
                     Button("add") {
                         self.isShowingWorkoutSheet = true
                     }.sheet(isPresented: $isShowingWorkoutSheet) {
-                        AddCycleWorkoutView(cycle: self.cycle)
+                        AddWorkoutView(repo: self.workoutRepository, workouts: $workouts)
                     }
                 }
             }
@@ -68,7 +67,7 @@ struct WorkoutsView: View {
 
 struct CycleView_Previews: PreviewProvider {
     static var previews: some View {
-        let workoutRepo = CoreDataWorkoutRepository()
+        let workoutRepo = CoreDataRepository()
         return WorkoutsView(workoutRepo: workoutRepo)
     }
 }
