@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class CoreDataRepository : LiftRepository, WorkoutRepository{
+class CoreDataRepository : AppRepository{
     
     private let container = NSPersistentContainer(name: "Ironlog")
     

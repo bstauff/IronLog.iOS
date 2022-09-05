@@ -9,17 +9,16 @@ import SwiftUI
 
 @main
 struct IronlogApp: App {
-    private var liftRepo = CoreDataLiftRepository()
-    private var workoutRepo = CoreDataWorkoutRepository()
+    private var repository  = CoreDataRepository()
     
     var body: some Scene {
         WindowGroup {
             TabView {
-                WorkoutsView(workoutRepo: workoutRepo).tabItem {
+                WorkoutsView(workoutRepo: repository).tabItem {
                     Label("Cycle", systemImage: "list.bullet.circle")
                 }
                 let currentDate = Date()
-                let activeWorkout = workoutRepo.getWorkoutForDate(date: currentDate)
+                let activeWorkout = try? repository.getWorkoutForDate(date: currentDate)
                 if activeWorkout != nil {
                     ActiveWorkoutView(workout: activeWorkout!).tabItem {
                         Label("Active Workout", systemImage: "flame.circle")
@@ -30,7 +29,7 @@ struct IronlogApp: App {
                             Label("Active Workout", systemImage: "flame.circle")
                         }
                 }
-                LiftsView(liftRepo: liftRepo).tabItem {
+                LiftsView(liftRepo: repository).tabItem {
                     Label("Lifts", systemImage: "arrow.up.circle")
                 }
             }

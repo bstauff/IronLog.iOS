@@ -15,9 +15,9 @@ struct LiftsView: View {
     
     @State private var lifts: [Lift] = []
     
-    var liftRepo: LiftRepository
+    var liftRepo: AppRepository
     
-    init(liftRepo: LiftRepository) {
+    init(liftRepo: AppRepository) {
         self.liftRepo = liftRepo
     }
     
@@ -86,7 +86,7 @@ struct LiftsView: View {
 
 struct LiftsView_Previews: PreviewProvider {
     static var previews: some View {
-        let liftRepo = CoreDataLiftRepository()
+        let liftRepo = CoreDataRepository()
         let squat = Lift(name: "Squat", trainingMax: 315)
         try? liftRepo.addLift(lift: squat)
         return LiftsView(liftRepo: liftRepo)

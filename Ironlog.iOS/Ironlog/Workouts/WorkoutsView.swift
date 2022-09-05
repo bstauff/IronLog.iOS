@@ -15,9 +15,9 @@ struct WorkoutsView: View {
     @State private var isError = false
     @State private var errorString = ""
     
-    var workoutRepository: WorkoutRepository
+    var workoutRepository: AppRepository
     
-    init(workoutRepo: WorkoutRepository) {
+    init(workoutRepo: AppRepository) {
         self.workoutRepository = workoutRepo
     }
     
@@ -26,7 +26,7 @@ struct WorkoutsView: View {
             VStack {
                 List {
                     ForEach($workouts){ $workout in
-                        NavigationLink(getWorkoutDate(workout: workout), destination: WorkoutView(workout: workout, cycle: cycle, liftCatalog: liftCatalog))
+                        NavigationLink(getWorkoutDate(workout: workout), destination: WorkoutDetailsView(workout: workout, cycle: cycle, liftCatalog: liftCatalog))
                     }
                     .onDelete { indexSet in
                         workouts.remove(atOffsets: indexSet)

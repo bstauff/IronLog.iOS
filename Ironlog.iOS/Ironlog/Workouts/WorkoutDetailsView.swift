@@ -7,11 +7,17 @@
 
 import SwiftUI
 
-struct WorkoutView: View {
+struct WorkoutDetailsView: View {
     @ObservedObject var workout: Workout
     @State private var isSheetActive = false
     @State private var draftExercise: Exercise = Exercise()
     @State private var isShowingExerciseSheet = false
+    
+    var repo: AppRepository
+    
+    init(repo: AppRepository) {
+        self.repo = repo
+    }
     
     var body: some View {
         VStack {
@@ -63,10 +69,10 @@ struct ExerciseRowView: View {
     }
 }
 
-struct WorkoutView_Previews: PreviewProvider {
+struct WorkoutDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         
-        return WorkoutView(workout: Workout(date: Date.now))
+        return WorkoutDetailsView(workout: Workout(date: Date.now))
             .previewDevice("iPhone 13 Pro")
     }
 }

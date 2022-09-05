@@ -16,14 +16,14 @@ struct EditLiftView: View {
     
     @Binding var lift: Lift
     
-    private var liftRepository: LiftRepository
+    private var liftRepository: AppRepository
     
     private let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         return formatter
     }()
     
-    init(lift: Binding<Lift>, liftRepository: LiftRepository){
+    init(lift: Binding<Lift>, liftRepository: AppRepository){
         self._lift = lift
         self.liftRepository = liftRepository
     }
@@ -80,7 +80,7 @@ struct EditLiftView: View {
 struct EditLiftView_Previews: PreviewProvider {
     static var previews: some View {
         let liftModel = Lift(name: "squat", trainingMax: 350)
-        let liftRepo = CoreDataLiftRepository()
+        let liftRepo = CoreDataRepository()
         return EditLiftView(lift: .constant(liftModel), liftRepository: liftRepo)
     }
 }

@@ -1,12 +1,18 @@
 //
-//  WorkoutRepository.swift
+//  LiftRepository.swift
 //  Ironlog
 //
-//  Created by Brian Stauff on 9/3/22.
+//  Created by Brian Stauff on 5/21/22.
 //
 
 import Foundation
-protocol WorkoutRepository {
+
+protocol AppRepository {
+    func getLift(liftId: UUID) throws -> Lift?
+    func getAllLifts() throws -> [Lift]
+    func addLift(lift: Lift) throws
+    func deleteLift(liftId: UUID) throws
+    func saveLift(lift: Lift) throws
     func getWorkout(workoutId: UUID) throws -> Workout?
     func getAllWorkouts() throws -> [Workout]
     func getWorkoutForDate(date: Date) throws -> Workout?

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddLiftView: View {
     @Environment(\.presentationMode) var presentationMode
-    private var repo: LiftRepository
+    private var repo: AppRepository
     
     @State private var isError = false
     @State private var errorString = ""
@@ -19,7 +19,7 @@ struct AddLiftView: View {
         
     @Binding var lifts:[Lift]
     
-    init(liftRepo: LiftRepository, lifts: Binding<[Lift]>) {
+    init(liftRepo: AppRepository, lifts: Binding<[Lift]>) {
         self._lifts = lifts
         self.repo = liftRepo
     }
@@ -83,7 +83,7 @@ struct AddLiftView: View {
 
 struct AddLiftView_Previews: PreviewProvider {
     static var previews: some View {
-        let liftRepo = CoreDataLiftRepository()
+        let liftRepo = CoreDataRepository()
         let lifts: [Lift] = []
         AddLiftView(liftRepo: liftRepo, lifts: .constant(lifts))
     }
