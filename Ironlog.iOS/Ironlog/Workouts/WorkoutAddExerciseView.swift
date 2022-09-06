@@ -18,14 +18,13 @@ struct WorkoutAddExerciseView: View {
     @State private var isError = false
     @State private var errorMessage = ""
     
-    @Binding private var lifts: [Lift]
+    @State private var lifts: [Lift] = []
     
     private var repo: AppRepository
     
-    init(repo: AppRepository, workout: Workout, lifts: Binding<[Lift]>) {
-        self.repo = repo
+    init(repo: AppRepository, workout: Workout) {
         self.workout = workout
-        self._lifts = lifts
+        self.repo = repo
     }
     
     var body: some View {
@@ -101,9 +100,8 @@ struct WorkoutAddExerciseView_Previews: PreviewProvider {
         let squatLift = Lift(name: "Squat", trainingMax: 315)
         try? appRepo.addLift(lift: squatLift)
         
-        let lifts = try! appRepo.getAllLifts()
         
         let workout = Workout(date: Date.now)
-        return WorkoutAddExerciseView(repo: appRepo, workout: workout, lifts: .constant(lifts))
+        return WorkoutAddExerciseView(repo: appRepo, workout: workout)
     }
 }

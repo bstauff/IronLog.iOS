@@ -8,13 +8,20 @@
 import SwiftUI
 
 struct EditExerciseView: View {
-    @ObservedObject var liftCatalog: LiftCatalog
-    @ObservedObject var exercise: Exercise
-    
     @State private var shouldNavigate = false
-    
     @State private var isError = false
     @State private var errorMessage = ""
+    
+    @State private var lifts: [Lift] = []
+    
+    private var repo: AppRepository
+    
+    @ObservedObject var exercise: Exercise
+    
+    init(repo: AppRepository, exercise: Exercise) {
+        self.repo = repo
+        self.exercise = exercise
+    }
     
     var body: some View {
         VStack {
@@ -25,7 +32,7 @@ struct EditExerciseView: View {
                 }
             Form {
                 Picker("Lift", selection: $exercise.lift) {
-                    ForEach($liftCatalog.lifts) { $lift in
+                    ForEach($lifts) { $lift in
                         Text(lift.name).tag(lift)
                     }
                 }
@@ -55,14 +62,24 @@ struct EditExerciseView: View {
             }
         }
     }
+    
+    private func loadLifts() {
+        do {
+            let lifts = try repo.getAllLifts()
+            self.lifts = lifts
+        } catch {
+            isError = true
+            errorMessage = "Failed to load lifts"
+        }
+    }
 }
 
 struct EditExerciseView_Previews: PreviewProvider {
     static var previews: some View {
-        let liftCatalog = LiftCatalog()
-        let squatLift = Lift(name: "Squat", trainingMax: 315)
-        liftCatalog.lifts.append(squatLift)
+        let liftRepo = CoreDataRepository()
+        let squat = Lift(name: "Squat", trainingMax: 315)
+        try? liftRepo.addLift(lift: squat)
         let exercise = Exercise()
-        return EditExerciseView(liftCatalog: liftCatalog, exercise: exercise)
+        return EditExerciseView(repo: liftRepo, exercise: exercise)
     }
 }

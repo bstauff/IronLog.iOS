@@ -126,7 +126,11 @@ class CoreDataRepository : AppRepository{
         
         let workouts = try container.viewContext.fetch(fetchRequest)
         
-        return try mapWorkoutModel(workoutModel: workouts[0])
+        if(workouts.count > 0) {
+            
+            return try mapWorkoutModel(workoutModel: workouts[0])
+        }
+        return nil
     }
     
     func saveWorkout(workout: Workout) throws {

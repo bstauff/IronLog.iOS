@@ -25,14 +25,14 @@ struct WorkoutsView: View {
             VStack {
                 List {
                     ForEach($workouts){ $workout in
-                        NavigationLink(getWorkoutDate(workout: workout), destination: WorkoutDetailsView(workout: workout, cycle: cycle, liftCatalog: liftCatalog))
+                        NavigationLink(getWorkoutDate(workout: workout), destination: WorkoutDetailsView(repo: workoutRepository, workout: workout))
                     }
                     .onDelete { indexSet in
                         workouts.remove(atOffsets: indexSet)
                     }
                 }
             }
-            .navigationTitle("Cycle")
+            .navigationTitle("Workouts")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     EditButton()
@@ -67,7 +67,11 @@ struct WorkoutsView: View {
 
 struct CycleView_Previews: PreviewProvider {
     static var previews: some View {
+        let workoutA = Workout(date: Date())
+        let workoutB = Workout(date: Calendar.current.date(byAdding: .day, value: 1, to: Date())!)
         let workoutRepo = CoreDataRepository()
+        try? workoutRepo.addWorkout(workout: workoutA)
+        try? workoutRepo.addWorkout(workout: workoutB)
         return WorkoutsView(workoutRepo: workoutRepo)
     }
 }

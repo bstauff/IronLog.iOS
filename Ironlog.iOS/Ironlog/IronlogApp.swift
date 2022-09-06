@@ -15,7 +15,7 @@ struct IronlogApp: App {
         WindowGroup {
             TabView {
                 WorkoutsView(workoutRepo: repository).tabItem {
-                    Label("Cycle", systemImage: "list.bullet.circle")
+                    Label("Workouts", systemImage: "list.bullet.circle")
                 }
                 let currentDate = Date()
                 let activeWorkout = try? repository.getWorkoutForDate(date: currentDate)
