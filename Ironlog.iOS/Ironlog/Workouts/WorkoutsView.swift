@@ -27,9 +27,7 @@ struct WorkoutsView: View {
                     ForEach($workouts){ $workout in
                         NavigationLink(getWorkoutDate(workout: workout), destination: WorkoutDetailsView(repo: workoutRepository, workout: workout))
                     }
-                    .onDelete { indexSet in
-                        workouts.remove(atOffsets: indexSet)
-                    }
+                    .onDelete(perform: deleteWorkouts)
                 }
             }
             .navigationTitle("Workouts")
@@ -61,6 +59,20 @@ struct WorkoutsView: View {
             errorString = "Failed to load workouts"
         }
         
+    }
+    func deleteWorkouts(offsets: IndexSet) {
+        do {
+            for offset in offsets {
+                let workoutToDelete = self.workouts[offset]
+                
+                try workoutRepository.deleteWorkout(workoutId: workoutToDelete.id)
+            }
+            
+            self.workouts.remove(atOffsets: offsets)
+        } catch {
+            isError = true
+            errorString = "Failed to delete.  Please try again."
+        }
     }
 }
 
