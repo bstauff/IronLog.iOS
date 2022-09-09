@@ -45,7 +45,7 @@ struct WorkoutsView: View {
                     }
                 }
             }
-        }
+        }.onAppear(perform: loadWorkouts)
     }
     func getWorkoutDate(workout: Workout) -> String{
         let dateFormatter = DateFormatter()
