@@ -18,13 +18,14 @@ struct WorkoutAddExerciseView: View {
     @State private var isError = false
     @State private var errorMessage = ""
     
-    @State private var lifts: [Lift] = []
+    @Binding private var lifts: [Lift]
     
     private var repo: AppRepository
     
-    init(repo: AppRepository, workout: Workout) {
+    init(repo: AppRepository, workout: Workout, lifts: Binding<[Lift]>) {
         self.workout = workout
         self.repo = repo
+        self._lifts = lifts
     }
     
     var body: some View {
@@ -78,8 +79,18 @@ struct WorkoutAddExerciseView: View {
                             let newExercise = Exercise()
                             newExercise.sets = self.sets
                             newExercise.lift = self.selectedLift!
-                            
+                           
                             workout.exercises.append(newExercise)
+                            
+                            do {
+                                try self.repo.saveWorkout(workout: workout)
+                            } catch {
+                                self.isError = true
+                                self.errorMessage = "Failed to save exercise"
+                                workout.exercises.removeLast()
+                                return
+                            }
+                            
                             
                             presentationMode.wrappedValue.dismiss()
                             
@@ -98,10 +109,11 @@ struct WorkoutAddExerciseView_Previews: PreviewProvider {
     static var previews: some View {
         let appRepo = CoreDataRepository()
         let squatLift = Lift(name: "Squat", trainingMax: 315)
+        let lifts = [squatLift]
         try? appRepo.addLift(lift: squatLift)
         
         
         let workout = Workout(date: Date.now)
-        return WorkoutAddExerciseView(repo: appRepo, workout: workout)
+        return WorkoutAddExerciseView(repo: appRepo, workout: workout, lifts: .constant(lifts))
     }
 }

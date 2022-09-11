@@ -13,13 +13,14 @@ struct WorkoutDetailsView: View {
     @State private var draftExercise: Exercise = Exercise()
     @State private var isShowingExerciseSheet = false
     
-    private var lifts: [Lift] = []
+    @Binding var lifts: [Lift]
     
     var repo: AppRepository
     
-    init(repo: AppRepository, workout: Workout) {
+    init(repo: AppRepository, workout: Workout, lifts: Binding<[Lift]>) {
         self.repo = repo
         self.workout = workout
+        self._lifts = lifts
     }
     
     var body: some View {
@@ -32,7 +33,7 @@ struct WorkoutDetailsView: View {
                     Button(action: showExerciseSheet) {
                         Text("Add")
                     }.sheet(isPresented: $isShowingExerciseSheet){
-                        WorkoutAddExerciseView(repo: repo, workout: workout)
+                        WorkoutAddExerciseView(repo: repo, workout: workout, lifts: $lifts)
                     }
                 }
                 ForEach($workout.exercises){ $exercise in
@@ -77,9 +78,10 @@ struct WorkoutDetailsView_Previews: PreviewProvider {
         
         let appRepo = CoreDataRepository()
         let squatLift = Lift(name: "Squat", trainingMax: 315)
+        let lifts = [squatLift]
         try? appRepo.addLift(lift: squatLift)
         
-        return WorkoutDetailsView(repo: appRepo, workout: Workout(date: Date.now))
+        return WorkoutDetailsView(repo: appRepo, workout: Workout(date: Date.now), lifts: .constant(lifts))
             .previewDevice("iPhone 13 Pro")
     }
 }

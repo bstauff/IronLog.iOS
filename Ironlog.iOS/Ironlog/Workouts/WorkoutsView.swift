@@ -14,6 +14,8 @@ struct WorkoutsView: View {
     @State private var isError = false
     @State private var errorString = ""
     
+    @State private var lifts: [Lift] = []
+    
     var workoutRepository: AppRepository
     
     init(workoutRepo: AppRepository) {
@@ -25,7 +27,7 @@ struct WorkoutsView: View {
             VStack {
                 List {
                     ForEach($workouts){ $workout in
-                        NavigationLink(getWorkoutDate(workout: workout), destination: WorkoutDetailsView(repo: workoutRepository, workout: workout))
+                        NavigationLink(getWorkoutDate(workout: workout), destination: WorkoutDetailsView(repo: workoutRepository, workout: workout, lifts: $lifts))
                     }
                     .onDelete(perform: deleteWorkouts)
                 }
@@ -43,12 +45,16 @@ struct WorkoutsView: View {
                     }
                 }
             }
-        }.onAppear(perform: loadWorkouts)
+        }.onAppear(perform: loadData)
     }
     func getWorkoutDate(workout: Workout) -> String{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/YY"
         return dateFormatter.string(from: workout.date)
+    }
+    func loadData() {
+        loadWorkouts()
+        loadLifts()
     }
     func loadWorkouts() {
         do {
@@ -72,6 +78,15 @@ struct WorkoutsView: View {
         } catch {
             isError = true
             errorString = "Failed to delete.  Please try again."
+        }
+    }
+    func loadLifts() {
+        do {
+            let lifts = try self.workoutRepository.getAllLifts()
+            self.lifts = lifts
+        } catch {
+            isError = true
+            errorString = "Failed to load lifts"
         }
     }
 }
