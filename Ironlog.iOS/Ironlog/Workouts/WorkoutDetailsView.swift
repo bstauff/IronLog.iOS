@@ -33,7 +33,7 @@ struct WorkoutDetailsView: View {
                     Button(action: showExerciseSheet) {
                         Text("Add")
                     }.sheet(isPresented: $isShowingExerciseSheet){
-                        WorkoutAddExerciseView(repo: repo, workout: workout, lifts: $lifts)
+                        AddExerciseView(repo: repo, workout: workout, lifts: $lifts)
                     }
                 }
                 ForEach($workout.exercises){ $exercise in

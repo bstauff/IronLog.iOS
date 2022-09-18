@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WorkoutAddExerciseView: View {
+struct AddExerciseView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var workout: Workout
     @State private var selectedLift: Lift?
@@ -105,7 +105,7 @@ struct WorkoutAddExerciseView: View {
     }
 }
 
-struct WorkoutAddExerciseView_Previews: PreviewProvider {
+struct AddExerciseView_Previews: PreviewProvider {
     static var previews: some View {
         let appRepo = CoreDataRepository()
         let squatLift = Lift(name: "Squat", trainingMax: 315)
@@ -114,6 +114,6 @@ struct WorkoutAddExerciseView_Previews: PreviewProvider {
         
         
         let workout = Workout(date: Date.now)
-        return WorkoutAddExerciseView(repo: appRepo, workout: workout, lifts: .constant(lifts))
+        return AddExerciseView(repo: appRepo, workout: workout, lifts: .constant(lifts))
     }
 }
