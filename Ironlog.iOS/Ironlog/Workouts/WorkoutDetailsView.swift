@@ -38,7 +38,7 @@ struct WorkoutDetailsView: View {
                 }
                 ForEach($workout.exercises){ $exercise in
                     NavigationLink(
-                        destination: EditExerciseView(repo: repo, exercise: exercise)) {
+                        destination: ExerciseDetailsView(repo: repo, exercise: exercise, lifts: $lifts)) {
                             ExerciseRowView(exercise: exercise)
                         }
                 }

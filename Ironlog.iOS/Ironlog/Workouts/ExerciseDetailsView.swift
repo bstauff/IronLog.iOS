@@ -2,12 +2,12 @@
 //  EditExerciseView.swift
 //  Ironlog
 //
-//  Created by Brian Stauff on 9/20/22.
+//  Created by Brian Stauff on 4/30/22.
 //
 
 import SwiftUI
 
-struct EditExerciseView: View {
+struct ExerciseDetailsView: View {
     @State private var shouldNavigate = false
     @State private var isError = false
     @State private var errorMessage = ""
@@ -32,11 +32,6 @@ struct EditExerciseView: View {
                     EmptyView()
                 }
             Form {
-                Picker("Lift", selection: $exercise.lift) {
-                    ForEach($lifts) { $lift in
-                        Text(lift.name).tag(lift)
-                    }
-                }
                 Section {
                     HStack {
                         Text("Reps")
@@ -51,17 +46,10 @@ struct EditExerciseView: View {
                                 Text(String(exerciseSet.weight))
                             }
                         }
-                        .onDelete{ indexSet in
-                            exercise.sets.remove(atOffsets: indexSet)
-                        }
-                        Button("Add Set") {
-                            shouldNavigate = true
-                        }
                     }
-                    
                 }
             }
-        }
+        }.navigationTitle(exercise.lift.name)
     }
     
     private func loadLifts() {
@@ -75,12 +63,17 @@ struct EditExerciseView: View {
     }
 }
 
-struct EditExerciseView_Previews: PreviewProvider {
+struct ExerciseDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         let liftRepo = CoreDataRepository()
         let squat = Lift(name: "Squat", trainingMax: 315)
         let lifts = [squat]
-        let exercise = Exercise()
-        return ExerciseDetailsView(repo: liftRepo, exercise: exercise, lifts: .constant(lifts))
+        let sets = [
+            ExerciseSet(reps: 5, weight: 250)
+        ]
+        let exercise = Exercise(id: UUID(), sets: sets, lift: squat, isComplete: false)
+        return NavigationView {
+            ExerciseDetailsView(repo: liftRepo, exercise: exercise, lifts: .constant(lifts))
+        }
     }
 }
