@@ -80,8 +80,12 @@ struct WorkoutDetailsView_Previews: PreviewProvider {
         let squatLift = Lift(name: "Squat", trainingMax: 315)
         let lifts = [squatLift]
         try? appRepo.addLift(lift: squatLift)
+        let workout = Workout(date: Date())
+        let squatExercise = Exercise()
+        squatExercise.lift = squatLift
+        workout.exercises = [squatExercise]
         
-        return WorkoutDetailsView(repo: appRepo, workout: Workout(date: Date.now), lifts: .constant(lifts))
+        return WorkoutDetailsView(repo: appRepo, workout: workout, lifts: .constant(lifts))
             .previewDevice("iPhone 13 Pro")
     }
 }

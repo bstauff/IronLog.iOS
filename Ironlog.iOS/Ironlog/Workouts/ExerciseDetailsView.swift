@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ExerciseDetailsView: View {
-    @State private var shouldNavigate = false
     @State private var isError = false
     @State private var errorMessage = ""
+    
+    @State private var shouldShowEditSheet = false
     
     @Binding private var lifts: [Lift]
     
@@ -26,13 +27,8 @@ struct ExerciseDetailsView: View {
     
     var body: some View {
         VStack {
-            NavigationLink(
-                destination:AddSetToExerciseSheet(exerciseSets: $exercise.sets),
-                isActive: $shouldNavigate) {
-                    EmptyView()
-                }
             Form {
-                Section {
+                Section(header: Text("Sets")) {
                     HStack {
                         Text("Reps")
                         Spacer()
@@ -49,7 +45,32 @@ struct ExerciseDetailsView: View {
                     }
                 }
             }
-        }.navigationTitle(exercise.lift.name)
+        }
+        .sheet(isPresented: $shouldShowEditSheet) {
+            NavigationView {
+                EditExerciseView(repo: self.repo, exercise: exercise, lifts: $lifts)
+                    .navigationTitle(exercise.lift.name)
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Cancel") {
+                                shouldShowEditSheet = false
+                            }
+                        }
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("Done") {
+                                shouldShowEditSheet = false
+                                //TODO save here
+                            }
+                        }
+                    }
+            }
+        }
+        .navigationTitle(exercise.lift.name)
+        .toolbar {
+            Button("Edit") {
+                self.shouldShowEditSheet = true
+            }
+        }
     }
     
     private func loadLifts() {
