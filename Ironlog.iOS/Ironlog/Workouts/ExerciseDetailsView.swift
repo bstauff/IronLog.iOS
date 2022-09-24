@@ -15,6 +15,9 @@ struct ExerciseDetailsView: View {
     
     @Binding private var lifts: [Lift]
     
+    @State private var updatedSets: [ExerciseSet] = []
+    @State private var updatedLift: Lift = Lift(name: "stub", trainingMax: 0)
+    
     private var repo: AppRepository
     
     @ObservedObject var exercise: Exercise
@@ -49,11 +52,9 @@ struct ExerciseDetailsView: View {
         .sheet(isPresented: $shouldShowEditSheet) {
             NavigationView {
                 EditExerciseView(
-                    repo: self.repo,
-                    exercise: exercise,
                     lifts: $lifts,
-                    updatedLift: $exercise.lift,
-                    updatedSets: $exercise.sets
+                    updatedLift: $updatedLift,
+                    updatedSets: $updatedSets
                 )
                 .navigationTitle(exercise.lift.name)
                 .toolbar {
@@ -62,12 +63,23 @@ struct ExerciseDetailsView: View {
                             shouldShowEditSheet = false
                         }
                     }
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button("Done") {
+                            shouldShowEditSheet = false
+                            self.exercise.sets = self.updatedSets
+                            self.exercise.lift = self.updatedLift
+                            self.updatedSets = []
+                            self.updatedLift = Lift(name: "stub", trainingMax: 0)
+                        }
+                    }
                 }
             }
         }
         .navigationTitle(exercise.lift.name)
         .toolbar {
             Button("Edit") {
+                self.updatedLift = exercise.lift
+                self.updatedSets = exercise.sets
                 self.shouldShowEditSheet = true
             }
         }
