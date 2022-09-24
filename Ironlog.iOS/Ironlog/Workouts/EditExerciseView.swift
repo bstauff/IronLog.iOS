@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct EditExerciseView: View {
-    @State private var shouldNavigate = false
     @State private var isError = false
     @State private var errorMessage = ""
+    
+    @Binding private var updatedLift: Lift
+    @Binding private var updatedSets: [ExerciseSet]
     
     @Binding private var lifts: [Lift]
     
@@ -18,21 +20,23 @@ struct EditExerciseView: View {
     
     @ObservedObject var exercise: Exercise
     
-    init(repo: AppRepository, exercise: Exercise, lifts: Binding<[Lift]>) {
-        self.repo = repo
-        self.exercise = exercise
-        self._lifts = lifts
+    init(
+        repo: AppRepository,
+        exercise: Exercise,
+        lifts: Binding<[Lift]>,
+        updatedLift: Binding<Lift>,
+        updatedSets: Binding<[ExerciseSet]>) {
+            self.repo = repo
+            self.exercise = exercise
+            self._lifts = lifts
+            self._updatedLift = updatedLift
+            self._updatedSets = updatedSets
     }
     
     var body: some View {
         VStack {
-            NavigationLink(
-                destination:AddSetToExerciseSheet(exerciseSets: $exercise.sets),
-                isActive: $shouldNavigate) {
-                    EmptyView()
-                }
             Form {
-                Picker("Lift", selection: $exercise.lift) {
+                Picker("Lift", selection: $updatedLift) {
                     ForEach($lifts) { $lift in
                         Text(lift.name).tag(lift)
                     }
@@ -44,7 +48,7 @@ struct EditExerciseView: View {
                         Text("Weight")
                     }
                     List {
-                        ForEach($exercise.sets){ $exerciseSet in
+                        ForEach($updatedSets){ $exerciseSet in
                             HStack {
                                 Text(String(exerciseSet.reps))
                                 Spacer()
@@ -52,25 +56,14 @@ struct EditExerciseView: View {
                             }
                         }
                         .onDelete{ indexSet in
-                            exercise.sets.remove(atOffsets: indexSet)
+                            updatedSets.remove(atOffsets: indexSet)
                         }
                         Button("Add Set") {
-                            shouldNavigate = true
                         }
                     }
                     
                 }
             }
-        }
-    }
-    
-    private func loadLifts() {
-        do {
-            let lifts = try repo.getAllLifts()
-            self.lifts = lifts
-        } catch {
-            isError = true
-            errorMessage = "Failed to load lifts"
         }
     }
 }
@@ -79,8 +72,20 @@ struct EditExerciseView_Previews: PreviewProvider {
     static var previews: some View {
         let liftRepo = CoreDataRepository()
         let squat = Lift(name: "Squat", trainingMax: 315)
-        let lifts = [squat]
-        let exercise = Exercise()
-        return ExerciseDetailsView(repo: liftRepo, exercise: exercise, lifts: .constant(lifts))
+        let bench = Lift(name: "Bench", trainingMax: 275)
+        let lifts = [squat, bench]
+        let sets = [
+            ExerciseSet(reps: 5, weight: 250)
+        ]
+        let exercise = Exercise(id: UUID(), sets: sets, lift: squat, isComplete: false)
+        return NavigationView {
+            EditExerciseView(
+                repo: liftRepo,
+                exercise: exercise,
+                lifts: .constant(lifts),
+                updatedLift: .constant(exercise.lift),
+                updatedSets: .constant(exercise.sets)
+            )
+        }
     }
 }

@@ -48,21 +48,21 @@ struct ExerciseDetailsView: View {
         }
         .sheet(isPresented: $shouldShowEditSheet) {
             NavigationView {
-                EditExerciseView(repo: self.repo, exercise: exercise, lifts: $lifts)
-                    .navigationTitle(exercise.lift.name)
-                    .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
-                            Button("Cancel") {
-                                shouldShowEditSheet = false
-                            }
-                        }
-                        ToolbarItem(placement: .confirmationAction) {
-                            Button("Done") {
-                                shouldShowEditSheet = false
-                                //TODO save here
-                            }
+                EditExerciseView(
+                    repo: self.repo,
+                    exercise: exercise,
+                    lifts: $lifts,
+                    updatedLift: $exercise.lift,
+                    updatedSets: $exercise.sets
+                )
+                .navigationTitle(exercise.lift.name)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Cancel") {
+                            shouldShowEditSheet = false
                         }
                     }
+                }
             }
         }
         .navigationTitle(exercise.lift.name)
