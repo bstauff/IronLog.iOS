@@ -20,7 +20,7 @@ struct IronlogApp: App {
                 let currentDate = Date()
                 let activeWorkout = try? repository.getWorkoutForDate(date: currentDate)
                 if activeWorkout != nil {
-                    ActiveWorkoutView(workout: activeWorkout!).tabItem {
+                    ActiveWorkoutView(workout: activeWorkout!, repository: repository).tabItem {
                         Label("Active Workout", systemImage: "flame.circle")
                     }
                 } else {

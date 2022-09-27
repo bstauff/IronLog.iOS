@@ -9,11 +9,16 @@ import SwiftUI
 
 struct ActiveWorkoutView: View {
     @ObservedObject var workout: Workout
+    private var repository: AppRepository
+    init(workout: Workout, repository: AppRepository) {
+        self.workout = workout
+        self.repository = repository
+    }
     var body: some View {
         List {
             ForEach($workout.exercises){$exercise in
                 Section {
-                    ActiveWorkoutExerciseView(exercise: exercise)
+                    ActiveWorkoutExerciseView(workout: self.workout, exercise: exercise, repository: self.repository)
                 }
             }
             HStack {
@@ -70,6 +75,7 @@ struct ActiveWorkoutView_Previews: PreviewProvider {
         workout.exercises.append(squatSupplemental)
         
         
-        return ActiveWorkoutView(workout: workout)
+        let workoutRepo = CoreDataRepository()
+        return ActiveWorkoutView(workout: workout, repository: workoutRepo)
     }
 }

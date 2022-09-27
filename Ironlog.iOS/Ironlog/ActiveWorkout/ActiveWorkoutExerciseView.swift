@@ -9,6 +9,17 @@ import SwiftUI
 
 struct ActiveWorkoutExerciseView: View {
     @ObservedObject var exercise: Exercise
+    
+    @ObservedObject var workout: Workout
+    
+    private var repository: AppRepository
+    
+    init(workout: Workout, exercise: Exercise, repository: AppRepository) {
+        self.workout = workout
+        self.exercise = exercise
+        self.repository = repository
+    }
+    
     var body: some View {
         VStack {
             HStack {
@@ -41,6 +52,9 @@ struct ActiveWorkoutExerciseView_Previews: PreviewProvider {
             trainingMax: 315
         )
 
+        let workoutA = Workout(date: Date())
+        let workoutRepo = CoreDataRepository()
+        
         squatMain.lift = squatLift
         squatMain.sets.append(
             ExerciseSet(reps: 5, weight: 250)
@@ -51,6 +65,6 @@ struct ActiveWorkoutExerciseView_Previews: PreviewProvider {
         squatMain.sets.append(
             ExerciseSet(reps: 1, weight: 300)
         )
-        return ActiveWorkoutExerciseView(exercise: squatMain)
+        return ActiveWorkoutExerciseView(workout: workoutA, exercise: squatMain, repository: workoutRepo)
     }
 }

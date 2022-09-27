@@ -97,8 +97,6 @@ struct CycleView_Previews: PreviewProvider {
         let workoutA = Workout(date: Date())
         let workoutB = Workout(date: Calendar.current.date(byAdding: .day, value: 1, to: Date())!)
         let workoutRepo = CoreDataRepository()
-        try? workoutRepo.addWorkout(workout: workoutA)
-        try? workoutRepo.addWorkout(workout: workoutB)
         return WorkoutsView(workoutRepo: workoutRepo)
     }
 }
