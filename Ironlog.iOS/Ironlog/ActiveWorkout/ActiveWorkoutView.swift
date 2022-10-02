@@ -9,6 +9,10 @@ import SwiftUI
 
 struct ActiveWorkoutView: View {
     @ObservedObject var workout: Workout
+    
+    @State private var isError = false
+    @State private var errorMessage = ""
+    
     private var repository: AppRepository
     init(workout: Workout, repository: AppRepository) {
         self.workout = workout
@@ -28,6 +32,25 @@ struct ActiveWorkoutView: View {
                 }.toggleStyle(.button)
                 Spacer()
             }
+            HStack {
+                Spacer()
+                Button("Save") {
+                    do {
+                        try self.repository.saveWorkout(workout: workout)
+                    } catch {
+                        self.isError = true
+                        self.errorMessage = "Failed to save exercise"
+                        return
+                    }
+                }
+                Spacer()
+            }
+        }
+        .alert(isPresented: $isError) {
+            Alert(
+                title: Text("oops"),
+                message: Text("Failed to save workout"),
+                dismissButton: .default(Text("OK")))
         }
     }
 }
