@@ -26,7 +26,7 @@
 		0555F36C27A74790008D5726 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0555F34F27A73944008D5726 /* Workout.swift */; };
 		0555F36D27A74797008D5726 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0555F35127A7394F008D5726 /* Exercise.swift */; };
 		0555F36E27A7479B008D5726 /* ExerciseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0555F35327A73955008D5726 /* ExerciseSet.swift */; };
-		058393A2281464CD0045297A /* ActiveWorkoutExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058393A1281464CD0045297A /* ActiveWorkoutExerciseView.swift */; };
+		058393A2281464CD0045297A /* ExerciseCompletionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058393A1281464CD0045297A /* ExerciseCompletionRowView.swift */; };
 		058B1B82281DD0EF00FD87C2 /* ExerciseDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058B1B81281DD0EF00FD87C2 /* ExerciseDetailsView.swift */; };
 		059CD6CC28C2263000DDA354 /* LiftLineItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 059CD6CB28C2263000DDA354 /* LiftLineItemView.swift */; };
 		05A6E7B527C17EF000B3113E /* LiftsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A6E7B427C17EF000B3113E /* LiftsView.swift */; };
@@ -35,6 +35,7 @@
 		05A6E7BC27C18B7800B3113E /* WorkoutDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A6E7BB27C18B7800B3113E /* WorkoutDetailsView.swift */; };
 		05CABDBB2826DC6500A53B98 /* Ironlog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05CABDB92826DC6500A53B98 /* Ironlog.xcdatamodeld */; };
 		05E55D3527EFB91600FAD5B7 /* ActiveWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E55D3427EFB91600FAD5B7 /* ActiveWorkoutView.swift */; };
+		05E6FA3028EB0C0F005DF36D /* ExerciseCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E6FA2F28EB0C0F005DF36D /* ExerciseCompletionView.swift */; };
 		05F1E2FF28D9DDC4009D5EED /* EditExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F1E2FE28D9DDC4009D5EED /* EditExerciseView.swift */; };
 /* End PBXBuildFile section */
 
@@ -78,7 +79,7 @@
 		0555F34F27A73944008D5726 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		0555F35127A7394F008D5726 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		0555F35327A73955008D5726 /* ExerciseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSet.swift; sourceTree = "<group>"; };
-		058393A1281464CD0045297A /* ActiveWorkoutExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveWorkoutExerciseView.swift; sourceTree = "<group>"; };
+		058393A1281464CD0045297A /* ExerciseCompletionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCompletionRowView.swift; sourceTree = "<group>"; };
 		058B1B81281DD0EF00FD87C2 /* ExerciseDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailsView.swift; sourceTree = "<group>"; };
 		059CD6CB28C2263000DDA354 /* LiftLineItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftLineItemView.swift; sourceTree = "<group>"; };
 		05A6E7B427C17EF000B3113E /* LiftsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftsView.swift; sourceTree = "<group>"; };
@@ -87,6 +88,7 @@
 		05A6E7BB27C18B7800B3113E /* WorkoutDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailsView.swift; sourceTree = "<group>"; };
 		05CABDBA2826DC6500A53B98 /* Ironlog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Ironlog.xcdatamodel; sourceTree = "<group>"; };
 		05E55D3427EFB91600FAD5B7 /* ActiveWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveWorkoutView.swift; sourceTree = "<group>"; };
+		05E6FA2F28EB0C0F005DF36D /* ExerciseCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCompletionView.swift; sourceTree = "<group>"; };
 		05F1E2FE28D9DDC4009D5EED /* EditExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExerciseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -252,7 +254,8 @@
 			isa = PBXGroup;
 			children = (
 				05E55D3427EFB91600FAD5B7 /* ActiveWorkoutView.swift */,
-				058393A1281464CD0045297A /* ActiveWorkoutExerciseView.swift */,
+				058393A1281464CD0045297A /* ExerciseCompletionRowView.swift */,
+				05E6FA2F28EB0C0F005DF36D /* ExerciseCompletionView.swift */,
 			);
 			path = ActiveWorkout;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				0555F34827A72E28008D5726 /* Lift.swift in Sources */,
 				05A6E7BA27C18A1000B3113E /* WorkoutsView.swift in Sources */,
 				0555F36D27A74797008D5726 /* Exercise.swift in Sources */,
+				05E6FA3028EB0C0F005DF36D /* ExerciseCompletionView.swift in Sources */,
 				05F1E2FF28D9DDC4009D5EED /* EditExerciseView.swift in Sources */,
 				05E55D3527EFB91600FAD5B7 /* ActiveWorkoutView.swift in Sources */,
 				05CABDBB2826DC6500A53B98 /* Ironlog.xcdatamodeld in Sources */,
@@ -408,7 +412,7 @@
 				054FEB1F28BA3B0A00506316 /* LiftDetailView.swift in Sources */,
 				05A6E7B527C17EF000B3113E /* LiftsView.swift in Sources */,
 				0554AAE2281485A2001E8A58 /* AddExerciseView.swift in Sources */,
-				058393A2281464CD0045297A /* ActiveWorkoutExerciseView.swift in Sources */,
+				058393A2281464CD0045297A /* ExerciseCompletionRowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

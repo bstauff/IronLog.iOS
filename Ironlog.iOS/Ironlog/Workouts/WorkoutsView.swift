@@ -8,18 +8,22 @@
 import SwiftUI
 
 struct WorkoutsView: View {
-    @State private var isShowingWorkoutSheet = false
-    @State private var workouts: [Workout] = []
+    @Binding private var workouts: [Workout]
+    @Binding private var lifts: [Lift]
     
+    @State private var isShowingWorkoutSheet = false
     @State private var isError = false
     @State private var errorString = ""
     
-    @State private var lifts: [Lift] = []
-    
     var workoutRepository: AppRepository
     
-    init(workoutRepo: AppRepository) {
-        self.workoutRepository = workoutRepo
+    init(
+        workoutRepo: AppRepository,
+        workouts: Binding<[Workout]>,
+        lifts: Binding<[Lift]>) {
+            self.workoutRepository = workoutRepo
+            self._workouts = workouts
+            self._lifts = lifts
     }
     
     var body: some View {
@@ -27,7 +31,13 @@ struct WorkoutsView: View {
             VStack {
                 List {
                     ForEach($workouts){ $workout in
-                        NavigationLink(getWorkoutDate(workout: workout), destination: WorkoutDetailsView(repo: workoutRepository, workout: workout, lifts: $lifts))
+                        NavigationLink(
+                            getWorkoutDate(workout: workout),
+                            destination:
+                                WorkoutDetailsView(
+                                    repo: workoutRepository,
+                                    workout: workout,
+                                    lifts: $lifts))
                     }
                     .onDelete(perform: deleteWorkouts)
                 }
@@ -45,26 +55,12 @@ struct WorkoutsView: View {
                     }
                 }
             }
-        }.onAppear(perform: loadData)
+        }
     }
     func getWorkoutDate(workout: Workout) -> String{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/YY"
         return dateFormatter.string(from: workout.date)
-    }
-    func loadData() {
-        loadWorkouts()
-        loadLifts()
-    }
-    func loadWorkouts() {
-        do {
-            let workouts = try self.workoutRepository.getAllWorkouts()
-            self.workouts = workouts
-        } catch {
-            isError = true
-            errorString = "Failed to load workouts"
-        }
-        
     }
     func deleteWorkouts(offsets: IndexSet) {
         do {
@@ -80,15 +76,6 @@ struct WorkoutsView: View {
             errorString = "Failed to delete.  Please try again."
         }
     }
-    func loadLifts() {
-        do {
-            let lifts = try self.workoutRepository.getAllLifts()
-            self.lifts = lifts
-        } catch {
-            isError = true
-            errorString = "Failed to load lifts"
-        }
-    }
 }
 
 
@@ -96,7 +83,11 @@ struct CycleView_Previews: PreviewProvider {
     static var previews: some View {
         let workoutA = Workout(date: Date())
         let workoutB = Workout(date: Calendar.current.date(byAdding: .day, value: 1, to: Date())!)
+        let workouts = [workoutA, workoutB]
+        
+        let lift = Lift(name: "Squat", trainingMax: 350)
         let workoutRepo = CoreDataRepository()
-        return WorkoutsView(workoutRepo: workoutRepo)
+        
+        return WorkoutsView(workoutRepo: workoutRepo, workouts: .constant(workouts), lifts: .constant([lift]))
     }
 }

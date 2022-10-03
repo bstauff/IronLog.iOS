@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ActiveWorkoutExerciseView: View {
+struct ExerciseCompletionRowView: View {
     @ObservedObject var exercise: Exercise
     
     @ObservedObject var workout: Workout
@@ -44,7 +44,7 @@ struct ActiveWorkoutExerciseView: View {
     }
 }
 
-struct ActiveWorkoutExerciseView_Previews: PreviewProvider {
+struct ExerciseCompletionRowView_Previews: PreviewProvider {
     static var previews: some View {
         let squatMain = Exercise()
         let squatLift = Lift(
@@ -65,6 +65,6 @@ struct ActiveWorkoutExerciseView_Previews: PreviewProvider {
         squatMain.sets.append(
             ExerciseSet(reps: 1, weight: 300)
         )
-        return ActiveWorkoutExerciseView(workout: workoutA, exercise: squatMain, repository: workoutRepo)
+        return ExerciseCompletionRowView(workout: workoutA, exercise: squatMain, repository: workoutRepo)
     }
 }

@@ -119,20 +119,6 @@ class CoreDataRepository : AppRepository{
         return results
     }
     
-    func getWorkoutForDate(date: Date) throws -> Workout? {
-        let fetchRequest = WorkoutModel.fetchRequest()
-        let fetchPred = NSPredicate(format: "%K == %@","date", date as CVarArg)
-        fetchRequest.predicate = fetchPred
-        
-        let workouts = try container.viewContext.fetch(fetchRequest)
-        
-        if(workouts.count > 0) {
-            
-            return try mapWorkoutModel(workoutModel: workouts[0])
-        }
-        return nil
-    }
-    
     func saveWorkout(workout: Workout) throws {
         try deleteWorkout(workoutId: workout.id)
         try addWorkout(workout: workout)
