@@ -7,7 +7,9 @@
 
 import Foundation
 
-class Exercise: Identifiable, ObservableObject {
+class Exercise: Identifiable, ObservableObject, Hashable {
+    
+    
     var id = UUID()
     @Published var sets: [ExerciseSet]
     @Published var lift: Lift
@@ -29,5 +31,15 @@ class Exercise: Identifiable, ObservableObject {
         self.sets = sets
         self.lift = lift
         self.isComplete = isComplete
+    }
+    
+    static func == (lhs: Exercise, rhs: Exercise) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(sets)
+        hasher.combine(lift)
+        hasher.combine(isComplete)
     }
 }

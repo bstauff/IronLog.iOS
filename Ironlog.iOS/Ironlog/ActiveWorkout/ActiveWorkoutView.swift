@@ -8,39 +8,52 @@
 import SwiftUI
 
 struct ActiveWorkoutView: View {
+    @Binding var workouts: [Workout]
+    
     @State private var isError = false
     @State private var errorMessage = ""
-    
     @State private var selectedWorkout: Workout? = nil
     
     private var repository: AppRepository
     
-    init(repository: AppRepository) {
+    init(repository: AppRepository, workouts: Binding<[Workout]>) {
         self.repository = repository
+        self._workouts = workouts
     }
     
     var body: some View {
-        List {
-            ExerciseCompletionView(repository: repository, workout: selectedWorkout!)
-            HStack {
-                Spacer()
-                Toggle(isOn: $workout.isComplete) {
-                    Text("Workout Complete")
-                }.toggleStyle(.button)
-                Spacer()
-            }
-            HStack {
-                Spacer()
-                Button("Save") {
-                    do {
-                        try self.repository.saveWorkout(workout: workout)
-                    } catch {
-                        self.isError = true
-                        self.errorMessage = "Failed to save exercise"
-                        return
+        NavigationView {
+            List {
+                Picker("Workout", selection: $selectedWorkout) {
+                    ForEach($workouts) { $workout in
+                        Text(getWorkoutDate(workout: workout)).tag(workout as Workout?)
                     }
                 }
-                Spacer()
+                if(selectedWorkout != nil) {
+                    ExerciseCompletionView(repository: repository, workout: selectedWorkout!)
+                } else {
+                    Text("No workout selected")
+                }
+    //            HStack {
+    //                Spacer()
+    //                Toggle(isOn: $workout.isComplete) {
+    //                    Text("Workout Complete")
+    //                }.toggleStyle(.button)
+    //                Spacer()
+    //            }
+    //            HStack {
+    //                Spacer()
+    //                Button("Save") {
+    //                    do {
+    //                        try self.repository.saveWorkout(workout: workout)
+    //                    } catch {
+    //                        self.isError = true
+    //                        self.errorMessage = "Failed to save exercise"
+    //                        return
+    //                    }
+    //                }
+    //                Spacer()
+    //            }
             }
         }
         .alert(isPresented: $isError) {
@@ -49,6 +62,12 @@ struct ActiveWorkoutView: View {
                 message: Text("Failed to save workout"),
                 dismissButton: .default(Text("OK")))
         }
+    }
+    
+    func getWorkoutDate(workout: Workout) -> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/YY"
+        return dateFormatter.string(from: workout.date)
     }
 }
 
@@ -96,6 +115,6 @@ struct ActiveWorkoutView_Previews: PreviewProvider {
         
         
         let workoutRepo = CoreDataRepository()
-        return ActiveWorkoutView(repository: workoutRepo, workout: workout)
+        return ActiveWorkoutView(repository: workoutRepo, workouts: .constant([workout]))
     }
 }
