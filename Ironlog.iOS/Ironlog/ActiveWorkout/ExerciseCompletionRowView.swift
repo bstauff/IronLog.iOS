@@ -33,7 +33,11 @@ struct ExerciseCompletionRowView: View {
                 HStack {
                     Toggle(isOn: $exerciseset.isComplete) {
                        Text("done")
-                    }.toggleStyle(.button)
+                    }
+                        .toggleStyle(.button)
+                        .onChange(of: exerciseset.isComplete) { value in
+                            try? repository.saveWorkout(workout: self.workout)
+                        }
                     Spacer()
                     Text(String(exerciseset.reps))
                     Spacer()

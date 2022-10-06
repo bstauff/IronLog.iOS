@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ActiveWorkoutView: View {
-    @Binding var workouts: [Workout]
+    @Binding private var workouts: [Workout]
     
     @State private var isError = false
     @State private var errorMessage = ""
@@ -31,29 +31,10 @@ struct ActiveWorkoutView: View {
                 }
                 if(selectedWorkout != nil) {
                     ExerciseCompletionView(repository: repository, workout: selectedWorkout!)
+                    WorkoutCompletionView(workout: selectedWorkout!, appRepository: repository)
                 } else {
                     Text("No workout selected")
                 }
-    //            HStack {
-    //                Spacer()
-    //                Toggle(isOn: $workout.isComplete) {
-    //                    Text("Workout Complete")
-    //                }.toggleStyle(.button)
-    //                Spacer()
-    //            }
-    //            HStack {
-    //                Spacer()
-    //                Button("Save") {
-    //                    do {
-    //                        try self.repository.saveWorkout(workout: workout)
-    //                    } catch {
-    //                        self.isError = true
-    //                        self.errorMessage = "Failed to save exercise"
-    //                        return
-    //                    }
-    //                }
-    //                Spacer()
-    //            }
             }
         }
         .alert(isPresented: $isError) {

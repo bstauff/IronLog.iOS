@@ -43,7 +43,8 @@ struct IronlogApp: App {
     private func loadWorkouts() {
         do {
             let workouts = try repository.getAllWorkouts()
-            self.workouts = workouts
+            self.workouts.removeAll()
+            self.workouts.append(contentsOf: workouts)
         } catch {
            //error handling here
         }
