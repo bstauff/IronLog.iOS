@@ -14,6 +14,7 @@ struct IronlogApp: App {
     @State private var workouts: [Workout] = []
     @State private var lifts: [Lift] = []
     
+    
     var body: some Scene {
         WindowGroup {
             TabView {
@@ -22,7 +23,7 @@ struct IronlogApp: App {
                         Label("Workouts", systemImage: "list.bullet.circle")
                     }
                     .tag(1)
-                ActiveWorkoutView(repository: repository, workouts: $workouts)
+                ActiveWorkoutView(repository: repository)
                     .tabItem {
                         Label("Active Workout", systemImage: "flame.circle")
                     }
@@ -41,20 +42,11 @@ struct IronlogApp: App {
     }
     
     private func loadWorkouts() {
-        do {
-            let workouts = try repository.getAllWorkouts()
-            self.workouts.removeAll()
-            self.workouts.append(contentsOf: workouts)
-        } catch {
-           //error handling here
-        }
+        let workouts = try! repository.getAllWorkouts()
+        self.workouts = workouts
     }
     private func loadLifts() {
-        do {
-            let lifts = try repository.getAllLifts()
-            self.lifts = lifts
-        } catch {
-            //error handling here
-        }
+        let lifts = try! repository.getAllLifts()
+        self.lifts = lifts
     }
 }

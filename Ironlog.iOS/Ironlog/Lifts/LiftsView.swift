@@ -55,13 +55,15 @@ struct LiftsView: View {
                     }
                 }
             }
-        }.onAppear(perform: loadLifts)
+        }
+        .onAppear(perform: loadLifts)
     }
     
     func loadLifts() {
         do {
             let lifts = try liftRepo.getAllLifts()
-            self.lifts = lifts
+            self.lifts.removeAll()
+            self.lifts.append(contentsOf: lifts)
         } catch {
             isError = true
             errorString = "Failed to load lifts"

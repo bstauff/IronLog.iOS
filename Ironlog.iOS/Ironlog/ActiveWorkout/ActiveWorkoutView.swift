@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ActiveWorkoutView: View {
-    @Binding private var workouts: [Workout]
+    @State private var workouts: [Workout] = []
     
     @State private var isError = false
     @State private var errorMessage = ""
@@ -16,19 +16,14 @@ struct ActiveWorkoutView: View {
     
     private var repository: AppRepository
     
-    init(repository: AppRepository, workouts: Binding<[Workout]>) {
+    init(repository: AppRepository) {
         self.repository = repository
-        self._workouts = workouts
     }
     
     var body: some View {
         NavigationView {
             List {
-                Picker("Workout", selection: $selectedWorkout) {
-                    ForEach($workouts) { $workout in
-                        Text(getWorkoutDate(workout: workout)).tag(workout as Workout?)
-                    }
-                }
+                WorkoutSelection(workouts: $workouts, selectedWorkout: $selectedWorkout)
                 if(selectedWorkout != nil) {
                     ExerciseCompletionView(repository: repository, workout: selectedWorkout!)
                     WorkoutCompletionView(workout: selectedWorkout!, appRepository: repository)
@@ -43,12 +38,19 @@ struct ActiveWorkoutView: View {
                 message: Text("Failed to save workout"),
                 dismissButton: .default(Text("OK")))
         }
+        .onAppear(perform: loadWorkouts)
     }
     
     func getWorkoutDate(workout: Workout) -> String{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/YY"
         return dateFormatter.string(from: workout.date)
+    }
+    
+    func loadWorkouts() {
+        let workouts = try! repository.getAllWorkouts()
+        self.workouts.removeAll()
+        self.workouts.append(contentsOf: workouts)
     }
 }
 
@@ -96,6 +98,6 @@ struct ActiveWorkoutView_Previews: PreviewProvider {
         
         
         let workoutRepo = CoreDataRepository()
-        return ActiveWorkoutView(repository: workoutRepo, workouts: .constant([workout]))
+        return ActiveWorkoutView(repository: workoutRepo)
     }
 }
