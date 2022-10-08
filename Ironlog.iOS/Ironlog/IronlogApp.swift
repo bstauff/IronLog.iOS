@@ -14,7 +14,6 @@ struct IronlogApp: App {
     @State private var workouts: [Workout] = []
     @State private var lifts: [Lift] = []
     
-    
     var body: some Scene {
         WindowGroup {
             TabView {
@@ -23,12 +22,12 @@ struct IronlogApp: App {
                         Label("Workouts", systemImage: "list.bullet.circle")
                     }
                     .tag(1)
-                ActiveWorkoutView(repository: repository)
+                ActiveWorkoutView(workouts: $workouts, repository: repository)
                     .tabItem {
                         Label("Active Workout", systemImage: "flame.circle")
                     }
                     .tag(2)
-                LiftsView(liftRepo: repository)
+                LiftsView(lifts: $lifts, liftRepo: repository)
                     .tabItem {
                         Label("Lifts", systemImage: "arrow.up.circle")
                     }

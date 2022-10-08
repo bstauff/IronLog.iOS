@@ -8,24 +8,24 @@
 import SwiftUI
 
 struct LiftsView: View {
-    @State private var isShowingAddSheet = false
+    @Binding private var lifts: [Lift]
     
+    @State private var isShowingAddSheet = false
     @State private var isError = false
     @State private var errorString = ""
     
-    @State private var lifts: [Lift] = []
-    
     var liftRepo: AppRepository
     
-    init(liftRepo: AppRepository) {
+    init(lifts: Binding<[Lift]>, liftRepo: AppRepository) {
         self.liftRepo = liftRepo
+        self._lifts = lifts
     }
     
     var body: some View {
         NavigationView {
             VStack {
                 List {
-                    ForEach($lifts) {$lift in
+                    ForEach($lifts, id: \.self) { $lift in
                         NavigationLink(
                             destination: LiftDetailView(lift: $lift, liftRepository: liftRepo))
                         {
@@ -56,18 +56,6 @@ struct LiftsView: View {
                 }
             }
         }
-        .onAppear(perform: loadLifts)
-    }
-    
-    func loadLifts() {
-        do {
-            let lifts = try liftRepo.getAllLifts()
-            self.lifts.removeAll()
-            self.lifts.append(contentsOf: lifts)
-        } catch {
-            isError = true
-            errorString = "Failed to load lifts"
-        }
     }
     
     func deleteLifts(offsets: IndexSet) {
@@ -91,6 +79,6 @@ struct LiftsView_Previews: PreviewProvider {
         let liftRepo = CoreDataRepository()
         let squat = Lift(name: "Squat", trainingMax: 315)
         try? liftRepo.addLift(lift: squat)
-        return LiftsView(liftRepo: liftRepo)
+        return LiftsView(lifts: .constant([squat]), liftRepo: liftRepo)
     }
 }

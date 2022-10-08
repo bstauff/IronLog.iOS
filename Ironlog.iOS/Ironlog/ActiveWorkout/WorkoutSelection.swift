@@ -12,7 +12,7 @@ struct WorkoutSelection: View {
     @Binding var selectedWorkout: Workout?
     var body: some View {
         Picker("Workout", selection: $selectedWorkout) {
-            ForEach($workouts) { $workout in
+            ForEach($workouts, id: \.self) { $workout in
                 Text(getWorkoutDate(workout: workout)).tag(workout as Workout?)
             }
         }
