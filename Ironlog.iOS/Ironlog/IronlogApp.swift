@@ -9,30 +9,43 @@ import SwiftUI
 
 @main
 struct IronlogApp: App {
-    @StateObject var liftCatalog = LiftCatalog()
-    @StateObject var cyclePlan = Cycle()
+    private var repository  = CoreDataRepository()
+    
+    @State private var workouts: [Workout] = []
+    @State private var lifts: [Lift] = []
     
     var body: some Scene {
         WindowGroup {
             TabView {
-                CycleView(cycle: cyclePlan, liftCatalog: liftCatalog).tabItem {
-                    Label("Cycle", systemImage: "list.bullet.circle")
-                }
-                let activeWorkout = cyclePlan.getActiveWorkout()
-                if activeWorkout != nil {
-                    ActiveWorkoutView(workout: activeWorkout!).tabItem {
+                WorkoutsView(workoutRepo: repository, workouts: $workouts, lifts: $lifts)
+                    .tabItem {
+                        Label("Workouts", systemImage: "list.bullet.circle")
+                    }
+                    .tag(1)
+                ActiveWorkoutView(workouts: $workouts, repository: repository)
+                    .tabItem {
                         Label("Active Workout", systemImage: "flame.circle")
                     }
-                } else {
-                    Text("No currently active workout.  Go plan one!")
-                        .tabItem {
-                            Label("Active Workout", systemImage: "flame.circle")
-                        }
-                }
-                LiftCatalogView(liftCatalog: liftCatalog).tabItem {
-                    Label("Lifts", systemImage: "arrow.up.circle")
-                }
+                    .tag(2)
+                LiftsView(lifts: $lifts, liftRepo: repository)
+                    .tabItem {
+                        Label("Lifts", systemImage: "arrow.up.circle")
+                    }
+                    .tag(3)
+            }
+            .onAppear {
+                loadWorkouts()
+                loadLifts()
             }
         }
+    }
+    
+    private func loadWorkouts() {
+        let workouts = try! repository.getAllWorkouts()
+        self.workouts = workouts
+    }
+    private func loadLifts() {
+        let lifts = try! repository.getAllLifts()
+        self.lifts = lifts
     }
 }

@@ -7,12 +7,19 @@
 
 import SwiftUI
 
-struct AddCycleWorkoutView: View {
+struct AddWorkoutView: View {
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var cycle: Cycle
+    @Binding private var workouts: [Workout]
     @State private var selectedDate = Date()
     @State private var isError = false
     @State private var errorString = ""
+    
+    private var repo: AppRepository
+    
+    init(repo: AppRepository, workouts: Binding<[Workout]>) {
+        self.repo = repo
+        self._workouts = workouts
+    }
     
     var body: some View {
         VStack {
@@ -29,20 +36,24 @@ struct AddCycleWorkoutView: View {
         }
     }
     func saveClicked() {
-        if cycle.doesCycleHaveWorkoutForDate(date: selectedDate) {
+        let newWorkout = Workout(date: selectedDate)
+        
+        do {
+            try repo.saveWorkout(workout: newWorkout)
+        } catch {
             isError = true
-            errorString = "This date already has a workout"
+            errorString = "Failed to add new workout"
             return
         }
-        let newWorkout = Workout(date: selectedDate)
-        cycle.workouts.append(newWorkout)
+        self.workouts.append(newWorkout)
         presentationMode.wrappedValue.dismiss()
     }
 }
 
-struct AddCycleWorkoutView_Previews: PreviewProvider {
+struct AddWorkoutView_Previews: PreviewProvider {
     static var previews: some View {
-        let cycle = Cycle()
-        AddCycleWorkoutView(cycle: cycle)
+        let workouts: [Workout] = []
+        let appRepo = CoreDataRepository()
+        AddWorkoutView(repo: appRepo, workouts: .constant(workouts))
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ExerciseSet: Identifiable {
+struct ExerciseSet: Identifiable, Hashable {
     var id = UUID()
     var reps: Int
     var weight: Int
@@ -15,5 +15,10 @@ struct ExerciseSet: Identifiable {
     init(reps: Int, weight: Int) {
         self.reps = reps
         self.weight = weight
+    }
+    init(reps: Int, weight: Int, id: UUID) {
+        self.reps = reps
+        self.weight = weight
+        self.id = id
     }
 }

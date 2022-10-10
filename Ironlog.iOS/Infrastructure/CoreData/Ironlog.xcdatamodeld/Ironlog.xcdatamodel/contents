@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21G83" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ExerciseModel" representedClassName="ExerciseModel" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isComplete" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="exerciseLift" maxCount="1" deletionRule="Nullify" destinationEntity="LiftModel"/>
+        <relationship name="exerciseSets" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseSetModel"/>
+    </entity>
+    <entity name="ExerciseSetModel" representedClassName="ExerciseSetModel" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isComplete" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="reps" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="weight" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="LiftModel" representedClassName="LiftModel" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="trainingMax" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="WorkoutModel" representedClassName="WorkoutModel" syncable="YES" codeGenerationType="class">
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isComplete" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="workoutExercise" toMany="YES" deletionRule="Cascade" destinationEntity="ExerciseModel"/>
+    </entity>
+    <elements>
+        <element name="ExerciseModel" positionX="15915.94921875" positionY="-414.1484375" width="128" height="89"/>
+        <element name="ExerciseSetModel" positionX="15516" positionY="-549" width="128" height="103"/>
+        <element name="LiftModel" positionX="15350.72265625" positionY="-643.73046875" width="128" height="88"/>
+        <element name="WorkoutModel" positionX="15642.625" positionY="-675.0859375" width="128" height="89"/>
+    </elements>
+</model>

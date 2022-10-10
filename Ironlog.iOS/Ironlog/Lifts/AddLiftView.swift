@@ -7,14 +7,22 @@
 
 import SwiftUI
 
-struct AddLiftSheetView: View {
+struct AddLiftView: View {
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var liftCatalog: LiftCatalog
+    private var repo: AppRepository
     
-    @State private var name: String = ""
-    @State private var trainingMax: Int?
     @State private var isError = false
     @State private var errorString = ""
+    
+    @State var liftName: String?
+    @State var trainingMax: Int?
+        
+    @Binding var lifts:[Lift]
+    
+    init(liftRepo: AppRepository, lifts: Binding<[Lift]>) {
+        self._lifts = lifts
+        self.repo = liftRepo
+    }
     
     var body: some View {
         HStack {
@@ -23,7 +31,7 @@ struct AddLiftSheetView: View {
                     "Lift Name")
                 TextField(
                     "Lift Name",
-                    text: $name
+                    text: $liftName.toUnwrapped(defaultValue: "")
                 )
                 Text("Training Max")
                 TextField(
@@ -46,7 +54,7 @@ struct AddLiftSheetView: View {
         }
     }
     private func saveClicked() {
-        guard name != "" else {
+        guard liftName != nil else {
             isError = true
             errorString = "lift name required"
             return
@@ -57,18 +65,26 @@ struct AddLiftSheetView: View {
             errorString = "training max required"
             return
         }
-        let newLift = Lift(
-            name: name,
-            trainingMax: trainingMax!
-        )
-        liftCatalog.lifts.append(newLift)
+        
+        let newLift = Lift(name: liftName!, trainingMax: trainingMax!)
+            
+        do {
+            try repo.addLift(lift: newLift)
+        }catch {
+            isError = true
+            errorString = "failed to save lift"
+        }
+            
+        lifts.append(newLift)
+        
         presentationMode.wrappedValue.dismiss()
     }
 }
 
 struct AddLiftView_Previews: PreviewProvider {
     static var previews: some View {
-        let liftCatalog = LiftCatalog()
-        AddLiftSheetView(liftCatalog: liftCatalog)
+        let liftRepo = CoreDataRepository()
+        let lifts: [Lift] = []
+        AddLiftView(liftRepo: liftRepo, lifts: .constant(lifts))
     }
 }

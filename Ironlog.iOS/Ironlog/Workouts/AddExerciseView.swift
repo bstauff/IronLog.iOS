@@ -7,9 +7,8 @@
 
 import SwiftUI
 
-struct WorkoutAddExerciseView: View {
+struct AddExerciseView: View {
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var liftCatalog: LiftCatalog
     @ObservedObject var workout: Workout
     @State private var selectedLift: Lift?
     @State private var sets: [ExerciseSet] = []
@@ -18,6 +17,16 @@ struct WorkoutAddExerciseView: View {
     
     @State private var isError = false
     @State private var errorMessage = ""
+    
+    @Binding private var lifts: [Lift]
+    
+    private var repo: AppRepository
+    
+    init(repo: AppRepository, workout: Workout, lifts: Binding<[Lift]>) {
+        self.workout = workout
+        self.repo = repo
+        self._lifts = lifts
+    }
     
     var body: some View {
         NavigationView{
@@ -29,7 +38,7 @@ struct WorkoutAddExerciseView: View {
                     }
                 Form {
                     Picker("Lift", selection: $selectedLift) {
-                        ForEach($liftCatalog.lifts) { $lift in
+                        ForEach($lifts) { $lift in
                             Text(lift.name).tag(lift as Lift?)
                         }
                     }
@@ -70,8 +79,18 @@ struct WorkoutAddExerciseView: View {
                             let newExercise = Exercise()
                             newExercise.sets = self.sets
                             newExercise.lift = self.selectedLift!
-                            
+                           
                             workout.exercises.append(newExercise)
+                            
+                            do {
+                                try self.repo.saveWorkout(workout: workout)
+                            } catch {
+                                self.isError = true
+                                self.errorMessage = "Failed to save exercise"
+                                workout.exercises.removeLast()
+                                return
+                            }
+                            
                             
                             presentationMode.wrappedValue.dismiss()
                             
@@ -86,13 +105,15 @@ struct WorkoutAddExerciseView: View {
     }
 }
 
-struct WorkoutAddExerciseView_Previews: PreviewProvider {
+struct AddExerciseView_Previews: PreviewProvider {
     static var previews: some View {
-        let liftCatalog = LiftCatalog()
+        let appRepo = CoreDataRepository()
         let squatLift = Lift(name: "Squat", trainingMax: 315)
-        liftCatalog.lifts.append(squatLift)
+        let lifts = [squatLift]
+        try? appRepo.addLift(lift: squatLift)
+        
         
         let workout = Workout(date: Date.now)
-        return WorkoutAddExerciseView(liftCatalog: liftCatalog, workout: workout)
+        return AddExerciseView(repo: appRepo, workout: workout, lifts: .constant(lifts))
     }
 }

@@ -1,55 +1,37 @@
 //
-//  ActiveWorkoutView.swift
+//  ExerciseCompletionVIew.swift
 //  Ironlog
 //
-//  Created by Brian Stauff on 3/26/22.
+//  Created by Brian Stauff on 10/3/22.
 //
 
 import SwiftUI
 
-struct ActiveWorkoutView: View {
-    @Binding private var workouts: [Workout]
-    
-    @State private var isError = false
-    @State private var errorMessage = ""
-    @State private var selectedWorkout: Workout? = nil
+struct ExerciseCompletionView: View {
+    @ObservedObject var workout: Workout
     
     private var repository: AppRepository
     
-    init(workouts: Binding<[Workout]>, repository: AppRepository) {
-        self._workouts = workouts
+    init(repository: AppRepository, workout: Workout) {
+        self.workout = workout
         self.repository = repository
     }
     
     var body: some View {
-        NavigationView {
-            List {
-                WorkoutSelection(workouts: $workouts, selectedWorkout: $selectedWorkout)
-                if(selectedWorkout != nil) {
-                    ExerciseCompletionView(repository: repository, workout: selectedWorkout!)
-                    WorkoutCompletionView(workout: selectedWorkout!, appRepository: repository)
-                } else {
-                    Text("No workout selected")
-                }
+        ForEach($workout.exercises){$exercise in
+            Section {
+                ExerciseCompletionRowView(
+                    workout: self.workout,
+                    exercise: exercise,
+                    repository: self.repository)
             }
         }
-        .alert(isPresented: $isError) {
-            Alert(
-                title: Text("oops"),
-                message: Text("Failed to save workout"),
-                dismissButton: .default(Text("OK")))
-        }
-    }
-    
-    func getWorkoutDate(workout: Workout) -> String{
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/YY"
-        return dateFormatter.string(from: workout.date)
     }
 }
 
-struct ActiveWorkoutView_Previews: PreviewProvider {
+struct ExerciseCompletionView_Previews: PreviewProvider {
     static var previews: some View {
+        
         let workout = Workout(date: Date())
         let squatMain = Exercise()
         let squatLift = Lift(
@@ -92,6 +74,7 @@ struct ActiveWorkoutView_Previews: PreviewProvider {
         
         
         let workoutRepo = CoreDataRepository()
-        return ActiveWorkoutView(workouts: .constant([workout]), repository: workoutRepo)
+        
+        return ExerciseCompletionRowView(workout: workout, exercise: squatMain, repository: workoutRepo)
     }
 }

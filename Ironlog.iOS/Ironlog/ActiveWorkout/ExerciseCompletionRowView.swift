@@ -7,8 +7,19 @@
 
 import SwiftUI
 
-struct ActiveWorkoutExerciseView: View {
+struct ExerciseCompletionRowView: View {
     @ObservedObject var exercise: Exercise
+    
+    @ObservedObject var workout: Workout
+    
+    private var repository: AppRepository
+    
+    init(workout: Workout, exercise: Exercise, repository: AppRepository) {
+        self.workout = workout
+        self.exercise = exercise
+        self.repository = repository
+    }
+    
     var body: some View {
         VStack {
             HStack {
@@ -22,7 +33,11 @@ struct ActiveWorkoutExerciseView: View {
                 HStack {
                     Toggle(isOn: $exerciseset.isComplete) {
                        Text("done")
-                    }.toggleStyle(.button)
+                    }
+                        .toggleStyle(.button)
+                        .onChange(of: exerciseset.isComplete) { value in
+                            try? repository.saveWorkout(workout: self.workout)
+                        }
                     Spacer()
                     Text(String(exerciseset.reps))
                     Spacer()
@@ -33,7 +48,7 @@ struct ActiveWorkoutExerciseView: View {
     }
 }
 
-struct ActiveWorkoutExerciseView_Previews: PreviewProvider {
+struct ExerciseCompletionRowView_Previews: PreviewProvider {
     static var previews: some View {
         let squatMain = Exercise()
         let squatLift = Lift(
@@ -41,6 +56,9 @@ struct ActiveWorkoutExerciseView_Previews: PreviewProvider {
             trainingMax: 315
         )
 
+        let workoutA = Workout(date: Date())
+        let workoutRepo = CoreDataRepository()
+        
         squatMain.lift = squatLift
         squatMain.sets.append(
             ExerciseSet(reps: 5, weight: 250)
@@ -51,6 +69,6 @@ struct ActiveWorkoutExerciseView_Previews: PreviewProvider {
         squatMain.sets.append(
             ExerciseSet(reps: 1, weight: 300)
         )
-        return ActiveWorkoutExerciseView(exercise: squatMain)
+        return ExerciseCompletionRowView(workout: workoutA, exercise: squatMain, repository: workoutRepo)
     }
 }

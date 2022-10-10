@@ -7,13 +7,21 @@
 
 import SwiftUI
 
-struct WorkoutView: View {
+struct WorkoutDetailsView: View {
     @ObservedObject var workout: Workout
-    @ObservedObject var cycle: Cycle
-    @ObservedObject var liftCatalog: LiftCatalog
     @State private var isSheetActive = false
     @State private var draftExercise: Exercise = Exercise()
     @State private var isShowingExerciseSheet = false
+    
+    @Binding var lifts: [Lift]
+    
+    var repo: AppRepository
+    
+    init(repo: AppRepository, workout: Workout, lifts: Binding<[Lift]>) {
+        self.repo = repo
+        self.workout = workout
+        self._lifts = lifts
+    }
     
     var body: some View {
         VStack {
@@ -25,12 +33,12 @@ struct WorkoutView: View {
                     Button(action: showExerciseSheet) {
                         Text("Add")
                     }.sheet(isPresented: $isShowingExerciseSheet){
-                        WorkoutAddExerciseView(liftCatalog: self.liftCatalog, workout: self.workout)
+                        AddExerciseView(repo: repo, workout: workout, lifts: $lifts)
                     }
                 }
                 ForEach($workout.exercises){ $exercise in
                     NavigationLink(
-                        destination: EditExerciseView(liftCatalog: liftCatalog, exercise: exercise)) {
+                        destination: ExerciseDetailsView(repo: repo, exercise: exercise, lifts: $lifts)) {
                             ExerciseRowView(exercise: exercise)
                         }
                 }
@@ -65,14 +73,19 @@ struct ExerciseRowView: View {
     }
 }
 
-struct WorkoutView_Previews: PreviewProvider {
+struct WorkoutDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let liftCatalog = LiftCatalog()
+        let appRepo = CoreDataRepository()
         let squatLift = Lift(name: "Squat", trainingMax: 315)
-        liftCatalog.lifts.append(squatLift)
+        let lifts = [squatLift]
+        try? appRepo.addLift(lift: squatLift)
+        let workout = Workout(date: Date())
+        let squatExercise = Exercise()
+        squatExercise.lift = squatLift
+        workout.exercises = [squatExercise]
         
-        return WorkoutView(workout: Workout(date: Date.now), cycle: Cycle(), liftCatalog: liftCatalog)
+        return WorkoutDetailsView(repo: appRepo, workout: workout, lifts: .constant(lifts))
             .previewDevice("iPhone 13 Pro")
     }
 }

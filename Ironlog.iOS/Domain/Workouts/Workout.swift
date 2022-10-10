@@ -7,7 +7,8 @@
 
 import Foundation
 
-class Workout : ObservableObject, Identifiable {
+class Workout : ObservableObject, Identifiable, Hashable {
+    
     let id: UUID
     @Published var date: Date
     @Published var exercises: [Exercise]
@@ -17,4 +18,23 @@ class Workout : ObservableObject, Identifiable {
         id = UUID()
         self.exercises = []
     }
+    
+    init(id: UUID, date: Date, exercises: [Exercise], isComplete: Bool){
+        self.id = id
+        self.date = date
+        self.exercises = exercises
+        self.isComplete = isComplete
+    }
+    
+    static func == (lhs: Workout, rhs: Workout) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(date)
+        hasher.combine(exercises)
+        hasher.combine(isComplete)
+    }
+    
 }

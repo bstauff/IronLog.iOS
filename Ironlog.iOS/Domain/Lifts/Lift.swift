@@ -19,6 +19,12 @@ class Lift : ObservableObject, Identifiable, Hashable {
         self.id = UUID()
     }
     
+    init(name: String, trainingMax: Int, id: UUID) {
+        self.name = name
+        self.trainingMax = trainingMax
+        self.id = id
+    }
+    
     static func == (lhs: Lift, rhs: Lift) -> Bool {
         return lhs.id == rhs.id
     }
