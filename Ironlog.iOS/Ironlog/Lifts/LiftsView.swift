@@ -32,7 +32,6 @@ struct LiftsView: View {
                             LiftLineItemView(lift: lift)
                         }
                     }
-                    .onDelete(perform: deleteLifts)
                     .alert(isPresented: $isError) {
                         Alert(
                             title: Text("Error"),
@@ -44,9 +43,6 @@ struct LiftsView: View {
             }
             .navigationTitle("Lift Catalog")
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("add"){
                         isShowingAddSheet = true
