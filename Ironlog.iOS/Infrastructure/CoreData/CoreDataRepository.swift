@@ -237,7 +237,8 @@ class CoreDataRepository : AppRepository{
         return ExerciseSet(
             reps: Int(exerciseSetModel.reps),
             weight: Int(exerciseSetModel.weight),
-            id: exerciseSetModel.id!)
+            id: exerciseSetModel.id!,
+            isComplete: exerciseSetModel.isComplete)
     }
     
     private func mapWorkout(workout: Workout) throws -> WorkoutModel {
