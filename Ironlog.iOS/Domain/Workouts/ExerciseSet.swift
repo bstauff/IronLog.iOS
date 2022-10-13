@@ -16,9 +16,10 @@ struct ExerciseSet: Identifiable, Hashable {
         self.reps = reps
         self.weight = weight
     }
-    init(reps: Int, weight: Int, id: UUID) {
+    init(reps: Int, weight: Int, id: UUID, isComplete: Bool) {
         self.reps = reps
         self.weight = weight
         self.id = id
+        self.isComplete = isComplete
     }
 }
