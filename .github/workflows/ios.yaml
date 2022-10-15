@@ -24,4 +24,7 @@ jobs:
         env:
           scheme: ${{ 'default' }}
           platform: ${{ 'iOS Simulator' }}
-        run: build
+        run: |
+          chmod +x ./build.sh
+          ./build.sh
+        shell: bash
