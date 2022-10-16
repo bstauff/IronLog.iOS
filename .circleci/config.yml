@@ -1,7 +1,8 @@
+version: 2.1
 jobs:
   build:
     macos: 
       xcode: 14.0.1
     steps:
       - checkout
-      - run: 
+      - run: build.sh
