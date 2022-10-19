@@ -1,6 +1,7 @@
 version: 2.1
 jobs:
   build:
+    working_directory: ~/project
     macos: 
       xcode: 14.0.1
     steps:
