@@ -13,3 +13,5 @@ jobs:
             echo $default | cat >default
             echo Using default scheme: $default
       - run: ~/Project/build/build.sh
+    environment:
+      platform: 'iOS Simulator'
