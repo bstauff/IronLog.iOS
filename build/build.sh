@@ -1,3 +1,5 @@
+echo "platform=$platform"
+echo "default=$default"
 device=$(xcrun xctrace list devices 2>&1 | grep -oE 'iPhone.*?[^\(]+' | head -1 | awk '{$1=$1;print}' | sed -e "s/ Simulator$//")
 
 if [ $scheme = default ]; then
