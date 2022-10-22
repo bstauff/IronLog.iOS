@@ -14,4 +14,4 @@ fi
 
 file_to_build=$(echo $file_to_build | awk '{$1=$1;print}')
 
-xcodebuild build-for-testing -scheme "Ironlog" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform, name=$device"
+xcodebuild build-for-testing -scheme "Ironlog" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device"
