@@ -14,4 +14,4 @@ fi
 
 file_to_build=$(echo $file_to_build | awk '{$1=$1;print}')
 
-xcodebuild build-for-testing -scheme "Ironlog" -"$filetype_parameter" "$file_to_build" -destination "platform=iOS Simulator, id=92A00580-356F-4DB4-8CEC-EE875D922AB3, os=16.0, name=iPhone 14"
+xcodebuild build-for-testing -scheme "Ironlog" -"$filetype_parameter" "$file_to_build" -destination "platform=iOS Simulator, name=iPhone 14"
