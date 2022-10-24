@@ -22,4 +22,16 @@ platform :ios do
     build_app(scheme: "Ironlog")
     upload_to_app_store
   end
+  lane :build do
+    get_certificates
+    get_provisioning_profile
+    build_app(
+      scheme: "Ironlog",
+      export_method: "app-store",
+      export_options: {
+        provisioningProfiles: {
+          "braynesoft.Ironlog" => "IronlogAppStore"
+        }
+      })
+  end
 end
