@@ -1,17 +1,24 @@
 version: 2.1
+
+orbs:
+  ruby: circleci/ruby@1.2.0
+
 jobs:
   build:
     macos: 
       xcode: 14.0.1
+    working_directory: /Users/distiller/project
+    environment:
+      FL_OUTPUT_DIR: output
+      FASTLANE_LANE: test
+    shell: /bin/bash --login -o pipefail
     steps:
       - checkout
+      - ruby/install-deps
       - run:
-          name: set scheme
-          command: |
-            scheme_list=$(xcodebuild -list -json -project Ironlog.xcodeproj/ | tr -d "\n")
-            default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
-            echo $default | cat >default
-            echo Using default scheme: $default
-      - run: ~/Project/build/build.sh
-    environment:
-      platform: 'iOS Simulator'
+          name: fastlane
+          command: bundle exec fastlane $FASTLANE_LANE
+      - store_artifacts:
+          path: output
+      - store_test_results:
+          path: output/scan

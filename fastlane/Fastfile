@@ -16,18 +16,19 @@
 default_platform(:ios)
 
 platform :ios do
+  before_all do
+    setup_circle_ci
+  end
+
+  desc "Build and run tests"
+  lane :test do
+    scan
+  end
+
   desc "Push a new release build to the App Store"
   lane :release do
     increment_build_number(xcodeproj: "Ironlog.xcodeproj")
-    build_app(scheme: "Ironlog")
+    build_app(scheme: "Ironlog", export_method: "app-store")
     upload_to_app_store
-  end
-  lane :build do
-    # get_certificates
-    # get_provisioning_profile
-    build_app(
-      scheme: "Ironlog",
-      export_method: "app-store"
-    )
   end
 end
