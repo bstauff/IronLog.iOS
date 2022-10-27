@@ -624,8 +624,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = braynesoft.Ironlog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = IronlogAppleDistribution;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = IronlogAppleDistribution;
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore braynesoft.Ironlog";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore braynesoft.Ironlog";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
