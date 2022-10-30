@@ -23,6 +23,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Build and run tests
 
+### ios build
+
+```sh
+[bundle exec] fastlane ios build
+```
+
+build only
+
 ### ios release
 
 ```sh
