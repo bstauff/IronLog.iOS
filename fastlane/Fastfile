@@ -26,16 +26,32 @@ platform :ios do
   end
 
   desc "Push a new release build to the App Store"
-  lane :release do
-    api_key = app_store_connect_api_key(
-      key_id: "95XX6JPXC4",
-      issuer_id: "3a18ad82-a3bf-415b-93a4-f23e58882685",
-      key_filepath: "./AuthKey_95XX6JPXC4.p8",
-      duration: 1200,
-      in_house: false
-    )
+  lane :release_prod do
+    # api_key = app_store_connect_api_key(
+    #   key_id: "95XX6JPXC4",
+    #   issuer_id: "3a18ad82-a3bf-415b-93a4-f23e58882685",
+    #   key_filepath: "./AuthKey_95XX6JPXC4.p8",
+    #   duration: 1200,
+    #   in_house: false
+    # )
+    app_store_connect_api_key
     increment_build_number(xcodeproj: "Ironlog.xcodeproj")
     build_app(scheme: "Ironlog", export_method: "app-store")
     upload_to_app_store(run_precheck_before_submit: false)
+  end
+
+  desc "Push a new release to Testflight internal beta"
+  lane :release_internal_beta do
+  # api_key = app_store_connect_api_key(
+  #   key_id: "95XX6JPXC4",
+  #   issuer_id: "3a18ad82-a3bf-415b-93a4-f23e58882685",
+  #   key_filepath: "./AuthKey_95XX6JPXC4.p8",
+  #   duration: 1200,
+  #   in_house: false
+  # )
+  app_store_connect_api_key
+  increment_build_number(xcodeproj: "Ironlog.xcodeproj")
+  build_app(scheme: "Ironlog")
+  upload_to_testflight(skip_waiting_for_build_processing: true)
   end
 end
