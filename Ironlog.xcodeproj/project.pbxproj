@@ -77,6 +77,7 @@
 		0555F34F27A73944008D5726 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		0555F35127A7394F008D5726 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		0555F35327A73955008D5726 /* ExerciseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSet.swift; sourceTree = "<group>"; };
+		0582ADDC2911456B00FBB944 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		058B1B81281DD0EF00FD87C2 /* ExerciseDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailsView.swift; sourceTree = "<group>"; };
 		059CD6CB28C2263000DDA354 /* LiftLineItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftLineItemView.swift; sourceTree = "<group>"; };
 		05A6E7B427C17EF000B3113E /* LiftsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftsView.swift; sourceTree = "<group>"; };
@@ -142,6 +143,7 @@
 		053FDDD8272F2DC5002D6D9D /* Ironlog */ = {
 			isa = PBXGroup;
 			children = (
+				0582ADDC2911456B00FBB944 /* Info.plist */,
 				05E55D3327EFB8FF00FAD5B7 /* ActiveWorkout */,
 				05A6E7B827C18A0200B3113E /* Workouts */,
 				05A6E7B327C17ED600B3113E /* Lifts */,
@@ -580,6 +582,7 @@
 				DEVELOPMENT_TEAM = U3NXLYP7CP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Ironlog/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -618,6 +621,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = U3NXLYP7CP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Ironlog/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
