@@ -53,6 +53,6 @@ platform :ios do
   match(type: "appstore", git_url: "git@github.com:bstauff/Ironlog.certs.git")
   increment_build_number(xcodeproj: "Ironlog.xcodeproj")
   build_app(scheme: "Ironlog", export_method: "app-store")
-  upload_to_testflight(skip_waiting_for_build_processing: true)
+  upload_to_testflight(skip_waiting_for_build_processing: true, groups: "Dev testing")
   end
 end
