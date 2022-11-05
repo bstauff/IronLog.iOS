@@ -33,6 +33,9 @@ platform :ios do
     xcodeproj: "Ironlog.xcodeproj",
     build_number: "$CIRCLE_BUILD_NUM")
   build_app(scheme: "Ironlog", export_method: "app-store")
-  upload_to_testflight(skip_waiting_for_build_processing: true, groups: ["Dev testing"])
+  upload_to_testflight(
+    skip_waiting_for_build_processing: true, 
+    groups: ["Dev testing"],
+    distribute_external: false)
   end
 end
