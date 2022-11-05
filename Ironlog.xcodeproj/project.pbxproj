@@ -57,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		050CC5EA29169679009A422E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		052C8AC32817883700324E68 /* AddLiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLiftView.swift; sourceTree = "<group>"; };
 		0532310428C6250A00094823 /* AddWorkoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWorkoutView.swift; sourceTree = "<group>"; };
 		053FDDD6272F2DC5002D6D9D /* Ironlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ironlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +143,7 @@
 		053FDDD8272F2DC5002D6D9D /* Ironlog */ = {
 			isa = PBXGroup;
 			children = (
+				050CC5EA29169679009A422E /* Info.plist */,
 				05E55D3327EFB8FF00FAD5B7 /* ActiveWorkout */,
 				05A6E7B827C18A0200B3113E /* Workouts */,
 				05A6E7B327C17ED600B3113E /* Lifts */,
@@ -580,6 +582,7 @@
 				DEVELOPMENT_TEAM = U3NXLYP7CP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Ironlog/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -618,6 +621,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = U3NXLYP7CP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Ironlog/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
