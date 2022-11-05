@@ -1,0 +1,73 @@
+version: 2.1
+
+orbs:
+  ruby: circleci/ruby@1.2.0
+
+jobs:
+  build:
+    macos: 
+      xcode: 14.0.1
+    working_directory: /Users/distiller/project
+    environment:
+      FL_OUTPUT_DIR: output
+      FASTLANE_LANE: test
+    shell: /bin/bash --login -o pipefail
+    steps:
+      - checkout
+      - ruby/install-deps
+      - run:
+          name: fastlane
+          command: bundle exec fastlane $FASTLANE_LANE
+      - store_artifacts:
+          path: output
+      - store_test_results:
+          path: output/scan
+  release-beta:
+    macos: 
+      xcode: 14.0.1
+    working_directory: /Users/distiller/project
+    environment:
+      FL_OUTPUT_DIR: output
+      FASTLANE_LANE: release_internal_beta
+    shell: /bin/bash --login -o pipefail
+    steps:
+      - checkout
+      - ruby/install-deps
+      - run:
+          name: fastlane
+          command: bundle exec fastlane $FASTLANE_LANE
+      - store_artifacts:
+          path: output
+  release-prod:
+    macos: 
+      xcode: 14.0.1
+    working_directory: /Users/distiller/project
+    environment:
+      FL_OUTPUT_DIR: output
+      FASTLANE_LANE: release_prod
+    shell: /bin/bash --login -o pipefail
+    steps:
+      - checkout
+      - ruby/install-deps
+      - run:
+          name: fastlane
+          command: bundle exec fastlane $FASTLANE_LANE
+      - store_artifacts:
+          path: output
+
+workflows:
+  version: 2
+  build-test-and-approval-deploy:
+    jobs:
+      # - build
+      # - release-beta:
+      #     requires:
+      #       - build
+      # - hold:
+      #     type: approval
+      #     requires: 
+      #       - release-beta
+      # - release-prod:
+      #     requires:
+      #       - hold
+      - release-beta

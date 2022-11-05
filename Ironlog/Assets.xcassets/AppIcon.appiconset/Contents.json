@@ -1,6 +1,12 @@
 {
   "images" : [
     {
+      "filename" : "iphone1024.png",
+      "idiom" : "universal",
+      "platform" : "ios",
+      "size" : "1024x1024"
+    },
+    {
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "20x20"
@@ -86,6 +92,7 @@
       "size" : "83.5x83.5"
     },
     {
+      "filename" : "iphone1024 1.png",
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"
