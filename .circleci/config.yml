@@ -48,7 +48,7 @@ workflows:
           filters:
             branches:
               only:
-                - main
+                - master
           requires:
             - build
       # - hold:
