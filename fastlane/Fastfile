@@ -22,7 +22,9 @@ platform :ios do
 
   desc "Build and run tests"
   lane :test do
-    scan
+    scan(
+      include_simulator_logs: false
+    )
   end
 
   desc "Push a new release to Testflight internal beta"
