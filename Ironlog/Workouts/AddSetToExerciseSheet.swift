@@ -16,11 +16,23 @@ struct AddSetToExerciseSheet: View {
     @State private var isError = false
     @State private var errorMessage = ""
     var body: some View {
-        VStack {
-            Text("Reps")
-            TextField("Reps", value: $reps, format: .number)
-            Text("Weight")
-            TextField("Weight", value: $weight, format: .number)
+        VStack(spacing: 20) {
+            HStack(spacing:20) {
+                Spacer()
+                VStack {
+                    Text("Reps")
+                    TextField("Reps", value: $reps, format: .number)
+                }
+                Spacer()
+            }
+            HStack(spacing:20) {
+                Spacer()
+                VStack {
+                    Text("Weight")
+                    TextField("Weight", value: $weight, format: .number)
+                }
+                Spacer()
+            }
             Button("add") {
                 guard reps != nil || weight != nil else {
                     isError = true
