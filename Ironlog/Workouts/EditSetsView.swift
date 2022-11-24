@@ -10,8 +10,10 @@ import SwiftUI
 struct EditSetsView: View {
     @Binding var updatedSets: [ExerciseSet]
     
-    @State private var newReps: String = ""
-    @State private var newWeight: String = ""
+    @State private var newReps: Int = 0
+    @State private var newWeight: Int = 0
+    @State private var isError: Bool = false
+    @State private var errorMessage: String = ""
     
     var body: some View {
         List {
@@ -36,17 +38,26 @@ struct EditSetsView: View {
             }
             HStack {
                 Spacer()
-                TextField("Reps", text: $newReps)
+                TextField("Reps", value: $newReps, formatter: NumberFormatter())
                     .keyboardType(.numberPad)
                     .textFieldStyle(.roundedBorder)
                 Spacer()
-                TextField("Weight", text: $newWeight)
+                TextField("Weight", value: $newWeight, formatter: NumberFormatter())
                     .keyboardType(.numberPad)
                     .textFieldStyle(.roundedBorder)
                 Spacer()
                 Button(action: {}) {
                     Image(systemName: "plus.circle.fill")
-                }.disabled(areNewInputsInvalid())
+                }
+                    .disabled(areNewInputsInvalid())
+                    .alert("Oops", isPresented: $isError) {
+                        Button("Ok"){
+                            isError = false
+                            errorMessage = ""
+                        }
+                    } message: {
+                        Text(errorMessage)
+                    }
                 Spacer()
             }
         }
@@ -54,9 +65,16 @@ struct EditSetsView: View {
     
     private func areNewInputsInvalid() -> Bool {
         return
-            self.newReps.isEmpty ||
-            self.newWeight.isEmpty
-            
+            self.newReps == 0 ||
+            self.newWeight == 0
+    }
+    private func addNewSet() {
+        guard self.newReps != 0 && self.newWeight != 0 else {
+            self.isError = true
+            self.errorMessage = "Reps and Sets must have a value"
+            return
+        }
+        let newSet = ExerciseSet(reps: self.newReps, weight: self.newWeight)
     }
 }
 
