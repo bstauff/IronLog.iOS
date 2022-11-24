@@ -10,8 +10,8 @@ import SwiftUI
 struct EditSetsView: View {
     @Binding var updatedSets: [ExerciseSet]
     
-    @State private var newReps: Int = 0
-    @State private var newWeight: Int = 0
+    @State private var newReps: Int? = nil
+    @State private var newWeight: Int? = nil
     @State private var isError: Bool = false
     @State private var errorMessage: String = ""
     
@@ -38,15 +38,19 @@ struct EditSetsView: View {
             }
             HStack {
                 Spacer()
-                TextField("Reps", value: $newReps, formatter: NumberFormatter())
+                TextField("Reps", value: $newReps, format: .number, prompt: Text("Reps"))
                     .keyboardType(.numberPad)
                     .textFieldStyle(.roundedBorder)
                 Spacer()
-                TextField("Weight", value: $newWeight, formatter: NumberFormatter())
+                TextField("Weight", value: $newWeight, format: .number, prompt: Text("Weight"))
                     .keyboardType(.numberPad)
                     .textFieldStyle(.roundedBorder)
                 Spacer()
-                Button(action: {}) {
+                Button(action: {
+                    withAnimation{
+                        addNewSet()
+                    }
+                }) {
                     Image(systemName: "plus.circle.fill")
                 }
                     .disabled(areNewInputsInvalid())
@@ -65,16 +69,20 @@ struct EditSetsView: View {
     
     private func areNewInputsInvalid() -> Bool {
         return
-            self.newReps == 0 ||
-            self.newWeight == 0
+            self.newReps == nil ||
+            self.newWeight == nil
     }
     private func addNewSet() {
-        guard self.newReps != 0 && self.newWeight != 0 else {
+        guard !areNewInputsInvalid() else {
             self.isError = true
             self.errorMessage = "Reps and Sets must have a value"
             return
         }
-        let newSet = ExerciseSet(reps: self.newReps, weight: self.newWeight)
+        let newSet = ExerciseSet(reps: self.newReps!, weight: self.newWeight!)
+        
+        self.updatedSets.append(newSet)
+        self.newReps = nil
+        self.newWeight = nil
     }
 }
 
