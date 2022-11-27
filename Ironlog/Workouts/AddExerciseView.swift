@@ -13,8 +13,6 @@ struct AddExerciseView: View {
     @State private var selectedLift: Lift?
     @State private var sets: [ExerciseSet] = []
     
-    @State private var shouldNavigate = false
-    
     @State private var isError = false
     @State private var errorMessage = ""
     
@@ -31,11 +29,6 @@ struct AddExerciseView: View {
     var body: some View {
         NavigationView{
             VStack {
-                NavigationLink(
-                    destination:AddSetToExerciseSheet(exerciseSets: $sets),
-                    isActive: $shouldNavigate) {
-                        EmptyView()
-                    }
                 Form {
                     Picker("Lift", selection: $selectedLift) {
                         ForEach($lifts) { $lift in
@@ -43,64 +36,53 @@ struct AddExerciseView: View {
                         }
                     }
                     Section {
-                        HStack {
-                            Text("Reps")
-                            Spacer()
-                            Text("Weight")
-                        }
-                        List {
-                            ForEach($sets){ $exerciseSet in
-                                HStack {
-                                    Text(String(exerciseSet.reps))
-                                    Spacer()
-                                    Text(String(exerciseSet.weight))
-                                }
-                            }
-                            Button("Add Set") {
-                                shouldNavigate = true
-                            }
-                        }
-                        
+                        EditSetsView(updatedSets: $sets)
                     }
                     Section {
-                        Button("Save") {
-                            guard selectedLift != nil else {
-                                isError = true
-                                errorMessage = "Must select a lift"
-                                return
+                        HStack {
+                            Spacer()
+                            Button("Save") {
+                                createNewExercise()
+                                presentationMode.wrappedValue.dismiss()
                             }
-                            
-                            guard !sets.isEmpty else {
-                                isError = true
-                                errorMessage = "Must add sets"
-                                return
-                            }
-                            
-                            let newExercise = Exercise()
-                            newExercise.sets = self.sets
-                            newExercise.lift = self.selectedLift!
-                           
-                            workout.exercises.append(newExercise)
-                            
-                            do {
-                                try self.repo.saveWorkout(workout: workout)
-                            } catch {
-                                self.isError = true
-                                self.errorMessage = "Failed to save exercise"
-                                workout.exercises.removeLast()
-                                return
-                            }
-                            
-                            
-                            presentationMode.wrappedValue.dismiss()
-                            
-                        }.buttonStyle(.borderedProminent)
-                            .alert(isPresented: $isError) {
-                                Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
-                            }
+                                .buttonStyle(.borderedProminent)
+                                .alert(isPresented: $isError) {
+                                    Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
+                                }
+                            Spacer()
+                        }
                     }
                 }
             }
+        }
+    }
+        
+    func createNewExercise() -> Void {
+        guard selectedLift != nil else {
+            isError = true
+            errorMessage = "Must select a lift"
+            return
+        }
+                        
+        guard !sets.isEmpty else {
+            isError = true
+            errorMessage = "Must add sets"
+            return
+        }
+                        
+        let newExercise = Exercise()
+        newExercise.sets = self.sets
+        newExercise.lift = self.selectedLift!
+                       
+        workout.exercises.append(newExercise)
+                        
+        do {
+            try self.repo.saveWorkout(workout: workout)
+        } catch {
+            self.isError = true
+            self.errorMessage = "Failed to save exercise"
+            workout.exercises.removeLast()
+            return
         }
     }
 }

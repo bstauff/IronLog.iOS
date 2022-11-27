@@ -13,7 +13,7 @@ struct IronlogApp: App {
     
     @State private var workouts: [Workout] = []
     @State private var lifts: [Lift] = []
-    
+   
     var body: some Scene {
         WindowGroup {
             TabView {

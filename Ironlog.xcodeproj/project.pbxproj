@@ -19,7 +19,6 @@
 		05432ABF283953EF00B238E7 /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05432ABE283953EF00B238E7 /* CoreDataRepository.swift */; };
 		054FEB1F28BA3B0A00506316 /* LiftDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FEB1E28BA3B0A00506316 /* LiftDetailView.swift */; };
 		0554AAE2281485A2001E8A58 /* AddExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0554AAE1281485A2001E8A58 /* AddExerciseView.swift */; };
-		0554AAE428148A00001E8A58 /* AddSetToExerciseSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0554AAE328148A00001E8A58 /* AddSetToExerciseSheet.swift */; };
 		0555F34827A72E28008D5726 /* Lift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0555F34727A72E28008D5726 /* Lift.swift */; };
 		0555F36C27A74790008D5726 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0555F34F27A73944008D5726 /* Workout.swift */; };
 		0555F36D27A74797008D5726 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0555F35127A7394F008D5726 /* Exercise.swift */; };
@@ -30,7 +29,9 @@
 		05A6E7B727C1807700B3113E /* EditLiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A6E7B627C1807700B3113E /* EditLiftView.swift */; };
 		05A6E7BA27C18A1000B3113E /* WorkoutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A6E7B927C18A1000B3113E /* WorkoutsView.swift */; };
 		05A6E7BC27C18B7800B3113E /* WorkoutDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A6E7BB27C18B7800B3113E /* WorkoutDetailsView.swift */; };
+		05ABCF722929AF17009BC6BC /* EditSetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05ABCF712929AF17009BC6BC /* EditSetsView.swift */; };
 		05CABDBB2826DC6500A53B98 /* Ironlog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05CABDB92826DC6500A53B98 /* Ironlog.xcdatamodeld */; };
+		05D385F2293251AA00911EFF /* AddSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D385F1293251AA00911EFF /* AddSetView.swift */; };
 		05E3991728EEF87A009E1125 /* WorkoutCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E3991628EEF87A009E1125 /* WorkoutCompletionView.swift */; };
 		05E3991928EEFB87009E1125 /* ExerciseCompletionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E3991828EEFB87009E1125 /* ExerciseCompletionRowView.swift */; };
 		05E3991B28F0F06E009E1125 /* WorkoutSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E3991A28F0F06E009E1125 /* WorkoutSelection.swift */; };
@@ -73,7 +74,6 @@
 		05432ABE283953EF00B238E7 /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
 		054FEB1E28BA3B0A00506316 /* LiftDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftDetailView.swift; sourceTree = "<group>"; };
 		0554AAE1281485A2001E8A58 /* AddExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseView.swift; sourceTree = "<group>"; };
-		0554AAE328148A00001E8A58 /* AddSetToExerciseSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSetToExerciseSheet.swift; sourceTree = "<group>"; };
 		0555F34727A72E28008D5726 /* Lift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lift.swift; sourceTree = "<group>"; };
 		0555F34F27A73944008D5726 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		0555F35127A7394F008D5726 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
@@ -84,7 +84,9 @@
 		05A6E7B627C1807700B3113E /* EditLiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLiftView.swift; sourceTree = "<group>"; };
 		05A6E7B927C18A1000B3113E /* WorkoutsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsView.swift; sourceTree = "<group>"; };
 		05A6E7BB27C18B7800B3113E /* WorkoutDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailsView.swift; sourceTree = "<group>"; };
+		05ABCF712929AF17009BC6BC /* EditSetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSetsView.swift; sourceTree = "<group>"; };
 		05CABDBA2826DC6500A53B98 /* Ironlog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Ironlog.xcdatamodel; sourceTree = "<group>"; };
+		05D385F1293251AA00911EFF /* AddSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSetView.swift; sourceTree = "<group>"; };
 		05E3991628EEF87A009E1125 /* WorkoutCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutCompletionView.swift; sourceTree = "<group>"; };
 		05E3991828EEFB87009E1125 /* ExerciseCompletionRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseCompletionRowView.swift; sourceTree = "<group>"; };
 		05E3991A28F0F06E009E1125 /* WorkoutSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSelection.swift; sourceTree = "<group>"; };
@@ -221,11 +223,11 @@
 		05A6E7B827C18A0200B3113E /* Workouts */ = {
 			isa = PBXGroup;
 			children = (
+				05D385F02932516800911EFF /* ExerciseSets */,
 				0532310428C6250A00094823 /* AddWorkoutView.swift */,
 				05A6E7B927C18A1000B3113E /* WorkoutsView.swift */,
 				05A6E7BB27C18B7800B3113E /* WorkoutDetailsView.swift */,
 				0554AAE1281485A2001E8A58 /* AddExerciseView.swift */,
-				0554AAE328148A00001E8A58 /* AddSetToExerciseSheet.swift */,
 				058B1B81281DD0EF00FD87C2 /* ExerciseDetailsView.swift */,
 				05F1E2FE28D9DDC4009D5EED /* EditExerciseView.swift */,
 			);
@@ -248,6 +250,15 @@
 				05432ABE283953EF00B238E7 /* CoreDataRepository.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		05D385F02932516800911EFF /* ExerciseSets */ = {
+			isa = PBXGroup;
+			children = (
+				05ABCF712929AF17009BC6BC /* EditSetsView.swift */,
+				05D385F1293251AA00911EFF /* AddSetView.swift */,
+			);
+			path = ExerciseSets;
 			sourceTree = "<group>";
 		};
 		05E55D3327EFB8FF00FAD5B7 /* ActiveWorkout */ = {
@@ -395,8 +406,8 @@
 				05432ABD2839536100B238E7 /* AppRepository.swift in Sources */,
 				05A6E7BC27C18B7800B3113E /* WorkoutDetailsView.swift in Sources */,
 				05432ABF283953EF00B238E7 /* CoreDataRepository.swift in Sources */,
-				0554AAE428148A00001E8A58 /* AddSetToExerciseSheet.swift in Sources */,
 				0555F36E27A7479B008D5726 /* ExerciseSet.swift in Sources */,
+				05D385F2293251AA00911EFF /* AddSetView.swift in Sources */,
 				05E3991B28F0F06E009E1125 /* WorkoutSelection.swift in Sources */,
 				05A6E7B727C1807700B3113E /* EditLiftView.swift in Sources */,
 				05E3991728EEF87A009E1125 /* WorkoutCompletionView.swift in Sources */,
@@ -407,6 +418,7 @@
 				05A6E7BA27C18A1000B3113E /* WorkoutsView.swift in Sources */,
 				0555F36D27A74797008D5726 /* Exercise.swift in Sources */,
 				05E6FA3028EB0C0F005DF36D /* ExerciseCompletionView.swift in Sources */,
+				05ABCF722929AF17009BC6BC /* EditSetsView.swift in Sources */,
 				05F1E2FF28D9DDC4009D5EED /* EditExerciseView.swift in Sources */,
 				05E55D3527EFB91600FAD5B7 /* ActiveWorkoutView.swift in Sources */,
 				05CABDBB2826DC6500A53B98 /* Ironlog.xcdatamodeld in Sources */,
