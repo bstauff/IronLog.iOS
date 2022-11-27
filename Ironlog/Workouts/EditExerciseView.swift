@@ -8,12 +8,6 @@
 import SwiftUI
 
 struct EditExerciseView: View {
-    @State private var isError = false
-    @State private var errorMessage = ""
-    
-    @State private var newReps = ""
-    @State private var newWeight = ""
-    
     @Binding private var updatedLift: Lift
     @Binding private var updatedSets: [ExerciseSet]
     
@@ -37,54 +31,7 @@ struct EditExerciseView: View {
                     }
                 }
                 Section {
-                    HStack {
-                        Text("Reps")
-                        Spacer()
-                        Text("Weight")
-                    }
-                    List {
-                        ForEach(updatedSets){ exerciseSet in
-                            HStack {
-                                Text(String(exerciseSet.reps))
-                                Spacer()
-                                Text(String(exerciseSet.weight))
-                            }
-                        }
-                        .onDelete{ indexSet in
-                            updatedSets.remove(atOffsets: indexSet)
-                        }
-                        HStack {
-                            TextField("Reps", text: $newReps)
-                                .keyboardType(.decimalPad)
-                            TextField("Weight", text: $newWeight)
-                                .keyboardType(.decimalPad)
-                            Button(action: {
-                                withAnimation {
-                                    let newRepsInt = Int(newReps)
-                                    let newRepsWeight = Int(newWeight)
-                                    guard newRepsInt != nil  && newRepsWeight != nil else {
-                                        isError = true
-                                        errorMessage = "invalid reps or weight"
-                                        newReps = ""
-                                        newWeight = ""
-                                        return
-                                    }
-                                    
-                                    let newSet =
-                                        ExerciseSet(
-                                            reps: newRepsInt!,
-                                            weight: newRepsWeight!)
-                                    updatedSets.append(newSet)
-                                    newReps = ""
-                                    newWeight = ""
-                                }
-                            }) {
-                                Image(systemName: "plus.circle.fill")
-                            }
-                            .disabled(newReps.isEmpty || newWeight.isEmpty)
-                        }
-                    }
-                    
+                    EditSetsView(updatedSets: $updatedSets)
                 }
             }
         }
