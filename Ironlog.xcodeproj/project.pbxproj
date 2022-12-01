@@ -24,6 +24,7 @@
 		0555F36D27A74797008D5726 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0555F35127A7394F008D5726 /* Exercise.swift */; };
 		0555F36E27A7479B008D5726 /* ExerciseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0555F35327A73955008D5726 /* ExerciseSet.swift */; };
 		058B1B82281DD0EF00FD87C2 /* ExerciseDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058B1B81281DD0EF00FD87C2 /* ExerciseDetailsView.swift */; };
+		058F24942938DC7E00111074 /* LiftSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058F24932938DC7E00111074 /* LiftSelectionView.swift */; };
 		059CD6CC28C2263000DDA354 /* LiftLineItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 059CD6CB28C2263000DDA354 /* LiftLineItemView.swift */; };
 		05A6E7B527C17EF000B3113E /* LiftsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A6E7B427C17EF000B3113E /* LiftsView.swift */; };
 		05A6E7B727C1807700B3113E /* EditLiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A6E7B627C1807700B3113E /* EditLiftView.swift */; };
@@ -79,6 +80,7 @@
 		0555F35127A7394F008D5726 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		0555F35327A73955008D5726 /* ExerciseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSet.swift; sourceTree = "<group>"; };
 		058B1B81281DD0EF00FD87C2 /* ExerciseDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailsView.swift; sourceTree = "<group>"; };
+		058F24932938DC7E00111074 /* LiftSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftSelectionView.swift; sourceTree = "<group>"; };
 		059CD6CB28C2263000DDA354 /* LiftLineItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftLineItemView.swift; sourceTree = "<group>"; };
 		05A6E7B427C17EF000B3113E /* LiftsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftsView.swift; sourceTree = "<group>"; };
 		05A6E7B627C1807700B3113E /* EditLiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLiftView.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				0554AAE1281485A2001E8A58 /* AddExerciseView.swift */,
 				058B1B81281DD0EF00FD87C2 /* ExerciseDetailsView.swift */,
 				05F1E2FE28D9DDC4009D5EED /* EditExerciseView.swift */,
+				058F24932938DC7E00111074 /* LiftSelectionView.swift */,
 			);
 			path = Workouts;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				0555F34827A72E28008D5726 /* Lift.swift in Sources */,
 				05A6E7BA27C18A1000B3113E /* WorkoutsView.swift in Sources */,
 				0555F36D27A74797008D5726 /* Exercise.swift in Sources */,
+				058F24942938DC7E00111074 /* LiftSelectionView.swift in Sources */,
 				05E6FA3028EB0C0F005DF36D /* ExerciseCompletionView.swift in Sources */,
 				05ABCF722929AF17009BC6BC /* EditSetsView.swift in Sources */,
 				05F1E2FF28D9DDC4009D5EED /* EditExerciseView.swift in Sources */,

@@ -30,11 +30,7 @@ struct AddExerciseView: View {
         NavigationView{
             VStack {
                 Form {
-                    Picker("Lift", selection: $selectedLift) {
-                        ForEach($lifts) { $lift in
-                            Text(lift.name).tag(lift as Lift?)
-                        }
-                    }
+                    LiftSelectionView(lifts: lifts)
                     Section {
                         EditSetsView(updatedSets: $sets)
                     }
@@ -91,7 +87,7 @@ struct AddExerciseView_Previews: PreviewProvider {
     static var previews: some View {
         let appRepo = CoreDataRepository()
         let squatLift = Lift(name: "Squat", trainingMax: 315)
-        let lifts = [squatLift]
+        let lifts = [squatLift, Lift(name: "Bench", trainingMax: 300)]
         try? appRepo.addLift(lift: squatLift)
         
         
