@@ -11,6 +11,8 @@ import SwiftUI
 struct IronlogApp: App {
     private var repository  = CoreDataRepository()
     
+    let persistenceController = PersistenceController.shared
+    
     @State private var workouts: [Workout] = []
     @State private var lifts: [Lift] = []
    
@@ -33,6 +35,7 @@ struct IronlogApp: App {
                     }
                     .tag(3)
             }
+            .environment(\.managedObjectContext, persistenceController.container.viewContext)
             .onAppear {
                 loadWorkouts()
                 loadLifts()
