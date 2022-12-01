@@ -8,15 +8,18 @@
 import SwiftUI
 
 struct LiftLineItemView: View {
-    @ObservedObject var lift: Lift
+    @ObservedObject var liftModel: LiftModel
+    
     var body: some View {
-        Text(lift.name)
+        Text(liftModel.name ?? "unknown")
     }
 }
 
 struct LiftLineItemView_Previews: PreviewProvider {
     static var previews: some View {
-        let liftModel = Lift(name: "squat", trainingMax: 350)
-        LiftLineItemView(lift: liftModel)
+        let liftModel = LiftModel(context: PersistenceController.preview.container.viewContext)
+        liftModel.name = "Test Lift"
+        liftModel.trainingMax = 999
+        return LiftLineItemView(liftModel: liftModel)
     }
 }

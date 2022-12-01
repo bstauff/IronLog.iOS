@@ -29,7 +29,7 @@ struct IronlogApp: App {
                         Label("Active Workout", systemImage: "flame.circle")
                     }
                     .tag(2)
-                LiftsView(lifts: $lifts, liftRepo: repository)
+                LiftsView()
                     .tabItem {
                         Label("Lifts", systemImage: "arrow.up.circle")
                     }
