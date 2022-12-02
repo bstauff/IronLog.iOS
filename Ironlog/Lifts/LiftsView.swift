@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LiftsView: View {
     
-    @Environment(\.managedObjectContext) var managedObjectContext
+    @Environment(\.managedObjectContext) var viewContext
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var lifts: FetchedResults<LiftModel>
     
     var body: some View {
@@ -33,6 +33,7 @@ struct LiftsView: View {
 
 struct LiftsView_Previews: PreviewProvider {
     static var previews: some View {
-        return LiftsView()
+        let viewContext = PersistenceController.preview.container.viewContext
+        return LiftsView().environment(\.managedObjectContext, viewContext)
     }
 }
