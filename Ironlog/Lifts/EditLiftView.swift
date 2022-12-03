@@ -8,33 +8,26 @@
 import SwiftUI
 
 struct EditLiftView: View {
+    @Environment(\.managedObjectContext) var viewContext
+    
     @State private var isError = false
     @State private var errorString = ""
     
     @State private var updatedLiftName: String = ""
     @State private var updatedTrainingMax: Int = 0
     
-    @Binding var lift: Lift
-    
-    private var liftRepository: AppRepository
-    
-    private let numberFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        return formatter
-    }()
-    
-    init(lift: Binding<Lift>, liftRepository: AppRepository){
-        self._lift = lift
-        self.liftRepository = liftRepository
-    }
+    @Binding var lift: LiftModel
     
     var body: some View {
         HStack {
             VStack {
                 Text("Lift Name")
-                TextField("Lift Name", text: $updatedLiftName).textFieldStyle(.roundedBorder)
+                TextField("Lift Name", text: $updatedLiftName, prompt: Text("lift name"))
+                    .textFieldStyle(.roundedBorder)
                 Text("Training Max")
-                TextField("Training Max", value: $updatedTrainingMax, formatter: numberFormatter).textFieldStyle(.roundedBorder)
+                TextField("Training Max", value: $updatedTrainingMax, format: .number)
+                    .keyboardType(.numberPad)
+                    .textFieldStyle(.roundedBorder)
                 Button("Save", action: saveLift)
             }
             .alert(isPresented: $isError) {
@@ -45,8 +38,8 @@ struct EditLiftView: View {
                 )
             }
         }.onAppear {
-            self.updatedLiftName = lift.name
-            self.updatedTrainingMax = lift.trainingMax
+            self.updatedLiftName = lift.name ?? ""
+            self.updatedTrainingMax = Int(lift.trainingMax)
         }
     }
     
@@ -64,29 +57,24 @@ struct EditLiftView: View {
             return
         }
         
+        lift.trainingMax = Int64(updatedTrainingMax)
+        lift.name = updatedLiftName
+        
         do {
-            try liftRepository.saveLift(lift: lift)
+            try viewContext.save()
         } catch {
             isError = true
             errorString = "failed to save lift"
             return
         }
-        
-        lift.trainingMax = updatedTrainingMax
-        lift.name = updatedLiftName
     }
 }
 
 struct EditLiftView_Previews: PreviewProvider {
     static var previews: some View {
-        let liftModel = Lift(name: "squat", trainingMax: 350)
-        let liftRepo = CoreDataRepository()
-        return EditLiftView(lift: .constant(liftModel), liftRepository: liftRepo)
-    }
-}
-
-extension Binding {
-     func toUnwrapped<T>(defaultValue: T) -> Binding<T> where Value == Optional<T>  {
-        Binding<T>(get: { self.wrappedValue ?? defaultValue }, set: { self.wrappedValue = $0 })
+        let liftModel = LiftModel(context: PersistenceController.preview.container.viewContext)
+        liftModel.name = "Test Lift"
+        liftModel.trainingMax = 999
+        return EditLiftView(lift: .constant(liftModel)).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

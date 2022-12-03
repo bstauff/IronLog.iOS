@@ -29,10 +29,10 @@ struct AddLiftView: View {
             VStack {
                 Text(
                     "Lift Name")
-                TextField(
-                    "Lift Name",
-                    text: $liftName.toUnwrapped(defaultValue: "")
-                )
+//                TextField(
+//                    "Lift Name",
+//                    text: $liftName.toUnwrapped(defaultValue: "")
+//                )
                 Text("Training Max")
                 TextField(
                     "Training Max",

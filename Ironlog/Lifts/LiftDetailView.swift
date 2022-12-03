@@ -8,15 +8,9 @@
 import SwiftUI
 
 struct LiftDetailView: View {
-    @Binding var lift: Lift
-    private var liftRepository: AppRepository
+    @Binding var lift: LiftModel
     @State private var isPresentingEditSheet = false
     @State private var didSaveThrowError = false
-    
-    init(lift: Binding<Lift>, liftRepository: AppRepository) {
-        self._lift = lift
-        self.liftRepository = liftRepository
-    }
     
     var body: some View {
         VStack {
@@ -24,30 +18,30 @@ struct LiftDetailView: View {
             Text(String(lift.trainingMax))
             Spacer()
         }
-        .navigationTitle(lift.name)
+        .navigationTitle(lift.name ?? "unknown")
         .toolbar {
             Button("edit") {
                 isPresentingEditSheet = true
             }
         }
-        .sheet(isPresented: $isPresentingEditSheet, onDismiss: saveLift) {
-            NavigationView {
-                EditLiftView(lift: $lift, liftRepository: self.liftRepository)
-                .navigationTitle(lift.name)
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel") {
-                            isPresentingEditSheet = false
-                        }
-                    }
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button("Done") {
-                            isPresentingEditSheet = false
-                        }
-                    }
-                }
-            }
-        }
+//        .sheet(isPresented: $isPresentingEditSheet, onDismiss: saveLift) {
+//            NavigationView {
+//                EditLiftView(lift: $lift, liftRepository: self.liftRepository)
+//                .navigationTitle(lift.name)
+//                .toolbar {
+//                    ToolbarItem(placement: .cancellationAction) {
+//                        Button("Cancel") {
+//                            isPresentingEditSheet = false
+//                        }
+//                    }
+//                    ToolbarItem(placement: .confirmationAction) {
+//                        Button("Done") {
+//                            isPresentingEditSheet = false
+//                        }
+//                    }
+//                }
+//            }
+//        }
         .alert("Woops", isPresented: $didSaveThrowError) {
             VStack {
                 Text("Failed to save lift")
@@ -55,26 +49,21 @@ struct LiftDetailView: View {
             }
         }
     }
-    
-    private func saveLift() {
-        do {
-            try self.liftRepository.saveLift(lift: lift)
-        } catch {
-            didSaveThrowError = true
-        }
-    }
 }
 
 struct LiftDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        let liftModel = Lift(name: "squat", trainingMax: 350)
-        let liftRepo = CoreDataRepository()
-        NavigationView {
-            LiftDetailView(lift: .constant(liftModel), liftRepository: liftRepo)
+        let previewContext = PersistenceController.preview.container.viewContext
+        
+        let liftModel = LiftModel(context: previewContext)
+        
+        liftModel.name = "Squat"
+        liftModel.trainingMax = 315
+        
+        try! previewContext.save()
+        
+        return NavigationView {
+            LiftDetailView(lift: .constant(liftModel))
         }
     }
-}
-
-enum MyError : Error {
-    case boom
 }

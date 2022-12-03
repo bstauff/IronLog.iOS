@@ -17,12 +17,10 @@ struct LiftsView: View {
             VStack {
                 List {
                     ForEach(lifts) { lift in
-//                        NavigationLink(
-//                            destination: LiftDetailView(lift: $lift, liftRepository: liftRepo))
-//                        {
+//                        NavigationLink(destination: LiftDetailView(lift: $lift)) {
 //                            LiftLineItemView(lift: lift)
 //                        }
-                            LiftLineItemView(liftModel: lift)
+                        LiftLineItemView(liftModel: lift)
                     }
                 }
             }
