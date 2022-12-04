@@ -9,22 +9,19 @@ import SwiftUI
 
 @main
 struct IronlogApp: App {
-    private var repository  = CoreDataRepository()
-    
     let persistenceController = PersistenceController.shared
     
-    @State private var workouts: [Workout] = []
-    @State private var lifts: [Lift] = []
-   
     var body: some Scene {
         WindowGroup {
             TabView {
-                WorkoutsView(workoutRepo: repository, workouts: $workouts, lifts: $lifts)
+//                WorkoutsView(workoutRepo: repository, workouts: $workouts, lifts: $lifts)
+                    Text("Workouts here someday")
                     .tabItem {
                         Label("Workouts", systemImage: "list.bullet.circle")
                     }
                     .tag(1)
-                ActiveWorkoutView(workouts: $workouts, repository: repository)
+//                ActiveWorkoutView(workouts: $workouts, repository: repository)
+                    Text("Active workout here someday")
                     .tabItem {
                         Label("Active Workout", systemImage: "flame.circle")
                     }
@@ -36,19 +33,6 @@ struct IronlogApp: App {
                     .tag(3)
             }
             .environment(\.managedObjectContext, persistenceController.container.viewContext)
-            .onAppear {
-                loadWorkouts()
-                loadLifts()
-            }
         }
-    }
-    
-    private func loadWorkouts() {
-        let workouts = try! repository.getAllWorkouts()
-        self.workouts = workouts
-    }
-    private func loadLifts() {
-        let lifts = try! repository.getAllLifts()
-        self.lifts = lifts
     }
 }
