@@ -8,15 +8,20 @@
 import SwiftUI
 
 struct EditLiftView: View {
-    @Environment(\.managedObjectContext) var viewContext
-    
     @State private var isError = false
     @State private var errorString = ""
     
     @State private var updatedLiftName: String = ""
     @State private var updatedTrainingMax: Int = 0
     
-    @Binding var lift: LiftModel
+    let onLiftUpdated: (_ updatedName: String, _ updatedTrainingMax: Int) -> Void
+    
+    @ObservedObject var lift: LiftModel
+    
+    init(liftModel: LiftModel, onLiftUpdated: @escaping (String,Int) -> Void) {
+        self.lift = liftModel
+        self.onLiftUpdated = onLiftUpdated
+    }
     
     var body: some View {
         HStack {
@@ -57,16 +62,7 @@ struct EditLiftView: View {
             return
         }
         
-        lift.trainingMax = Int64(updatedTrainingMax)
-        lift.name = updatedLiftName
-        
-        do {
-            try viewContext.save()
-        } catch {
-            isError = true
-            errorString = "failed to save lift"
-            return
-        }
+        self.onLiftUpdated(updatedLiftName, updatedTrainingMax)
     }
 }
 
@@ -75,6 +71,8 @@ struct EditLiftView_Previews: PreviewProvider {
         let liftModel = LiftModel(context: PersistenceController.preview.container.viewContext)
         liftModel.name = "Test Lift"
         liftModel.trainingMax = 999
-        return EditLiftView(lift: .constant(liftModel)).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        return EditLiftView(liftModel: liftModel) { updatedName, updatedMax in
+            
+        }
     }
 }

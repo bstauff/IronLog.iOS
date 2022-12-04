@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct LiftDetailView: View {
-    @Binding var lift: LiftModel
+    @Environment(\.managedObjectContext) var viewContext
+    
+    @ObservedObject var lift: LiftModel
+    
     @State private var isPresentingEditSheet = false
     @State private var didSaveThrowError = false
     
@@ -24,29 +27,27 @@ struct LiftDetailView: View {
                 isPresentingEditSheet = true
             }
         }
-//        .sheet(isPresented: $isPresentingEditSheet, onDismiss: saveLift) {
-//            NavigationView {
-//                EditLiftView(lift: $lift, liftRepository: self.liftRepository)
-//                .navigationTitle(lift.name)
-//                .toolbar {
-//                    ToolbarItem(placement: .cancellationAction) {
-//                        Button("Cancel") {
-//                            isPresentingEditSheet = false
-//                        }
-//                    }
-//                    ToolbarItem(placement: .confirmationAction) {
-//                        Button("Done") {
-//                            isPresentingEditSheet = false
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        .sheet(isPresented: $isPresentingEditSheet) {
+            EditLiftView(liftModel: lift, onLiftUpdated: saveLift)
+        }
         .alert("Woops", isPresented: $didSaveThrowError) {
             VStack {
                 Text("Failed to save lift")
                 Button("OK", role: .cancel){}
             }
+        }
+    }
+    
+    func saveLift(updatedName: String, updatedMax: Int) -> Void {
+        self.isPresentingEditSheet = false
+        
+        lift.name = updatedName
+        lift.trainingMax = Int64(updatedMax)
+        
+        do {
+            try viewContext.save()
+        } catch {
+            self.didSaveThrowError = true
         }
     }
 }
@@ -63,7 +64,7 @@ struct LiftDetailView_Previews: PreviewProvider {
         try! previewContext.save()
         
         return NavigationView {
-            LiftDetailView(lift: .constant(liftModel))
+            LiftDetailView(lift: liftModel)
         }
     }
 }
