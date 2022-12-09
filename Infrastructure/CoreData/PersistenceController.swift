@@ -18,9 +18,15 @@ struct PersistenceController {
         
         let viewContext = controller.container.viewContext
         
-        let lift = LiftModel(context: viewContext)
-        lift.name = "Squat"
-        lift.trainingMax = 315
+        let squat = LiftModel(context: viewContext)
+        squat.name = "Squat"
+        squat.trainingMax = 315
+        squat.id = UUID()
+        
+        let bench = LiftModel(context: viewContext)
+        bench.name = "Bench"
+        bench.trainingMax = 375
+        bench.id = UUID()
             
         do {
             try viewContext.save()

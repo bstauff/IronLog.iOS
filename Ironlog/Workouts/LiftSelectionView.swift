@@ -8,19 +8,15 @@
 import SwiftUI
 
 struct LiftSelectionView: View {
-    
-    private var lifts: [Lift]
+    @Environment(\.managedObjectContext) var viewContext
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var lifts: FetchedResults<LiftModel>
     
     @State var selectedLift: Lift?
-    
-    init(lifts: [Lift]) {
-        self.lifts = lifts
-    }
     
     var body: some View {
         Picker("Lift", selection: $selectedLift) {
             ForEach(lifts) { lift in
-                Text(lift.name).tag(lift as Lift?)
+                Text(lift.name ?? "").tag(lift as LiftModel?)
             }
         }
     }
@@ -28,11 +24,7 @@ struct LiftSelectionView: View {
 
 struct LiftSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        let lifts = [
-            Lift(name: "Squat", trainingMax: 350),
-            Lift(name: "Bench", trainingMax: 300)
-        ]
-        
-        LiftSelectionView(lifts: lifts)
+        let viewContext = PersistenceController.preview.container.viewContext
+        return LiftSelectionView().environment(\.managedObjectContext, viewContext)
     }
 }

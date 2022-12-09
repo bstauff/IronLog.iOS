@@ -185,6 +185,17 @@
 			path = IronlogUITests;
 			sourceTree = "<group>";
 		};
+		054C288529436E9500E04761 /* Exercises */ = {
+			isa = PBXGroup;
+			children = (
+				05D385F02932516800911EFF /* ExerciseSets */,
+				0554AAE1281485A2001E8A58 /* AddExerciseView.swift */,
+				058B1B81281DD0EF00FD87C2 /* ExerciseDetailsView.swift */,
+				05F1E2FE28D9DDC4009D5EED /* EditExerciseView.swift */,
+			);
+			path = Exercises;
+			sourceTree = "<group>";
+		};
 		0555F34627A72E17008D5726 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,13 +238,10 @@
 		05A6E7B827C18A0200B3113E /* Workouts */ = {
 			isa = PBXGroup;
 			children = (
-				05D385F02932516800911EFF /* ExerciseSets */,
+				054C288529436E9500E04761 /* Exercises */,
 				0532310428C6250A00094823 /* AddWorkoutView.swift */,
 				05A6E7B927C18A1000B3113E /* WorkoutsView.swift */,
 				05A6E7BB27C18B7800B3113E /* WorkoutDetailsView.swift */,
-				0554AAE1281485A2001E8A58 /* AddExerciseView.swift */,
-				058B1B81281DD0EF00FD87C2 /* ExerciseDetailsView.swift */,
-				05F1E2FE28D9DDC4009D5EED /* EditExerciseView.swift */,
 				058F24932938DC7E00111074 /* LiftSelectionView.swift */,
 			);
 			path = Workouts;

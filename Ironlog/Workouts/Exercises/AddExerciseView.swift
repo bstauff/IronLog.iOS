@@ -23,7 +23,7 @@ struct AddExerciseView: View {
         NavigationView{
             VStack {
                 Form {
-                    LiftSelectionView(lifts: [])
+                    LiftSelectionView()
                     Section {
                         EditSetsView(updatedSets: $sets)
                     }
