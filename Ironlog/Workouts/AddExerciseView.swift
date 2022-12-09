@@ -9,28 +9,21 @@ import SwiftUI
 
 struct AddExerciseView: View {
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var workout: Workout
+    @Environment(\.managedObjectContext) var viewContext
+    
     @State private var selectedLift: Lift?
     @State private var sets: [ExerciseSet] = []
     
     @State private var isError = false
     @State private var errorMessage = ""
     
-    @Binding private var lifts: [Lift]
-    
-    private var repo: AppRepository
-    
-    init(repo: AppRepository, workout: Workout, lifts: Binding<[Lift]>) {
-        self.workout = workout
-        self.repo = repo
-        self._lifts = lifts
-    }
+    var onExerciseAdded: (_ newExercise: ExerciseModel) -> Void
     
     var body: some View {
         NavigationView{
             VStack {
                 Form {
-                    LiftSelectionView(lifts: lifts)
+                    LiftSelectionView(lifts: [])
                     Section {
                         EditSetsView(updatedSets: $sets)
                     }
@@ -65,33 +58,28 @@ struct AddExerciseView: View {
             errorMessage = "Must add sets"
             return
         }
-                        
-        let newExercise = Exercise()
-        newExercise.sets = self.sets
-        newExercise.lift = self.selectedLift!
-                       
-        workout.exercises.append(newExercise)
-                        
+        
+        let newExercise = ExerciseModel(context: viewContext)
+        
         do {
-            try self.repo.saveWorkout(workout: workout)
+            try viewContext.save()
         } catch {
             self.isError = true
             self.errorMessage = "Failed to save exercise"
-            workout.exercises.removeLast()
             return
         }
+        
+        self.onExerciseAdded(newExercise)
     }
 }
 
 struct AddExerciseView_Previews: PreviewProvider {
     static var previews: some View {
-        let appRepo = CoreDataRepository()
-        let squatLift = Lift(name: "Squat", trainingMax: 315)
-        let lifts = [squatLift, Lift(name: "Bench", trainingMax: 300)]
-        try? appRepo.addLift(lift: squatLift)
-        
-        
-        let workout = Workout(date: Date.now)
-        return AddExerciseView(repo: appRepo, workout: workout, lifts: .constant(lifts))
+        let viewContext = PersistenceController.preview.container.viewContext
+        return
+            AddExerciseView{ newExercise in
+            
+            }
+            .environment(\.managedObjectContext, viewContext)
     }
 }
