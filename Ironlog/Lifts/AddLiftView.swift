@@ -9,52 +9,36 @@ import SwiftUI
 
 struct AddLiftView: View {
     @Environment(\.presentationMode) var presentationMode
-    private var repo: AppRepository
+    @Environment(\.managedObjectContext) var viewContext
     
     @State private var isError = false
     @State private var errorString = ""
     
-    @State var liftName: String?
+    @State var liftName: String = ""
     @State var trainingMax: Int?
-        
-    @Binding var lifts:[Lift]
-    
-    init(liftRepo: AppRepository, lifts: Binding<[Lift]>) {
-        self._lifts = lifts
-        self.repo = liftRepo
-    }
     
     var body: some View {
         HStack {
             VStack {
-                Text(
-                    "Lift Name")
-//                TextField(
-//                    "Lift Name",
-//                    text: $liftName.toUnwrapped(defaultValue: "")
-//                )
+                Text("Lift Name")
+                TextField("Lift Name", text: $liftName, prompt: Text("lift name"))
+                    .textFieldStyle(.roundedBorder)
                 Text("Training Max")
-                TextField(
-                    "Training Max",
-                    value: $trainingMax,
-                    format: .number
-                ).keyboardType(.numberPad)
-                Button("Save") {
-                    saveClicked()
-                }
-                .buttonStyle(.borderedProminent)
-                .alert(isPresented: $isError) {
-                    Alert(
-                        title: Text("Error"),
-                        message: Text(errorString),
-                        dismissButton: .default(Text("OK"))
-                    )
-                }
+                TextField("Training Max", value: $trainingMax, format: .number)
+                    .keyboardType(.numberPad)
+                Button("Save", action: saveClicked)
+                    .buttonStyle(.borderedProminent)
             }
+        }
+        .alert(isPresented: $isError) {
+            Alert(
+                title: Text("Error"),
+                message: Text(errorString),
+                dismissButton: .default(Text("OK")))
         }
     }
     private func saveClicked() {
-        guard liftName != nil else {
+        guard liftName != "" else {
             isError = true
             errorString = "lift name required"
             return
@@ -66,16 +50,17 @@ struct AddLiftView: View {
             return
         }
         
-        let newLift = Lift(name: liftName!, trainingMax: trainingMax!)
+        let newLift = LiftModel(context: viewContext)
+        newLift.name = liftName
+        newLift.trainingMax = Int64(trainingMax!)
+        newLift.id = UUID()
             
         do {
-            try repo.addLift(lift: newLift)
+            try viewContext.save()
         }catch {
             isError = true
             errorString = "failed to save lift"
         }
-            
-        lifts.append(newLift)
         
         presentationMode.wrappedValue.dismiss()
     }
@@ -83,8 +68,7 @@ struct AddLiftView: View {
 
 struct AddLiftView_Previews: PreviewProvider {
     static var previews: some View {
-        let liftRepo = CoreDataRepository()
-        let lifts: [Lift] = []
-        AddLiftView(liftRepo: liftRepo, lifts: .constant(lifts))
+        let viewContext = PersistenceController.preview.container.viewContext
+        return AddLiftView().environment(\.managedObjectContext, viewContext)
     }
 }
