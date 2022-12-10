@@ -10,8 +10,9 @@ import SwiftUI
 struct AddExerciseView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.managedObjectContext) var viewContext
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var lifts: FetchedResults<LiftModel>
     
-    @State private var selectedLift: Lift?
+    @State private var selectedLift: LiftModel?
     @State private var sets: [ExerciseSet] = []
     
     @State private var isError = false
@@ -23,7 +24,11 @@ struct AddExerciseView: View {
         NavigationView{
             VStack {
                 Form {
-                    LiftSelectionView()
+                    Picker("Lift", selection: $selectedLift) {
+                        ForEach(lifts) { lift in
+                            Text(lift.name ?? "").tag(lift as LiftModel?)
+                        }
+                    }
                     Section {
                         EditSetsView(updatedSets: $sets)
                     }
