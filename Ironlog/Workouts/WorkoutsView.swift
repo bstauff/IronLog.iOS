@@ -51,7 +51,7 @@ struct WorkoutsView: View {
                     Button("add") {
                         self.isShowingWorkoutSheet = true
                     }.sheet(isPresented: $isShowingWorkoutSheet) {
-                        AddWorkoutView(repo: self.workoutRepository, workouts: $workouts)
+                        AddWorkoutView()
                     }
                 }
             }
