@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct AddSetView: View {
+    @Environment(\.managedObjectContext) var viewContext
     
-    let onCreateSet: (_ exerciseSet: ExerciseSet) -> Void
+    let onCreateSet: (_ exerciseSet: ExerciseSetModel) -> Void
     
     @State var newReps: Int?
     @State var newWeight: Int?
@@ -54,8 +55,11 @@ struct AddSetView: View {
             self.errorMessage = "Reps and Sets must have a value"
             return
         }
-        
-        let newSet = ExerciseSet(reps: self.newReps!, weight: self.newWeight!)
+        let newSet = ExerciseSetModel(context: self.viewContext)
+        newSet.id = UUID()
+        newSet.isComplete = false
+        newSet.reps = Int64(self.newReps!)
+        newSet.weight = Int64(self.newWeight!)
         
         self.newReps = nil
         self.newWeight = nil

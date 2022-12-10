@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EditSetsView: View {
-    @Binding var updatedSets: [ExerciseSet]
+    @Binding var updatedSets: [ExerciseSetModel]
     
     var body: some View {
         List {
