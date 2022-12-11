@@ -15,10 +15,7 @@ struct ExerciseDetailsView: View {
     
     @State private var shouldShowEditSheet = false
     
-    @State private var updatedSets: [ExerciseSet] = []
-    @State private var updatedLift: Lift = Lift(name: "stub", trainingMax: 0)
-    
-    @ObservedObject var exercise: Exercise
+    @ObservedObject var exercise: ExerciseModel
     
     var body: some View {
         VStack {
@@ -30,7 +27,7 @@ struct ExerciseDetailsView: View {
                         Text("Weight")
                     }
                     List {
-                        ForEach($exercise.sets){ $exerciseSet in
+                        ForEach(exercise.exerciseSets?.allObjects as! [ExerciseSetModel]){ exerciseSet in
                             HStack {
                                 Text(String(exerciseSet.reps))
                                 Spacer()
@@ -42,35 +39,12 @@ struct ExerciseDetailsView: View {
             }
         }
         .sheet(isPresented: $shouldShowEditSheet) {
-            NavigationView {
-                EditExerciseView(
-                    updatedLift: $updatedLift,
-                    updatedSets: $updatedSets
-                )
-                .navigationTitle(exercise.lift.name)
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel") {
-                            shouldShowEditSheet = false
-                        }
-                    }
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button("Done") {
-                            shouldShowEditSheet = false
-                            self.exercise.sets = self.updatedSets
-                            self.exercise.lift = self.updatedLift
-                            self.updatedSets = []
-                            self.updatedLift = Lift(name: "stub", trainingMax: 0)
-                        }
-                    }
-                }
+            EditExerciseView(exercise: self.exercise) {
+                
             }
         }
-        .navigationTitle(exercise.lift.name)
         .toolbar {
             Button("Edit") {
-                self.updatedLift = exercise.lift
-                self.updatedSets = exercise.sets
                 self.shouldShowEditSheet = true
             }
         }
@@ -79,13 +53,35 @@ struct ExerciseDetailsView: View {
 
 struct ExerciseDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        let squat = Lift(name: "Squat", trainingMax: 315)
-        let sets = [
-            ExerciseSet(reps: 5, weight: 250)
-        ]
-        let exercise = Exercise(id: UUID(), sets: sets, lift: squat, isComplete: false)
-        return NavigationView {
-            ExerciseDetailsView(exercise: exercise)
-        }
+        let viewContext = PersistenceController.preview.container.viewContext
+        
+        let exercise = ExerciseModel(context: viewContext)
+        exercise.isComplete = false
+        
+        let lift = LiftModel(context: viewContext)
+        lift.name = "Squat"
+        lift.trainingMax = 315
+        lift.id = UUID()
+        
+        exercise.exerciseLift = lift
+        
+        let setA = ExerciseSetModel(context: viewContext)
+        setA.id = UUID()
+        setA.isComplete = false
+        setA.reps = 5
+        setA.weight = 315
+        
+        let setB = ExerciseSetModel(context: viewContext)
+        setB.id = UUID()
+        setB.isComplete = false
+        setB.reps = 5
+        setB.weight = 315
+        
+        let exerciseSets = [setA, setB]
+        
+        exercise.exerciseSets = NSSet(array: exerciseSets)
+        
+        return ExerciseDetailsView(exercise: exercise)
+            .environment(\.managedObjectContext, viewContext)
     }
 }
