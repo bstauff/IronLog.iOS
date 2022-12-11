@@ -13,7 +13,7 @@ struct AddExerciseView: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var lifts: FetchedResults<LiftModel>
     
     @State private var selectedLift: LiftModel?
-    @State private var sets: [ExerciseSet] = []
+    @State private var sets: [ExerciseSetModel] = []
     
     @State private var isError = false
     @State private var errorMessage = ""
@@ -65,6 +65,8 @@ struct AddExerciseView: View {
         }
         
         let newExercise = ExerciseModel(context: viewContext)
+        newExercise.addToExerciseSets(NSSet(array: self.sets))
+        newExercise.exerciseLift = self.selectedLift
         
         do {
             try viewContext.save()

@@ -61,6 +61,14 @@ struct AddSetView: View {
         newSet.reps = Int64(self.newReps!)
         newSet.weight = Int64(self.newWeight!)
         
+        do {
+            try viewContext.save()
+        } catch {
+            self.isError = true
+            self.errorMessage = "Failed to save new set"
+            return
+        }
+        
         self.newReps = nil
         self.newWeight = nil
         
@@ -76,7 +84,9 @@ struct AddSetView: View {
 
 struct AddSetView_Previews: PreviewProvider {
     static var previews: some View {
+        let viewContext = PersistenceController.preview.container.viewContext
         AddSetView{ exerciseSet in
         }
+        .environment(\.managedObjectContext, viewContext)
     }
 }

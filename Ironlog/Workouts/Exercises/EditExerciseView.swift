@@ -12,9 +12,9 @@ struct EditExerciseView: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var lifts: FetchedResults<LiftModel>
     
     @State var updatedLift: LiftModel?
-    @State var updatedSets: [ExerciseSetModel]
+    @State var updatedSets: [ExerciseSetModel] = []
     
-    @Binding var exercise: ExerciseModel
+    @ObservedObject var exercise: ExerciseModel
     
     var onExerciseEdited: () -> Void
     
@@ -33,23 +33,19 @@ struct EditExerciseView: View {
         }
         .onAppear {
             updatedLift = exercise.exerciseLift
-            updatedSets = exercise.exerciseSets
+            updatedSets = exercise.exerciseSets?.allObjects as! [ExerciseSetModel]
         }
     }
 }
 
 struct EditExerciseView_Previews: PreviewProvider {
     static var previews: some View {
-        let squat = Lift(name: "Squat", trainingMax: 315)
-        let sets = [
-            ExerciseSet(reps: 5, weight: 250)
-        ]
-        
         let viewContext = PersistenceController.preview.container.viewContext
         
+        let exercise = ExerciseModel(context: viewContext)
+        
         return NavigationView {
-            EditExerciseView(
-            ){
+            EditExerciseView(exercise: exercise) {
                 
             }
             .environment(\.managedObjectContext, viewContext)
