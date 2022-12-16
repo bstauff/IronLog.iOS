@@ -14,8 +14,7 @@ struct IronlogApp: App {
     var body: some Scene {
         WindowGroup {
             TabView {
-//                WorkoutsView(workoutRepo: repository, workouts: $workouts, lifts: $lifts)
-                    Text("Workouts here someday")
+                WorkoutsView()
                     .tabItem {
                         Label("Workouts", systemImage: "list.bullet.circle")
                     }
