@@ -27,6 +27,11 @@ struct PersistenceController {
         bench.name = "Bench"
         bench.trainingMax = 375
         bench.id = UUID()
+        
+        let workout = WorkoutModel(context: viewContext)
+        workout.id = UUID()
+        workout.date = Date()
+        workout.isComplete = false
             
         do {
             try viewContext.save()

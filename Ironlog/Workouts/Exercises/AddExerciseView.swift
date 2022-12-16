@@ -67,6 +67,8 @@ struct AddExerciseView: View {
         let newExercise = ExerciseModel(context: viewContext)
         newExercise.addToExerciseSets(NSOrderedSet(array: sets))
         newExercise.exerciseLift = self.selectedLift
+        newExercise.id = UUID()
+        newExercise.isComplete = false
         
         do {
             try viewContext.save()

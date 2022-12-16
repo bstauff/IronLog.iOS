@@ -21,7 +21,7 @@ struct AddLiftView: View {
         HStack {
             VStack {
                 Text("Lift Name")
-                TextField("Lift Name", text: $liftName, prompt: Text("lift name"))
+                TextField("Lift Name", text: $liftName, prompt: Text("Lift name"))
                     .textFieldStyle(.roundedBorder)
                 Text("Training Max")
                 TextField("Training Max", value: $trainingMax, format: .number)

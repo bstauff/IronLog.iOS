@@ -8,11 +8,8 @@
 import SwiftUI
 
 struct WorkoutsView: View {
-    @Environment(\.managedObjectContext)
-    var viewContext
-    
-    @FetchRequest(sortDescriptors:[SortDescriptor(\WorkoutModel.date)])
-    var workouts: FetchedResults<WorkoutModel>
+    @Environment(\.managedObjectContext) var viewContext
+    @FetchRequest(sortDescriptors:[SortDescriptor(\WorkoutModel.date)]) var workouts: FetchedResults<WorkoutModel>
     
     @State private var isShowingWorkoutSheet = false
     @State private var isError = false
@@ -59,7 +56,9 @@ struct WorkoutsView: View {
         do {
             for offset in offsets {
                 let workoutToDelete = self.workouts[offset]
+                self.viewContext.delete(workoutToDelete)
             }
+            try self.viewContext.save()
         } catch {
             isError = true
             errorString = "Failed to delete.  Please try again."
@@ -68,14 +67,10 @@ struct WorkoutsView: View {
 }
 
 
-struct CycleView_Previews: PreviewProvider {
+struct WorkoutsView_Previews: PreviewProvider {
     static var previews: some View {
-        let workoutA = Workout(date: Date())
-        let workoutB = Workout(date: Calendar.current.date(byAdding: .day, value: 1, to: Date())!)
-        let workouts = [workoutA, workoutB]
-        
-        let lift = Lift(name: "Squat", trainingMax: 350)
-        
-        return WorkoutsView()
+        let viewContext = PersistenceController.preview.container.viewContext
+        WorkoutsView()
+            .environment(\.managedObjectContext, viewContext)
     }
 }

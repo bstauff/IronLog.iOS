@@ -25,7 +25,6 @@ struct LiftsView: View {
                     }
                 }
             }
-//                Image(systemName: "plus.circle.fill")
             .navigationTitle("Lift Catalog")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
