@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct WorkoutsView: View {
-    @Binding var workouts: [Workout]
-    @Binding var lifts: [Lift]
+    @Environment(\.managedObjectContext)
+    var viewContext
+    
+    @FetchRequest(sortDescriptors:[SortDescriptor(\WorkoutModel.date)])
+    var workouts: FetchedResults<WorkoutModel>
     
     @State private var isShowingWorkoutSheet = false
     @State private var isError = false
@@ -19,7 +22,7 @@ struct WorkoutsView: View {
         NavigationView {
             VStack {
                 List {
-                    ForEach($workouts){ $workout in
+                    ForEach(workouts){ workout in
                         NavigationLink(
                             getWorkoutDate(workout: workout),
                             destination:
@@ -43,18 +46,20 @@ struct WorkoutsView: View {
             }
         }
     }
-    func getWorkoutDate(workout: Workout) -> String{
+    func getWorkoutDate(workout: WorkoutModel?) -> String{
+        guard workout?.date != nil else {
+            return ""
+        }
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/YY"
-        return dateFormatter.string(from: workout.date)
+        return dateFormatter.string(from: workout!.date!)
     }
     func deleteWorkouts(offsets: IndexSet) {
         do {
             for offset in offsets {
                 let workoutToDelete = self.workouts[offset]
             }
-            
-            self.workouts.remove(atOffsets: offsets)
         } catch {
             isError = true
             errorString = "Failed to delete.  Please try again."
@@ -70,8 +75,7 @@ struct CycleView_Previews: PreviewProvider {
         let workouts = [workoutA, workoutB]
         
         let lift = Lift(name: "Squat", trainingMax: 350)
-        let workoutRepo = CoreDataRepository()
         
-        return WorkoutsView(workoutRepo: workoutRepo, workouts: .constant(workouts), lifts: .constant([lift]))
+        return WorkoutsView()
     }
 }

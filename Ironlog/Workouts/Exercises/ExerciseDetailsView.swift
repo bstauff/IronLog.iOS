@@ -27,7 +27,7 @@ struct ExerciseDetailsView: View {
                         Text("Weight")
                     }
                     List {
-                        ForEach(exercise.exerciseSets?.allObjects as! [ExerciseSetModel]){ exerciseSet in
+                        ForEach(exercise.exerciseSets?.array as! [ExerciseSetModel]){ exerciseSet in
                             HStack {
                                 Text(String(exerciseSet.reps))
                                 Spacer()
@@ -79,7 +79,7 @@ struct ExerciseDetailsView_Previews: PreviewProvider {
         
         let exerciseSets = [setA, setB]
         
-        exercise.exerciseSets = NSSet(array: exerciseSets)
+        exercise.exerciseSets = NSOrderedSet(array: exerciseSets)
         
         return ExerciseDetailsView(exercise: exercise)
             .environment(\.managedObjectContext, viewContext)
