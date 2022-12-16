@@ -12,6 +12,8 @@ struct LiftsView: View {
     @Environment(\.managedObjectContext) var viewContext
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var lifts: FetchedResults<LiftModel>
     
+    @State private var isShowingAddLiftSheet = false
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -23,7 +25,17 @@ struct LiftsView: View {
                     }
                 }
             }
+//                Image(systemName: "plus.circle.fill")
             .navigationTitle("Lift Catalog")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {() -> Void in self.isShowingAddLiftSheet = true}) {
+                        Image(systemName: "plus.circle.fill")
+                    }.sheet(isPresented: $isShowingAddLiftSheet) {
+                        AddLiftView()
+                    }
+                }
+            }
         }
     }
 }
