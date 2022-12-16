@@ -12,14 +12,6 @@ struct ExerciseCompletionRowView: View {
     
     @ObservedObject var workout: Workout
     
-    private var repository: AppRepository
-    
-    init(workout: Workout, exercise: Exercise, repository: AppRepository) {
-        self.workout = workout
-        self.exercise = exercise
-        self.repository = repository
-    }
-    
     var body: some View {
         VStack {
             HStack {
@@ -36,7 +28,6 @@ struct ExerciseCompletionRowView: View {
                     }
                         .toggleStyle(.button)
                         .onChange(of: exerciseset.isComplete) { value in
-                            try? repository.saveWorkout(workout: self.workout)
                         }
                     Spacer()
                     Text(String(exerciseset.reps))
@@ -57,7 +48,6 @@ struct ExerciseCompletionRowView_Previews: PreviewProvider {
         )
 
         let workoutA = Workout(date: Date())
-        let workoutRepo = CoreDataRepository()
         
         squatMain.lift = squatLift
         squatMain.sets.append(
@@ -69,6 +59,6 @@ struct ExerciseCompletionRowView_Previews: PreviewProvider {
         squatMain.sets.append(
             ExerciseSet(reps: 1, weight: 300)
         )
-        return ExerciseCompletionRowView(workout: workoutA, exercise: squatMain, repository: workoutRepo)
+        return ExerciseCompletionRowView(exercise: squatMain, workout: workoutA)
     }
 }

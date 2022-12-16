@@ -65,7 +65,7 @@ struct AddExerciseView: View {
         }
         
         let newExercise = ExerciseModel(context: viewContext)
-        newExercise.addToExerciseSets(NSSet(array: self.sets))
+        newExercise.addToExerciseSets(NSOrderedSet(array: sets))
         newExercise.exerciseLift = self.selectedLift
         
         do {

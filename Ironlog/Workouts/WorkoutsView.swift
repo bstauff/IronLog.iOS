@@ -8,23 +8,12 @@
 import SwiftUI
 
 struct WorkoutsView: View {
-    @Binding private var workouts: [Workout]
-    @Binding private var lifts: [Lift]
+    @Binding var workouts: [Workout]
+    @Binding var lifts: [Lift]
     
     @State private var isShowingWorkoutSheet = false
     @State private var isError = false
     @State private var errorString = ""
-    
-    var workoutRepository: AppRepository
-    
-    init(
-        workoutRepo: AppRepository,
-        workouts: Binding<[Workout]>,
-        lifts: Binding<[Lift]>) {
-            self.workoutRepository = workoutRepo
-            self._workouts = workouts
-            self._lifts = lifts
-    }
     
     var body: some View {
         NavigationView {
@@ -34,10 +23,7 @@ struct WorkoutsView: View {
                         NavigationLink(
                             getWorkoutDate(workout: workout),
                             destination:
-                                WorkoutDetailsView(
-                                    repo: workoutRepository,
-                                    workout: workout,
-                                    lifts: $lifts))
+                                WorkoutDetailsView(workout: workout))
                     }
                     .onDelete(perform: deleteWorkouts)
                 }
@@ -66,8 +52,6 @@ struct WorkoutsView: View {
         do {
             for offset in offsets {
                 let workoutToDelete = self.workouts[offset]
-                
-                try workoutRepository.deleteWorkout(workoutId: workoutToDelete.id)
             }
             
             self.workouts.remove(atOffsets: offsets)

@@ -9,12 +9,7 @@ import SwiftUI
 
 struct WorkoutCompletionView: View {
     @ObservedObject var workout: Workout
-    private var appRepository: AppRepository
     
-    init(workout: Workout, appRepository: AppRepository) {
-        self.workout = workout
-        self.appRepository = appRepository
-    }
     var body: some View {
         HStack {
             Spacer()
@@ -23,7 +18,6 @@ struct WorkoutCompletionView: View {
             }
                 .toggleStyle(.button)
                 .onChange(of: workout.isComplete) { value in
-                    try? appRepository.saveWorkout(workout: self.workout)
                 }
             Spacer()
         }
@@ -73,8 +67,6 @@ struct WorkoutCompletionView_Previews: PreviewProvider {
         
         workout.exercises.append(squatSupplemental)
         
-        
-        let workoutRepo = CoreDataRepository()
-        return WorkoutCompletionView(workout: workout, appRepository: workoutRepo)
+        return WorkoutCompletionView(workout: workout)
     }
 }

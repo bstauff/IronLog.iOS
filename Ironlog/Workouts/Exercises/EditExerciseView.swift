@@ -33,7 +33,7 @@ struct EditExerciseView: View {
         }
         .onAppear {
             updatedLift = exercise.exerciseLift
-            updatedSets = exercise.exerciseSets?.allObjects as! [ExerciseSetModel]
+            updatedSets = exercise.exerciseSets?.array as! [ExerciseSetModel]
         }
     }
 }

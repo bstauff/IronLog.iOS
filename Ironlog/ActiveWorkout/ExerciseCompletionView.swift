@@ -10,20 +10,12 @@ import SwiftUI
 struct ExerciseCompletionView: View {
     @ObservedObject var workout: Workout
     
-    private var repository: AppRepository
-    
-    init(repository: AppRepository, workout: Workout) {
-        self.workout = workout
-        self.repository = repository
-    }
-    
     var body: some View {
         ForEach($workout.exercises){$exercise in
             Section {
                 ExerciseCompletionRowView(
-                    workout: self.workout,
                     exercise: exercise,
-                    repository: self.repository)
+                    workout: self.workout)
             }
         }
     }
@@ -72,9 +64,6 @@ struct ExerciseCompletionView_Previews: PreviewProvider {
         
         workout.exercises.append(squatSupplemental)
         
-        
-        let workoutRepo = CoreDataRepository()
-        
-        return ExerciseCompletionRowView(workout: workout, exercise: squatMain, repository: workoutRepo)
+        return ExerciseCompletionRowView(exercise: squatMain, workout: workout)
     }
 }

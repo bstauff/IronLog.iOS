@@ -8,26 +8,19 @@
 import SwiftUI
 
 struct ActiveWorkoutView: View {
-    @Binding private var workouts: [Workout]
+    @Binding var workouts: [Workout]
     
     @State private var isError = false
     @State private var errorMessage = ""
     @State private var selectedWorkout: Workout? = nil
-    
-    private var repository: AppRepository
-    
-    init(workouts: Binding<[Workout]>, repository: AppRepository) {
-        self._workouts = workouts
-        self.repository = repository
-    }
     
     var body: some View {
         NavigationView {
             List {
                 WorkoutSelection(workouts: $workouts, selectedWorkout: $selectedWorkout)
                 if(selectedWorkout != nil) {
-                    ExerciseCompletionView(repository: repository, workout: selectedWorkout!)
-                    WorkoutCompletionView(workout: selectedWorkout!, appRepository: repository)
+                    ExerciseCompletionView(workout: selectedWorkout!)
+                    WorkoutCompletionView(workout: selectedWorkout!)
                 } else {
                     Text("No workout selected")
                 }
@@ -90,8 +83,6 @@ struct ActiveWorkoutView_Previews: PreviewProvider {
         
         workout.exercises.append(squatSupplemental)
         
-        
-        let workoutRepo = CoreDataRepository()
-        return ActiveWorkoutView(workouts: .constant([workout]), repository: workoutRepo)
+        return ActiveWorkoutView(workouts: .constant([workout]))
     }
 }

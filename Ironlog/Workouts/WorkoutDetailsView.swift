@@ -16,11 +16,7 @@ struct WorkoutDetailsView: View {
     @State private var isShowingExerciseSheet = false
     
     var exerciseArray: [ExerciseModel] {
-        let exerciseSet = workout.workoutExercises as? Set<ExerciseModel> ?? []
-        
-        return exerciseSet.sorted {
-            $0.exerciseLift?.name ?? "" < $1.exerciseLift?.name ?? ""
-        }
+        return workout.workoutExercises?.array as? [ExerciseModel] ?? []
     }
     
     var body: some View {
@@ -63,7 +59,7 @@ struct WorkoutDetailsView: View {
     func convertDateToString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/YY"
-        return dateFormatter.string(from: self.workout.date)
+        return dateFormatter.string(from: self.workout.date!)
     }
 }
 
@@ -77,17 +73,12 @@ struct ExerciseRowView: View {
 
 struct WorkoutDetailsView_Previews: PreviewProvider {
     static var previews: some View {
+        let viewContext = PersistenceController.preview.container.viewContext
+        let stuff = WorkoutModel.fetchRequest()
         
-        let appRepo = CoreDataRepository()
-        let squatLift = Lift(name: "Squat", trainingMax: 315)
-        let lifts = [squatLift]
-        try? appRepo.addLift(lift: squatLift)
-        let workout = Workout(date: Date())
-        let squatExercise = Exercise()
-        squatExercise.lift = squatLift
-        workout.exercises = [squatExercise]
+        let moreStuff = try? viewContext.fetch(stuff)
         
-        return WorkoutDetailsView(repo: appRepo, workout: workout, lifts: .constant(lifts))
-            .previewDevice("iPhone 13 Pro")
+        return WorkoutDetailsView(workout: (moreStuff?.first!)!)
+            .environment(\.managedObjectContext, viewContext)
     }
 }
