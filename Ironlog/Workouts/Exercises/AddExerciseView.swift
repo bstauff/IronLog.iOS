@@ -65,7 +65,8 @@ struct AddExerciseView: View {
         }
         
         let newExercise = ExerciseModel(context: viewContext)
-        newExercise.addToExerciseSets(NSOrderedSet(array: sets))
+        let orderedSet = NSOrderedSet(array:sets)
+        newExercise.addToExerciseSets(orderedSet)
         newExercise.exerciseLift = self.selectedLift
         newExercise.id = UUID()
         newExercise.isComplete = false

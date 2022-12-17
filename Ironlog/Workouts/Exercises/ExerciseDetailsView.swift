@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ExerciseDetailsView: View {
     @Environment(\.managedObjectContext) var viewContext
+    @FetchRequest(sortDescriptors:[SortDescriptor(\ExerciseSetModel.id)])
+    var allExerciseSets: FetchedResults<ExerciseSetModel>
     
     @State private var isError = false
     @State private var errorMessage = ""
@@ -18,7 +20,8 @@ struct ExerciseDetailsView: View {
     @ObservedObject var exercise: ExerciseModel
     
     var body: some View {
-        VStack {
+        printSets()
+        return VStack {
             Form {
                 Section(header: Text("Sets")) {
                     HStack {
@@ -48,6 +51,11 @@ struct ExerciseDetailsView: View {
                 self.shouldShowEditSheet = true
             }
         }
+    }
+    
+    private func printSets() -> Void {
+        print("total sets in store: \(self.allExerciseSets.count)")
+        print("exercise model sets: \(self.exercise.exerciseSets?.count)")
     }
 }
 

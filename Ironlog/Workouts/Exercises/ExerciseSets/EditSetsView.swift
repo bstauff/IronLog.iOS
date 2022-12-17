@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EditSetsView: View {
     @Binding var updatedSets: [ExerciseSetModel]
+    @Environment(\.managedObjectContext) var viewContext
     
     var body: some View {
         List {
@@ -31,8 +32,8 @@ struct EditSetsView: View {
             .onDelete{ indexSet in
                 updatedSets.remove(atOffsets: indexSet)
             }
-            AddSetView { exerciseSet in
-                updatedSets.append(exerciseSet)
+            AddSetView { newSet in
+                updatedSets.append(newSet)
             }
         }
     }

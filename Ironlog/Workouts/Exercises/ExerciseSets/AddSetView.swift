@@ -9,8 +9,7 @@ import SwiftUI
 
 struct AddSetView: View {
     @Environment(\.managedObjectContext) var viewContext
-    
-    let onCreateSet: (_ exerciseSet: ExerciseSetModel) -> Void
+    let onCreateSet: (_ newSet: ExerciseSetModel) -> Void
     
     @State var newReps: Int?
     @State var newWeight: Int?
@@ -55,24 +54,17 @@ struct AddSetView: View {
             self.errorMessage = "Reps and Sets must have a value"
             return
         }
-        let newSet = ExerciseSetModel(context: self.viewContext)
-        newSet.id = UUID()
-        newSet.isComplete = false
-        newSet.reps = Int64(self.newReps!)
-        newSet.weight = Int64(self.newWeight!)
         
-        do {
-            try viewContext.save()
-        } catch {
-            self.isError = true
-            self.errorMessage = "Failed to save new set"
-            return
-        }
+        let exerciseSetModel = ExerciseSetModel(context: viewContext)
+        exerciseSetModel.id = UUID()
+        exerciseSetModel.isComplete = false
+        exerciseSetModel.weight = Int64(newWeight!)
+        exerciseSetModel.reps = Int64(newReps!)
+        
+        self.onCreateSet(exerciseSetModel)
         
         self.newReps = nil
         self.newWeight = nil
-        
-        self.onCreateSet(newSet)
     }
     
     private func areNewInputsInvalid() -> Bool {
@@ -85,7 +77,7 @@ struct AddSetView: View {
 struct AddSetView_Previews: PreviewProvider {
     static var previews: some View {
         let viewContext = PersistenceController.preview.container.viewContext
-        AddSetView{ exerciseSet in
+        AddSetView{ exerciseSetModel in
         }
         .environment(\.managedObjectContext, viewContext)
     }
