@@ -45,6 +45,7 @@ struct WorkoutDetailsView: View {
                     for index in indexSet {
                         let exerciseToDelete = exerciseArray[index]
                         workout.removeFromWorkoutExercises(exerciseToDelete)
+                        self.viewContext.delete(exerciseToDelete)
                     }
                     try? self.viewContext.save()
                 }
