@@ -48,6 +48,10 @@ struct AddExerciseView: View {
                     }
                 }
             }
+        }.onAppear {
+            if self.selectedLift == nil {
+                self.selectedLift = lifts.first
+            }
         }
     }
         
