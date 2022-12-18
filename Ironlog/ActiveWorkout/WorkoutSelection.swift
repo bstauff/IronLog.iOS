@@ -8,25 +8,39 @@
 import SwiftUI
 
 struct WorkoutSelection: View {
-    @Binding var workouts: [Workout]
-    @Binding var selectedWorkout: Workout?
+    @Environment(\.managedObjectContext) var viewContext
+    @FetchRequest(sortDescriptors:[SortDescriptor(\WorkoutModel.date)]) var workouts: FetchedResults<WorkoutModel>
+    
+    var onWorkoutSelected: (_ selectedWorkout: WorkoutModel?) -> Void
+    
+    @State var selectedWorkout: WorkoutModel? = nil
+    
     var body: some View {
         Picker("Workout", selection: $selectedWorkout) {
-            ForEach($workouts, id: \.self) { $workout in
-                Text(getWorkoutDate(workout: workout)).tag(workout as Workout?)
+            ForEach(workouts) { workout in
+                Text(getWorkoutDate(workout: workout)).tag(workout as WorkoutModel?)
             }
         }
+        .onChange(of: selectedWorkout) { updatedWorkout in
+            onWorkoutSelected(updatedWorkout)
+        }
     }
-    func getWorkoutDate(workout: Workout) -> String{
+    func getWorkoutDate(workout: WorkoutModel) -> String{
+        guard workout.date != nil else  {
+            return ""
+        }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/YY"
-        return dateFormatter.string(from: workout.date)
+        return dateFormatter.string(from: workout.date!)
     }
 }
 
 struct WorkoutSelection_Previews: PreviewProvider {
     static var previews: some View {
-        var selectedWorkout: Workout = Workout(date: Date())
-        WorkoutSelection(workouts: .constant([Workout(date: Date())]), selectedWorkout: .constant(selectedWorkout))
+        let viewContext = PersistenceController.preview.container.viewContext
+        WorkoutSelection() { workoutSelected in
+            
+        }
+            .environment(\.managedObjectContext, viewContext)
     }
 }

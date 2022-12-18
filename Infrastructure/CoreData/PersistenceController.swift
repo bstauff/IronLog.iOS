@@ -32,6 +32,11 @@ struct PersistenceController {
         workout.id = UUID()
         workout.date = Date()
         workout.isComplete = false
+        
+        let anotherWorkout = WorkoutModel(context: viewContext)
+        anotherWorkout.id = UUID()
+        anotherWorkout.date = Calendar.current.date(byAdding:.day, value: 5, to: Date())
+        anotherWorkout.isComplete = false
             
         do {
             try viewContext.save()

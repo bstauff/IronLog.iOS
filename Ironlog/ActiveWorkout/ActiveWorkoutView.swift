@@ -14,12 +14,14 @@ struct ActiveWorkoutView: View {
     @State private var isError = false
     @State private var errorMessage = ""
     
-    @State private var selectedWorkout: Workout? = nil
+    @State private var selectedWorkout: WorkoutModel? = nil
     
     var body: some View {
         NavigationView {
             List {
-//                WorkoutSelection(workouts: $workouts, selectedWorkout: $selectedWorkout)
+                WorkoutSelection() { updatedWorkoutSelection in
+                    selectedWorkout = updatedWorkoutSelection
+                }
                 if(selectedWorkout != nil) {
 //                    ExerciseCompletionView(workout: selectedWorkout!)
 //                    WorkoutCompletionView(workout: selectedWorkout!)
