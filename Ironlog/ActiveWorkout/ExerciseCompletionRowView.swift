@@ -8,31 +8,22 @@
 import SwiftUI
 
 struct ExerciseCompletionRowView: View {
-    @ObservedObject var exercise: ExerciseModel
+    @Environment(\.managedObjectContext) var viewContext
+    @ObservedObject var exerciseSet: ExerciseSetModel
     
     var body: some View {
-        VStack {
-            HStack {
-                Text("Done").font(.headline)
-                Spacer()
-                Text("reps")
-                Spacer()
-                Text("weight")
+        HStack {
+            Toggle(isOn: $exerciseSet.isComplete) {
+                Text("done")
             }
-//            ForEach(exercise.exerciseSets){ exerciseset in
-//                HStack {
-//                    Toggle(isOn: exerciseset.isComplete) {
-//                       Text("done")
-//                    }
-//                        .toggleStyle(.button)
-//                        .onChange(of: exerciseset.isComplete) { value in
-//                        }
-//                    Spacer()
-//                    Text(String(exerciseset.reps))
-//                    Spacer()
-//                    Text(String(exerciseset.weight))
-//                }
-//            }
+            .onChange(of: exerciseSet.isComplete) { complete in
+//                try! viewContext.save()
+            }
+            .toggleStyle(.button)
+            Spacer()
+            Text(String(exerciseSet.reps))
+            Spacer()
+            Text(String(exerciseSet.weight))
         }
     }
 }
@@ -41,6 +32,6 @@ struct ExerciseCompletionRowView_Previews: PreviewProvider {
     static var previews: some View {
         let viewContext = PersistenceController.preview.container.viewContext
         let exercise = try? viewContext.fetch(ExerciseModel.fetchRequest()).first
-        return ExerciseCompletionRowView(exercise: exercise!)
+        return ExerciseCompletionRowView(exerciseSet: exercise!.exerciseSets?.firstObject! as! ExerciseSetModel)
     }
 }
