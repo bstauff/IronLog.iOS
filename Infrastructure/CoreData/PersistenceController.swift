@@ -38,6 +38,32 @@ struct PersistenceController {
         anotherWorkout.date = Calendar.current.date(byAdding:.day, value: 5, to: Date())
         anotherWorkout.isComplete = false
             
+        let workoutSet1 = ExerciseSetModel(context: viewContext)
+        workoutSet1.isComplete = false
+        workoutSet1.id = UUID()
+        workoutSet1.weight = 250
+        workoutSet1.reps = 5
+        
+        let workoutSet2 = ExerciseSetModel(context: viewContext)
+        workoutSet2.isComplete = false
+        workoutSet2.id = UUID()
+        workoutSet2.weight = 275
+        workoutSet2.reps = 3
+        
+        let workoutSet3 = ExerciseSetModel(context: viewContext)
+        workoutSet3.isComplete = false
+        workoutSet3.id = UUID()
+        workoutSet3.weight = 275
+        workoutSet3.reps = 3
+        
+        let workoutSets = [workoutSet1, workoutSet2, workoutSet3]
+        
+        let workoutExercise = ExerciseModel(context: viewContext)
+        workoutExercise.id = UUID()
+        workoutExercise.isComplete = false
+        workoutExercise.exerciseLift = bench
+        workoutExercise.exerciseSets = NSOrderedSet(array: workoutSets)
+            
         do {
             try viewContext.save()
         } catch {
