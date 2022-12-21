@@ -8,19 +8,32 @@
 import SwiftUI
 
 struct ExerciseCompletionView: View {
+    @Environment(\.managedObjectContext) var viewContext
+    
+    @ObservedObject var exercise: ExerciseModel
+    
     var body: some View {
-        Text("bananas")
-//        ForEach($workout.exercises){$exercise in
-//            Section {
-//                ExerciseCompletionRowView(
-//                    exercise: exercise)
-//            }
-//        }
+        VStack {
+            Text(exercise.exerciseLift?.name ?? "")
+                .font(.headline)
+            ForEach(getSets()){ exerciseSet in
+                ExerciseCompletionRowView(exerciseSet: exerciseSet)
+            }
+        }
+    }
+    
+    private func getSets() -> [ExerciseSetModel] {
+        let exerciseSets = exercise.exerciseSets?.array as? [ExerciseSetModel]
+        
+        return exerciseSets ?? []
     }
 }
 
 struct ExerciseCompletionView_Previews: PreviewProvider {
     static var previews: some View {
-        ExerciseCompletionView()
+        let viewContext = PersistenceController.preview.container.viewContext
+        let exercise = try! viewContext.fetch(ExerciseModel.fetchRequest()).first!
+        ExerciseCompletionView(exercise: exercise)
+            .environment(\.managedObjectContext, viewContext)
     }
 }
