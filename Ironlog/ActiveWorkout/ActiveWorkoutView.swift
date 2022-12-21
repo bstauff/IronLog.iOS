@@ -23,8 +23,7 @@ struct ActiveWorkoutView: View {
                     selectedWorkout = updatedWorkoutSelection
                 }
                 if(selectedWorkout != nil) {
-//                    ExerciseCompletionView(workout: selectedWorkout!)
-//                    WorkoutCompletionView(workout: selectedWorkout!)
+                    WorkoutCompletionView(workout: selectedWorkout!)
                 } else {
                     Text("No workout selected")
                 }

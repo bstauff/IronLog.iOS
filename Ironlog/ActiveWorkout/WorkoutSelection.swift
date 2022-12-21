@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WorkoutSelection: View {
     @Environment(\.managedObjectContext) var viewContext
-    @FetchRequest(sortDescriptors:[SortDescriptor(\WorkoutModel.date)]) var workouts: FetchedResults<WorkoutModel>
+    @FetchRequest(sortDescriptors:[SortDescriptor(\WorkoutModel.date, order: .reverse)]) var workouts: FetchedResults<WorkoutModel>
     
     var onWorkoutSelected: (_ selectedWorkout: WorkoutModel?) -> Void
     
@@ -23,6 +23,9 @@ struct WorkoutSelection: View {
         }
         .onChange(of: selectedWorkout) { updatedWorkout in
             onWorkoutSelected(updatedWorkout)
+        }
+        .onAppear {
+            self.selectedWorkout = workouts.first
         }
     }
     func getWorkoutDate(workout: WorkoutModel) -> String{
