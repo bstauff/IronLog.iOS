@@ -11,13 +11,21 @@ struct ExerciseCompletionRowView: View {
     @Environment(\.managedObjectContext) var viewContext
     @ObservedObject var exerciseSet: ExerciseSetModel
     
+    @State var errorMessage: String = ""
+    @State var isError: Bool = false
+    
     var body: some View {
         HStack {
             Toggle(isOn: $exerciseSet.isComplete) {
                 Text("done")
             }
             .onChange(of: exerciseSet.isComplete) { complete in
-//                try! viewContext.save()
+                do {
+                    try viewContext.save()
+                } catch {
+                    self.isError = true
+                    self.errorMessage = "failed to update set status"
+                }
             }
             .toggleStyle(.button)
             Spacer()
@@ -25,6 +33,12 @@ struct ExerciseCompletionRowView: View {
             Spacer()
             Text(String(exerciseSet.weight))
         }
+        .alert(isPresented: $isError, content: {
+            Alert(title: Text("Oops"), message: Text(self.errorMessage), dismissButton: .default(Text("OK")))
+        })
+        
+            
+        
     }
 }
 
