@@ -8,65 +8,39 @@
 import SwiftUI
 
 struct WorkoutCompletionView: View {
-    @ObservedObject var workout: Workout
+    @Environment(\.managedObjectContext) var viewContext
+    
+    @ObservedObject var workout: WorkoutModel
     
     var body: some View {
-        HStack {
-            Spacer()
-            Toggle(isOn: $workout.isComplete) {
-                Text("Workout Complete")
+        VStack {
+            ForEach(getExercises()) { exercise in
+                ExerciseCompletionView(exercise: exercise)
             }
-                .toggleStyle(.button)
-                .onChange(of: workout.isComplete) { value in
+            HStack {
+                Spacer()
+                Toggle(isOn: $workout.isComplete) {
+                    Text("Workout Complete")
                 }
-            Spacer()
+                    .toggleStyle(.button)
+                    .onChange(of: workout.isComplete) { value in
+                    }
+                Spacer()
+            }
         }
+    }
+    
+    private func getExercises() -> [ExerciseModel] {
+        let exercises = self.workout.workoutExercises?.array as? [ExerciseModel]
+        return exercises ?? []
     }
 }
 
 struct WorkoutCompletionView_Previews: PreviewProvider {
     static var previews: some View {
-        
-        let workout = Workout(date: Date())
-        let squatMain = Exercise()
-        let squatLift = Lift(
-            name: "squat",
-            trainingMax: 315
-        )
-
-        squatMain.lift = squatLift
-        squatMain.sets.append(
-            ExerciseSet(reps: 5, weight: 250)
-        )
-        squatMain.sets.append(
-            ExerciseSet(reps: 3, weight: 275)
-        )
-        squatMain.sets.append(
-            ExerciseSet(reps: 1, weight: 300)
-        )
-        
-        workout.exercises.append(squatMain)
-        
-        let squatSupplemental = Exercise()
-        squatSupplemental.sets.append(
-            ExerciseSet(reps: 5, weight: 250)
-        )
-        squatSupplemental.sets.append(
-            ExerciseSet(reps: 5, weight: 250)
-        )
-        squatSupplemental.sets.append(
-            ExerciseSet(reps: 5, weight: 250)
-        )
-        squatSupplemental.sets.append(
-            ExerciseSet(reps: 5, weight: 250)
-        )
-        squatSupplemental.sets.append(
-            ExerciseSet(reps: 5, weight: 250)
-        )
-        squatSupplemental.lift = squatLift
-        
-        workout.exercises.append(squatSupplemental)
-        
+        let viewContext = PersistenceController.preview.container.viewContext
+        let workout = try! viewContext.fetch(WorkoutModel.fetchRequest()).first!
         return WorkoutCompletionView(workout: workout)
+            .environment(\.managedObjectContext, viewContext)
     }
 }

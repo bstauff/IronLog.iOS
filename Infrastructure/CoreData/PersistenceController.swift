@@ -63,6 +63,9 @@ struct PersistenceController {
         workoutExercise.isComplete = false
         workoutExercise.exerciseLift = bench
         workoutExercise.exerciseSets = NSOrderedSet(array: workoutSets)
+        
+        workout.workoutExercises = [workoutExercise]
+        anotherWorkout.workoutExercises = [workoutExercise]
             
         do {
             try viewContext.save()
