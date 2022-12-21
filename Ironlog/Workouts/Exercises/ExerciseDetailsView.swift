@@ -20,7 +20,6 @@ struct ExerciseDetailsView: View {
     @ObservedObject var exercise: ExerciseModel
     
     var body: some View {
-        printSets()
         return VStack {
             Form {
                 Section(header: Text("Sets")) {
@@ -51,11 +50,6 @@ struct ExerciseDetailsView: View {
                 self.shouldShowEditSheet = true
             }
         }
-    }
-    
-    private func printSets() -> Void {
-        print("total sets in store: \(self.allExerciseSets.count)")
-        print("exercise model sets: \(self.exercise.exerciseSets?.count)")
     }
 }
 
