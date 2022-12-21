@@ -8,67 +8,44 @@
 import SwiftUI
 
 struct ExerciseCompletionRowView: View {
-    @ObservedObject var exercise: Exercise
+    @Environment(\.managedObjectContext) var viewContext
+    @ObservedObject var exerciseSet: ExerciseSetModel
     
-    @ObservedObject var workout: Workout
-    
-    private var repository: AppRepository
-    
-    init(workout: Workout, exercise: Exercise, repository: AppRepository) {
-        self.workout = workout
-        self.exercise = exercise
-        self.repository = repository
-    }
+    @State var errorMessage: String = ""
+    @State var isError: Bool = false
     
     var body: some View {
-        VStack {
-            HStack {
-                Text(exercise.lift.name).font(.headline)
-                Spacer()
-                Text("reps")
-                Spacer()
-                Text("weight")
+        HStack {
+            Toggle(isOn: $exerciseSet.isComplete) {
+                Text("done")
             }
-            ForEach($exercise.sets){ $exerciseset in
-                HStack {
-                    Toggle(isOn: $exerciseset.isComplete) {
-                       Text("done")
-                    }
-                        .toggleStyle(.button)
-                        .onChange(of: exerciseset.isComplete) { value in
-                            try? repository.saveWorkout(workout: self.workout)
-                        }
-                    Spacer()
-                    Text(String(exerciseset.reps))
-                    Spacer()
-                    Text(String(exerciseset.weight))
+            .onChange(of: exerciseSet.isComplete) { complete in
+                do {
+                    try viewContext.save()
+                } catch {
+                    self.isError = true
+                    self.errorMessage = "failed to update set status"
                 }
             }
+            .toggleStyle(.button)
+            Spacer()
+            Text(String(exerciseSet.reps))
+            Spacer()
+            Text(String(exerciseSet.weight))
         }
+        .alert(isPresented: $isError, content: {
+            Alert(title: Text("Oops"), message: Text(self.errorMessage), dismissButton: .default(Text("OK")))
+        })
+        
+            
+        
     }
 }
 
 struct ExerciseCompletionRowView_Previews: PreviewProvider {
     static var previews: some View {
-        let squatMain = Exercise()
-        let squatLift = Lift(
-            name: "squat",
-            trainingMax: 315
-        )
-
-        let workoutA = Workout(date: Date())
-        let workoutRepo = CoreDataRepository()
-        
-        squatMain.lift = squatLift
-        squatMain.sets.append(
-            ExerciseSet(reps: 5, weight: 250)
-        )
-        squatMain.sets.append(
-            ExerciseSet(reps: 3, weight: 275)
-        )
-        squatMain.sets.append(
-            ExerciseSet(reps: 1, weight: 300)
-        )
-        return ExerciseCompletionRowView(workout: workoutA, exercise: squatMain, repository: workoutRepo)
+        let viewContext = PersistenceController.preview.container.viewContext
+        let exercise = try? viewContext.fetch(ExerciseModel.fetchRequest()).first
+        return ExerciseCompletionRowView(exerciseSet: exercise!.exerciseSets?.firstObject! as! ExerciseSetModel)
     }
 }

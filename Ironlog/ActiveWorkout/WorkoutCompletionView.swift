@@ -8,73 +8,72 @@
 import SwiftUI
 
 struct WorkoutCompletionView: View {
-    @ObservedObject var workout: Workout
-    private var appRepository: AppRepository
+    @Environment(\.managedObjectContext) var viewContext
     
-    init(workout: Workout, appRepository: AppRepository) {
-        self.workout = workout
-        self.appRepository = appRepository
-    }
+    @ObservedObject var workout: WorkoutModel
+    
+    @State private var errorMessage = ""
+    @State private var isError = false
+    
     var body: some View {
-        HStack {
-            Spacer()
-            Toggle(isOn: $workout.isComplete) {
-                Text("Workout Complete")
+        VStack {
+            ForEach(getExercises()) { exercise in
+                ExerciseCompletionView(exercise: exercise)
             }
-                .toggleStyle(.button)
-                .onChange(of: workout.isComplete) { value in
-                    try? appRepository.saveWorkout(workout: self.workout)
+            HStack {
+                Spacer()
+                Toggle(isOn: $workout.isComplete) {
+                    Text("Workout Complete")
                 }
-            Spacer()
+                    .toggleStyle(.button)
+                    .onChange(of: workout.isComplete) { value in
+                        do {
+                            try self.viewContext.save()
+                        } catch {
+                            self.isError = true
+                            self.errorMessage = "failed to save workout"
+                        }
+                    }
+                Spacer()
+            }
         }
+        .navigationTitle(Text(getFormattedDate()))
+        .alert(
+            "Oops",
+            isPresented: $isError,
+            presenting: self.workout,
+            actions: {workout in Button("OK"){}}) { workout in
+                Text(errorMessage)
+        }
+    }
+    
+    private func getFormattedDate() -> String {
+        guard self.workout.date != nil else {
+           return ""
+        }
+        
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.locale = Locale(identifier: "en_US")
+        dateFormatter.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
+        
+        return dateFormatter.string(from: self.workout.date!)
+    }
+    
+    private func getExercises() -> [ExerciseModel] {
+        let exercises = self.workout.workoutExercises?.array as? [ExerciseModel]
+        return exercises ?? []
     }
 }
 
 struct WorkoutCompletionView_Previews: PreviewProvider {
     static var previews: some View {
-        
-        let workout = Workout(date: Date())
-        let squatMain = Exercise()
-        let squatLift = Lift(
-            name: "squat",
-            trainingMax: 315
-        )
-
-        squatMain.lift = squatLift
-        squatMain.sets.append(
-            ExerciseSet(reps: 5, weight: 250)
-        )
-        squatMain.sets.append(
-            ExerciseSet(reps: 3, weight: 275)
-        )
-        squatMain.sets.append(
-            ExerciseSet(reps: 1, weight: 300)
-        )
-        
-        workout.exercises.append(squatMain)
-        
-        let squatSupplemental = Exercise()
-        squatSupplemental.sets.append(
-            ExerciseSet(reps: 5, weight: 250)
-        )
-        squatSupplemental.sets.append(
-            ExerciseSet(reps: 5, weight: 250)
-        )
-        squatSupplemental.sets.append(
-            ExerciseSet(reps: 5, weight: 250)
-        )
-        squatSupplemental.sets.append(
-            ExerciseSet(reps: 5, weight: 250)
-        )
-        squatSupplemental.sets.append(
-            ExerciseSet(reps: 5, weight: 250)
-        )
-        squatSupplemental.lift = squatLift
-        
-        workout.exercises.append(squatSupplemental)
-        
-        
-        let workoutRepo = CoreDataRepository()
-        return WorkoutCompletionView(workout: workout, appRepository: workoutRepo)
+        let viewContext = PersistenceController.preview.container.viewContext
+        let workout = try! viewContext.fetch(WorkoutModel.fetchRequest()).first!
+        return
+            NavigationView {
+                WorkoutCompletionView(workout: workout)
+            }
+                .environment(\.managedObjectContext, viewContext)
     }
 }

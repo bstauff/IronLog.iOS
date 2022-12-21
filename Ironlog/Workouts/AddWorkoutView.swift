@@ -8,18 +8,13 @@
 import SwiftUI
 
 struct AddWorkoutView: View {
+    @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentationMode
-    @Binding private var workouts: [Workout]
+    
     @State private var selectedDate = Date()
+    
     @State private var isError = false
     @State private var errorString = ""
-    
-    private var repo: AppRepository
-    
-    init(repo: AppRepository, workouts: Binding<[Workout]>) {
-        self.repo = repo
-        self._workouts = workouts
-    }
     
     var body: some View {
         VStack {
@@ -36,24 +31,26 @@ struct AddWorkoutView: View {
         }
     }
     func saveClicked() {
-        let newWorkout = Workout(date: selectedDate)
+        let newWorkout = WorkoutModel(context: viewContext)
+        newWorkout.id = UUID()
+        newWorkout.isComplete = false
+        newWorkout.date = selectedDate
         
         do {
-            try repo.saveWorkout(workout: newWorkout)
+            try viewContext.save()
         } catch {
             isError = true
             errorString = "Failed to add new workout"
             return
         }
-        self.workouts.append(newWorkout)
         presentationMode.wrappedValue.dismiss()
     }
 }
 
 struct AddWorkoutView_Previews: PreviewProvider {
     static var previews: some View {
-        let workouts: [Workout] = []
-        let appRepo = CoreDataRepository()
-        AddWorkoutView(repo: appRepo, workouts: .constant(workouts))
+        let viewContext = PersistenceController.preview.container.viewContext
+        AddWorkoutView()
+            .environment(\.managedObjectContext, viewContext)
     }
 }

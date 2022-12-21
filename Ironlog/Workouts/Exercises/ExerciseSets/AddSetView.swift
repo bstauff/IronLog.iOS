@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct AddSetView: View {
-    
-    let onCreateSet: (_ exerciseSet: ExerciseSet) -> Void
+    @Environment(\.managedObjectContext) var viewContext
+    let onCreateSet: (_ newSet: ExerciseSetModel) -> Void
     
     @State var newReps: Int?
     @State var newWeight: Int?
@@ -55,12 +55,16 @@ struct AddSetView: View {
             return
         }
         
-        let newSet = ExerciseSet(reps: self.newReps!, weight: self.newWeight!)
+        let exerciseSetModel = ExerciseSetModel(context: viewContext)
+        exerciseSetModel.id = UUID()
+        exerciseSetModel.isComplete = false
+        exerciseSetModel.weight = Int64(newWeight!)
+        exerciseSetModel.reps = Int64(newReps!)
+        
+        self.onCreateSet(exerciseSetModel)
         
         self.newReps = nil
         self.newWeight = nil
-        
-        self.onCreateSet(newSet)
     }
     
     private func areNewInputsInvalid() -> Bool {
@@ -72,7 +76,9 @@ struct AddSetView: View {
 
 struct AddSetView_Previews: PreviewProvider {
     static var previews: some View {
-        AddSetView{ exerciseSet in
+        let viewContext = PersistenceController.preview.container.viewContext
+        AddSetView{ exerciseSetModel in
         }
+        .environment(\.managedObjectContext, viewContext)
     }
 }

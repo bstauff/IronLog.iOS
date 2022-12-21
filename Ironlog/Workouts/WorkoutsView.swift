@@ -8,36 +8,22 @@
 import SwiftUI
 
 struct WorkoutsView: View {
-    @Binding private var workouts: [Workout]
-    @Binding private var lifts: [Lift]
+    @Environment(\.managedObjectContext) var viewContext
+    @FetchRequest(sortDescriptors:[SortDescriptor(\WorkoutModel.date)]) var workouts: FetchedResults<WorkoutModel>
     
     @State private var isShowingWorkoutSheet = false
     @State private var isError = false
     @State private var errorString = ""
     
-    var workoutRepository: AppRepository
-    
-    init(
-        workoutRepo: AppRepository,
-        workouts: Binding<[Workout]>,
-        lifts: Binding<[Lift]>) {
-            self.workoutRepository = workoutRepo
-            self._workouts = workouts
-            self._lifts = lifts
-    }
-    
     var body: some View {
         NavigationView {
             VStack {
                 List {
-                    ForEach($workouts){ $workout in
+                    ForEach(workouts){ workout in
                         NavigationLink(
                             getWorkoutDate(workout: workout),
                             destination:
-                                WorkoutDetailsView(
-                                    repo: workoutRepository,
-                                    workout: workout,
-                                    lifts: $lifts))
+                                WorkoutDetailsView(workout: workout))
                     }
                     .onDelete(perform: deleteWorkouts)
                 }
@@ -51,26 +37,28 @@ struct WorkoutsView: View {
                     Button("add") {
                         self.isShowingWorkoutSheet = true
                     }.sheet(isPresented: $isShowingWorkoutSheet) {
-                        AddWorkoutView(repo: self.workoutRepository, workouts: $workouts)
+                        AddWorkoutView()
                     }
                 }
             }
         }
     }
-    func getWorkoutDate(workout: Workout) -> String{
+    func getWorkoutDate(workout: WorkoutModel?) -> String{
+        guard workout?.date != nil else {
+            return ""
+        }
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/YY"
-        return dateFormatter.string(from: workout.date)
+        return dateFormatter.string(from: workout!.date!)
     }
     func deleteWorkouts(offsets: IndexSet) {
         do {
             for offset in offsets {
                 let workoutToDelete = self.workouts[offset]
-                
-                try workoutRepository.deleteWorkout(workoutId: workoutToDelete.id)
+                self.viewContext.delete(workoutToDelete)
             }
-            
-            self.workouts.remove(atOffsets: offsets)
+            try self.viewContext.save()
         } catch {
             isError = true
             errorString = "Failed to delete.  Please try again."
@@ -79,15 +67,10 @@ struct WorkoutsView: View {
 }
 
 
-struct CycleView_Previews: PreviewProvider {
+struct WorkoutsView_Previews: PreviewProvider {
     static var previews: some View {
-        let workoutA = Workout(date: Date())
-        let workoutB = Workout(date: Calendar.current.date(byAdding: .day, value: 1, to: Date())!)
-        let workouts = [workoutA, workoutB]
-        
-        let lift = Lift(name: "Squat", trainingMax: 350)
-        let workoutRepo = CoreDataRepository()
-        
-        return WorkoutsView(workoutRepo: workoutRepo, workouts: .constant(workouts), lifts: .constant([lift]))
+        let viewContext = PersistenceController.preview.container.viewContext
+        WorkoutsView()
+            .environment(\.managedObjectContext, viewContext)
     }
 }

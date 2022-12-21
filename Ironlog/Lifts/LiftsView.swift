@@ -8,73 +8,40 @@
 import SwiftUI
 
 struct LiftsView: View {
-    @Binding private var lifts: [Lift]
     
-    @State private var isShowingAddSheet = false
-    @State private var isError = false
-    @State private var errorString = ""
+    @Environment(\.managedObjectContext) var viewContext
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var lifts: FetchedResults<LiftModel>
     
-    var liftRepo: AppRepository
-    
-    init(lifts: Binding<[Lift]>, liftRepo: AppRepository) {
-        self.liftRepo = liftRepo
-        self._lifts = lifts
-    }
+    @State private var isShowingAddLiftSheet = false
     
     var body: some View {
         NavigationView {
             VStack {
                 List {
-                    ForEach($lifts, id: \.self) { $lift in
-                        NavigationLink(
-                            destination: LiftDetailView(lift: $lift, liftRepository: liftRepo))
-                        {
-                            LiftLineItemView(lift: lift)
+                    ForEach(lifts) { lift in
+                        NavigationLink(destination: LiftDetailView(lift: lift)) {
+                            LiftLineItemView(liftModel: lift)
                         }
-                    }
-                    .alert(isPresented: $isError) {
-                        Alert(
-                            title: Text("Error"),
-                            message: Text(errorString),
-                            dismissButton: .default(Text("OK"))
-                        )
                     }
                 }
             }
             .navigationTitle("Lift Catalog")
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("add"){
-                        isShowingAddSheet = true
-                    }.sheet(isPresented: $isShowingAddSheet){
-                        AddLiftView(liftRepo: liftRepo, lifts: $lifts)
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {() -> Void in self.isShowingAddLiftSheet = true}) {
+                        Image(systemName: "plus.circle.fill")
+                    }.sheet(isPresented: $isShowingAddLiftSheet) {
+                        AddLiftView()
                     }
                 }
             }
-        }
-    }
-    
-    func deleteLifts(offsets: IndexSet) {
-        do {
-            for offset in offsets {
-                let liftToDelete = self.lifts[offset]
-                
-                try liftRepo.deleteLift(liftId: liftToDelete.id)
-            }
-            
-            self.lifts.remove(atOffsets: offsets)
-        } catch {
-            isError = true
-            errorString = "Failed to delete.  Please try again."
         }
     }
 }
 
 struct LiftsView_Previews: PreviewProvider {
     static var previews: some View {
-        let liftRepo = CoreDataRepository()
-        let squat = Lift(name: "Squat", trainingMax: 315)
-        try? liftRepo.addLift(lift: squat)
-        return LiftsView(lifts: .constant([squat]), liftRepo: liftRepo)
+        let viewContext = PersistenceController.preview.container.viewContext
+        return LiftsView().environment(\.managedObjectContext, viewContext)
     }
 }

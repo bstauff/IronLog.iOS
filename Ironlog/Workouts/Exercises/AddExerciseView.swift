@@ -9,30 +9,24 @@ import SwiftUI
 
 struct AddExerciseView: View {
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var workout: Workout
-    @State private var selectedLift: Lift?
-    @State private var sets: [ExerciseSet] = []
+    @Environment(\.managedObjectContext) var viewContext
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var lifts: FetchedResults<LiftModel>
+    
+    @State private var selectedLift: LiftModel?
+    @State private var sets: [ExerciseSetModel] = []
     
     @State private var isError = false
     @State private var errorMessage = ""
     
-    @Binding private var lifts: [Lift]
-    
-    private var repo: AppRepository
-    
-    init(repo: AppRepository, workout: Workout, lifts: Binding<[Lift]>) {
-        self.workout = workout
-        self.repo = repo
-        self._lifts = lifts
-    }
+    var onExerciseAdded: (_ newExercise: ExerciseModel) -> Void
     
     var body: some View {
         NavigationView{
             VStack {
                 Form {
                     Picker("Lift", selection: $selectedLift) {
-                        ForEach($lifts) { $lift in
-                            Text(lift.name).tag(lift as Lift?)
+                        ForEach(lifts) { lift in
+                            Text(lift.name ?? "").tag(lift as LiftModel?)
                         }
                     }
                     Section {
@@ -54,6 +48,10 @@ struct AddExerciseView: View {
                     }
                 }
             }
+        }.onAppear {
+            if self.selectedLift == nil {
+                self.selectedLift = lifts.first
+            }
         }
     }
         
@@ -69,33 +67,33 @@ struct AddExerciseView: View {
             errorMessage = "Must add sets"
             return
         }
-                        
-        let newExercise = Exercise()
-        newExercise.sets = self.sets
-        newExercise.lift = self.selectedLift!
-                       
-        workout.exercises.append(newExercise)
-                        
+        
+        let newExercise = ExerciseModel(context: viewContext)
+        let orderedSet = NSOrderedSet(array:sets)
+        newExercise.addToExerciseSets(orderedSet)
+        newExercise.exerciseLift = self.selectedLift
+        newExercise.id = UUID()
+        newExercise.isComplete = false
+        
         do {
-            try self.repo.saveWorkout(workout: workout)
+            try viewContext.save()
         } catch {
             self.isError = true
             self.errorMessage = "Failed to save exercise"
-            workout.exercises.removeLast()
             return
         }
+        
+        self.onExerciseAdded(newExercise)
     }
 }
 
 struct AddExerciseView_Previews: PreviewProvider {
     static var previews: some View {
-        let appRepo = CoreDataRepository()
-        let squatLift = Lift(name: "Squat", trainingMax: 315)
-        let lifts = [squatLift]
-        try? appRepo.addLift(lift: squatLift)
-        
-        
-        let workout = Workout(date: Date.now)
-        return AddExerciseView(repo: appRepo, workout: workout, lifts: .constant(lifts))
+        let viewContext = PersistenceController.preview.container.viewContext
+        return
+            AddExerciseView{ newExercise in
+            
+            }
+            .environment(\.managedObjectContext, viewContext)
     }
 }

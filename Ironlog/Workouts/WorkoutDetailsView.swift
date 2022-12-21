@@ -8,19 +8,15 @@
 import SwiftUI
 
 struct WorkoutDetailsView: View {
-    @ObservedObject var workout: Workout
+    @Environment(\.managedObjectContext) var viewContext
+    
+    @ObservedObject var workout: WorkoutModel
+    
     @State private var isSheetActive = false
-    @State private var draftExercise: Exercise = Exercise()
     @State private var isShowingExerciseSheet = false
     
-    @Binding var lifts: [Lift]
-    
-    var repo: AppRepository
-    
-    init(repo: AppRepository, workout: Workout, lifts: Binding<[Lift]>) {
-        self.repo = repo
-        self.workout = workout
-        self._lifts = lifts
+    var exerciseArray: [ExerciseModel] {
+        return workout.workoutExercises?.array as? [ExerciseModel] ?? []
     }
     
     var body: some View {
@@ -33,17 +29,25 @@ struct WorkoutDetailsView: View {
                     Button(action: showExerciseSheet) {
                         Text("Add")
                     }.sheet(isPresented: $isShowingExerciseSheet){
-                        AddExerciseView(repo: repo, workout: workout, lifts: $lifts)
+                        AddExerciseView{newExercise in
+                            self.workout.addToWorkoutExercises(newExercise)
+                            try? self.viewContext.save()
+                        }
                     }
                 }
-                ForEach($workout.exercises){ $exercise in
+                ForEach(exerciseArray){ exercise in
                     NavigationLink(
-                        destination: ExerciseDetailsView(repo: repo, exercise: exercise, lifts: $lifts)) {
+                        destination: ExerciseDetailsView(exercise: exercise)) {
                             ExerciseRowView(exercise: exercise)
                         }
                 }
                 .onDelete { indexSet in
-                    workout.exercises.remove(atOffsets: indexSet)
+                    for index in indexSet {
+                        let exerciseToDelete = exerciseArray[index]
+                        workout.removeFromWorkoutExercises(exerciseToDelete)
+                        self.viewContext.delete(exerciseToDelete)
+                    }
+                    try? self.viewContext.save()
                 }
             }
         }
@@ -56,36 +60,26 @@ struct WorkoutDetailsView: View {
     func convertDateToString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/YY"
-        return dateFormatter.string(from: self.workout.date)
-    }
-    
-    func addExercise() {
-        let newExercise = Exercise()
-        workout.exercises.append(newExercise)
+        return dateFormatter.string(from: self.workout.date!)
     }
 }
 
 struct ExerciseRowView: View {
-    @ObservedObject var exercise: Exercise
+    @ObservedObject var exercise: ExerciseModel
     
     var body: some View {
-        Text(exercise.lift.name)
+        Text(exercise.exerciseLift?.name ?? "")
     }
 }
 
 struct WorkoutDetailsView_Previews: PreviewProvider {
     static var previews: some View {
+        let viewContext = PersistenceController.preview.container.viewContext
+        let stuff = WorkoutModel.fetchRequest()
         
-        let appRepo = CoreDataRepository()
-        let squatLift = Lift(name: "Squat", trainingMax: 315)
-        let lifts = [squatLift]
-        try? appRepo.addLift(lift: squatLift)
-        let workout = Workout(date: Date())
-        let squatExercise = Exercise()
-        squatExercise.lift = squatLift
-        workout.exercises = [squatExercise]
+        let moreStuff = try? viewContext.fetch(stuff)
         
-        return WorkoutDetailsView(repo: appRepo, workout: workout, lifts: .constant(lifts))
-            .previewDevice("iPhone 13 Pro")
+        return WorkoutDetailsView(workout: (moreStuff?.first!)!)
+            .environment(\.managedObjectContext, viewContext)
     }
 }

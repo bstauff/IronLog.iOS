@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct EditSetsView: View {
-    @Binding var updatedSets: [ExerciseSet]
+    @Binding var updatedSets: [ExerciseSetModel]
+    @Environment(\.managedObjectContext) var viewContext
     
     var body: some View {
         List {
@@ -31,8 +32,8 @@ struct EditSetsView: View {
             .onDelete{ indexSet in
                 updatedSets.remove(atOffsets: indexSet)
             }
-            AddSetView { exerciseSet in
-                updatedSets.append(exerciseSet)
+            AddSetView { newSet in
+                updatedSets.append(newSet)
             }
         }
     }
@@ -40,11 +41,18 @@ struct EditSetsView: View {
 
 struct EditSetsView_Previews: PreviewProvider {
     static var previews: some View {
+        let viewContext = PersistenceController.preview.container.viewContext
+        let setA = ExerciseSetModel(context: viewContext)
+        setA.reps = 5
+        setA.weight = 250
+        let setB = ExerciseSetModel(context: viewContext)
+        setB.reps = 10
+        setB.weight = 500
         let exerciseSets = [
-            ExerciseSet(reps: 5, weight: 250),
-            ExerciseSet(reps: 5, weight: 275),
-            ExerciseSet(reps: 5, weight: 300)
+            setA,
+            setB
         ]
-        EditSetsView(updatedSets: .constant(exerciseSets))
+        return EditSetsView(updatedSets: .constant(exerciseSets))
+            .environment(\.managedObjectContext, viewContext)
     }
 }
