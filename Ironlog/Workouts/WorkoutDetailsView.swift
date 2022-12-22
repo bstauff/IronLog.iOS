@@ -28,8 +28,9 @@ struct WorkoutDetailsView: View {
                     Text("Exercises").font(.headline)
                     Spacer()
                     Button(action: showExerciseSheet) {
-                        Text("Add")
-                    }.sheet(isPresented: $isShowingExerciseSheet){
+                        Image(systemName: "plus.circle.fill").foregroundColor(.blue)
+                    }
+                    .sheet(isPresented: $isShowingExerciseSheet){
                         AddExerciseView{newExercise in
                             self.workout.addToWorkoutExercises(newExercise)
                             try? self.viewContext.save()
