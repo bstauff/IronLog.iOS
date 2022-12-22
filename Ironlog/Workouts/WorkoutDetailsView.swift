@@ -15,6 +15,8 @@ struct WorkoutDetailsView: View {
     @State private var isSheetActive = false
     @State private var isShowingExerciseSheet = false
     
+    @State private var isShowingEditSheet = false
+    
     var exerciseArray: [ExerciseModel] {
         return workout.workoutExercises?.array as? [ExerciseModel] ?? []
     }
@@ -22,13 +24,13 @@ struct WorkoutDetailsView: View {
     var body: some View {
         VStack {
             List {
-                Text(convertDateToString()).font(.largeTitle)
                 HStack {
                     Text("Exercises").font(.headline)
                     Spacer()
                     Button(action: showExerciseSheet) {
-                        Text("Add")
-                    }.sheet(isPresented: $isShowingExerciseSheet){
+                        Image(systemName: "plus.circle.fill").foregroundColor(.blue)
+                    }
+                    .sheet(isPresented: $isShowingExerciseSheet){
                         AddExerciseView{newExercise in
                             self.workout.addToWorkoutExercises(newExercise)
                             try? self.viewContext.save()
@@ -48,6 +50,17 @@ struct WorkoutDetailsView: View {
                         self.viewContext.delete(exerciseToDelete)
                     }
                     try? self.viewContext.save()
+                }
+            }
+        }
+        .sheet(isPresented: $isShowingEditSheet) {
+            EditWorkoutView(workout: workout)
+        }
+        .navigationTitle(Text(convertDateToString()))
+        .toolbar {
+            ToolbarItem(placement:.navigationBarTrailing) {
+                Button("Edit") {
+                    self.isShowingEditSheet = true
                 }
             }
         }
@@ -79,7 +92,9 @@ struct WorkoutDetailsView_Previews: PreviewProvider {
         
         let moreStuff = try? viewContext.fetch(stuff)
         
-        return WorkoutDetailsView(workout: (moreStuff?.first!)!)
+        return NavigationView {
+            WorkoutDetailsView(workout: (moreStuff?.first!)!)
+        }
             .environment(\.managedObjectContext, viewContext)
     }
 }
