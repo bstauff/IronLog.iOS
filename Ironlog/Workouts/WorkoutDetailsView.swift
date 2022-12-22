@@ -53,6 +53,9 @@ struct WorkoutDetailsView: View {
                 }
             }
         }
+        .sheet(isPresented: $isShowingEditSheet) {
+            EditWorkoutView(workout: workout)
+        }
         .navigationTitle(Text(convertDateToString()))
         .toolbar {
             ToolbarItem(placement:.navigationBarTrailing) {
