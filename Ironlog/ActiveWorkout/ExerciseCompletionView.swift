@@ -14,7 +14,7 @@ struct ExerciseCompletionView: View {
     
     var body: some View {
         VStack {
-            Text(exercise.exerciseLift?.name ?? "")
+            Text(exercise.lift?.name ?? "")
                 .font(.headline)
             ForEach(getSets()){ exerciseSet in
                 ExerciseCompletionRowView(exerciseSet: exerciseSet)

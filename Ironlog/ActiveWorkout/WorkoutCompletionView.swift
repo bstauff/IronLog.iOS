@@ -61,7 +61,7 @@ struct WorkoutCompletionView: View {
     }
     
     private func getExercises() -> [Exercise] {
-        let exercises = self.workout.workoutExercises?.array as? [ExerciseModel]
+        let exercises = self.workout.warmupExercises?.array as? [Exercise]
         return exercises ?? []
     }
 }

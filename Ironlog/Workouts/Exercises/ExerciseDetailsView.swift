@@ -63,7 +63,7 @@ struct ExerciseDetailsView_Previews: PreviewProvider {
         lift.trainingMax = 315
         lift.id = UUID()
         
-        exercise.exerciseLift = lift
+        exercise.lift = lift
         
         let setA = ExerciseSet(context: viewContext)
         setA.id = UUID()

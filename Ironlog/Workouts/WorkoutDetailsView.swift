@@ -32,7 +32,7 @@ struct WorkoutDetailsView: View {
                     }
                     .sheet(isPresented: $isShowingExerciseSheet){
                         AddExerciseView{newExercise in
-                            self.workout.addToWorkoutExercises(newExercise)
+//                            self.workout.addToWarmupExercises(newExercise)
                             try? self.viewContext.save()
                         }
                     }
@@ -46,7 +46,7 @@ struct WorkoutDetailsView: View {
                 .onDelete { indexSet in
                     for index in indexSet {
                         let exerciseToDelete = exerciseArray[index]
-                        workout.removeFromWorkoutExercises(exerciseToDelete)
+//                        workout.removeFromWarmupExercises(exerciseToDelete)
                         self.viewContext.delete(exerciseToDelete)
                     }
                     try? self.viewContext.save()
@@ -81,14 +81,14 @@ struct ExerciseRowView: View {
     @ObservedObject var exercise: Exercise
     
     var body: some View {
-        Text(exercise.exerciseLift?.name ?? "")
+        Text(exercise.lift?.name ?? "")
     }
 }
 
 struct WorkoutDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         let viewContext = PersistenceController.preview.container.viewContext
-        let stuff = WorkoutModel.fetchRequest()
+        let stuff = Workout.fetchRequest()
         
         let moreStuff = try? viewContext.fetch(stuff)
         
