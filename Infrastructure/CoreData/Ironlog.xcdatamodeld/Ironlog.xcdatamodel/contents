@@ -1,26 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22A400" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="ExerciseModel" representedClassName="ExerciseModel" syncable="YES" codeGenerationType="class">
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="isComplete" attributeType="Boolean" usesScalarValueType="YES"/>
-        <relationship name="exerciseLift" maxCount="1" deletionRule="Nullify" destinationEntity="LiftModel"/>
-        <relationship name="exerciseSets" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ExerciseSetModel"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22C65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Exercise" representedClassName="Exercise" isAbstract="YES" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="UUID" usesScalarValueType="YES"/>
+        <attribute name="isComplete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <relationship name="exerciseSets" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ExerciseSet" inverseName="exercise" inverseEntity="ExerciseSet"/>
+        <relationship name="lift" maxCount="1" deletionRule="Cascade" destinationEntity="Lift" inverseName="exercise" inverseEntity="Lift"/>
     </entity>
-    <entity name="ExerciseSetModel" representedClassName="ExerciseSetModel" syncable="YES" codeGenerationType="class">
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="isComplete" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="reps" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="weight" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    <entity name="ExerciseSet" representedClassName="ExerciseSet" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="UUID" usesScalarValueType="YES"/>
+        <attribute name="isComplete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="reps" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="weight" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="exercise" maxCount="1" deletionRule="Cascade" destinationEntity="Exercise" inverseName="exerciseSets" inverseEntity="Exercise"/>
     </entity>
-    <entity name="LiftModel" representedClassName="LiftModel" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+    <entity name="Lift" representedClassName="Lift" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="UUID" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
-        <attribute name="trainingMax" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="trainingMax" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="exercise" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="lift" inverseEntity="Exercise"/>
+    </entity>
+    <entity name="WarmupExerciseModel" representedClassName="WarmupExerciseModel" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isComplete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <relationship name="exerciseSets" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WarmupSetsModel" inverseName="exercise" inverseEntity="WarmupSetsModel"/>
+        <relationship name="lift" maxCount="1" deletionRule="Cascade" destinationEntity="WarmupLiftModel" inverseName="exercises" inverseEntity="WarmupLiftModel"/>
+        <relationship name="workout" maxCount="1" deletionRule="Cascade" destinationEntity="WorkoutModel" inverseName="warmupExercises" inverseEntity="WorkoutModel"/>
+    </entity>
+    <entity name="WarmupLiftModel" representedClassName="WarmupLiftModel" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="UUID" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="trainingMax" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WarmupExerciseModel" inverseName="lift" inverseEntity="WarmupExerciseModel"/>
+    </entity>
+    <entity name="WarmupSetsModel" representedClassName="WarmupSetsModel" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="UUID" usesScalarValueType="YES"/>
+        <attribute name="isComplete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="reps" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="weight" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="exercise" maxCount="1" deletionRule="Cascade" destinationEntity="WarmupExerciseModel" inverseName="exerciseSets" inverseEntity="WarmupExerciseModel"/>
     </entity>
     <entity name="WorkoutModel" representedClassName="WorkoutModel" syncable="YES" codeGenerationType="class">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="isComplete" attributeType="Boolean" usesScalarValueType="YES"/>
-        <relationship name="workoutExercises" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="ExerciseModel"/>
+        <attribute name="isComplete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <relationship name="warmupExercises" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="WarmupExerciseModel" inverseName="workout" inverseEntity="WarmupExerciseModel"/>
     </entity>
 </model>
