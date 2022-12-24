@@ -9,16 +9,16 @@ import SwiftUI
 
 struct WorkoutSelection: View {
     @Environment(\.managedObjectContext) var viewContext
-    @FetchRequest(sortDescriptors:[SortDescriptor(\WorkoutModel.date, order: .reverse)]) var workouts: FetchedResults<WorkoutModel>
+    @FetchRequest(sortDescriptors:[SortDescriptor(\Workout.date, order: .reverse)]) var workouts: FetchedResults<Workout>
     
-    var onWorkoutSelected: (_ selectedWorkout: WorkoutModel?) -> Void
+    var onWorkoutSelected: (_ selectedWorkout: Workout?) -> Void
     
-    @State var selectedWorkout: WorkoutModel? = nil
+    @State var selectedWorkout: Workout? = nil
     
     var body: some View {
         Picker("Workout", selection: $selectedWorkout) {
             ForEach(workouts) { workout in
-                Text(getWorkoutDate(workout: workout)).tag(workout as WorkoutModel?)
+                Text(getWorkoutDate(workout: workout)).tag(workout as Workout?)
             }
         }
         .onChange(of: selectedWorkout) { updatedWorkout in
@@ -28,7 +28,7 @@ struct WorkoutSelection: View {
             self.selectedWorkout = workouts.first
         }
     }
-    func getWorkoutDate(workout: WorkoutModel) -> String{
+    func getWorkoutDate(workout: Workout) -> String{
         guard workout.date != nil else  {
             return ""
         }
