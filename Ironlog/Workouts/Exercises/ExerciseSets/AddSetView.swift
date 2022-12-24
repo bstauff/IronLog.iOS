@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddSetView: View {
     @Environment(\.managedObjectContext) var viewContext
-    let onCreateSet: (_ newSet: ExerciseSetModel) -> Void
+    let onCreateSet: (_ newSet: ExerciseSet) -> Void
     
     @State var newReps: Int?
     @State var newWeight: Int?
@@ -55,11 +55,11 @@ struct AddSetView: View {
             return
         }
         
-        let exerciseSetModel = ExerciseSetModel(context: viewContext)
+        let exerciseSetModel = ExerciseSet(context: viewContext)
         exerciseSetModel.id = UUID()
         exerciseSetModel.isComplete = false
-        exerciseSetModel.weight = Int64(newWeight!)
-        exerciseSetModel.reps = Int64(newReps!)
+        exerciseSetModel.weight = Int32(newWeight!)
+        exerciseSetModel.reps = Int32(newReps!)
         
         self.onCreateSet(exerciseSetModel)
         

@@ -10,15 +10,15 @@ import SwiftUI
 struct AddExerciseView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.managedObjectContext) var viewContext
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var lifts: FetchedResults<LiftModel>
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var lifts: FetchedResults<Lift>
     
-    @State private var selectedLift: LiftModel?
-    @State private var sets: [ExerciseSetModel] = []
+    @State private var selectedLift: Lift?
+    @State private var sets: [ExerciseSet] = []
     
     @State private var isError = false
     @State private var errorMessage = ""
     
-    var onExerciseAdded: (_ newExercise: ExerciseModel) -> Void
+    var onExerciseAdded: (_ newExercise: Exercise) -> Void
     
     var body: some View {
         NavigationView{
@@ -26,7 +26,7 @@ struct AddExerciseView: View {
                 Form {
                     Picker("Lift", selection: $selectedLift) {
                         ForEach(lifts) { lift in
-                            Text(lift.name ?? "").tag(lift as LiftModel?)
+                            Text(lift.name ?? "").tag(lift as Lift?)
                         }
                     }
                     Section {
@@ -68,10 +68,10 @@ struct AddExerciseView: View {
             return
         }
         
-        let newExercise = ExerciseModel(context: viewContext)
+        let newExercise = Exercise(context: viewContext)
         let orderedSet = NSOrderedSet(array:sets)
         newExercise.addToExerciseSets(orderedSet)
-        newExercise.exerciseLift = self.selectedLift
+        newExercise.lift = self.selectedLift
         newExercise.id = UUID()
         newExercise.isComplete = false
         

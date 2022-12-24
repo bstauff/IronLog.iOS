@@ -9,15 +9,13 @@ import SwiftUI
 
 struct ExerciseDetailsView: View {
     @Environment(\.managedObjectContext) var viewContext
-    @FetchRequest(sortDescriptors:[SortDescriptor(\ExerciseSetModel.id)])
-    var allExerciseSets: FetchedResults<ExerciseSetModel>
     
     @State private var isError = false
     @State private var errorMessage = ""
     
     @State private var shouldShowEditSheet = false
     
-    @ObservedObject var exercise: ExerciseModel
+    @ObservedObject var exercise: Exercise
     
     var body: some View {
         return VStack {
@@ -29,7 +27,7 @@ struct ExerciseDetailsView: View {
                         Text("Weight")
                     }
                     List {
-                        ForEach(exercise.exerciseSets?.array as! [ExerciseSetModel]){ exerciseSet in
+                        ForEach(exercise.exerciseSets?.array as! [ExerciseSet]){ exerciseSet in
                             HStack {
                                 Text(String(exerciseSet.reps))
                                 Spacer()
@@ -57,23 +55,23 @@ struct ExerciseDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         let viewContext = PersistenceController.preview.container.viewContext
         
-        let exercise = ExerciseModel(context: viewContext)
+        let exercise = Exercise(context: viewContext)
         exercise.isComplete = false
         
-        let lift = LiftModel(context: viewContext)
+        let lift = Lift(context: viewContext)
         lift.name = "Squat"
         lift.trainingMax = 315
         lift.id = UUID()
         
         exercise.exerciseLift = lift
         
-        let setA = ExerciseSetModel(context: viewContext)
+        let setA = ExerciseSet(context: viewContext)
         setA.id = UUID()
         setA.isComplete = false
         setA.reps = 5
         setA.weight = 315
         
-        let setB = ExerciseSetModel(context: viewContext)
+        let setB = ExerciseSet(context: viewContext)
         setB.id = UUID()
         setB.isComplete = false
         setB.reps = 5
