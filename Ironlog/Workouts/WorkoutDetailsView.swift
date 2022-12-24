@@ -10,15 +10,15 @@ import SwiftUI
 struct WorkoutDetailsView: View {
     @Environment(\.managedObjectContext) var viewContext
     
-    @ObservedObject var workout: WorkoutModel
+    @ObservedObject var workout: Workout
     
     @State private var isSheetActive = false
     @State private var isShowingExerciseSheet = false
     
     @State private var isShowingEditSheet = false
     
-    var exerciseArray: [ExerciseModel] {
-        return workout.workoutExercises?.array as? [ExerciseModel] ?? []
+    var exerciseArray: [Exercise] {
+        return workout.warmupExercises?.array as? [Exercise] ?? []
     }
     
     var body: some View {
@@ -78,7 +78,7 @@ struct WorkoutDetailsView: View {
 }
 
 struct ExerciseRowView: View {
-    @ObservedObject var exercise: ExerciseModel
+    @ObservedObject var exercise: Exercise
     
     var body: some View {
         Text(exercise.exerciseLift?.name ?? "")

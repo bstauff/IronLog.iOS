@@ -11,7 +11,7 @@ struct EditWorkoutView: View {
     @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentationMode
     
-    @ObservedObject var workout: WorkoutModel
+    @ObservedObject var workout: Workout
     
     @State private var selectedDate: Date = Date()
     @State private var isError = false
@@ -49,7 +49,7 @@ struct EditWorkoutView: View {
 struct EditWorkoutView_Previews: PreviewProvider {
     static var previews: some View {
         let viewContext = PersistenceController.preview.container.viewContext
-        let workoutModel = try! viewContext.fetch(WorkoutModel.fetchRequest()).first!
+        let workoutModel = try! viewContext.fetch(Workout.fetchRequest()).first!
         EditWorkoutView(workout: workoutModel)
             .environment(\.managedObjectContext, viewContext)
     }
