@@ -16,9 +16,9 @@ struct EditLiftView: View {
     
     let onLiftUpdated: (_ updatedName: String, _ updatedTrainingMax: Int) -> Void
     
-    @ObservedObject var lift: LiftModel
+    @ObservedObject var lift: Lift
     
-    init(liftModel: LiftModel, onLiftUpdated: @escaping (String,Int) -> Void) {
+    init(liftModel: Lift, onLiftUpdated: @escaping (String,Int) -> Void) {
         self.lift = liftModel
         self.onLiftUpdated = onLiftUpdated
     }
@@ -68,7 +68,7 @@ struct EditLiftView: View {
 
 struct EditLiftView_Previews: PreviewProvider {
     static var previews: some View {
-        let liftModel = LiftModel(context: PersistenceController.preview.container.viewContext)
+        let liftModel = Lift(context: PersistenceController.preview.container.viewContext)
         liftModel.name = "Test Lift"
         liftModel.trainingMax = 999
         return EditLiftView(liftModel: liftModel) { updatedName, updatedMax in

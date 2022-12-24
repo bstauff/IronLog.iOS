@@ -50,9 +50,9 @@ struct AddLiftView: View {
             return
         }
         
-        let newLift = LiftModel(context: viewContext)
+        let newLift = Lift(context: viewContext)
         newLift.name = liftName
-        newLift.trainingMax = Int64(trainingMax!)
+        newLift.trainingMax = Int32(trainingMax!)
         newLift.id = UUID()
             
         do {
