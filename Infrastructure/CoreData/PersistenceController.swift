@@ -18,55 +18,12 @@ struct PersistenceController {
         
         let viewContext = controller.container.viewContext
         
-        let squat = Lift(context: viewContext)
-        squat.name = "Squat"
-        squat.trainingMax = 315
-        squat.id = UUID()
-        
-        let bench = Lift(context: viewContext)
-        bench.name = "Bench"
-        bench.trainingMax = 375
-        bench.id = UUID()
-        
         let workout = Workout(context: viewContext)
+        
         workout.id = UUID()
-        workout.date = Date()
         workout.isComplete = false
+        workout.date = Date()
         
-        let anotherWorkout = Workout(context: viewContext)
-        anotherWorkout.id = UUID()
-        anotherWorkout.date = Calendar.current.date(byAdding:.day, value: 5, to: Date())
-        anotherWorkout.isComplete = false
-            
-        let workoutSet1 = ExerciseSet(context: viewContext)
-        workoutSet1.isComplete = false
-        workoutSet1.id = UUID()
-        workoutSet1.weight = 250
-        workoutSet1.reps = 5
-        
-        let workoutSet2 = ExerciseSet(context: viewContext)
-        workoutSet2.isComplete = false
-        workoutSet2.id = UUID()
-        workoutSet2.weight = 275
-        workoutSet2.reps = 3
-        
-        let workoutSet3 = ExerciseSet(context: viewContext)
-        workoutSet3.isComplete = false
-        workoutSet3.id = UUID()
-        workoutSet3.weight = 275
-        workoutSet3.reps = 3
-        
-        let workoutSets = [workoutSet1, workoutSet2, workoutSet3]
-        
-        let workoutExercise = Exercise(context: viewContext)
-        workoutExercise.id = UUID()
-        workoutExercise.isComplete = false
-        workoutExercise.lift = bench
-        workoutExercise.exerciseSets = NSOrderedSet(array: workoutSets)
-        
-        workout.warmupExercises = [workoutExercise]
-        anotherWorkout.warmupExercises = [workoutExercise]
-            
         do {
             try viewContext.save()
         } catch {

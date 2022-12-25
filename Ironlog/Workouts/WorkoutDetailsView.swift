@@ -89,9 +89,9 @@ struct WorkoutDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         let viewContext = PersistenceController.preview.container.viewContext
         let stuff = Workout.fetchRequest()
-        
+
         let moreStuff = try? viewContext.fetch(stuff)
-        
+
         return NavigationView {
             WorkoutDetailsView(workout: (moreStuff?.first!)!)
         }
