@@ -17,41 +17,63 @@ struct WorkoutDetailsView: View {
     
     @State private var isShowingEditSheet = false
     
-    var exerciseArray: [Exercise] {
-        return workout.warmupExercises?.array as? [Exercise] ?? []
+    var warmupExercises: [WarmupExercise] {
+        return workout.warmupExercises?.array as? [WarmupExercise] ?? []
+    }
+    
+    var assistanceExercises: [AssistanceExercise] {
+        return workout.assistanceExercises?.array as? [AssistanceExercise] ?? []
     }
     
     var body: some View {
         VStack {
             List {
-                HStack {
-                    Text("Exercises").font(.headline)
-                    Spacer()
-                    Button(action: showExerciseSheet) {
-                        Image(systemName: "plus.circle.fill").foregroundColor(.blue)
-                    }
-                    .sheet(isPresented: $isShowingExerciseSheet){
-                        AddExerciseView{newExercise in
-//                            self.workout.addToWarmupExercises(newExercise)
-                            try? self.viewContext.save()
+                Section(header: Text("Warmup Lifts")) {
+                    if warmupExercises.count > 0 {
+                        ForEach(warmupExercises){ warmupExercise in
+                            NavigationLink(
+                                destination: ExerciseDetailsView(exercise: warmupExercise)) {
+                                ExerciseRowView(exercise: warmupExercise)
+                            }
                         }
+                    } else {
+                        Text("Go add some warmup work!")
                     }
                 }
-                ForEach(exerciseArray){ exercise in
-                    NavigationLink(
-                        destination: ExerciseDetailsView(exercise: exercise)) {
-                            ExerciseRowView(exercise: exercise)
+                Section(header: Text("Main Lift")) {
+                    if self.workout.mainExercise != nil {
+                        NavigationLink(
+                            destination: ExerciseDetailsView(exercise: self.workout.mainExercise!)) {
+                            ExerciseRowView(exercise: self.workout.mainExercise!)
                         }
-                }
-                .onDelete { indexSet in
-                    for index in indexSet {
-                        let exerciseToDelete = exerciseArray[index]
-//                        workout.removeFromWarmupExercises(exerciseToDelete)
-                        self.viewContext.delete(exerciseToDelete)
+                    } else {
+                        Text("Go add some main work!")
                     }
-                    try? self.viewContext.save()
+                }
+                Section(header: Text("Supplemental Lift")) {
+                    if self.workout.supplementalExercise != nil {
+                        NavigationLink(
+                            destination: ExerciseDetailsView(exercise: self.workout.supplementalExercise!)) {
+                            ExerciseRowView(exercise: self.workout.supplementalExercise!)
+                        }
+                    } else {
+                        Text("Go add some supplemental work!")
+                    }
+                }
+                Section(header: Text("Assistance Lifts")) {
+                    if assistanceExercises.count > 0 {
+                        ForEach(assistanceExercises){ assistanceExercise in
+                            NavigationLink(
+                                destination: ExerciseDetailsView(exercise: assistanceExercise)) {
+                                ExerciseRowView(exercise: assistanceExercise)
+                            }
+                        }
+                    } else {
+                        Text("Go add some assistance work!")
+                    }
                 }
             }
+            .listStyle(.insetGrouped)
         }
         .sheet(isPresented: $isShowingEditSheet) {
             EditWorkoutView(workout: workout)
