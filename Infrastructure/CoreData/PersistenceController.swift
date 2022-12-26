@@ -23,6 +23,21 @@ struct PersistenceController {
         squat.name = "Squat"
         squat.trainingMax = 315
         
+        let dumbbellBench = Lift(context: viewContext)
+        dumbbellBench.id = UUID()
+        dumbbellBench.name = "Dumbbell Bench"
+        dumbbellBench.trainingMax = 75
+        
+        let latPulldown = Lift(context: viewContext)
+        latPulldown.id = UUID()
+        latPulldown.name = "Lat Pulldown"
+        latPulldown.trainingMax = 115
+        
+        let reverseCrunch = Lift(context: viewContext)
+        reverseCrunch.id = UUID()
+        reverseCrunch.name = "Reverse Crunch"
+        reverseCrunch.trainingMax = 200
+        
         let workout = Workout(context: viewContext)
         workout.id = UUID()
         workout.isComplete = false
@@ -33,27 +48,7 @@ struct PersistenceController {
         warmUp.id = UUID()
         warmUp.lift = squat
         
-        var set1 = ExerciseSet(context: viewContext)
-        set1.id = UUID()
-        set1.isComplete = false
-        set1.reps = 5
-        set1.weight = 275
-        
-        var set2 = ExerciseSet(context: viewContext)
-        set2.id = UUID()
-        set2.isComplete = false
-        set2.reps = 3
-        set2.weight = 300
-        
-        var set3 = ExerciseSet(context: viewContext)
-        set3.id = UUID()
-        set3.isComplete = false
-        set3.reps = 1
-        set3.weight = 315
-        
-        var sets = NSOrderedSet(array: [set1, set2, set3])
-        
-        warmUp.exerciseSets = sets
+        warmUp.exerciseSets = createSets(setCount: 3, viewContext: viewContext)
         
         workout.addToWarmupExercises(warmUp)
             
@@ -61,30 +56,39 @@ struct PersistenceController {
         main.isComplete = false
         main.id = UUID()
         main.lift = squat
-        
-        set1 = ExerciseSet(context: viewContext)
-        set1.id = UUID()
-        set1.isComplete = false
-        set1.reps = 5
-        set1.weight = 275
-        
-        set2 = ExerciseSet(context: viewContext)
-        set2.id = UUID()
-        set2.isComplete = false
-        set2.reps = 3
-        set2.weight = 300
-        
-        set3 = ExerciseSet(context: viewContext)
-        set3.id = UUID()
-        set3.isComplete = false
-        set3.reps = 1
-        set3.weight = 315
-        
-        sets = NSOrderedSet(array: [set1, set2, set3])
-        
-        main.exerciseSets = sets
+        main.exerciseSets = createSets(setCount: 3, viewContext: viewContext)
         
         workout.mainExercise = main
+        
+        let supplemental = SupplementalExercise(context: viewContext)
+        supplemental.isComplete = false
+        supplemental.id = UUID()
+        supplemental.lift = squat
+        supplemental.exerciseSets = createSets(setCount: 5, viewContext: viewContext)
+        
+        workout.supplementalExercise = supplemental
+        
+        let assistance1 = AssistanceExercise(context: viewContext)
+        assistance1.isComplete = false
+        assistance1.id = UUID()
+        assistance1.lift = dumbbellBench
+        assistance1.exerciseSets = createSets(setCount: 5, viewContext: viewContext)
+        
+        let assistance2 = AssistanceExercise(context: viewContext)
+        assistance2.isComplete = false
+        assistance2.id = UUID()
+        assistance2.lift = latPulldown
+        assistance2.exerciseSets = createSets(setCount: 5, viewContext: viewContext)
+        
+        let assistance3 = AssistanceExercise(context: viewContext)
+        assistance3.isComplete = false
+        assistance3.id = UUID()
+        assistance3.lift = reverseCrunch
+        assistance3.exerciseSets = createSets(setCount: 5, viewContext: viewContext)
+        
+        var assistanceWork = NSOrderedSet(array: [assistance1, assistance2, assistance3])
+        
+        workout.assistanceExercises = assistanceWork
         
         do {
             try viewContext.save()
@@ -112,5 +116,21 @@ struct PersistenceController {
         }
         
         container.viewContext.automaticallyMergesChangesFromParent = true
+    }
+    
+    private static func createSets(setCount: Int, viewContext: NSManagedObjectContext) -> NSOrderedSet {
+        var sets: [ExerciseSet] = []
+        
+        for _ in 1...setCount {
+            let set = ExerciseSet(context: viewContext)
+            set.id = UUID()
+            set.isComplete = false
+            set.weight = Int32(Int.random(in: 200..<300))
+            set.reps = Int32(Int.random(in: 1...5))
+            
+            sets.append(set)
+        }
+        
+        return NSOrderedSet(array: sets)
     }
 }
