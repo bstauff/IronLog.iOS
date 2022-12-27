@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct WorkoutsView: View {
-    @Environment(\.managedObjectContext) var viewContext
-    @FetchRequest(sortDescriptors:[SortDescriptor(\Workout.date)]) var workouts: FetchedResults<Workout>
+    @Environment(\.managedObjectContext)
+    var viewContext
+    
+    @FetchRequest(sortDescriptors:[SortDescriptor(\Workout.date)])
+    var workouts: FetchedResults<Workout>
     
     @State private var isShowingWorkoutSheet = false
     @State private var isError = false

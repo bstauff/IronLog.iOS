@@ -16,6 +16,10 @@ struct WorkoutDetailsView: View {
     @State private var isShowingExerciseSheet = false
     
     @State private var isShowingEditSheet = false
+    @State private var isShowingAddWarmUpSheet = false
+    @State private var isShowingAddAssistanceSheet = false
+    @State private var isShowingAddMainSheet = false
+    @State private var isShowingAddSupplementalSheet = false
     
     var warmupExercises: [WarmupExercise] {
         return workout.warmupExercises?.array as? [WarmupExercise] ?? []
@@ -28,7 +32,10 @@ struct WorkoutDetailsView: View {
     var body: some View {
         VStack {
             List {
-                Section(header: Text("Warmup Lifts")) {
+                Section(
+                    header: ExerciseHeaderView(canAdd: .constant(true), headerTitle: "Warm Up Lifts"){
+                        self.isShowingAddWarmUpSheet = true
+                    }) {
                     if warmupExercises.count > 0 {
                         ForEach(warmupExercises){ warmupExercise in
                             NavigationLink(
@@ -40,7 +47,10 @@ struct WorkoutDetailsView: View {
                         Text("Go add some warmup work!")
                     }
                 }
-                Section(header: Text("Main Lift")) {
+                Section(
+                    header: MainHeaderView(workout: self.workout, headerTitle: "Main Lift") {
+                        self.isShowingAddMainSheet = true
+                    }) {
                     if self.workout.mainExercise != nil {
                         NavigationLink(
                             destination: ExerciseDetailsView(exercise: self.workout.mainExercise!)) {
@@ -50,7 +60,10 @@ struct WorkoutDetailsView: View {
                         Text("Go add some main work!")
                     }
                 }
-                Section(header: Text("Supplemental Lift")) {
+                Section(
+                    header: SupplementalHeaderView(workout: self.workout, headerTitle: "Supplemental Lift") {
+                        self.isShowingAddSupplementalSheet = true
+                    }) {
                     if self.workout.supplementalExercise != nil {
                         NavigationLink(
                             destination: ExerciseDetailsView(exercise: self.workout.supplementalExercise!)) {
@@ -60,7 +73,9 @@ struct WorkoutDetailsView: View {
                         Text("Go add some supplemental work!")
                     }
                 }
-                Section(header: Text("Assistance Lifts")) {
+                Section(header: ExerciseHeaderView(canAdd: .constant(true), headerTitle: "Assistance Lifts") {
+                    self.isShowingAddAssistanceSheet = true
+                }) {
                     if assistanceExercises.count > 0 {
                         ForEach(assistanceExercises){ assistanceExercise in
                             NavigationLink(
@@ -77,6 +92,18 @@ struct WorkoutDetailsView: View {
         }
         .sheet(isPresented: $isShowingEditSheet) {
             EditWorkoutView(workout: workout)
+        }
+        .sheet(isPresented: $isShowingAddWarmUpSheet) {
+            AddWarmUpView(workout: workout)
+        }
+        .sheet(isPresented: $isShowingAddAssistanceSheet) {
+            AddAssistanceView(workout: workout)
+        }
+        .sheet(isPresented: $isShowingAddMainSheet) {
+            AddMainView(workout: workout)
+        }
+        .sheet(isPresented: $isShowingAddSupplementalSheet) {
+            AddSupplementalView(workout: workout)
         }
         .navigationTitle(Text(convertDateToString()))
         .toolbar {
@@ -96,6 +123,61 @@ struct WorkoutDetailsView: View {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/YY"
         return dateFormatter.string(from: self.workout.date!)
+    }
+}
+
+struct ExerciseHeaderView: View {
+    @Binding var canAdd: Bool
+    
+    var headerTitle: String
+    
+    var onAddClicked: () -> Void
+    
+    var body: some View {
+        HStack {
+            Text(headerTitle)
+            Spacer()
+            Button(action: onAddClicked) {
+                Image(systemName: "plus.circle.fill")
+            }
+        }
+    }
+}
+
+struct MainHeaderView: View {
+    @ObservedObject var workout: Workout
+    
+    var headerTitle: String
+    
+    var onAddClicked: () -> Void
+    
+    var body: some View {
+        HStack {
+            Text(headerTitle)
+            Spacer()
+            Button(action: onAddClicked) {
+                Image(systemName: "plus.circle.fill")
+            }
+            .disabled(workout.mainExercise != nil)
+        }
+    }
+}
+struct SupplementalHeaderView: View {
+    @ObservedObject var workout: Workout
+    
+    var headerTitle: String
+    
+    var onAddClicked: () -> Void
+    
+    var body: some View {
+        HStack {
+            Text(headerTitle)
+            Spacer()
+            Button(action: onAddClicked) {
+                Image(systemName: "plus.circle.fill")
+            }
+            .disabled(workout.supplementalExercise != nil)
+        }
     }
 }
 
