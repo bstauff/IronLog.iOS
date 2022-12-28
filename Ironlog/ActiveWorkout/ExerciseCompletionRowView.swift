@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ExerciseCompletionRowView: View {
     @Environment(\.managedObjectContext) var viewContext
-    @ObservedObject var exerciseSet: ExerciseSetModel
+    @ObservedObject var exerciseSet: ExerciseSet
     
     @State var errorMessage: String = ""
     @State var isError: Bool = false
@@ -45,7 +45,7 @@ struct ExerciseCompletionRowView: View {
 struct ExerciseCompletionRowView_Previews: PreviewProvider {
     static var previews: some View {
         let viewContext = PersistenceController.preview.container.viewContext
-        let exercise = try? viewContext.fetch(ExerciseModel.fetchRequest()).first
-        return ExerciseCompletionRowView(exerciseSet: exercise!.exerciseSets?.firstObject! as! ExerciseSetModel)
+        let exercise = try? viewContext.fetch(Exercise.fetchRequest()).first
+        return ExerciseCompletionRowView(exerciseSet: exercise!.exerciseSets?.firstObject! as! ExerciseSet)
     }
 }

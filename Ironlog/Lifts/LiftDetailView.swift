@@ -10,7 +10,7 @@ import SwiftUI
 struct LiftDetailView: View {
     @Environment(\.managedObjectContext) var viewContext
     
-    @ObservedObject var lift: LiftModel
+    @ObservedObject var lift: Lift
     
     @State private var isPresentingEditSheet = false
     @State private var didSaveThrowError = false
@@ -42,7 +42,7 @@ struct LiftDetailView: View {
         self.isPresentingEditSheet = false
         
         lift.name = updatedName
-        lift.trainingMax = Int64(updatedMax)
+        lift.trainingMax = Int32(updatedMax)
         
         do {
             try viewContext.save()
@@ -56,7 +56,7 @@ struct LiftDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let previewContext = PersistenceController.preview.container.viewContext
         
-        let liftModel = LiftModel(context: previewContext)
+        let liftModel = Lift(context: previewContext)
         
         liftModel.name = "Squat"
         liftModel.trainingMax = 315

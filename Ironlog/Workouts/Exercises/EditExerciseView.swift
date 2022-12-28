@@ -12,12 +12,12 @@ struct EditExerciseView: View {
     @Environment(\.managedObjectContext) var viewContext
     
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)])
-    var lifts: FetchedResults<LiftModel>
+    var lifts: FetchedResults<Lift>
     
-    @ObservedObject var exercise: ExerciseModel
+    @ObservedObject var exercise: Exercise
     
-    @State var updatedLift: LiftModel?
-    @State var updatedSets: [ExerciseSetModel] = []
+    @State var updatedLift: Lift?
+    @State var updatedSets: [ExerciseSet] = []
     
     @State private var isError = false
     @State private var errorMessage = ""
@@ -30,7 +30,7 @@ struct EditExerciseView: View {
             Form {
                 Picker("Lift", selection: $updatedLift) {
                     ForEach(lifts) { lift in
-                        Text(lift.name ?? "").tag(lift as LiftModel?)
+                        Text(lift.name ?? "").tag(lift as Lift?)
                     }
                 }
                 Section {
@@ -53,21 +53,21 @@ struct EditExerciseView: View {
             }
         }
         .onAppear {
-            updatedLift = exercise.exerciseLift
-            updatedSets = exercise.exerciseSets?.array as! [ExerciseSetModel]
+            updatedLift = exercise.lift
+            updatedSets = exercise.exerciseSets?.array as! [ExerciseSet]
         }
     }
     
     private func updateExercise() -> Void {
-        exercise.exerciseLift = updatedLift
-        var setsToRemove: [ExerciseSetModel] = []
-        for exerciseSet in exercise.exerciseSets!.array as! [ExerciseSetModel] {
+        exercise.lift = updatedLift
+        var setsToRemove: [ExerciseSet] = []
+        for exerciseSet in exercise.exerciseSets!.array as! [ExerciseSet] {
             if !updatedSets.contains(exerciseSet) {
                 setsToRemove.append(exerciseSet)
             }
         }
         
-        var setsToAdd: [ExerciseSetModel] = []
+        var setsToAdd: [ExerciseSet] = []
         for exerciseSet in updatedSets {
             if !exercise.exerciseSets!.contains(exerciseSet) {
                 setsToAdd.append(exerciseSet)
@@ -96,7 +96,7 @@ struct EditExerciseView_Previews: PreviewProvider {
     static var previews: some View {
         let viewContext = PersistenceController.preview.container.viewContext
         
-        let exercise = ExerciseModel(context: viewContext)
+        let exercise = Exercise(context: viewContext)
         
         return NavigationView {
             EditExerciseView(exercise: exercise) {

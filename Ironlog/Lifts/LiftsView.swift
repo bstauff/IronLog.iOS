@@ -10,7 +10,7 @@ import SwiftUI
 struct LiftsView: View {
     
     @Environment(\.managedObjectContext) var viewContext
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var lifts: FetchedResults<LiftModel>
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var lifts: FetchedResults<Lift>
     
     @State private var isShowingAddLiftSheet = false
     
@@ -20,7 +20,7 @@ struct LiftsView: View {
                 List {
                     ForEach(lifts) { lift in
                         NavigationLink(destination: LiftDetailView(lift: lift)) {
-                            LiftLineItemView(liftModel: lift)
+                            LiftLineItemView(lift: lift)
                         }
                     }
                 }

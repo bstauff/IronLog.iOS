@@ -10,7 +10,7 @@ import SwiftUI
 struct WorkoutCompletionView: View {
     @Environment(\.managedObjectContext) var viewContext
     
-    @ObservedObject var workout: WorkoutModel
+    @ObservedObject var workout: Workout
     
     @State private var errorMessage = ""
     @State private var isError = false
@@ -60,8 +60,8 @@ struct WorkoutCompletionView: View {
         return dateFormatter.string(from: self.workout.date!)
     }
     
-    private func getExercises() -> [ExerciseModel] {
-        let exercises = self.workout.workoutExercises?.array as? [ExerciseModel]
+    private func getExercises() -> [Exercise] {
+        let exercises = self.workout.warmupExercises?.array as? [Exercise]
         return exercises ?? []
     }
 }
@@ -69,7 +69,7 @@ struct WorkoutCompletionView: View {
 struct WorkoutCompletionView_Previews: PreviewProvider {
     static var previews: some View {
         let viewContext = PersistenceController.preview.container.viewContext
-        let workout = try! viewContext.fetch(WorkoutModel.fetchRequest()).first!
+        let workout = try! viewContext.fetch(Workout.fetchRequest()).first!
         return
             NavigationView {
                 WorkoutCompletionView(workout: workout)

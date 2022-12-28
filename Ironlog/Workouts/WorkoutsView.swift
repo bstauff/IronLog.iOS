@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct WorkoutsView: View {
-    @Environment(\.managedObjectContext) var viewContext
-    @FetchRequest(sortDescriptors:[SortDescriptor(\WorkoutModel.date)]) var workouts: FetchedResults<WorkoutModel>
+    @Environment(\.managedObjectContext)
+    var viewContext
+    
+    @FetchRequest(sortDescriptors:[SortDescriptor(\Workout.date)])
+    var workouts: FetchedResults<Workout>
     
     @State private var isShowingWorkoutSheet = false
     @State private var isError = false
@@ -43,7 +46,7 @@ struct WorkoutsView: View {
             }
         }
     }
-    func getWorkoutDate(workout: WorkoutModel?) -> String{
+    func getWorkoutDate(workout: Workout?) -> String{
         guard workout?.date != nil else {
             return ""
         }

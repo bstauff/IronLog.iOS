@@ -1,24 +1,30 @@
 //
-//  WorkoutAddExerciseView.swift
+//  AddWarmUp.swift
 //  Ironlog
 //
-//  Created by Brian Stauff on 4/23/22.
+//  Created by Brian Stauff on 12/27/22.
 //
 
 import SwiftUI
 
-struct AddExerciseView: View {
-    @Environment(\.presentationMode) var presentationMode
-    @Environment(\.managedObjectContext) var viewContext
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var lifts: FetchedResults<Lift>
+struct AddWarmUpView: View {
+    @Environment(\.presentationMode)
+    var presentationMode
+    
+    @Environment(\.managedObjectContext)
+    var viewContext
+    
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)])
+    var lifts: FetchedResults<Lift>
+    
+    @ObservedObject
+    var workout: Workout
     
     @State private var selectedLift: Lift?
     @State private var sets: [ExerciseSet] = []
     
     @State private var isError = false
     @State private var errorMessage = ""
-    
-    var onExerciseAdded: (_ newExercise: Exercise) -> Void
     
     var body: some View {
         NavigationView{
@@ -54,7 +60,7 @@ struct AddExerciseView: View {
             }
         }
     }
-        
+    
     func createNewExercise() -> Void {
         guard selectedLift != nil else {
             isError = true
@@ -68,12 +74,16 @@ struct AddExerciseView: View {
             return
         }
         
-        let newExercise = Exercise(context: viewContext)
+        let newExercise = WarmupExercise(context: viewContext)
         let orderedSet = NSOrderedSet(array:sets)
         newExercise.addToExerciseSets(orderedSet)
         newExercise.lift = self.selectedLift
         newExercise.id = UUID()
         newExercise.isComplete = false
+        
+        newExercise.workout = self.workout
+        
+        workout.addToWarmupExercises(newExercise)
         
         do {
             try viewContext.save()
@@ -82,18 +92,15 @@ struct AddExerciseView: View {
             self.errorMessage = "Failed to save exercise"
             return
         }
-        
-        self.onExerciseAdded(newExercise)
     }
 }
 
-struct AddExerciseView_Previews: PreviewProvider {
+struct AddWarmUpView_Previews: PreviewProvider {
     static var previews: some View {
         let viewContext = PersistenceController.preview.container.viewContext
-        return
-            AddExerciseView{ newExercise in
-            
-            }
-            .environment(\.managedObjectContext, viewContext)
+        let workout = try! viewContext.fetch(Workout.fetchRequest()).first!
+        
+        AddWarmUpView(workout: workout)
+                .environment(\.managedObjectContext, viewContext)
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EditSetsView: View {
-    @Binding var updatedSets: [ExerciseSetModel]
+    @Binding var updatedSets: [ExerciseSet]
     @Environment(\.managedObjectContext) var viewContext
     
     var body: some View {
@@ -42,10 +42,10 @@ struct EditSetsView: View {
 struct EditSetsView_Previews: PreviewProvider {
     static var previews: some View {
         let viewContext = PersistenceController.preview.container.viewContext
-        let setA = ExerciseSetModel(context: viewContext)
+        let setA = ExerciseSet(context: viewContext)
         setA.reps = 5
         setA.weight = 250
-        let setB = ExerciseSetModel(context: viewContext)
+        let setB = ExerciseSet(context: viewContext)
         setB.reps = 10
         setB.weight = 500
         let exerciseSets = [
