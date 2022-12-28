@@ -16,60 +16,23 @@ struct WorkoutDetailsView: View {
     @State private var isShowingExerciseSheet = false
     
     @State private var isShowingEditSheet = false
-    @State private var isShowingAddAssistanceSheet = false
-    @State private var isShowingAddSupplementalSheet = false
     
     @State private var isError = false
     @State private var errorMessage = ""
     
-    var assistanceExercises: [AssistanceExercise] {
-        return workout.assistanceExercises?.array as? [AssistanceExercise] ?? []
-    }
     
     var body: some View {
         VStack {
             List {
                 WarmUpView(workout: self.workout)
                 MainView(workout: self.workout)
-                Section(
-                    header: SupplementalHeaderView(workout: self.workout, headerTitle: "Supplemental Lift") {
-                        self.isShowingAddSupplementalSheet = true
-                    }) {
-                        if self.workout.supplementalExercise != nil {
-                            NavigationLink(
-                                destination: ExerciseDetailsView(exercise: self.workout.supplementalExercise!)) {
-                                ExerciseRowView(exercise: self.workout.supplementalExercise!)
-                            }
-                        } else {
-                            Text("Go add some supplemental work!")
-                        }
-                    }
-                Section(header: ExerciseHeaderView(canAdd: .constant(true), headerTitle: "Assistance Lifts") {
-                    self.isShowingAddAssistanceSheet = true
-                }) {
-                    if assistanceExercises.count > 0 {
-                        ForEach(assistanceExercises){ assistanceExercise in
-                            NavigationLink(
-                                destination: ExerciseDetailsView(exercise: assistanceExercise)) {
-                                ExerciseRowView(exercise: assistanceExercise)
-                            }
-                        }
-                        .onDelete(perform: deleteAssistance)
-                    } else {
-                        Text("Go add some assistance work!")
-                    }
-                }
+                SupplementalView(workout: self.workout)
+                AssistanceView(workout: self.workout)
             }
             .listStyle(.insetGrouped)
         }
         .sheet(isPresented: $isShowingEditSheet) {
             EditWorkoutView(workout: workout)
-        }
-        .sheet(isPresented: $isShowingAddAssistanceSheet) {
-            AddAssistanceView(workout: workout)
-        }
-        .sheet(isPresented: $isShowingAddSupplementalSheet) {
-            AddSupplementalView(workout: workout)
         }
         .alert(isPresented: $isError) {
             Alert(
@@ -98,21 +61,6 @@ struct WorkoutDetailsView: View {
         return dateFormatter.string(from: self.workout.date!)
     }
     
-    func deleteAssistance(indexSet: IndexSet) {
-        for index in indexSet {
-            let assistance = assistanceExercises[index]
-            workout.removeFromAssistanceExercises(assistance)
-            self.viewContext.delete(assistance)
-        }
-        
-        do {
-            try self.viewContext.save()
-        } catch {
-            self.isError = true
-            self.errorMessage = "\(error)"
-            return
-        }
-    }
 }
 
 struct ExerciseHeaderView: View {

@@ -1,5 +1,5 @@
 //
-//  WorkoutDetailsMainView.swift
+//  SupplementalView.swift
 //  Ironlog
 //
 //  Created by Brian Stauff on 12/28/22.
@@ -7,31 +7,31 @@
 
 import SwiftUI
 
-struct MainView: View {
+struct SupplementalView: View {
     @Environment(\.managedObjectContext) var viewContext
     
     @ObservedObject var workout: Workout
     
-    @State private var isShowingAddMainSheet = false
+    @State private var isShowingAddSupplementalSheet = false
     @State private var isError = false
     @State private var errorMessage = ""
     
     var body: some View {
         Section(
-            header: MainHeaderView(workout: self.workout, headerTitle: "Main Lift") {
-                self.isShowingAddMainSheet = true
+            header: SupplementalHeaderView(workout: self.workout, headerTitle: "Supplemental Lift") {
+                self.isShowingAddSupplementalSheet = true
             }) {
-                if self.workout.mainExercise != nil {
-                    NavigationLink(
-                        destination: ExerciseDetailsView(exercise: self.workout.mainExercise!)) {
-                        ExerciseRowView(exercise: self.workout.mainExercise!)
-                    }
-                } else {
-                    Text("Go add some main work!")
+            if self.workout.supplementalExercise != nil {
+                NavigationLink(
+                    destination: ExerciseDetailsView(exercise: self.workout.supplementalExercise!)) {
+                    ExerciseRowView(exercise: self.workout.supplementalExercise!)
                 }
+            } else {
+                Text("Go add some supplemental work!")
             }
-        .sheet(isPresented: $isShowingAddMainSheet) {
-            AddMainView(workout: workout)
+        }
+        .sheet(isPresented: $isShowingAddSupplementalSheet) {
+            AddSupplementalView(workout: workout)
         }
         .alert(isPresented: $isError) {
             Alert(
@@ -43,7 +43,7 @@ struct MainView: View {
     }
 }
 
-struct MainView_Previews: PreviewProvider {
+struct SupplementalView_Previews: PreviewProvider {
     static var previews: some View {
         let viewContext = PersistenceController.preview.container.viewContext
         let workoutFetchRequest = Workout.fetchRequest()
@@ -51,7 +51,7 @@ struct MainView_Previews: PreviewProvider {
         let workout = try! viewContext.fetch(workoutFetchRequest).first!
         NavigationView {
             List {
-                MainView(workout: workout)
+                SupplementalView(workout: workout)
             }
         }
             .environment(\.managedObjectContext, viewContext)
