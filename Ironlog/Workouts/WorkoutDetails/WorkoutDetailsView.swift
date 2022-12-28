@@ -56,13 +56,6 @@ struct WorkoutDetailsView: View {
     
 }
 
-struct ExerciseRowView: View {
-    @ObservedObject var exercise: Exercise
-    var body: some View {
-        Text(exercise.lift?.name ?? "")
-    }
-}
-
 struct WorkoutDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         let viewContext = PersistenceController.preview.container.viewContext
