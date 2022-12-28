@@ -20,7 +20,7 @@ struct SupplementalView: View {
         Section(
             header:
                 ExerciseHeaderView(
-                    headerTitle: "Warm Up Lifts",
+                    headerTitle: "Supplemental",
                     onAddClicked: {() -> Void in self.isShowingAddSupplementalSheet = true},
                     isAddDisabled: {() -> Bool in self.workout.supplementalExercise != nil}
         )) {

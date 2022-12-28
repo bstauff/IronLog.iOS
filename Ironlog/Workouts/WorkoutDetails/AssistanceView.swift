@@ -24,7 +24,7 @@ struct AssistanceView: View {
         Section(
             header:
                 ExerciseHeaderView(
-                    headerTitle: "Warm Up Lifts",
+                    headerTitle: "Assistance",
                     onAddClicked: {() -> Void in self.isShowingAddAssistanceSheet = true},
                     isAddDisabled: {() -> Bool in false}
         )) {

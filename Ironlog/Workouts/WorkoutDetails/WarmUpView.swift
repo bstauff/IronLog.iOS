@@ -24,7 +24,7 @@ struct WarmUpView: View {
         Section(
             header:
                 ExerciseHeaderView(
-                    headerTitle: "Warm Up Lifts",
+                    headerTitle: "Warm Up",
                     onAddClicked: {() -> Void in self.isShowingAddWarmUpSheet = true},
                     isAddDisabled: {() -> Bool in false}
         )) {

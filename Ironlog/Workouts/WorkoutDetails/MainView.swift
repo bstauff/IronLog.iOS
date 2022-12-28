@@ -20,7 +20,7 @@ struct MainView: View {
         Section(
             header:
                 ExerciseHeaderView(
-                    headerTitle: "Warm Up Lifts",
+                    headerTitle: "Main",
                     onAddClicked: {() -> Void in self.isShowingAddMainSheet = true},
                     isAddDisabled: {() -> Bool in self.workout.mainExercise != nil}
         )) {
