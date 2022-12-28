@@ -21,6 +21,9 @@ struct WorkoutDetailsView: View {
     @State private var isShowingAddMainSheet = false
     @State private var isShowingAddSupplementalSheet = false
     
+    @State private var isError = false
+    @State private var errorMessage = ""
+    
     var warmupExercises: [WarmupExercise] {
         return workout.warmupExercises?.array as? [WarmupExercise] ?? []
     }
@@ -36,43 +39,44 @@ struct WorkoutDetailsView: View {
                     header: ExerciseHeaderView(canAdd: .constant(true), headerTitle: "Warm Up Lifts"){
                         self.isShowingAddWarmUpSheet = true
                     }) {
-                    if warmupExercises.count > 0 {
-                        ForEach(warmupExercises){ warmupExercise in
-                            NavigationLink(
-                                destination: ExerciseDetailsView(exercise: warmupExercise)) {
-                                ExerciseRowView(exercise: warmupExercise)
+                        if warmupExercises.count > 0 {
+                            ForEach(warmupExercises){ warmupExercise in
+                                NavigationLink(
+                                    destination: ExerciseDetailsView(exercise: warmupExercise)) {
+                                    ExerciseRowView(exercise: warmupExercise)
+                                }
                             }
+                            .onDelete(perform: deleteWarmups)
+                        } else {
+                            Text("Go add some warmup work!")
                         }
-                    } else {
-                        Text("Go add some warmup work!")
                     }
-                }
                 Section(
                     header: MainHeaderView(workout: self.workout, headerTitle: "Main Lift") {
                         self.isShowingAddMainSheet = true
                     }) {
-                    if self.workout.mainExercise != nil {
-                        NavigationLink(
-                            destination: ExerciseDetailsView(exercise: self.workout.mainExercise!)) {
-                            ExerciseRowView(exercise: self.workout.mainExercise!)
+                        if self.workout.mainExercise != nil {
+                            NavigationLink(
+                                destination: ExerciseDetailsView(exercise: self.workout.mainExercise!)) {
+                                ExerciseRowView(exercise: self.workout.mainExercise!)
+                            }
+                        } else {
+                            Text("Go add some main work!")
                         }
-                    } else {
-                        Text("Go add some main work!")
                     }
-                }
                 Section(
                     header: SupplementalHeaderView(workout: self.workout, headerTitle: "Supplemental Lift") {
                         self.isShowingAddSupplementalSheet = true
                     }) {
-                    if self.workout.supplementalExercise != nil {
-                        NavigationLink(
-                            destination: ExerciseDetailsView(exercise: self.workout.supplementalExercise!)) {
-                            ExerciseRowView(exercise: self.workout.supplementalExercise!)
+                        if self.workout.supplementalExercise != nil {
+                            NavigationLink(
+                                destination: ExerciseDetailsView(exercise: self.workout.supplementalExercise!)) {
+                                ExerciseRowView(exercise: self.workout.supplementalExercise!)
+                            }
+                        } else {
+                            Text("Go add some supplemental work!")
                         }
-                    } else {
-                        Text("Go add some supplemental work!")
                     }
-                }
                 Section(header: ExerciseHeaderView(canAdd: .constant(true), headerTitle: "Assistance Lifts") {
                     self.isShowingAddAssistanceSheet = true
                 }) {
@@ -83,6 +87,7 @@ struct WorkoutDetailsView: View {
                                 ExerciseRowView(exercise: assistanceExercise)
                             }
                         }
+                        .onDelete(perform: deleteAssistance)
                     } else {
                         Text("Go add some assistance work!")
                     }
@@ -105,6 +110,13 @@ struct WorkoutDetailsView: View {
         .sheet(isPresented: $isShowingAddSupplementalSheet) {
             AddSupplementalView(workout: workout)
         }
+        .alert(isPresented: $isError) {
+            Alert(
+                title: Text("Error"),
+                message: Text(self.errorMessage),
+                dismissButton: .default(Text("OK"))
+            )
+        }
         .navigationTitle(Text(convertDateToString()))
         .toolbar {
             ToolbarItem(placement:.navigationBarTrailing) {
@@ -123,6 +135,38 @@ struct WorkoutDetailsView: View {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/YY"
         return dateFormatter.string(from: self.workout.date!)
+    }
+    
+    func deleteWarmups(indexSet: IndexSet) {
+        for index in indexSet {
+            let warmup = warmupExercises[index]
+            workout.removeFromWarmupExercises(warmup)
+            self.viewContext.delete(warmup)
+        }
+        
+        do {
+            try self.viewContext.save()
+        } catch {
+            self.isError = true
+            self.errorMessage = "\(error)"
+            return
+        }
+    }
+    
+    func deleteAssistance(indexSet: IndexSet) {
+        for index in indexSet {
+            let assistance = assistanceExercises[index]
+            workout.removeFromAssistanceExercises(assistance)
+            self.viewContext.delete(assistance)
+        }
+        
+        do {
+            try self.viewContext.save()
+        } catch {
+            self.isError = true
+            self.errorMessage = "\(error)"
+            return
+        }
     }
 }
 
