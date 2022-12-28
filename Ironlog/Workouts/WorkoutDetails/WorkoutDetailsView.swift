@@ -12,9 +12,6 @@ struct WorkoutDetailsView: View {
     
     @ObservedObject var workout: Workout
     
-    @State private var isSheetActive = false
-    @State private var isShowingExerciseSheet = false
-    
     @State private var isShowingEditSheet = false
     
     @State private var isError = false
@@ -49,10 +46,6 @@ struct WorkoutDetailsView: View {
                 }
             }
         }
-    }
-    
-    func showExerciseSheet() {
-        isShowingExerciseSheet = true
     }
     
     func convertDateToString() -> String {
