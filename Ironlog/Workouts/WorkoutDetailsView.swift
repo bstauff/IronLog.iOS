@@ -16,7 +16,6 @@ struct WorkoutDetailsView: View {
     @State private var isShowingExerciseSheet = false
     
     @State private var isShowingEditSheet = false
-    @State private var isShowingAddWarmUpSheet = false
     @State private var isShowingAddAssistanceSheet = false
     @State private var isShowingAddMainSheet = false
     @State private var isShowingAddSupplementalSheet = false
@@ -35,22 +34,7 @@ struct WorkoutDetailsView: View {
     var body: some View {
         VStack {
             List {
-                Section(
-                    header: ExerciseHeaderView(canAdd: .constant(true), headerTitle: "Warm Up Lifts"){
-                        self.isShowingAddWarmUpSheet = true
-                    }) {
-                        if warmupExercises.count > 0 {
-                            ForEach(warmupExercises){ warmupExercise in
-                                NavigationLink(
-                                    destination: ExerciseDetailsView(exercise: warmupExercise)) {
-                                    ExerciseRowView(exercise: warmupExercise)
-                                }
-                            }
-                            .onDelete(perform: deleteWarmups)
-                        } else {
-                            Text("Go add some warmup work!")
-                        }
-                    }
+                WorkoutDetailsWarmUpView(workout: self.workout)
                 Section(
                     header: MainHeaderView(workout: self.workout, headerTitle: "Main Lift") {
                         self.isShowingAddMainSheet = true
@@ -97,9 +81,6 @@ struct WorkoutDetailsView: View {
         }
         .sheet(isPresented: $isShowingEditSheet) {
             EditWorkoutView(workout: workout)
-        }
-        .sheet(isPresented: $isShowingAddWarmUpSheet) {
-            AddWarmUpView(workout: workout)
         }
         .sheet(isPresented: $isShowingAddAssistanceSheet) {
             AddAssistanceView(workout: workout)
