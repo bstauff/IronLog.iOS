@@ -17,15 +17,10 @@ struct WorkoutDetailsView: View {
     
     @State private var isShowingEditSheet = false
     @State private var isShowingAddAssistanceSheet = false
-    @State private var isShowingAddMainSheet = false
     @State private var isShowingAddSupplementalSheet = false
     
     @State private var isError = false
     @State private var errorMessage = ""
-    
-    var warmupExercises: [WarmupExercise] {
-        return workout.warmupExercises?.array as? [WarmupExercise] ?? []
-    }
     
     var assistanceExercises: [AssistanceExercise] {
         return workout.assistanceExercises?.array as? [AssistanceExercise] ?? []
@@ -34,20 +29,8 @@ struct WorkoutDetailsView: View {
     var body: some View {
         VStack {
             List {
-                WorkoutDetailsWarmUpView(workout: self.workout)
-                Section(
-                    header: MainHeaderView(workout: self.workout, headerTitle: "Main Lift") {
-                        self.isShowingAddMainSheet = true
-                    }) {
-                        if self.workout.mainExercise != nil {
-                            NavigationLink(
-                                destination: ExerciseDetailsView(exercise: self.workout.mainExercise!)) {
-                                ExerciseRowView(exercise: self.workout.mainExercise!)
-                            }
-                        } else {
-                            Text("Go add some main work!")
-                        }
-                    }
+                WarmUpView(workout: self.workout)
+                MainView(workout: self.workout)
                 Section(
                     header: SupplementalHeaderView(workout: self.workout, headerTitle: "Supplemental Lift") {
                         self.isShowingAddSupplementalSheet = true
@@ -85,9 +68,6 @@ struct WorkoutDetailsView: View {
         .sheet(isPresented: $isShowingAddAssistanceSheet) {
             AddAssistanceView(workout: workout)
         }
-        .sheet(isPresented: $isShowingAddMainSheet) {
-            AddMainView(workout: workout)
-        }
         .sheet(isPresented: $isShowingAddSupplementalSheet) {
             AddSupplementalView(workout: workout)
         }
@@ -116,22 +96,6 @@ struct WorkoutDetailsView: View {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/YY"
         return dateFormatter.string(from: self.workout.date!)
-    }
-    
-    func deleteWarmups(indexSet: IndexSet) {
-        for index in indexSet {
-            let warmup = warmupExercises[index]
-            workout.removeFromWarmupExercises(warmup)
-            self.viewContext.delete(warmup)
-        }
-        
-        do {
-            try self.viewContext.save()
-        } catch {
-            self.isError = true
-            self.errorMessage = "\(error)"
-            return
-        }
     }
     
     func deleteAssistance(indexSet: IndexSet) {

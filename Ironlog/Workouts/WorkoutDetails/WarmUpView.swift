@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WorkoutDetailsWarmUpView: View {
+struct WarmUpView: View {
     @Environment(\.managedObjectContext) var viewContext
     
     @ObservedObject var workout: Workout
@@ -66,16 +66,15 @@ struct WorkoutDetailsWarmUpView: View {
     }
 }
 
-struct WorkoutDetailsWarmUpView_Previews: PreviewProvider {
+struct WarmUpView_Previews: PreviewProvider {
     static var previews: some View {
-        
         let viewContext = PersistenceController.preview.container.viewContext
         let workoutFetchRequest = Workout.fetchRequest()
 
         let workout = try! viewContext.fetch(workoutFetchRequest).first!
         NavigationView {
             List {
-                WorkoutDetailsWarmUpView(workout: workout)
+                WarmUpView(workout: workout)
             }
         }
             .environment(\.managedObjectContext, viewContext)
