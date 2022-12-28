@@ -18,9 +18,12 @@ struct SupplementalView: View {
     
     var body: some View {
         Section(
-            header: SupplementalHeaderView(workout: self.workout, headerTitle: "Supplemental Lift") {
-                self.isShowingAddSupplementalSheet = true
-            }) {
+            header:
+                ExerciseHeaderView(
+                    headerTitle: "Warm Up Lifts",
+                    onAddClicked: {() -> Void in self.isShowingAddSupplementalSheet = true},
+                    isAddDisabled: {() -> Bool in self.workout.supplementalExercise != nil}
+        )) {
             if self.workout.supplementalExercise != nil {
                 NavigationLink(
                     destination: ExerciseDetailsView(exercise: self.workout.supplementalExercise!)) {

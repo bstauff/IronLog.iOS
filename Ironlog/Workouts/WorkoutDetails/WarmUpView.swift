@@ -22,9 +22,12 @@ struct WarmUpView: View {
     
     var body: some View {
         Section(
-            header: ExerciseHeaderView(canAdd: .constant(true), headerTitle: "Warm Up Lifts"){
-                self.isShowingAddWarmUpSheet = true
-            }) {
+            header:
+                ExerciseHeaderView(
+                    headerTitle: "Warm Up Lifts",
+                    onAddClicked: {() -> Void in self.isShowingAddWarmUpSheet = true},
+                    isAddDisabled: {() -> Bool in false}
+        )) {
                 if warmUpExercises.count > 0 {
                     ForEach(warmUpExercises){ warmupExercise in
                         NavigationLink(

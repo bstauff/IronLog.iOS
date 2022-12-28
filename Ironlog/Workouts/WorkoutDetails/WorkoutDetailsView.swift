@@ -63,64 +63,8 @@ struct WorkoutDetailsView: View {
     
 }
 
-struct ExerciseHeaderView: View {
-    @Binding var canAdd: Bool
-    
-    var headerTitle: String
-    
-    var onAddClicked: () -> Void
-    
-    var body: some View {
-        HStack {
-            Text(headerTitle)
-            Spacer()
-            Button(action: onAddClicked) {
-                Image(systemName: "plus.circle.fill")
-            }
-        }
-    }
-}
-
-struct MainHeaderView: View {
-    @ObservedObject var workout: Workout
-    
-    var headerTitle: String
-    
-    var onAddClicked: () -> Void
-    
-    var body: some View {
-        HStack {
-            Text(headerTitle)
-            Spacer()
-            Button(action: onAddClicked) {
-                Image(systemName: "plus.circle.fill")
-            }
-            .disabled(workout.mainExercise != nil)
-        }
-    }
-}
-struct SupplementalHeaderView: View {
-    @ObservedObject var workout: Workout
-    
-    var headerTitle: String
-    
-    var onAddClicked: () -> Void
-    
-    var body: some View {
-        HStack {
-            Text(headerTitle)
-            Spacer()
-            Button(action: onAddClicked) {
-                Image(systemName: "plus.circle.fill")
-            }
-            .disabled(workout.supplementalExercise != nil)
-        }
-    }
-}
-
 struct ExerciseRowView: View {
     @ObservedObject var exercise: Exercise
-    
     var body: some View {
         Text(exercise.lift?.name ?? "")
     }

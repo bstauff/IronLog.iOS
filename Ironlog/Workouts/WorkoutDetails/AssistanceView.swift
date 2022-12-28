@@ -21,9 +21,13 @@ struct AssistanceView: View {
     }
     
     var body: some View {
-        Section(header: ExerciseHeaderView(canAdd: .constant(true), headerTitle: "Assistance Lifts") {
-            self.isShowingAddAssistanceSheet = true
-        }) {
+        Section(
+            header:
+                ExerciseHeaderView(
+                    headerTitle: "Warm Up Lifts",
+                    onAddClicked: {() -> Void in self.isShowingAddAssistanceSheet = true},
+                    isAddDisabled: {() -> Bool in false}
+        )) {
             if assistanceExercises.count > 0 {
                 ForEach(assistanceExercises){ assistanceExercise in
                     NavigationLink(

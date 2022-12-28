@@ -18,9 +18,12 @@ struct MainView: View {
     
     var body: some View {
         Section(
-            header: MainHeaderView(workout: self.workout, headerTitle: "Main Lift") {
-                self.isShowingAddMainSheet = true
-            }) {
+            header:
+                ExerciseHeaderView(
+                    headerTitle: "Warm Up Lifts",
+                    onAddClicked: {() -> Void in self.isShowingAddMainSheet = true},
+                    isAddDisabled: {() -> Bool in self.workout.mainExercise != nil}
+        )) {
                 if self.workout.mainExercise != nil {
                     NavigationLink(
                         destination: ExerciseDetailsView(exercise: self.workout.mainExercise!)) {
