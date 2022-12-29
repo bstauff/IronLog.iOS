@@ -21,6 +21,17 @@ struct WorkoutCompletionView: View {
             ForEach(getExercises()) { exercise in
                 ExerciseCompletionView(exercise: exercise)
             }
+            VStack {
+                Text("AMRAP Record Reps")
+                HStack {
+                    Spacer()
+                    TextField("apples", value: $workout.recordReps, format: .number, prompt: Text("record reps"))
+                        .frame(width: 200)
+                        .textFieldStyle(.roundedBorder)
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                }
+            }
             HStack {
                 Spacer()
                 Toggle(isOn: $workout.isComplete) {
