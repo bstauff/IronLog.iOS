@@ -26,6 +26,9 @@ struct WorkoutDetailsView: View {
                 MainView(workout: self.workout)
                 SupplementalView(workout: self.workout)
                 AssistanceView(workout: self.workout)
+                Section("AMRAP Record Reps") {
+                    Text("\(workout.recordReps)")
+                }
             }
             .listStyle(.insetGrouped)
         }
