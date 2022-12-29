@@ -11,8 +11,8 @@ struct WorkoutsView: View {
     @Environment(\.managedObjectContext)
     var viewContext
     
-    @FetchRequest(sortDescriptors:[SortDescriptor(\Workout.date)])
-    var workouts: FetchedResults<Workout>
+    @FetchRequest(sortDescriptors:[SortDescriptor(\FslAmrapWorkout.date)])
+    var workouts: FetchedResults<FslAmrapWorkout>
     
     @State private var isShowingWorkoutSheet = false
     @State private var isError = false
