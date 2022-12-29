@@ -31,7 +31,7 @@ struct AddWorkoutView: View {
         }
     }
     func saveClicked() {
-        let newWorkout = Workout(context: viewContext)
+        let newWorkout = FslAmrapWorkout(context: viewContext)
         newWorkout.id = UUID()
         newWorkout.isComplete = false
         newWorkout.date = selectedDate

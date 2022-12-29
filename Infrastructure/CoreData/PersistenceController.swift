@@ -38,7 +38,7 @@ struct PersistenceController {
         reverseCrunch.name = "Reverse Crunch"
         reverseCrunch.trainingMax = 200
         
-        let workout = Workout(context: viewContext)
+        let workout = FslAmrapWorkout(context: viewContext)
         workout.id = UUID()
         workout.isComplete = false
         workout.date = Date()

@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct WorkoutCompletionView: View {
     @Environment(\.managedObjectContext) var viewContext
     
-    @ObservedObject var workout: Workout
+    @ObservedObject var workout: FslAmrapWorkout
     
     @State private var errorMessage = ""
     @State private var isError = false
@@ -69,7 +70,8 @@ struct WorkoutCompletionView: View {
 struct WorkoutCompletionView_Previews: PreviewProvider {
     static var previews: some View {
         let viewContext = PersistenceController.preview.container.viewContext
-        let workout = try! viewContext.fetch(Workout.fetchRequest()).first!
+        let fetchRequest: NSFetchRequest<FslAmrapWorkout> = FslAmrapWorkout.fetchRequest()
+        let workout = try! viewContext.fetch(fetchRequest).first!
         return
             NavigationView {
                 WorkoutCompletionView(workout: workout)

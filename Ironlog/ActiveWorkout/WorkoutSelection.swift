@@ -9,11 +9,11 @@ import SwiftUI
 
 struct WorkoutSelection: View {
     @Environment(\.managedObjectContext) var viewContext
-    @FetchRequest(sortDescriptors:[SortDescriptor(\Workout.date, order: .reverse)]) var workouts: FetchedResults<Workout>
+    @FetchRequest(sortDescriptors:[SortDescriptor(\FslAmrapWorkout.date, order: .reverse)]) var workouts: FetchedResults<FslAmrapWorkout>
     
-    var onWorkoutSelected: (_ selectedWorkout: Workout?) -> Void
+    var onWorkoutSelected: (_ selectedWorkout: FslAmrapWorkout?) -> Void
     
-    @State var selectedWorkout: Workout? = nil
+    @State var selectedWorkout: FslAmrapWorkout? = nil
     
     var body: some View {
         Picker("Workout", selection: $selectedWorkout) {

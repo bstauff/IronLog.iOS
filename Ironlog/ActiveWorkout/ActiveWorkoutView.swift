@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ActiveWorkoutView: View {
     @Environment(\.managedObjectContext) var viewContext
-    @FetchRequest(sortDescriptors:[SortDescriptor(\Workout.date)]) var workouts: FetchedResults<Workout>
+    @FetchRequest(sortDescriptors:[SortDescriptor(\FslAmrapWorkout.date)]) var workouts: FetchedResults<FslAmrapWorkout>
     
     @State private var isError = false
     @State private var errorMessage = ""
     
-    @State private var selectedWorkout: Workout? = nil
+    @State private var selectedWorkout: FslAmrapWorkout? = nil
     
     var body: some View {
         NavigationView {

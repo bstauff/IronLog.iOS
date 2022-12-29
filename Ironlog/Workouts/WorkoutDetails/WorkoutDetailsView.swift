@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct WorkoutDetailsView: View {
     @Environment(\.managedObjectContext) var viewContext
     
-    @ObservedObject var workout: Workout
+    @ObservedObject var workout: FslAmrapWorkout
     
     @State private var isShowingEditSheet = false
     
@@ -59,9 +60,10 @@ struct WorkoutDetailsView: View {
 struct WorkoutDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         let viewContext = PersistenceController.preview.container.viewContext
-        let stuff = Workout.fetchRequest()
+        
+        let fetchRequest: NSFetchRequest<FslAmrapWorkout> = FslAmrapWorkout.fetchRequest()
 
-        let moreStuff = try? viewContext.fetch(stuff)
+        let moreStuff = try? viewContext.fetch(fetchRequest)
 
         return NavigationView {
             WorkoutDetailsView(workout: (moreStuff?.first!)!)

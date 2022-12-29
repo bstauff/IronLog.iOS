@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct EditWorkoutView: View {
     @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentationMode
     
-    @ObservedObject var workout: Workout
+    @ObservedObject var workout: FslAmrapWorkout
     
     @State private var selectedDate: Date = Date()
     @State private var isError = false
@@ -49,7 +50,8 @@ struct EditWorkoutView: View {
 struct EditWorkoutView_Previews: PreviewProvider {
     static var previews: some View {
         let viewContext = PersistenceController.preview.container.viewContext
-        let workoutModel = try! viewContext.fetch(Workout.fetchRequest()).first!
+        let fetchRequest: NSFetchRequest<FslAmrapWorkout> = FslAmrapWorkout.fetchRequest()
+        let workoutModel = try! viewContext.fetch(fetchRequest).first!
         EditWorkoutView(workout: workoutModel)
             .environment(\.managedObjectContext, viewContext)
     }
