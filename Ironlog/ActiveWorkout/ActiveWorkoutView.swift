@@ -17,16 +17,28 @@ struct ActiveWorkoutView: View {
     @State private var selectedWorkout: FslAmrapWorkout? = nil
     
     var body: some View {
-        NavigationView {
-            List {
+        List {
+            Section {
                 WorkoutSelection() { updatedWorkoutSelection in
                     selectedWorkout = updatedWorkoutSelection
                 }
-                if(selectedWorkout != nil) {
-                    WorkoutCompletionView(workout: selectedWorkout!)
-                } else {
-                    Text("No workout selected")
+            }
+            if(selectedWorkout != nil) {
+                //                    WorkoutCompletionView(workout: selectedWorkout!)
+                Section{
+                    NavigationStack {
+                        ForEach(getSelectedWarmups()){ warmup in
+                            NavigationLink(warmup.lift?.name ?? "") {
+                                ActiveWarmUpView()
+                            }
+                        }
+                        //                    .navigationDestination(for: WarmupExercise.self) { warmup in
+                        //                        ActiveWarmUpView()
+                        //                    }
+                    }
                 }
+            } else {
+                Text("No workout selected")
             }
         }
         .alert(isPresented: $isError) {
@@ -35,6 +47,10 @@ struct ActiveWorkoutView: View {
                 message: Text("Failed to save workout"),
                 dismissButton: .default(Text("OK")))
         }
+    }
+    
+    private func getSelectedWarmups() -> [WarmupExercise] {
+        return selectedWorkout?.warmupExercises?.array as? [WarmupExercise] ?? []
     }
 }
 
