@@ -14,32 +14,14 @@ struct ActiveWorkoutView: View {
     @State private var isError = false
     @State private var errorMessage = ""
     
-    @State private var selectedWorkout: FslAmrapWorkout? = nil
-    
     var body: some View {
-        List {
-            Section {
-                WorkoutSelection() { updatedWorkoutSelection in
-                    selectedWorkout = updatedWorkoutSelection
+        NavigationStack {
+            List(workouts){ workout in
+                NavigationLink(getWorkoutDate(workout: workout)) {
+                    ActiveWarmUpView()
                 }
             }
-            if(selectedWorkout != nil) {
-                //                    WorkoutCompletionView(workout: selectedWorkout!)
-                Section{
-                    NavigationStack {
-                        ForEach(getSelectedWarmups()){ warmup in
-                            NavigationLink(warmup.lift?.name ?? "") {
-                                ActiveWarmUpView()
-                            }
-                        }
-                        //                    .navigationDestination(for: WarmupExercise.self) { warmup in
-                        //                        ActiveWarmUpView()
-                        //                    }
-                    }
-                }
-            } else {
-                Text("No workout selected")
-            }
+            .navigationTitle(Text("Choose a Workout"))
         }
         .alert(isPresented: $isError) {
             Alert(
@@ -49,8 +31,13 @@ struct ActiveWorkoutView: View {
         }
     }
     
-    private func getSelectedWarmups() -> [WarmupExercise] {
-        return selectedWorkout?.warmupExercises?.array as? [WarmupExercise] ?? []
+    func getWorkoutDate(workout: Workout) -> String{
+        guard workout.date != nil else  {
+            return ""
+        }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/YY"
+        return dateFormatter.string(from: workout.date!)
     }
 }
 
