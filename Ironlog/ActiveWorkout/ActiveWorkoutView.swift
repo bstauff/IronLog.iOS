@@ -20,14 +20,18 @@ struct ActiveWorkoutView: View {
         NavigationStack(path: $path) {
             List(workouts){ workout in
                 NavigationLink(value: workout) {
-                    Text("hi")
+                    Text(getWorkoutDate(workout: workout))
                 }
             }
             .navigationTitle(Text("Choose a workout"))
             .navigationDestination(for: FslAmrapWorkout.self) { workout in
                 ActiveWarmUpView {
-                    path.append(workout.mainExercise)
+                    self.path.append(workout.mainExercise)
+                    print(path.count)
                 }
+            }
+            .navigationDestination(for: MainExercise?.self) { mainExercise in
+                ActiveMainView()
             }
         }
 //        NavigationStack {
