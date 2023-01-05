@@ -14,21 +14,36 @@ struct ActiveWorkoutView: View {
     @State private var isError = false
     @State private var errorMessage = ""
     
+    @State private var path = NavigationPath()
+    
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             List(workouts){ workout in
-                NavigationLink(getWorkoutDate(workout: workout)) {
-                    ActiveWarmUpView()
+                NavigationLink(value: workout) {
+                    Text("hi")
                 }
             }
-            .navigationTitle(Text("Choose a Workout"))
+            .navigationTitle(Text("Choose a workout"))
+            .navigationDestination(for: FslAmrapWorkout.self) { workout in
+                ActiveWarmUpView {
+                    path.append(workout.mainExercise)
+                }
+            }
         }
-        .alert(isPresented: $isError) {
-            Alert(
-                title: Text("oops"),
-                message: Text("Failed to save workout"),
-                dismissButton: .default(Text("OK")))
-        }
+//        NavigationStack {
+//            List(workouts){ workout in
+//                NavigationLink(getWorkoutDate(workout: workout)) {
+//                    ActiveWarmUpView()
+//                }
+//            }
+//            .navigationTitle(Text("Choose a Workout"))
+//        }
+//        .alert(isPresented: $isError) {
+//            Alert(
+//                title: Text("oops"),
+//                message: Text("Failed to save workout"),
+//                dismissButton: .default(Text("OK")))
+//        }
     }
     
     func getWorkoutDate(workout: Workout) -> String{

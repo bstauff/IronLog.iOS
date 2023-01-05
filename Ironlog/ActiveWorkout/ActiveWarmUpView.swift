@@ -8,13 +8,22 @@
 import SwiftUI
 
 struct ActiveWarmUpView: View {
+    
+    var onComplete: () -> Void
+    
     var body: some View {
-        Text("Active Warm up!")
+        VStack {
+            Text("Active Warm up!")
+            Spacer()
+            Button("Complete", action: onComplete)
+        }
     }
 }
 
 struct ActiveWarmUpView_Previews: PreviewProvider {
     static var previews: some View {
-        ActiveWarmUpView()
+        ActiveWarmUpView {
+            
+        }
     }
 }
