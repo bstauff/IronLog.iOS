@@ -8,22 +8,29 @@
 import SwiftUI
 
 struct ActiveWarmUpView: View {
-    
-    var onComplete: () -> Void
+    @Binding var path: NavigationPath
+    @ObservedObject var workout: Workout
     
     var body: some View {
         VStack {
             Text("Active Warm up!")
             Spacer()
-            Button("Complete", action: onComplete)
+            Button("Complete") {
+                path.append(workout.mainExercise)
+            }
         }
     }
 }
 
 struct ActiveWarmUpView_Previews: PreviewProvider {
     static var previews: some View {
-        ActiveWarmUpView {
-            
+        let path = NavigationPath()
+        
+        let viewContext = PersistenceController.preview.container.viewContext
+        let workout = try! viewContext.fetch(Workout.fetchRequest()).first!
+        
+        return NavigationStack(path: .constant(path)) {
+            ActiveWarmUpView(path: .constant(path), workout: workout)
         }
     }
 }

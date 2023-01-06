@@ -23,6 +23,8 @@
 		053FDDF5272F2DC5002D6D9D /* IronlogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053FDDF4272F2DC5002D6D9D /* IronlogUITests.swift */; };
 		053FDDF7272F2DC5002D6D9D /* IronlogUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053FDDF6272F2DC5002D6D9D /* IronlogUITestsLaunchTests.swift */; };
 		054FEB1F28BA3B0A00506316 /* LiftDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FEB1E28BA3B0A00506316 /* LiftDetailView.swift */; };
+		0551DF5429686D8400250CE0 /* ActiveSupplementalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0551DF5329686D8400250CE0 /* ActiveSupplementalView.swift */; };
+		0551DF562968757C00250CE0 /* ActiveFslAmrapVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0551DF552968757C00250CE0 /* ActiveFslAmrapVIew.swift */; };
 		0554AAE2281485A2001E8A58 /* AddExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0554AAE1281485A2001E8A58 /* AddExerciseView.swift */; };
 		058060D6295B298600F86A9F /* AddWarmUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058060D5295B298600F86A9F /* AddWarmUpView.swift */; };
 		058060D8295B2E7000F86A9F /* AddAssistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058060D7295B2E7000F86A9F /* AddAssistanceView.swift */; };
@@ -86,6 +88,8 @@
 		053FDDF4272F2DC5002D6D9D /* IronlogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronlogUITests.swift; sourceTree = "<group>"; };
 		053FDDF6272F2DC5002D6D9D /* IronlogUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronlogUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		054FEB1E28BA3B0A00506316 /* LiftDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftDetailView.swift; sourceTree = "<group>"; };
+		0551DF5329686D8400250CE0 /* ActiveSupplementalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveSupplementalView.swift; sourceTree = "<group>"; };
+		0551DF552968757C00250CE0 /* ActiveFslAmrapVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveFslAmrapVIew.swift; sourceTree = "<group>"; };
 		0554AAE1281485A2001E8A58 /* AddExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseView.swift; sourceTree = "<group>"; };
 		058060D5295B298600F86A9F /* AddWarmUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWarmUpView.swift; sourceTree = "<group>"; };
 		058060D7295B2E7000F86A9F /* AddAssistanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssistanceView.swift; sourceTree = "<group>"; };
@@ -285,6 +289,8 @@
 				05E3991A28F0F06E009E1125 /* WorkoutSelection.swift */,
 				05ECA7042960748600BB4CE4 /* ActiveWarmUpView.swift */,
 				05F01DBD296074B5006515F8 /* ActiveMainView.swift */,
+				0551DF5329686D8400250CE0 /* ActiveSupplementalView.swift */,
+				0551DF552968757C00250CE0 /* ActiveFslAmrapVIew.swift */,
 			);
 			path = ActiveWorkout;
 			sourceTree = "<group>";
@@ -427,6 +433,7 @@
 				05A6E7B727C1807700B3113E /* EditLiftView.swift in Sources */,
 				058060D8295B2E7000F86A9F /* AddAssistanceView.swift in Sources */,
 				05ECA7052960748600BB4CE4 /* ActiveWarmUpView.swift in Sources */,
+				0551DF562968757C00250CE0 /* ActiveFslAmrapVIew.swift in Sources */,
 				058060D6295B298600F86A9F /* AddWarmUpView.swift in Sources */,
 				058060DA295B2F1800F86A9F /* AddMainView.swift in Sources */,
 				052E62FB295C93A400D0B79F /* MainView.swift in Sources */,
@@ -441,6 +448,7 @@
 				05ABCF722929AF17009BC6BC /* EditSetsView.swift in Sources */,
 				05F1E2FF28D9DDC4009D5EED /* EditExerciseView.swift in Sources */,
 				05E55D3527EFB91600FAD5B7 /* ActiveWorkoutView.swift in Sources */,
+				0551DF5429686D8400250CE0 /* ActiveSupplementalView.swift in Sources */,
 				052E6300295C97FE00D0B79F /* AssistanceView.swift in Sources */,
 				05CABDBB2826DC6500A53B98 /* Ironlog.xcdatamodeld in Sources */,
 				053FDDDA272F2DC5002D6D9D /* IronlogApp.swift in Sources */,

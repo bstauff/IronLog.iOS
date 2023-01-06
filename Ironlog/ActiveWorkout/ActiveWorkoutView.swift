@@ -25,23 +25,12 @@ struct ActiveWorkoutView: View {
             }
             .navigationTitle(Text("Choose a workout"))
             .navigationDestination(for: FslAmrapWorkout.self) { workout in
-                ActiveWarmUpView {
-                    self.path.append(workout.mainExercise)
-                    print(path.count)
-                }
+                
             }
-            .navigationDestination(for: MainExercise?.self) { mainExercise in
-                ActiveMainView()
-            }
-        }
-//        NavigationStack {
-//            List(workouts){ workout in
-//                NavigationLink(getWorkoutDate(workout: workout)) {
-//                    ActiveWarmUpView()
-//                }
+//            .navigationDestination(for: MainExercise?.self) { mainExercise in
+//                ActiveMainView(path: $path, workout: workout)
 //            }
-//            .navigationTitle(Text("Choose a Workout"))
-//        }
+        }
 //        .alert(isPresented: $isError) {
 //            Alert(
 //                title: Text("oops"),
