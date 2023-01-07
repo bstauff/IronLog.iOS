@@ -23,13 +23,13 @@ struct ActiveWorkoutView: View {
                     Text(getWorkoutDate(workout: workout))
                 }
             }
-            .navigationTitle(Text("Choose a workout"))
-            .navigationDestination(for: FslAmrapWorkout.self) { workout in
-                
+            .navigationDestination(for: FslAmrapWorkout.self) { workout in 
+                ActiveFslAmrapView(path: $path, workout: workout)
             }
-//            .navigationDestination(for: MainExercise?.self) { mainExercise in
-//                ActiveMainView(path: $path, workout: workout)
-//            }
+            .navigationDestination(for: WarmupExercise.self) { warmup in
+                ActiveWarmupView(warmupExercise: warmup)
+            }
+            .navigationTitle(Text("Choose a workout"))
         }
 //        .alert(isPresented: $isError) {
 //            Alert(
