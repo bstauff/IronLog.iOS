@@ -9,9 +9,14 @@ import SwiftUI
 
 struct ActiveWarmupView: View {
     @ObservedObject var workout: FslAmrapWorkout
+    private var warmupExercises: [WarmupExercise] {
+        return workout.warmupExercises?.array as? [WarmupExercise] ?? []
+    }
     
     var body: some View {
-        Text("Active warmup!")
+        List(warmupExercises){ exercise in
+            ExerciseCompletionView(exercise: exercise)
+        }
     }
 }
 
