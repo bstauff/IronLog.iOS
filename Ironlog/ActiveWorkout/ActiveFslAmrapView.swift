@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct ActiveFslAmrapView: View {
-    @Binding var path: NavigationPath
     @ObservedObject var workout: FslAmrapWorkout
-    
+    @State var path: NavigationPath = NavigationPath()
     private var warmupExercises: [WarmupExercise] {
         return workout.warmupExercises?.array as? [WarmupExercise] ?? []
     }
@@ -18,16 +17,20 @@ struct ActiveFslAmrapView: View {
     
     var body: some View {
         VStack {
-            Text("FSL Amrap Workout")
-                .font(.largeTitle)
-            Text("Hit begin to start your workout!")
-            Spacer()
-            Button("Begin") {
-                path.append(warmupExercises.first!)
+            NavigationStack(path: $path) {
+                VStack{
+                    Text("When you're ready to start your workout, click begin!")
+                    Button("BEGIN"){
+                        path.append(warmupExercises)
+                    }
+                        .buttonStyle(.borderedProminent)
+                }
+                .navigationDestination(for: Array<WarmupExercise>.self) { warmups in
+                    ActiveWarmupView(workout: workout)
+                }
             }
-                .buttonStyle(.borderedProminent)
-            Spacer()
         }
+        .navigationTitle("FSL Amrap Workout")
     }
 }
 
@@ -35,8 +38,8 @@ struct ActiveFslAmrapView_Previews: PreviewProvider {
     static var previews: some View {
         let workout = try! PersistenceController.preview.container.viewContext.fetch(FslAmrapWorkout.fetchRequest()).first!
         let path = NavigationPath()
-        NavigationStack(path: .constant(path)) {
-            ActiveFslAmrapView(path: .constant(path), workout: workout)
+        NavigationStack {
+            ActiveFslAmrapView(workout: workout)
         }
     }
 }

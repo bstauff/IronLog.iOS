@@ -19,15 +19,9 @@ struct ActiveWorkoutView: View {
     var body: some View {
         NavigationStack(path: $path) {
             List(workouts){ workout in
-                NavigationLink(value: workout) {
+                NavigationLink(destination: ActiveFslAmrapView(workout: workout)) {
                     Text(getWorkoutDate(workout: workout))
                 }
-            }
-            .navigationDestination(for: FslAmrapWorkout.self) { workout in 
-                ActiveFslAmrapView(path: $path, workout: workout)
-            }
-            .navigationDestination(for: WarmupExercise.self) { warmup in
-                ActiveWarmupView(warmupExercise: warmup)
             }
             .navigationTitle(Text("Choose a workout"))
         }

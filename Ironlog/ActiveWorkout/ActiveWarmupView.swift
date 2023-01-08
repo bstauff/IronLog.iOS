@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ActiveWarmupView: View {
-    @ObservedObject var warmupExercise: WarmupExercise
+    @ObservedObject var workout: FslAmrapWorkout
     
     var body: some View {
         Text("Active warmup!")
@@ -17,8 +17,7 @@ struct ActiveWarmupView: View {
 
 struct ActiveWarmupView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewContext = PersistenceController.preview.container.viewContext
-        let warmupExercise = try! viewContext.fetch(WarmupExercise.fetchRequest()).first as! WarmupExercise
-        ActiveWarmupView(warmupExercise: warmupExercise)
+        let workout = try! PersistenceController.preview.container.viewContext.fetch(FslAmrapWorkout.fetchRequest()).first!
+        return ActiveWarmupView(workout: workout)
     }
 }
