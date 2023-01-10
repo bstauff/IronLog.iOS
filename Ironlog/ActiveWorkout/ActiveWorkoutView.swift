@@ -19,11 +19,14 @@ struct ActiveWorkoutView: View {
     var body: some View {
         NavigationStack(path: $path) {
             List(workouts){ workout in
-                NavigationLink(destination: ActiveFslAmrapView(workout: workout)) {
+                NavigationLink(value: workout) {
                     Text(getWorkoutDate(workout: workout))
                 }
             }
             .navigationTitle(Text("Choose a workout"))
+            .navigationDestination(for: FslAmrapWorkout.self) { workout in
+                ActiveFslAmrapView(workout: workout, navigationPath: $path)
+            }
         }
 //        .alert(isPresented: $isError) {
 //            Alert(

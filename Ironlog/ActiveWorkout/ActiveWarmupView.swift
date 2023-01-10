@@ -9,6 +9,9 @@ import SwiftUI
 
 struct ActiveWarmupView: View {
     @ObservedObject var workout: FslAmrapWorkout
+    
+    var onComplete: () -> Void
+    
     private var warmupExercises: [WarmupExercise] {
         return workout.warmupExercises?.array as? [WarmupExercise] ?? []
     }
@@ -23,7 +26,9 @@ struct ActiveWarmupView: View {
             Section {
                 HStack {
                     Spacer()
-                    Button("Complete") { }
+                    Button("Complete") {
+                        self.onComplete()
+                    }
                     Spacer()
                 }
             }
@@ -34,7 +39,8 @@ struct ActiveWarmupView: View {
 
 struct ActiveWarmupView_Previews: PreviewProvider {
     static var previews: some View {
+        let path = NavigationPath()
         let workout = try! PersistenceController.preview.container.viewContext.fetch(FslAmrapWorkout.fetchRequest()).first!
-        return ActiveWarmupView(workout: workout)
+        return ActiveWarmupView(workout: workout){ }
     }
 }

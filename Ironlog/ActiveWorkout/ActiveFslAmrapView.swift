@@ -9,28 +9,31 @@ import SwiftUI
 
 struct ActiveFslAmrapView: View {
     @ObservedObject var workout: FslAmrapWorkout
-    @State var path: NavigationPath = NavigationPath()
+    
+    @Binding var navigationPath: NavigationPath
+    
     private var warmupExercises: [WarmupExercise] {
         return workout.warmupExercises?.array as? [WarmupExercise] ?? []
     }
-        
     
     var body: some View {
-        VStack {
-            NavigationStack(path: $path) {
-                VStack{
-                    Text("When you're ready to start your workout, click begin!")
-                    Button("BEGIN"){
-                        path.append(warmupExercises)
-                    }
-                        .buttonStyle(.borderedProminent)
+        NavigationStack(path: $navigationPath) {
+            VStack{
+                Text("When you're ready to start your workout, click begin!")
+                Button("BEGIN"){
+                    self.navigationPath.append(warmupExercises)
                 }
-                .navigationDestination(for: Array<WarmupExercise>.self) { warmups in
-                    ActiveWarmupView(workout: workout)
-                }
+                    .buttonStyle(.borderedProminent)
             }
         }
-        .navigationTitle("FSL Amrap Workout")
+        .navigationDestination(for: Array<WarmupExercise>.self) { warmups in
+            ActiveWarmupView(workout: workout) {
+                self.navigationPath.append(self.workout.mainExercise!)
+            }
+        }
+        .navigationDestination(for: MainExercise.self) { mainExercise in
+            ActiveMainView()
+        }
     }
 }
 
@@ -39,7 +42,7 @@ struct ActiveFslAmrapView_Previews: PreviewProvider {
         let workout = try! PersistenceController.preview.container.viewContext.fetch(FslAmrapWorkout.fetchRequest()).first!
         let path = NavigationPath()
         NavigationStack {
-            ActiveFslAmrapView(workout: workout)
+            ActiveFslAmrapView(workout: workout, navigationPath: .constant(path))
         }
     }
 }
