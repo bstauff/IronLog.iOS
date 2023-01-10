@@ -43,14 +43,23 @@ struct PersistenceController {
         workout.isComplete = false
         workout.date = Date()
         
-        let warmUp = WarmupExercise(context: viewContext)
-        warmUp.isComplete = false
-        warmUp.id = UUID()
-        warmUp.lift = squat
+        let squatWarmup = WarmupExercise(context: viewContext)
+        squatWarmup.isComplete = false
+        squatWarmup.id = UUID()
+        squatWarmup.lift = squat
         
-        warmUp.exerciseSets = createSets(setCount: 3, viewContext: viewContext)
+        squatWarmup.exerciseSets = createSets(setCount: 3, viewContext: viewContext)
         
-        workout.addToWarmupExercises(warmUp)
+        workout.addToWarmupExercises(squatWarmup)
+        
+        let reverseCrunchWarmup = WarmupExercise(context: viewContext)
+        reverseCrunchWarmup.isComplete = false
+        reverseCrunchWarmup.id = UUID()
+        reverseCrunchWarmup.lift = reverseCrunch
+        
+        reverseCrunchWarmup.exerciseSets = createSets(setCount: 3, viewContext: viewContext)
+        
+        workout.addToWarmupExercises(reverseCrunchWarmup)
             
         let main = MainExercise(context: viewContext)
         main.isComplete = false
