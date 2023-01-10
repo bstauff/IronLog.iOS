@@ -41,7 +41,7 @@ struct ActiveFslAmrapView_Previews: PreviewProvider {
     static var previews: some View {
         let workout = try! PersistenceController.preview.container.viewContext.fetch(FslAmrapWorkout.fetchRequest()).first!
         let path = NavigationPath()
-        NavigationStack {
+        NavigationStack(path: .constant(path)) {
             ActiveFslAmrapView(workout: workout, navigationPath: .constant(path))
         }
     }
