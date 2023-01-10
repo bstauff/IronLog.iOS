@@ -14,11 +14,19 @@ struct ActiveWarmupView: View {
     }
     
     var body: some View {
-        VStack {
-//            List(warmupExercises){ exercise in
-//                ExerciseCompletionView(exercise: exercise)
-//            }
-//            Button("Complete") { }
+        List {
+            ForEach(warmupExercises) { exercise in
+                Section {
+                    ExerciseCompletionView(exercise: exercise)
+                }
+            }
+            Section {
+                HStack {
+                    Spacer()
+                    Button("Complete") { }
+                    Spacer()
+                }
+            }
         }
         .navigationTitle("Warmup")
     }
