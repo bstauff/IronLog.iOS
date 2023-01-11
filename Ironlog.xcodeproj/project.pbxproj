@@ -46,6 +46,7 @@
 		05E55D3527EFB91600FAD5B7 /* ActiveWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E55D3427EFB91600FAD5B7 /* ActiveWorkoutView.swift */; };
 		05E6FA3028EB0C0F005DF36D /* ExerciseCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E6FA2F28EB0C0F005DF36D /* ExerciseCompletionView.swift */; };
 		05E9B010296DB46F0004EC20 /* ActiveMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E9B00F296DB46F0004EC20 /* ActiveMainView.swift */; };
+		05E9B012296EEDE80004EC20 /* ActiveSupplementalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E9B011296EEDE80004EC20 /* ActiveSupplementalView.swift */; };
 		05F1E2FF28D9DDC4009D5EED /* EditExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F1E2FE28D9DDC4009D5EED /* EditExerciseView.swift */; };
 /* End PBXBuildFile section */
 
@@ -110,6 +111,7 @@
 		05E55D3427EFB91600FAD5B7 /* ActiveWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveWorkoutView.swift; sourceTree = "<group>"; };
 		05E6FA2F28EB0C0F005DF36D /* ExerciseCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCompletionView.swift; sourceTree = "<group>"; };
 		05E9B00F296DB46F0004EC20 /* ActiveMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveMainView.swift; sourceTree = "<group>"; };
+		05E9B011296EEDE80004EC20 /* ActiveSupplementalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveSupplementalView.swift; sourceTree = "<group>"; };
 		05F1E2FE28D9DDC4009D5EED /* EditExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExerciseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -288,6 +290,7 @@
 				0551DF572969AD3300250CE0 /* ActiveFslAmrapView.swift */,
 				0551DF592969B07800250CE0 /* ActiveWarmupView.swift */,
 				05E9B00F296DB46F0004EC20 /* ActiveMainView.swift */,
+				05E9B011296EEDE80004EC20 /* ActiveSupplementalView.swift */,
 			);
 			path = ActiveWorkout;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 				05D385F2293251AA00911EFF /* AddSetView.swift in Sources */,
 				058060DC295B323800F86A9F /* AddSupplementalView.swift in Sources */,
 				05E3991B28F0F06E009E1125 /* WorkoutSelection.swift in Sources */,
+				05E9B012296EEDE80004EC20 /* ActiveSupplementalView.swift in Sources */,
 				05A6E7B727C1807700B3113E /* EditLiftView.swift in Sources */,
 				058060D8295B2E7000F86A9F /* AddAssistanceView.swift in Sources */,
 				058060D6295B298600F86A9F /* AddWarmUpView.swift in Sources */,
