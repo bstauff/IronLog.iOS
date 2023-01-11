@@ -27,6 +27,7 @@ struct ActiveMainView: View {
                 }
             }
         }
+        .navigationTitle("Main")
     }
 }
 

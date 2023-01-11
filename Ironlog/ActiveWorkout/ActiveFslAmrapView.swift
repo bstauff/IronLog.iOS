@@ -37,6 +37,11 @@ struct ActiveFslAmrapView: View {
                 self.navigationPath.append(self.workout.supplementalExercise!)
             }
         }
+        .navigationDestination(for: SupplementalExercise.self) { supplementalExercise in
+            ActiveSupplementalView(supplementalExercise: supplementalExercise) {
+                
+            }
+        }
     }
 }
 
