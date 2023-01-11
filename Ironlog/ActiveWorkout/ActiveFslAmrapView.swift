@@ -12,8 +12,15 @@ struct ActiveFslAmrapView: View {
     
     @Binding var navigationPath: NavigationPath
     
+    @State
+    var isWorkoutComplete = false
+    
     private var warmupExercises: [WarmupExercise] {
         return workout.warmupExercises?.array as? [WarmupExercise] ?? []
+    }
+    
+    private var assistanceExercises: [AssistanceExercise] {
+        return workout.assistanceExercises?.array as? [AssistanceExercise] ?? []
     }
     
     var body: some View {
@@ -39,8 +46,16 @@ struct ActiveFslAmrapView: View {
         }
         .navigationDestination(for: SupplementalExercise.self) { supplementalExercise in
             ActiveSupplementalView(supplementalExercise: supplementalExercise) {
-                
+                self.navigationPath.append(assistanceExercises)
             }
+        }
+        .navigationDestination(for: Array<AssistanceExercise>.self){ assistance in
+            ActiveAssistanceView(workout: self.workout){
+                self.isWorkoutComplete = true
+            }
+        }
+        .alert(isPresented: $isWorkoutComplete) {
+            Alert(title: Text("Workout complete"), message: Text("You did it!"))
         }
     }
 }
