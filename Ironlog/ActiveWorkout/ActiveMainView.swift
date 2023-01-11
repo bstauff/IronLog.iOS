@@ -8,13 +8,31 @@
 import SwiftUI
 
 struct ActiveMainView: View {
+    @ObservedObject var mainExercise: MainExercise
+    
+    var onComplete: () -> Void
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            Section {
+                ExerciseCompletionView(exercise: mainExercise)
+            }
+            Section {
+                HStack {
+                    Spacer()
+                    Button("Complete") {
+                        self.onComplete()
+                    }
+                    Spacer()
+                }
+            }
+        }
     }
 }
 
 struct ActiveMainView_Previews: PreviewProvider {
     static var previews: some View {
-        ActiveMainView()
+        let workout = try! PersistenceController.preview.container.viewContext.fetch(FslAmrapWorkout.fetchRequest()).first!
+        ActiveMainView(mainExercise: workout.mainExercise!) { }
     }
 }

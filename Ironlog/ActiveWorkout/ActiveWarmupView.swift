@@ -39,7 +39,6 @@ struct ActiveWarmupView: View {
 
 struct ActiveWarmupView_Previews: PreviewProvider {
     static var previews: some View {
-        let path = NavigationPath()
         let workout = try! PersistenceController.preview.container.viewContext.fetch(FslAmrapWorkout.fetchRequest()).first!
         return ActiveWarmupView(workout: workout){ }
     }

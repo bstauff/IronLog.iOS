@@ -25,6 +25,7 @@ struct ActiveFslAmrapView: View {
                 }
                     .buttonStyle(.borderedProminent)
             }
+            .navigationTitle("FSL AMRAP Workout")
         }
         .navigationDestination(for: Array<WarmupExercise>.self) { warmups in
             ActiveWarmupView(workout: workout) {
@@ -32,7 +33,9 @@ struct ActiveFslAmrapView: View {
             }
         }
         .navigationDestination(for: MainExercise.self) { mainExercise in
-            ActiveMainView()
+            ActiveMainView(mainExercise: mainExercise) {
+                self.navigationPath.append(self.workout.supplementalExercise!)
+            }
         }
     }
 }
