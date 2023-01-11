@@ -8,32 +8,63 @@
 import SwiftUI
 
 struct ActiveMainView: View {
-    @ObservedObject var mainExercise: MainExercise
+    @Environment(\.managedObjectContext) var viewContext
+    
+    @ObservedObject var workout: FslAmrapWorkout
+    
+    @State
+    var repsCompleted: Int? = nil
+    
+    @State
+    var isError = false
+    @State
+    var errorMessage = ""
     
     var onComplete: () -> Void
     
     var body: some View {
         List {
             Section {
-                ExerciseCompletionView(exercise: mainExercise)
+                ExerciseCompletionView(exercise: workout.mainExercise!)
+            }
+            Section("AMRAP Reps Completed") {
+                TextField("AMRAP", value: $repsCompleted, format: .number, prompt: Text("Enter reps completed"))
+                    .keyboardType(.numberPad)
             }
             Section {
                 HStack {
                     Spacer()
                     Button("Complete") {
+                        self.workout.recordReps = Int32(repsCompleted ?? 0)
+                        saveWorkout()
                         self.onComplete()
                     }
                     Spacer()
                 }
             }
         }
+        .alert("Oops", isPresented: $isError) {
+            Button("OK") { }
+        } message: {
+            Text(self.errorMessage)
+        }
         .navigationTitle("Main")
+    }
+    
+    func saveWorkout() {
+        do {
+            try viewContext.save()
+        } catch {
+            self.isError = true
+            self.errorMessage = "Failed to save workout"
+        }
     }
 }
 
 struct ActiveMainView_Previews: PreviewProvider {
     static var previews: some View {
-        let workout = try! PersistenceController.preview.container.viewContext.fetch(FslAmrapWorkout.fetchRequest()).first!
-        ActiveMainView(mainExercise: workout.mainExercise!) { }
+        let viewContext = PersistenceController.preview.container.viewContext
+        let workout = try! viewContext.fetch(FslAmrapWorkout.fetchRequest()).first!
+        ActiveMainView(workout: workout) { }
     }
 }

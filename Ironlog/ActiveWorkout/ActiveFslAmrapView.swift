@@ -40,7 +40,7 @@ struct ActiveFslAmrapView: View {
             }
         }
         .navigationDestination(for: MainExercise.self) { mainExercise in
-            ActiveMainView(mainExercise: mainExercise) {
+            ActiveMainView(workout: self.workout) {
                 self.navigationPath.append(self.workout.supplementalExercise!)
             }
         }
