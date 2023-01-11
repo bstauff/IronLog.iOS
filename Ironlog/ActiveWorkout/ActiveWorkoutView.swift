@@ -8,33 +8,31 @@
 import SwiftUI
 
 struct ActiveWorkoutView: View {
-    @Environment(\.managedObjectContext) var viewContext
     @FetchRequest(sortDescriptors:[SortDescriptor(\FslAmrapWorkout.date)]) var workouts: FetchedResults<FslAmrapWorkout>
     
-    @State private var isError = false
-    @State private var errorMessage = ""
-    
-    @State private var selectedWorkout: FslAmrapWorkout? = nil
+    @State private var path = NavigationPath()
     
     var body: some View {
-        NavigationView {
-            List {
-                WorkoutSelection() { updatedWorkoutSelection in
-                    selectedWorkout = updatedWorkoutSelection
-                }
-                if(selectedWorkout != nil) {
-                    WorkoutCompletionView(workout: selectedWorkout!)
-                } else {
-                    Text("No workout selected")
+        NavigationStack(path: $path) {
+            List(workouts){ workout in
+                NavigationLink(value: workout) {
+                    Text(getWorkoutDate(workout: workout))
                 }
             }
+            .navigationTitle(Text("Choose a workout"))
+            .navigationDestination(for: FslAmrapWorkout.self) { workout in
+                ActiveFslAmrapView(workout: workout, navigationPath: $path)
+            }
         }
-        .alert(isPresented: $isError) {
-            Alert(
-                title: Text("oops"),
-                message: Text("Failed to save workout"),
-                dismissButton: .default(Text("OK")))
+    }
+    
+    func getWorkoutDate(workout: Workout) -> String{
+        guard workout.date != nil else  {
+            return ""
         }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/YY"
+        return dateFormatter.string(from: workout.date!)
     }
 }
 
