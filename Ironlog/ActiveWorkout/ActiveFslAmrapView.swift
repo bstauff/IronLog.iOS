@@ -51,11 +51,17 @@ struct ActiveFslAmrapView: View {
         }
         .navigationDestination(for: Array<AssistanceExercise>.self){ assistance in
             ActiveAssistanceView(workout: self.workout){
+                self.workout.isComplete = true
+                
                 self.isWorkoutComplete = true
             }
         }
-        .alert(isPresented: $isWorkoutComplete) {
-            Alert(title: Text("Workout complete"), message: Text("You did it!"))
+        .alert("Workout Complete", isPresented: $isWorkoutComplete) {
+            Button("OK") {
+                self.navigationPath.removeLast(self.navigationPath.count)
+            }
+        } message: {
+            Text("Congratulations!  You completed an FSL AMRAP workout!")
         }
     }
 }

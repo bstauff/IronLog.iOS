@@ -8,11 +8,7 @@
 import SwiftUI
 
 struct ActiveWorkoutView: View {
-    @Environment(\.managedObjectContext) var viewContext
     @FetchRequest(sortDescriptors:[SortDescriptor(\FslAmrapWorkout.date)]) var workouts: FetchedResults<FslAmrapWorkout>
-    
-    @State private var isError = false
-    @State private var errorMessage = ""
     
     @State private var path = NavigationPath()
     
@@ -28,12 +24,6 @@ struct ActiveWorkoutView: View {
                 ActiveFslAmrapView(workout: workout, navigationPath: $path)
             }
         }
-//        .alert(isPresented: $isError) {
-//            Alert(
-//                title: Text("oops"),
-//                message: Text("Failed to save workout"),
-//                dismissButton: .default(Text("OK")))
-//        }
     }
     
     func getWorkoutDate(workout: Workout) -> String{
