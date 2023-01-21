@@ -36,11 +36,21 @@ struct ActiveFslAmrapView: View {
         }
         .navigationDestination(for: Array<WarmupExercise>.self) { warmups in
             ActiveWarmupView(workout: workout) {
+                guard self.workout.mainExercise != nil else {
+                    self.workout.isComplete = true
+                    self.isWorkoutComplete = true
+                    return
+                }
                 self.navigationPath.append(self.workout.mainExercise!)
             }
         }
         .navigationDestination(for: MainExercise.self) { mainExercise in
             ActiveMainView(workout: self.workout) {
+                guard self.workout.supplementalExercise != nil else {
+                    self.workout.isComplete = true
+                    self.isWorkoutComplete = true
+                    return
+                }
                 self.navigationPath.append(self.workout.supplementalExercise!)
             }
         }
