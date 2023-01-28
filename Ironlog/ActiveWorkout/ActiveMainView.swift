@@ -13,25 +13,18 @@ struct ActiveMainView: View {
     
     @ObservedObject var workout: FslAmrapWorkout
     
+    @StateObject var restTimer = WorkoutTimer(secondsForCountDown: 5)
+    
     @State
     var repsCompleted: Int? = nil
     
     @State
     var isError = false
+    
     @State
     var errorMessage = ""
-    @State
-    var elapsed = 0.0
     
     var onComplete: () -> Void
-        
-    let timer: Timer? = nil
-    
-    @State
-    var restEndTime: Date? = nil
-    
-    @State
-    var remainingRest: Int = 0
     
     var body: some View {
         List {
@@ -55,19 +48,9 @@ struct ActiveMainView: View {
             }
             Section ("rest") {
                 VStack {
-                    if restEndTime != nil {
-                        Text("Rest remaining \(remainingRest)")
-                    }
+                    Text(String(self.restTimer.secondsRemaining))
                     Button("Rest"){
-                        self.restEndTime = Calendar.current.date(byAdding: .minute, value: 5, to: Date())
-                        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true){ timer in
-                            if self.restEndTime != nil && Date() >= self.restEndTime! {
-                                timer.invalidate()
-                                self.restEndTime = nil
-                            }
-                            let stuff = Calendar.current.dateComponents([.second], from: Date(), to: restEndTime!).second ?? 0
-                            self.remainingRest = stuff
-                        }
+                        self.restTimer.startTimer()
                     }
                 }
             }
