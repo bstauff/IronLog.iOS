@@ -48,9 +48,12 @@ struct ActiveMainView: View {
             }
             Section ("rest") {
                 VStack {
-                    Text(String(self.restTimer.secondsRemaining))
-                    Button("Rest"){
-                        self.restTimer.startTimer()
+                    if self.restTimer.timerRunning {
+                        Text("Resting " + String(self.restTimer.secondsRemaining) + " seconds")
+                    } else {
+                        Button("Rest"){
+                            self.restTimer.startTimer()
+                        }
                     }
                 }
             }

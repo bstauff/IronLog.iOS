@@ -8,7 +8,7 @@
 import Foundation
 class WorkoutTimer: ObservableObject {
     @Published var secondsRemaining = 0
-    @Published var timerStopped = false
+    @Published var timerRunning = false
     
     private var timer: Timer?
     private var frequency: TimeInterval { 1.0 / 60.0 }
@@ -22,6 +22,7 @@ class WorkoutTimer: ObservableObject {
     
     func startTimer() {
         self.startDate = Date()
+        self.timerRunning = true
         timer = Timer.scheduledTimer(withTimeInterval: frequency, repeats: true) { [weak self] timer in
             if let self = self, let startDate = self.startDate {
                 let secondsElapsed = Date().timeIntervalSince1970 - startDate.timeIntervalSince1970
@@ -31,7 +32,7 @@ class WorkoutTimer: ObservableObject {
                 if self.secondsRemaining == 0 {
                     self.timer?.invalidate()
                     self.timer = nil
-                    self.timerStopped = true
+                    self.timerRunning = false
                 }
             }
         }
