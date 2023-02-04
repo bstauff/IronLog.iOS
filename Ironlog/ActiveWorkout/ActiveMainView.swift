@@ -13,7 +13,7 @@ struct ActiveMainView: View {
     
     @ObservedObject var workout: FslAmrapWorkout
     
-    @StateObject var restTimer = WorkoutTimer(secondsForCountDown: 5)
+    @StateObject var restTimer = WorkoutTimer(secondsForCountDown: 120)
     
     @State
     var repsCompleted: Int? = nil
