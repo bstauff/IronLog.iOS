@@ -10,6 +10,8 @@ import SwiftUI
 struct ActiveSupplementalView: View {
     @ObservedObject var supplementalExercise: SupplementalExercise
     
+    @StateObject var restTimer = WorkoutTimer(secondsForCountDown: 120)
+    
     var onComplete: () -> Void
     
     var body: some View {
@@ -24,6 +26,17 @@ struct ActiveSupplementalView: View {
                         self.onComplete()
                     }
                     Spacer()
+                }
+            }
+            Section ("rest") {
+                VStack {
+                    if self.restTimer.timerRunning {
+                        Text("Resting " + String(self.restTimer.secondsRemaining) + " seconds")
+                    } else {
+                        Button("Rest"){
+                            self.restTimer.startTimer()
+                        }
+                    }
                 }
             }
         }

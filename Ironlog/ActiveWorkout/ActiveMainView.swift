@@ -6,17 +6,21 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct ActiveMainView: View {
     @Environment(\.managedObjectContext) var viewContext
     
     @ObservedObject var workout: FslAmrapWorkout
     
+    @StateObject var restTimer = WorkoutTimer(secondsForCountDown: 120)
+    
     @State
     var repsCompleted: Int? = nil
     
     @State
     var isError = false
+    
     @State
     var errorMessage = ""
     
@@ -40,6 +44,17 @@ struct ActiveMainView: View {
                         self.onComplete()
                     }
                     Spacer()
+                }
+            }
+            Section ("rest") {
+                VStack {
+                    if self.restTimer.timerRunning {
+                        Text("Resting " + String(self.restTimer.secondsRemaining) + " seconds")
+                    } else {
+                        Button("Rest"){
+                            self.restTimer.startTimer()
+                        }
+                    }
                 }
             }
         }

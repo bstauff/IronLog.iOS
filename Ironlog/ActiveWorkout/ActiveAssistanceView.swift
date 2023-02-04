@@ -10,6 +10,8 @@ import SwiftUI
 struct ActiveAssistanceView: View {
     @ObservedObject var workout: FslAmrapWorkout
     
+    @StateObject var restTimer = WorkoutTimer(secondsForCountDown: 90)
+    
     var onComplete: () -> Void
     
     private var assistanceExercises: [AssistanceExercise] {
@@ -20,7 +22,16 @@ struct ActiveAssistanceView: View {
         List {
             ForEach(assistanceExercises) { exercise in
                 Section {
-                    ExerciseCompletionView(exercise: exercise)
+                    VStack {
+                        ExerciseCompletionView(exercise: exercise)
+                        if self.restTimer.timerRunning {
+                            Text("Resting " + String(self.restTimer.secondsRemaining) + " seconds")
+                        } else {
+                            Button("Rest"){
+                                self.restTimer.startTimer()
+                            }
+                        }
+                    }
                 }
             }
             Section {

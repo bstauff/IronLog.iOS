@@ -26,6 +26,7 @@
 		0551DF582969AD3300250CE0 /* ActiveFslAmrapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0551DF572969AD3300250CE0 /* ActiveFslAmrapView.swift */; };
 		0551DF5A2969B07800250CE0 /* ActiveWarmupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0551DF592969B07800250CE0 /* ActiveWarmupView.swift */; };
 		0554AAE2281485A2001E8A58 /* AddExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0554AAE1281485A2001E8A58 /* AddExerciseView.swift */; };
+		057D97102985621A001509CF /* WorkoutTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057D970F2985621A001509CF /* WorkoutTimer.swift */; };
 		058060D6295B298600F86A9F /* AddWarmUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058060D5295B298600F86A9F /* AddWarmUpView.swift */; };
 		058060D8295B2E7000F86A9F /* AddAssistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058060D7295B2E7000F86A9F /* AddAssistanceView.swift */; };
 		058060DA295B2F1800F86A9F /* AddMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058060D9295B2F1800F86A9F /* AddMainView.swift */; };
@@ -92,6 +93,7 @@
 		0551DF572969AD3300250CE0 /* ActiveFslAmrapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveFslAmrapView.swift; sourceTree = "<group>"; };
 		0551DF592969B07800250CE0 /* ActiveWarmupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveWarmupView.swift; sourceTree = "<group>"; };
 		0554AAE1281485A2001E8A58 /* AddExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseView.swift; sourceTree = "<group>"; };
+		057D970F2985621A001509CF /* WorkoutTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTimer.swift; sourceTree = "<group>"; };
 		058060D5295B298600F86A9F /* AddWarmUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWarmUpView.swift; sourceTree = "<group>"; };
 		058060D7295B2E7000F86A9F /* AddAssistanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssistanceView.swift; sourceTree = "<group>"; };
 		058060D9295B2F1800F86A9F /* AddMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMainView.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 		053FDDCD272F2DC5002D6D9D = {
 			isa = PBXGroup;
 			children = (
+				057D970E298561F6001509CF /* Models */,
 				05CABDB72826DC5100A53B98 /* Infrastructure */,
 				053FDDD8272F2DC5002D6D9D /* Ironlog */,
 				053FDDE9272F2DC5002D6D9D /* IronlogTests */,
@@ -229,6 +232,14 @@
 				058060DB295B323800F86A9F /* AddSupplementalView.swift */,
 			);
 			path = Exercises;
+			sourceTree = "<group>";
+		};
+		057D970E298561F6001509CF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				057D970F2985621A001509CF /* WorkoutTimer.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		05A6E7B327C17ED600B3113E /* Lifts */ = {
@@ -461,6 +472,7 @@
 				05A6E7B527C17EF000B3113E /* LiftsView.swift in Sources */,
 				05E9B014296F02E00004EC20 /* ActiveAssistanceView.swift in Sources */,
 				052E6306295C9DEC00D0B79F /* ExerciseRowView.swift in Sources */,
+				057D97102985621A001509CF /* WorkoutTimer.swift in Sources */,
 				0554AAE2281485A2001E8A58 /* AddExerciseView.swift in Sources */,
 				052E62F9295C8EE200D0B79F /* WarmUpView.swift in Sources */,
 				050009C8295491B200FCBEF6 /* EditWorkoutView.swift in Sources */,
