@@ -10,18 +10,46 @@ import SwiftUI
 struct AddWorkoutView: View {
     @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentationMode
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var lifts: FetchedResults<Lift>
     
     @State private var selectedDate = Date()
+    @State private var selectedLift: Lift?
     
     @State private var isError = false
     @State private var errorString = ""
+    @State private var selectedCycleWeek = 1
     
     var body: some View {
         VStack {
             Text("Add Workout")
                 .font(.largeTitle)
-            DatePicker("Workout Date", selection: $selectedDate, displayedComponents: .date)
-            Button("Save") {
+            HStack {
+                Spacer()
+                DatePicker("Workout Date", selection: $selectedDate, displayedComponents: .date)
+                Spacer()
+            }
+            HStack {
+                Spacer()
+                Text("Main lift")
+                Spacer()
+                Picker("Lift", selection: $selectedLift) {
+                    ForEach(lifts) { lift in
+                        Text(lift.name ?? "").tag(lift as Lift?)
+                    }
+                }
+                Spacer()
+            }
+            HStack {
+                Spacer()
+                Text("Cycle week")
+                Spacer()
+            }
+            Picker("Cycle Week", selection: $selectedCycleWeek) {
+                ForEach((1..<4)) { week in
+                    Text(String(week)).tag(week)
+                }
+            }.pickerStyle(.segmented)
+            Button("Create") {
                 saveClicked()
             }
             .alert(isPresented: $isError) {
