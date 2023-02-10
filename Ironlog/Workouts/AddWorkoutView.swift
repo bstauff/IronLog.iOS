@@ -20,44 +20,42 @@ struct AddWorkoutView: View {
     @State private var selectedCycleWeek = 1
     
     var body: some View {
-        VStack {
-            Text("Add Workout")
-                .font(.largeTitle)
-            HStack {
-                Spacer()
-                DatePicker("Workout Date", selection: $selectedDate, displayedComponents: .date)
-                Spacer()
-            }
-            HStack {
-                Spacer()
-                Text("Main lift")
-                Spacer()
-                Picker("Lift", selection: $selectedLift) {
-                    ForEach(lifts) { lift in
-                        Text(lift.name ?? "").tag(lift as Lift?)
+        NavigationView {
+            List {
+                Section {
+                    DatePicker("Workout Date", selection: $selectedDate, displayedComponents: .date)
+                }
+                Section {
+                    Picker("Cycle Week", selection: $selectedCycleWeek) {
+                        ForEach((1..<4)) { week in
+                            Text(String(week)).tag(week)
+                        }
                     }
                 }
-                Spacer()
-            }
-            HStack {
-                Spacer()
-                Text("Cycle week")
-                Spacer()
-            }
-            Picker("Cycle Week", selection: $selectedCycleWeek) {
-                ForEach((1..<4)) { week in
-                    Text(String(week)).tag(week)
+                Section {
+                    Picker("Main Lift", selection: $selectedLift) {
+                        ForEach(lifts) { lift in
+                            Text(lift.name ?? "").tag(lift as Lift?)
+                        }
+                    }
                 }
-            }.pickerStyle(.segmented)
-            Button("Create") {
-                saveClicked()
-            }
-            .alert(isPresented: $isError) {
-                Alert(title: Text("Error"), message: Text(errorString), dismissButton: .default(Text("OK")))
-            }
-            .buttonStyle(.borderedProminent)
+                Section {
+                    HStack {
+                        Spacer()
+                        Button("Create") {
+                            saveClicked()
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .alert(isPresented: $isError) {
+                            Alert(title: Text("Error"), message: Text(errorString), dismissButton: .default(Text("OK")))
+                        }
+                        Spacer()
+                    }
+                }
+            }.navigationTitle("Add Workout")
         }
     }
+    
     func saveClicked() {
         let newWorkout = FslAmrapWorkout(context: viewContext)
         newWorkout.id = UUID()
