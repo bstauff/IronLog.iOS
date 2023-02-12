@@ -13,11 +13,17 @@ struct AddWorkoutView: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var lifts: FetchedResults<Lift>
     
     @State private var selectedDate = Date()
-    @State private var selectedLift: Lift?
+    @State private var selectedLift: Lift? = nil
     
     @State private var isError = false
     @State private var errorString = ""
     @State private var selectedCycleWeek = 1
+    
+    private var newWorkout: FslAmrapWorkout
+    
+    init() {
+        newWorkout = FslAmrapWorkout()
+    }
     
     var body: some View {
         NavigationView {
@@ -62,6 +68,8 @@ struct AddWorkoutView: View {
         newWorkout.isComplete = false
         newWorkout.date = selectedDate
         
+        newWorkout.warmupExercises = NSOrderedSet(array: [buildWarmupWork()])
+        
         do {
             try viewContext.save()
         } catch {
@@ -70,6 +78,52 @@ struct AddWorkoutView: View {
             return
         }
         presentationMode.wrappedValue.dismiss()
+    }
+    
+    private func buildWarmupWork() -> WarmupExercise {
+        let newWarmup = WarmupExercise(context: self.viewContext)
+        newWarmup.id = UUID()
+        newWarmup.isComplete = false
+        newWarmup.lift = self.selectedLift
+        
+        let set1 = ExerciseSet(context: self.viewContext)
+        set1.isComplete = false
+        set1.id = UUID()
+        set1.reps = 5
+        set1.weight = Int32(getTrainingMaxWeight(lift: self.selectedLift!, multiplier: 0.4))
+        
+        let set2 = ExerciseSet(context: self.viewContext)
+        set2.isComplete = false
+        set2.id = UUID()
+        set2.reps = 5
+        set2.weight = Int32(getTrainingMaxWeight(lift: self.selectedLift!, multiplier: 0.5))
+        
+        let set3 = ExerciseSet(context: self.viewContext)
+        set3.isComplete = false
+        set3.id = UUID()
+        set3.reps = 3
+        set3.weight = Int32(getTrainingMaxWeight(lift: self.selectedLift!, multiplier: 0.6))
+        
+        let sets = NSOrderedSet(array: [
+            set1,
+            set2,
+            set3
+        ])
+        
+        newWarmup.exerciseSets = sets
+        
+        return newWarmup
+    }
+    
+    private func getTrainingMaxWeight(lift: Lift, multiplier: Double) -> Int {
+        let liftTrainingMax = Double(lift.trainingMax)
+        
+        let scaledWeight = (liftTrainingMax * multiplier) / 5
+        
+        let scaledWeightRounded = 5 * scaledWeight.rounded(.toNearestOrAwayFromZero)
+        
+        return Int(scaledWeightRounded)
+        
     }
 }
 

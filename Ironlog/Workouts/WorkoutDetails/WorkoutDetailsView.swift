@@ -53,6 +53,9 @@ struct WorkoutDetailsView: View {
     }
     
     func convertDateToString() -> String {
+        guard self.workout.date != nil else {
+            return ""
+        }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/YY"
         return dateFormatter.string(from: self.workout.date!)
