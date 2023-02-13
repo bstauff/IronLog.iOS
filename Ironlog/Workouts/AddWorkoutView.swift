@@ -125,6 +125,65 @@ struct AddWorkoutView: View {
         return Int(scaledWeightRounded)
         
     }
+    
+    private func buildMainWork() -> MainExercise {
+        let newMainExercise = MainExercise(context: self.viewContext)
+        newMainExercise.id = UUID()
+        newMainExercise.isComplete = false
+        newMainExercise.lift = self.selectedLift
+        
+        var set1Reps: Int32 = 5
+        var set1Multiplier: Double = 0.65
+        var set2Reps: Int32 = 5
+        var set2Multiplier: Double = 0.75
+        var set3Reps: Int32 = 5
+        var set3Multiplier: Double = 0.85
+        
+        if self.selectedCycleWeek == 2 {
+            set1Reps = 3
+            set1Multiplier = 0.70
+            set2Reps = 3
+            set2Multiplier =  0.80
+            set3Reps = 3
+            set3Multiplier = 0.90
+        }
+        
+        if self.selectedCycleWeek == 3 {
+            set1Multiplier = 0.75
+            set2Reps = 3
+            set2Multiplier = 0.85
+            set3Reps = 1
+            set3Multiplier = 0.95
+        }
+        
+        let set1 = ExerciseSet(context: self.viewContext)
+        set1.isComplete = false
+        set1.id = UUID()
+        set1.reps = set1Reps
+        set1.weight = Int32(getTrainingMaxWeight(lift: self.selectedLift!, multiplier: set1Multiplier))
+        
+        let set2 = ExerciseSet(context: self.viewContext)
+        set2.isComplete = false
+        set2.id = UUID()
+        set2.reps = set2Reps
+        set2.weight = Int32(getTrainingMaxWeight(lift: self.selectedLift!, multiplier: set2Multiplier))
+        
+        let set3 = ExerciseSet(context: self.viewContext)
+        set3.isComplete = false
+        set3.id = UUID()
+        set3.reps = set3Reps
+        set3.weight = Int32(getTrainingMaxWeight(lift: self.selectedLift!, multiplier: set3Multiplier))
+        
+        let sets = NSOrderedSet(array: [
+            set1,
+            set2,
+            set3
+        ])
+        
+        newMainExercise.exerciseSets = sets
+        
+        return newMainExercise
+    }
 }
 
 struct AddWorkoutView_Previews: PreviewProvider {
