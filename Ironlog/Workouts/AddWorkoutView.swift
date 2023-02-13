@@ -70,6 +70,7 @@ struct AddWorkoutView: View {
         
         newWorkout.warmupExercises = NSOrderedSet(array: [buildWarmupWork()])
         newWorkout.mainExercise = buildMainWork()
+        newWorkout.supplementalExercise = buildSupplementalWork()
         
         do {
             try viewContext.save()
@@ -184,6 +185,46 @@ struct AddWorkoutView: View {
         newMainExercise.exerciseSets = sets
         
         return newMainExercise
+    }
+    
+    func buildSupplementalWork() -> SupplementalExercise {
+        let newSupplemental = SupplementalExercise(context: self.viewContext)
+        newSupplemental.id = UUID()
+        newSupplemental.isComplete = false
+        newSupplemental.lift = self.selectedLift
+        
+        var multiplier: Double = 0.65
+        
+        switch self.selectedCycleWeek {
+        case 1:
+            multiplier = 0.65
+        case 2:
+            multiplier = 0.70
+        case 3:
+            multiplier = 0.75
+        default:
+            multiplier = 0.65
+        }
+        
+        var setsArray: [ExerciseSet] = []
+        
+        for _ in 0...4 {
+            let set = ExerciseSet(context: self.viewContext)
+            set.isComplete = false
+            set.id = UUID()
+            set.reps = 5
+            set.weight = Int32(getTrainingMaxWeight(lift: self.selectedLift!, multiplier: multiplier))
+            
+            setsArray.append(set)
+        }
+        
+        
+        
+        let sets = NSOrderedSet(array: setsArray)
+        
+        newSupplemental.exerciseSets = sets
+        
+        return newSupplemental
     }
 }
 
