@@ -69,6 +69,7 @@ struct AddWorkoutView: View {
         newWorkout.date = selectedDate
         
         newWorkout.warmupExercises = NSOrderedSet(array: [buildWarmupWork()])
+        newWorkout.mainExercise = buildMainWork()
         
         do {
             try viewContext.save()
