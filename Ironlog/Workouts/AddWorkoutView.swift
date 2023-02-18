@@ -40,6 +40,7 @@ struct AddWorkoutView: View {
                 }
                 Section {
                     Picker("Main Lift", selection: $selectedLift) {
+                        Text("Select Lift").tag(Optional<Lift>(nil))
                         ForEach(lifts) { lift in
                             Text(lift.name ?? "").tag(lift as Lift?)
                         }
@@ -63,6 +64,11 @@ struct AddWorkoutView: View {
     }
     
     func saveClicked() {
+        guard self.selectedLift != nil else {
+            isError = true
+            errorString = "You must select a main lift"
+            return
+        }
         let newWorkout = FslAmrapWorkout(context: viewContext)
         newWorkout.id = UUID()
         newWorkout.isComplete = false
