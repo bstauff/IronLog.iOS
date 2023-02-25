@@ -22,14 +22,35 @@ class IronlogUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
+    func testNavigateToLiftsShouldLoadView() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
-
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        app.buttons["Lifts"].tap()
+        
+        let text = app.staticTexts["Lift Catalog"].label
+        
+        XCTAssertEqual("Lift Catalog", text)
     }
+    
+    func testNavigateToActiveWorkoutShouldLoadView() throws {
+        let app = XCUIApplication()
+        app.launch()
+        app.tabBars["Tab Bar"].buttons["Active Workout"].tap()
+        let text = app.staticTexts["Choose a workout"].label
+        XCTAssertEqual("Choose a workout", text)
+    }
+    
+    func testNavigateToWorkoutsShouldLoadView() throws {
+        let app = XCUIApplication()
+        app.launch()
+        app.tabBars["Tab Bar"].buttons["Workouts"].tap()
+        
+        let text = app.staticTexts["Workouts"].label
+        XCTAssertEqual("Workouts", text)
+    }
+    
 
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
