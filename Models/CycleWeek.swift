@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum WorkoutWeeks {
+enum CycleWeek {
     case firstWeek
     case secondWeek
     case thirdWeek

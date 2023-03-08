@@ -15,9 +15,13 @@ class ExerciseModel: ObservableObject {
     @Published
     var sets: [ExerciseSetModel]
     
-    init(isComplete: Bool, lift: LiftModel, sets: [ExerciseSetModel]) {
-        self.isComplete = isComplete
+    required init(lift: LiftModel) {
+        self.isComplete = false
         self.lift = lift
-        self.sets = sets
+        self.sets = []
+    }
+    
+    func planSetsForWeek(week: CycleWeek) {
+        self.sets = []
     }
 }

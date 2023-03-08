@@ -8,7 +8,7 @@
 import Foundation
 
 struct ExerciseSetModel {
-    var isComplete: Bool
+    var isComplete: Bool = false
     var reps: Int
     var weight: Int
 }
