@@ -15,7 +15,7 @@ class MainExerciseModel: ExerciseModel {
     ]
     
     override func planSetsForWeek(week: CycleWeek) {
-        let repsMults = self.weeksToRepsAndMultipliers[week]
+       let repsMults = self.weeksToRepsAndMultipliers[week]
         
         for (reps, mult) in repsMults! {
             let adjustedWeight = self.lift.getAdjustedTrainingMax(multiplier: mult)
@@ -27,10 +27,4 @@ class MainExerciseModel: ExerciseModel {
             sets.append(newSet)
         }
     }
-}
-
-
-
-enum ExerciseError: Error {
-    case invalidWorkoutWeek
 }

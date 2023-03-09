@@ -36,6 +36,9 @@
 		0551DF582969AD3300250CE0 /* ActiveFslAmrapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0551DF572969AD3300250CE0 /* ActiveFslAmrapView.swift */; };
 		0551DF5A2969B07800250CE0 /* ActiveWarmupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0551DF592969B07800250CE0 /* ActiveWarmupView.swift */; };
 		0554AAE2281485A2001E8A58 /* AddExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0554AAE1281485A2001E8A58 /* AddExerciseView.swift */; };
+		05700E3829BA14A300FED81A /* MainExerciseModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05700E3729BA14A300FED81A /* MainExerciseModelTests.swift */; };
+		05700E3A29BA182100FED81A /* WarmupExerciseModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05700E3929BA182100FED81A /* WarmupExerciseModelTests.swift */; };
+		05700E3C29BA197300FED81A /* SupplementalExerciseModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05700E3B29BA197300FED81A /* SupplementalExerciseModelTests.swift */; };
 		057D97102985621A001509CF /* WorkoutTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057D970F2985621A001509CF /* WorkoutTimer.swift */; };
 		058060D6295B298600F86A9F /* AddWarmUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058060D5295B298600F86A9F /* AddWarmUpView.swift */; };
 		058060D8295B2E7000F86A9F /* AddAssistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058060D7295B2E7000F86A9F /* AddAssistanceView.swift */; };
@@ -114,6 +117,9 @@
 		0551DF572969AD3300250CE0 /* ActiveFslAmrapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveFslAmrapView.swift; sourceTree = "<group>"; };
 		0551DF592969B07800250CE0 /* ActiveWarmupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveWarmupView.swift; sourceTree = "<group>"; };
 		0554AAE1281485A2001E8A58 /* AddExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseView.swift; sourceTree = "<group>"; };
+		05700E3729BA14A300FED81A /* MainExerciseModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainExerciseModelTests.swift; sourceTree = "<group>"; };
+		05700E3929BA182100FED81A /* WarmupExerciseModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarmupExerciseModelTests.swift; sourceTree = "<group>"; };
+		05700E3B29BA197300FED81A /* SupplementalExerciseModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplementalExerciseModelTests.swift; sourceTree = "<group>"; };
 		057D970F2985621A001509CF /* WorkoutTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTimer.swift; sourceTree = "<group>"; };
 		058060D5295B298600F86A9F /* AddWarmUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWarmUpView.swift; sourceTree = "<group>"; };
 		058060D7295B2E7000F86A9F /* AddAssistanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssistanceView.swift; sourceTree = "<group>"; };
@@ -229,6 +235,9 @@
 			children = (
 				053FDDEA272F2DC5002D6D9D /* IronlogTests.swift */,
 				0516966329ABDF30006BC0C1 /* WorkoutModelTests.swift */,
+				05700E3729BA14A300FED81A /* MainExerciseModelTests.swift */,
+				05700E3929BA182100FED81A /* WarmupExerciseModelTests.swift */,
+				05700E3B29BA197300FED81A /* SupplementalExerciseModelTests.swift */,
 			);
 			path = IronlogTests;
 			sourceTree = "<group>";
@@ -527,7 +536,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				053FDDEB272F2DC5002D6D9D /* IronlogTests.swift in Sources */,
+				05700E3A29BA182100FED81A /* WarmupExerciseModelTests.swift in Sources */,
 				0516966429ABDF30006BC0C1 /* WorkoutModelTests.swift in Sources */,
+				05700E3829BA14A300FED81A /* MainExerciseModelTests.swift in Sources */,
+				05700E3C29BA197300FED81A /* SupplementalExerciseModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

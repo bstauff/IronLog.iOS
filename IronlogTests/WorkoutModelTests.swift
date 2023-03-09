@@ -11,22 +11,46 @@ import XCTest
 @testable import Ironlog
 
 class WorkoutModelTests: XCTestCase {
-    func testWorkoutModelCreatesMainExercise() {
-        let squat = LiftModel(name: "squat", trainingMax: 225)
-        let workout = WorkoutModel(mainLift: squat, date: Date(), workoutWeek: CycleWeek.firstWeek)
+    
+    func testPlanWorkoutShouldCreateMainWork() {
+        let expectedDate = Date()
+        let lift = LiftModel(name: "Squat", trainingMax: 225, isMainLift: true)
+        let cycleWeek = CycleWeek.firstWeek
+        let workout = WorkoutModel(
+            workoutDate: expectedDate,
+            cycleWeek: cycleWeek,
+            mainLift: lift
+        )
         
-        XCTAssertEqual(3, workout.mainExercise.sets.count)
+        XCTAssertNotNil(workout.mainExercise)
+        XCTAssertTrue(workout.mainExercise.sets.count > 0)
     }
     
-    func iDontKnowWhatImDoing() {
-        // user creates a cycle starting on a given date
-        let cycle = Cycle(startDate: Date())
+    func testPlanWorkoutShouldCreateSupplementalWork() {
+        let expectedDate = Date()
+        let lift = LiftModel(name: "Squat", trainingMax: 225, isMainLift: true)
+        let cycleWeek = CycleWeek.firstWeek
+        let workout = WorkoutModel(
+            workoutDate: expectedDate,
+            cycleWeek: cycleWeek,
+            mainLift: lift
+        )
         
-        // user schedules a main lift for the cycle
-        // including accompanying assistance work
-        cycle.ScheduleMainLift(mainLift)
-        
-        //user can only schedule a MAX of 4 lifts
+        XCTAssertNotNil(workout.supplementalExercise)
+        XCTAssertTrue(workout.supplementalExercise.sets.count > 0)
     }
     
+    func testPlanWorkoutShouldCreateWarmupWork() {
+        let expectedDate = Date()
+        let lift = LiftModel(name: "Squat", trainingMax: 225, isMainLift: true)
+        let cycleWeek = CycleWeek.firstWeek
+        let workout = WorkoutModel(
+            workoutDate: expectedDate,
+            cycleWeek: cycleWeek,
+            mainLift: lift
+        )
+        
+        XCTAssertNotNil(workout.warmupExercise)
+        XCTAssertTrue(workout.warmupExercise.sets.count > 0)
+    }
 }

@@ -30,21 +30,32 @@ class WorkoutModel : ObservableObject {
         self.workoutDate = workoutDate
         self.cycleWeek = cycleWeek
             
-        self.warmupExercise = WorkoutModel.planExercise(lift: mainLift, cycleWeek: cycleWeek)
-        self.mainExercise = WorkoutModel.planExercise(lift: mainLift, cycleWeek: cycleWeek)
-        self.supplementalExercise = WorkoutModel.planExercise(lift: mainLift, cycleWeek: cycleWeek)
+        self.warmupExercise = WorkoutModel.planWarmupExercise(warmupLift: mainLift, cycleWeek: cycleWeek)
+        self.mainExercise = WorkoutModel.planMainExercise(mainLift: mainLift, cycleWeek: cycleWeek)
+        self.supplementalExercise = WorkoutModel.planSupplementalExercise(supplementalLift: mainLift, cycleWeek: cycleWeek)
     }
     
-    private static func planExercise<T: ExerciseModel>(lift: LiftModel, cycleWeek: CycleWeek) -> T {
-        let exercise = T(lift: lift)
-        exercise.planSetsForWeek(week: cycleWeek)
-        return exercise
+    static func planWarmupExercise(warmupLift: LiftModel, cycleWeek: CycleWeek) -> WarmupExerciseModel {
+        let warmupExercise = WarmupExerciseModel(lift: warmupLift)
+        warmupExercise.planSetsForWeek(week: cycleWeek)
+        return warmupExercise
+    }
+    
+    static func planMainExercise(mainLift: LiftModel, cycleWeek: CycleWeek) -> MainExerciseModel {
+        let mainExercise = MainExerciseModel(lift: mainLift)
+        mainExercise.planSetsForWeek(week: cycleWeek)
+        return mainExercise
+    }
+    
+    static func planSupplementalExercise(supplementalLift: LiftModel, cycleWeek: CycleWeek) -> SupplementalExerciseModel {
+        let supplementalExercise = SupplementalExerciseModel(lift: supplementalLift)
+        supplementalExercise.planSetsForWeek(week: cycleWeek)
+        return supplementalExercise
     }
     
     func planAssistanceExercise(assistanceLift: LiftModel) {
-        let assistanceExercise: AssistanceExerciseModel =
-            WorkoutModel.planExercise(lift: assistanceLift, cycleWeek: self.cycleWeek)
-        
+        let assistanceExercise = AssistanceExerciseModel(lift: assistanceLift)
+        assistanceExercise.planSetsForWeek(week: self.cycleWeek)
         self.assistanceExercises.append(assistanceExercise)
     }
 }
