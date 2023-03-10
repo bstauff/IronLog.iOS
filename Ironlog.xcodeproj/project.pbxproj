@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		050009C8295491B200FCBEF6 /* EditWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050009C7295491B200FCBEF6 /* EditWorkoutView.swift */; };
+		05116C7529BB5C360020ED1E /* AssistanceExerciseModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C7429BB5C360020ED1E /* AssistanceExerciseModelTests.swift */; };
 		0516965A29AA776E006BC0C1 /* LiftModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0516965929AA776E006BC0C1 /* LiftModel.swift */; };
 		0516965C29AA78DD006BC0C1 /* ExerciseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0516965B29AA78DD006BC0C1 /* ExerciseModel.swift */; };
 		0516965E29AA7B68006BC0C1 /* ExerciseSetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0516965D29AA7B68006BC0C1 /* ExerciseSetModel.swift */; };
@@ -86,6 +87,7 @@
 /* Begin PBXFileReference section */
 		050009C7295491B200FCBEF6 /* EditWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWorkoutView.swift; sourceTree = "<group>"; };
 		050CC5EA29169679009A422E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		05116C7429BB5C360020ED1E /* AssistanceExerciseModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistanceExerciseModelTests.swift; sourceTree = "<group>"; };
 		0516965929AA776E006BC0C1 /* LiftModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftModel.swift; sourceTree = "<group>"; };
 		0516965B29AA78DD006BC0C1 /* ExerciseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseModel.swift; sourceTree = "<group>"; };
 		0516965D29AA7B68006BC0C1 /* ExerciseSetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetModel.swift; sourceTree = "<group>"; };
@@ -172,6 +174,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05116C7729BB5E9D0020ED1E /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
 		052E62FC295C94D100D0B79F /* WorkoutDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +247,7 @@
 				05700E3729BA14A300FED81A /* MainExerciseModelTests.swift */,
 				05700E3929BA182100FED81A /* WarmupExerciseModelTests.swift */,
 				05700E3B29BA197300FED81A /* SupplementalExerciseModelTests.swift */,
+				05116C7429BB5C360020ED1E /* AssistanceExerciseModelTests.swift */,
 			);
 			path = IronlogTests;
 			sourceTree = "<group>";
@@ -311,6 +321,7 @@
 		05CABDB72826DC5100A53B98 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				05116C7729BB5E9D0020ED1E /* Realm */,
 				05CABDB82826DC5800A53B98 /* CoreData */,
 			);
 			path = Infrastructure;
@@ -538,6 +549,7 @@
 				053FDDEB272F2DC5002D6D9D /* IronlogTests.swift in Sources */,
 				05700E3A29BA182100FED81A /* WarmupExerciseModelTests.swift in Sources */,
 				0516966429ABDF30006BC0C1 /* WorkoutModelTests.swift in Sources */,
+				05116C7529BB5C360020ED1E /* AssistanceExerciseModelTests.swift in Sources */,
 				05700E3829BA14A300FED81A /* MainExerciseModelTests.swift in Sources */,
 				05700E3C29BA197300FED81A /* SupplementalExerciseModelTests.swift in Sources */,
 			);
