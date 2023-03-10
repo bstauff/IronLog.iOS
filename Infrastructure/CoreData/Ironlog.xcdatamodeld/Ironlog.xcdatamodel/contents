@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22C65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="AssistanceExercise" representedClassName="AssistanceExercise" parentEntity="Exercise" syncable="YES" codeGenerationType="class">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22D68" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AssistanceExercise" representedClassName="AssistanceExercise" parentEntity="Exercise" syncable="YES">
         <relationship name="workout" maxCount="1" deletionRule="Nullify" destinationEntity="Workout" inverseName="assistanceExercises" inverseEntity="Workout"/>
     </entity>
-    <entity name="Exercise" representedClassName="Exercise" isAbstract="YES" syncable="YES" codeGenerationType="class">
+    <entity name="Exercise" representedClassName="Exercise" isAbstract="YES" syncable="YES">
         <attribute name="id" attributeType="UUID" usesScalarValueType="YES"/>
         <attribute name="isComplete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <relationship name="exerciseSets" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="ExerciseSet" inverseName="exercise" inverseEntity="ExerciseSet"/>
         <relationship name="lift" maxCount="1" deletionRule="Nullify" destinationEntity="Lift" inverseName="exercise" inverseEntity="Lift"/>
     </entity>
-    <entity name="ExerciseSet" representedClassName="ExerciseSet" syncable="YES" codeGenerationType="class">
+    <entity name="ExerciseSet" representedClassName="ExerciseSet" syncable="YES">
         <attribute name="id" attributeType="UUID" usesScalarValueType="YES"/>
         <attribute name="isComplete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="reps" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="weight" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="exercise" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="exerciseSets" inverseEntity="Exercise"/>
     </entity>
-    <entity name="FslAmrapWorkout" representedClassName="FslAmrapWorkout" parentEntity="Workout" syncable="YES" codeGenerationType="class">
+    <entity name="FslAmrapWorkout" representedClassName="FslAmrapWorkout" parentEntity="Workout" syncable="YES">
         <attribute name="recordReps" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
-    <entity name="Lift" representedClassName="Lift" syncable="YES" codeGenerationType="class">
+    <entity name="Lift" representedClassName="Lift" syncable="YES">
         <attribute name="id" attributeType="UUID" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="trainingMax" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="exercise" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="lift" inverseEntity="Exercise"/>
     </entity>
-    <entity name="MainExercise" representedClassName="MainExercise" parentEntity="Exercise" syncable="YES" codeGenerationType="class">
+    <entity name="MainExercise" representedClassName="MainExercise" parentEntity="Exercise" syncable="YES">
         <relationship name="workout" maxCount="1" deletionRule="Nullify" destinationEntity="Workout" inverseName="mainExercise" inverseEntity="Workout"/>
     </entity>
-    <entity name="SupplementalExercise" representedClassName="SupplementalExercise" parentEntity="Exercise" syncable="YES" codeGenerationType="class">
+    <entity name="SupplementalExercise" representedClassName="SupplementalExercise" parentEntity="Exercise" syncable="YES">
         <relationship name="workout" maxCount="1" deletionRule="Nullify" destinationEntity="Workout" inverseName="supplementalExercise" inverseEntity="Workout"/>
     </entity>
-    <entity name="WarmupExercise" representedClassName="WarmupExercise" parentEntity="Exercise" syncable="YES" codeGenerationType="class">
+    <entity name="WarmupExercise" representedClassName="WarmupExercise" parentEntity="Exercise" syncable="YES">
         <relationship name="workout" maxCount="1" deletionRule="Nullify" destinationEntity="Workout" inverseName="warmupExercises" inverseEntity="Workout"/>
     </entity>
-    <entity name="Workout" representedClassName="Workout" isAbstract="YES" syncable="YES" codeGenerationType="class">
+    <entity name="Workout" representedClassName="Workout" isAbstract="YES" syncable="YES">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isComplete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
