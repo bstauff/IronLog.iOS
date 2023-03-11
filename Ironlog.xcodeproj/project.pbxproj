@@ -28,7 +28,7 @@
 		05116C9A29BB6A6D0020ED1E /* ExerciseSet+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C8829BB6A6D0020ED1E /* ExerciseSet+CoreDataClass.swift */; };
 		05116C9B29BB6A6D0020ED1E /* ExerciseSet+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C8929BB6A6D0020ED1E /* ExerciseSet+CoreDataProperties.swift */; };
 		0516966229AA89D9006BC0C1 /* CycleWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0516966129AA89D9006BC0C1 /* CycleWeek.swift */; };
-		0516966429ABDF30006BC0C1 /* WorkoutModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0516966329ABDF30006BC0C1 /* WorkoutModelTests.swift */; };
+		0516966429ABDF30006BC0C1 /* WorkoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0516966329ABDF30006BC0C1 /* WorkoutTests.swift */; };
 		052C8AC42817883700324E68 /* AddLiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052C8AC32817883700324E68 /* AddLiftView.swift */; };
 		052E62F9295C8EE200D0B79F /* WarmUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052E62F8295C8EE200D0B79F /* WarmUpView.swift */; };
 		052E62FB295C93A400D0B79F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052E62FA295C93A400D0B79F /* MainView.swift */; };
@@ -40,7 +40,6 @@
 		053FDDDA272F2DC5002D6D9D /* IronlogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053FDDD9272F2DC5002D6D9D /* IronlogApp.swift */; };
 		053FDDDE272F2DC5002D6D9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 053FDDDD272F2DC5002D6D9D /* Assets.xcassets */; };
 		053FDDE1272F2DC5002D6D9D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 053FDDE0272F2DC5002D6D9D /* Preview Assets.xcassets */; };
-		053FDDEB272F2DC5002D6D9D /* IronlogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053FDDEA272F2DC5002D6D9D /* IronlogTests.swift */; };
 		053FDDF5272F2DC5002D6D9D /* IronlogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053FDDF4272F2DC5002D6D9D /* IronlogUITests.swift */; };
 		053FDDF7272F2DC5002D6D9D /* IronlogUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053FDDF6272F2DC5002D6D9D /* IronlogUITestsLaunchTests.swift */; };
 		054FEB1F28BA3B0A00506316 /* LiftDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FEB1E28BA3B0A00506316 /* LiftDetailView.swift */; };
@@ -117,7 +116,7 @@
 		05116C8829BB6A6D0020ED1E /* ExerciseSet+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseSet+CoreDataClass.swift"; sourceTree = "<group>"; };
 		05116C8929BB6A6D0020ED1E /* ExerciseSet+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseSet+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0516966129AA89D9006BC0C1 /* CycleWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleWeek.swift; sourceTree = "<group>"; };
-		0516966329ABDF30006BC0C1 /* WorkoutModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutModelTests.swift; sourceTree = "<group>"; };
+		0516966329ABDF30006BC0C1 /* WorkoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTests.swift; sourceTree = "<group>"; };
 		052C8AC32817883700324E68 /* AddLiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLiftView.swift; sourceTree = "<group>"; };
 		052E62F8295C8EE200D0B79F /* WarmUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarmUpView.swift; sourceTree = "<group>"; };
 		052E62FA295C93A400D0B79F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -131,7 +130,6 @@
 		053FDDDD272F2DC5002D6D9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		053FDDE0272F2DC5002D6D9D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		053FDDE6272F2DC5002D6D9D /* IronlogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IronlogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		053FDDEA272F2DC5002D6D9D /* IronlogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronlogTests.swift; sourceTree = "<group>"; };
 		053FDDF0272F2DC5002D6D9D /* IronlogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IronlogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		053FDDF4272F2DC5002D6D9D /* IronlogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronlogUITests.swift; sourceTree = "<group>"; };
 		053FDDF6272F2DC5002D6D9D /* IronlogUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronlogUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -280,8 +278,7 @@
 		053FDDE9272F2DC5002D6D9D /* IronlogTests */ = {
 			isa = PBXGroup;
 			children = (
-				053FDDEA272F2DC5002D6D9D /* IronlogTests.swift */,
-				0516966329ABDF30006BC0C1 /* WorkoutModelTests.swift */,
+				0516966329ABDF30006BC0C1 /* WorkoutTests.swift */,
 				05700E3729BA14A300FED81A /* MainExerciseModelTests.swift */,
 				05700E3929BA182100FED81A /* WarmupExerciseModelTests.swift */,
 				05700E3B29BA197300FED81A /* SupplementalExerciseModelTests.swift */,
@@ -586,9 +583,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				053FDDEB272F2DC5002D6D9D /* IronlogTests.swift in Sources */,
 				05700E3A29BA182100FED81A /* WarmupExerciseModelTests.swift in Sources */,
-				0516966429ABDF30006BC0C1 /* WorkoutModelTests.swift in Sources */,
+				0516966429ABDF30006BC0C1 /* WorkoutTests.swift in Sources */,
 				05116C7529BB5C360020ED1E /* AssistanceExerciseModelTests.swift in Sources */,
 				05700E3829BA14A300FED81A /* MainExerciseModelTests.swift in Sources */,
 				05700E3C29BA197300FED81A /* SupplementalExerciseModelTests.swift in Sources */,

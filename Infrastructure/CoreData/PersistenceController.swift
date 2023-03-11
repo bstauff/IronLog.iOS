@@ -111,6 +111,10 @@ struct PersistenceController {
         return controller
     }()
     
+    static var testController: PersistenceController {
+        return PersistenceController(inMemory: true)
+    }
+    
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "Ironlog")
         
