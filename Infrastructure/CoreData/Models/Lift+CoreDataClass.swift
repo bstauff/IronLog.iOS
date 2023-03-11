@@ -11,5 +11,13 @@ import CoreData
 
 @objc(Lift)
 public class Lift: NSManagedObject {
-
+    func getAdjustedTrainingMax(multiplier: Double) -> Int {
+        let liftTrainingMax = Double(self.trainingMax)
+        
+        let scaledWeight = (liftTrainingMax * multiplier) / 5
+        
+        let scaledWeightRounded = 5 * scaledWeight.rounded(.toNearestOrAwayFromZero)
+        
+        return Int(scaledWeightRounded)
+    }
 }

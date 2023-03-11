@@ -11,4 +11,7 @@ import CoreData
 
 @objc(Exercise)
 public class Exercise: NSManagedObject {
+    func planSetsForWeek(week: CycleWeek) {
+        self.exerciseSets = []
+    }
 }
