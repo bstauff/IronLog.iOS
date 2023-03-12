@@ -24,6 +24,8 @@ public class SupplementalExercise: Exercise {
             let adjustedWeight = self.lift!.getAdjustedTrainingMax(multiplier: multiplier!)
             
             let newSet = ExerciseSet(context: self.managedObjectContext!)
+            newSet.id = UUID()
+            newSet.isComplete = false
             newSet.reps = 5
             newSet.weight = Int32(adjustedWeight)
             

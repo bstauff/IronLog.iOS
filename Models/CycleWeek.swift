@@ -7,7 +7,18 @@
 
 import Foundation
 
-enum CycleWeek {
+enum CycleWeek: CaseIterable, CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .firstWeek:
+            return "First week"
+        case .secondWeek:
+            return "Second week"
+        case .thirdWeek:
+            return "Third Week"
+        }
+    }
+    
     case firstWeek
     case secondWeek
     case thirdWeek

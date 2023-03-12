@@ -18,7 +18,8 @@ public class WarmupExercise: Exercise {
             let adjustedWeight = self.lift!.getAdjustedTrainingMax(multiplier: mult)
             
             let newSet = ExerciseSet(context: self.managedObjectContext!)
-            
+            newSet.id = UUID()
+            newSet.isComplete = false
             newSet.reps = Int32(reps)
             newSet.weight = Int32(adjustedWeight)
             
