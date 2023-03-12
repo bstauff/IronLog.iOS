@@ -9,24 +9,15 @@
 /* Begin PBXBuildFile section */
 		050009C8295491B200FCBEF6 /* EditWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050009C7295491B200FCBEF6 /* EditWorkoutView.swift */; };
 		05116C7529BB5C360020ED1E /* AssistanceExerciseModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C7429BB5C360020ED1E /* AssistanceExerciseModelTests.swift */; };
-		05116C8A29BB6A6D0020ED1E /* FslAmrapWorkout+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C7829BB6A6D0020ED1E /* FslAmrapWorkout+CoreDataClass.swift */; };
-		05116C8B29BB6A6D0020ED1E /* FslAmrapWorkout+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C7929BB6A6D0020ED1E /* FslAmrapWorkout+CoreDataProperties.swift */; };
-		05116C8C29BB6A6D0020ED1E /* AssistanceExercise+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C7A29BB6A6D0020ED1E /* AssistanceExercise+CoreDataClass.swift */; };
-		05116C8D29BB6A6D0020ED1E /* AssistanceExercise+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C7B29BB6A6D0020ED1E /* AssistanceExercise+CoreDataProperties.swift */; };
-		05116C8E29BB6A6D0020ED1E /* Lift+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C7C29BB6A6D0020ED1E /* Lift+CoreDataClass.swift */; };
-		05116C8F29BB6A6D0020ED1E /* Lift+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C7D29BB6A6D0020ED1E /* Lift+CoreDataProperties.swift */; };
-		05116C9029BB6A6D0020ED1E /* MainExercise+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C7E29BB6A6D0020ED1E /* MainExercise+CoreDataClass.swift */; };
-		05116C9129BB6A6D0020ED1E /* MainExercise+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C7F29BB6A6D0020ED1E /* MainExercise+CoreDataProperties.swift */; };
-		05116C9229BB6A6D0020ED1E /* SupplementalExercise+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C8029BB6A6D0020ED1E /* SupplementalExercise+CoreDataClass.swift */; };
-		05116C9329BB6A6D0020ED1E /* SupplementalExercise+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C8129BB6A6D0020ED1E /* SupplementalExercise+CoreDataProperties.swift */; };
-		05116C9429BB6A6D0020ED1E /* Exercise+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C8229BB6A6D0020ED1E /* Exercise+CoreDataClass.swift */; };
-		05116C9529BB6A6D0020ED1E /* Exercise+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C8329BB6A6D0020ED1E /* Exercise+CoreDataProperties.swift */; };
-		05116C9629BB6A6D0020ED1E /* Workout+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C8429BB6A6D0020ED1E /* Workout+CoreDataClass.swift */; };
-		05116C9729BB6A6D0020ED1E /* Workout+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C8529BB6A6D0020ED1E /* Workout+CoreDataProperties.swift */; };
-		05116C9829BB6A6D0020ED1E /* WarmupExercise+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C8629BB6A6D0020ED1E /* WarmupExercise+CoreDataClass.swift */; };
-		05116C9929BB6A6D0020ED1E /* WarmupExercise+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C8729BB6A6D0020ED1E /* WarmupExercise+CoreDataProperties.swift */; };
-		05116C9A29BB6A6D0020ED1E /* ExerciseSet+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C8829BB6A6D0020ED1E /* ExerciseSet+CoreDataClass.swift */; };
-		05116C9B29BB6A6D0020ED1E /* ExerciseSet+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C8929BB6A6D0020ED1E /* ExerciseSet+CoreDataProperties.swift */; };
+		05116C8A29BB6A6D0020ED1E /* FslAmrapWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C7829BB6A6D0020ED1E /* FslAmrapWorkout.swift */; };
+		05116C8C29BB6A6D0020ED1E /* AssistanceExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C7A29BB6A6D0020ED1E /* AssistanceExercise.swift */; };
+		05116C8E29BB6A6D0020ED1E /* Lift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C7C29BB6A6D0020ED1E /* Lift.swift */; };
+		05116C9029BB6A6D0020ED1E /* MainExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C7E29BB6A6D0020ED1E /* MainExercise.swift */; };
+		05116C9229BB6A6D0020ED1E /* SupplementalExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C8029BB6A6D0020ED1E /* SupplementalExercise.swift */; };
+		05116C9429BB6A6D0020ED1E /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C8229BB6A6D0020ED1E /* Exercise.swift */; };
+		05116C9629BB6A6D0020ED1E /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C8429BB6A6D0020ED1E /* Workout.swift */; };
+		05116C9829BB6A6D0020ED1E /* WarmupExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C8629BB6A6D0020ED1E /* WarmupExercise.swift */; };
+		05116C9A29BB6A6D0020ED1E /* ExerciseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05116C8829BB6A6D0020ED1E /* ExerciseSet.swift */; };
 		0516966229AA89D9006BC0C1 /* CycleWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0516966129AA89D9006BC0C1 /* CycleWeek.swift */; };
 		0516966429ABDF30006BC0C1 /* WorkoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0516966329ABDF30006BC0C1 /* WorkoutTests.swift */; };
 		052C8AC42817883700324E68 /* AddLiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052C8AC32817883700324E68 /* AddLiftView.swift */; };
@@ -97,24 +88,15 @@
 		050009C7295491B200FCBEF6 /* EditWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWorkoutView.swift; sourceTree = "<group>"; };
 		050CC5EA29169679009A422E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		05116C7429BB5C360020ED1E /* AssistanceExerciseModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistanceExerciseModelTests.swift; sourceTree = "<group>"; };
-		05116C7829BB6A6D0020ED1E /* FslAmrapWorkout+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FslAmrapWorkout+CoreDataClass.swift"; sourceTree = "<group>"; };
-		05116C7929BB6A6D0020ED1E /* FslAmrapWorkout+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FslAmrapWorkout+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		05116C7A29BB6A6D0020ED1E /* AssistanceExercise+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AssistanceExercise+CoreDataClass.swift"; sourceTree = "<group>"; };
-		05116C7B29BB6A6D0020ED1E /* AssistanceExercise+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AssistanceExercise+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		05116C7C29BB6A6D0020ED1E /* Lift+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lift+CoreDataClass.swift"; sourceTree = "<group>"; };
-		05116C7D29BB6A6D0020ED1E /* Lift+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lift+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		05116C7E29BB6A6D0020ED1E /* MainExercise+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainExercise+CoreDataClass.swift"; sourceTree = "<group>"; };
-		05116C7F29BB6A6D0020ED1E /* MainExercise+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainExercise+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		05116C8029BB6A6D0020ED1E /* SupplementalExercise+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SupplementalExercise+CoreDataClass.swift"; sourceTree = "<group>"; };
-		05116C8129BB6A6D0020ED1E /* SupplementalExercise+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SupplementalExercise+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		05116C8229BB6A6D0020ED1E /* Exercise+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+CoreDataClass.swift"; sourceTree = "<group>"; };
-		05116C8329BB6A6D0020ED1E /* Exercise+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		05116C8429BB6A6D0020ED1E /* Workout+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout+CoreDataClass.swift"; sourceTree = "<group>"; };
-		05116C8529BB6A6D0020ED1E /* Workout+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		05116C8629BB6A6D0020ED1E /* WarmupExercise+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WarmupExercise+CoreDataClass.swift"; sourceTree = "<group>"; };
-		05116C8729BB6A6D0020ED1E /* WarmupExercise+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WarmupExercise+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		05116C8829BB6A6D0020ED1E /* ExerciseSet+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseSet+CoreDataClass.swift"; sourceTree = "<group>"; };
-		05116C8929BB6A6D0020ED1E /* ExerciseSet+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseSet+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		05116C7829BB6A6D0020ED1E /* FslAmrapWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FslAmrapWorkout.swift; sourceTree = "<group>"; };
+		05116C7A29BB6A6D0020ED1E /* AssistanceExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistanceExercise.swift; sourceTree = "<group>"; };
+		05116C7C29BB6A6D0020ED1E /* Lift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lift.swift; sourceTree = "<group>"; };
+		05116C7E29BB6A6D0020ED1E /* MainExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainExercise.swift; sourceTree = "<group>"; };
+		05116C8029BB6A6D0020ED1E /* SupplementalExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplementalExercise.swift; sourceTree = "<group>"; };
+		05116C8229BB6A6D0020ED1E /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
+		05116C8429BB6A6D0020ED1E /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		05116C8629BB6A6D0020ED1E /* WarmupExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarmupExercise.swift; sourceTree = "<group>"; };
+		05116C8829BB6A6D0020ED1E /* ExerciseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSet.swift; sourceTree = "<group>"; };
 		0516966129AA89D9006BC0C1 /* CycleWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleWeek.swift; sourceTree = "<group>"; };
 		0516966329ABDF30006BC0C1 /* WorkoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTests.swift; sourceTree = "<group>"; };
 		052C8AC32817883700324E68 /* AddLiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLiftView.swift; sourceTree = "<group>"; };
@@ -195,24 +177,15 @@
 		05116C9C29BB6A940020ED1E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				05116C7829BB6A6D0020ED1E /* FslAmrapWorkout+CoreDataClass.swift */,
-				05116C7929BB6A6D0020ED1E /* FslAmrapWorkout+CoreDataProperties.swift */,
-				05116C7A29BB6A6D0020ED1E /* AssistanceExercise+CoreDataClass.swift */,
-				05116C7B29BB6A6D0020ED1E /* AssistanceExercise+CoreDataProperties.swift */,
-				05116C7C29BB6A6D0020ED1E /* Lift+CoreDataClass.swift */,
-				05116C7D29BB6A6D0020ED1E /* Lift+CoreDataProperties.swift */,
-				05116C7E29BB6A6D0020ED1E /* MainExercise+CoreDataClass.swift */,
-				05116C7F29BB6A6D0020ED1E /* MainExercise+CoreDataProperties.swift */,
-				05116C8029BB6A6D0020ED1E /* SupplementalExercise+CoreDataClass.swift */,
-				05116C8129BB6A6D0020ED1E /* SupplementalExercise+CoreDataProperties.swift */,
-				05116C8229BB6A6D0020ED1E /* Exercise+CoreDataClass.swift */,
-				05116C8329BB6A6D0020ED1E /* Exercise+CoreDataProperties.swift */,
-				05116C8429BB6A6D0020ED1E /* Workout+CoreDataClass.swift */,
-				05116C8529BB6A6D0020ED1E /* Workout+CoreDataProperties.swift */,
-				05116C8629BB6A6D0020ED1E /* WarmupExercise+CoreDataClass.swift */,
-				05116C8729BB6A6D0020ED1E /* WarmupExercise+CoreDataProperties.swift */,
-				05116C8829BB6A6D0020ED1E /* ExerciseSet+CoreDataClass.swift */,
-				05116C8929BB6A6D0020ED1E /* ExerciseSet+CoreDataProperties.swift */,
+				05116C7829BB6A6D0020ED1E /* FslAmrapWorkout.swift */,
+				05116C7A29BB6A6D0020ED1E /* AssistanceExercise.swift */,
+				05116C7C29BB6A6D0020ED1E /* Lift.swift */,
+				05116C7E29BB6A6D0020ED1E /* MainExercise.swift */,
+				05116C8029BB6A6D0020ED1E /* SupplementalExercise.swift */,
+				05116C8229BB6A6D0020ED1E /* Exercise.swift */,
+				05116C8429BB6A6D0020ED1E /* Workout.swift */,
+				05116C8629BB6A6D0020ED1E /* WarmupExercise.swift */,
+				05116C8829BB6A6D0020ED1E /* ExerciseSet.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -520,61 +493,52 @@
 			buildActionMask = 2147483647;
 			files = (
 				05A6E7BC27C18B7800B3113E /* WorkoutDetailsView.swift in Sources */,
-				05116C9629BB6A6D0020ED1E /* Workout+CoreDataClass.swift in Sources */,
-				05116C9A29BB6A6D0020ED1E /* ExerciseSet+CoreDataClass.swift in Sources */,
+				05116C9629BB6A6D0020ED1E /* Workout.swift in Sources */,
+				05116C9A29BB6A6D0020ED1E /* ExerciseSet.swift in Sources */,
 				05D385F2293251AA00911EFF /* AddSetView.swift in Sources */,
 				058060DC295B323800F86A9F /* AddSupplementalView.swift in Sources */,
 				05E3991B28F0F06E009E1125 /* WorkoutSelection.swift in Sources */,
 				05E9B012296EEDE80004EC20 /* ActiveSupplementalView.swift in Sources */,
 				05A6E7B727C1807700B3113E /* EditLiftView.swift in Sources */,
 				058060D8295B2E7000F86A9F /* AddAssistanceView.swift in Sources */,
-				05116C9229BB6A6D0020ED1E /* SupplementalExercise+CoreDataClass.swift in Sources */,
-				05116C9829BB6A6D0020ED1E /* WarmupExercise+CoreDataClass.swift in Sources */,
+				05116C9229BB6A6D0020ED1E /* SupplementalExercise.swift in Sources */,
+				05116C9829BB6A6D0020ED1E /* WarmupExercise.swift in Sources */,
 				058060D6295B298600F86A9F /* AddWarmUpView.swift in Sources */,
 				058060DA295B2F1800F86A9F /* AddMainView.swift in Sources */,
 				052E62FB295C93A400D0B79F /* MainView.swift in Sources */,
 				05E9B010296DB46F0004EC20 /* ActiveMainView.swift in Sources */,
-				05116C9129BB6A6D0020ED1E /* MainExercise+CoreDataProperties.swift in Sources */,
 				05E3991728EEF87A009E1125 /* WorkoutCompletionView.swift in Sources */,
 				059CD6CC28C2263000DDA354 /* LiftLineItemView.swift in Sources */,
 				052C8AC42817883700324E68 /* AddLiftView.swift in Sources */,
-				05116C9029BB6A6D0020ED1E /* MainExercise+CoreDataClass.swift in Sources */,
+				05116C9029BB6A6D0020ED1E /* MainExercise.swift in Sources */,
 				0532310528C6250A00094823 /* AddWorkoutView.swift in Sources */,
 				05A6E7BA27C18A1000B3113E /* WorkoutsView.swift in Sources */,
-				05116C8E29BB6A6D0020ED1E /* Lift+CoreDataClass.swift in Sources */,
+				05116C8E29BB6A6D0020ED1E /* Lift.swift in Sources */,
 				058F24982938E3AE00111074 /* PersistenceController.swift in Sources */,
 				05E6FA3028EB0C0F005DF36D /* ExerciseCompletionView.swift in Sources */,
 				052E62FE295C958E00D0B79F /* SupplementalView.swift in Sources */,
 				0516966229AA89D9006BC0C1 /* CycleWeek.swift in Sources */,
-				05116C9929BB6A6D0020ED1E /* WarmupExercise+CoreDataProperties.swift in Sources */,
 				05ABCF722929AF17009BC6BC /* EditSetsView.swift in Sources */,
 				05F1E2FF28D9DDC4009D5EED /* EditExerciseView.swift in Sources */,
 				05E55D3527EFB91600FAD5B7 /* ActiveWorkoutView.swift in Sources */,
-				05116C9B29BB6A6D0020ED1E /* ExerciseSet+CoreDataProperties.swift in Sources */,
-				05116C8A29BB6A6D0020ED1E /* FslAmrapWorkout+CoreDataClass.swift in Sources */,
+				05116C8A29BB6A6D0020ED1E /* FslAmrapWorkout.swift in Sources */,
 				052E6300295C97FE00D0B79F /* AssistanceView.swift in Sources */,
-				05116C9429BB6A6D0020ED1E /* Exercise+CoreDataClass.swift in Sources */,
+				05116C9429BB6A6D0020ED1E /* Exercise.swift in Sources */,
 				05CABDBB2826DC6500A53B98 /* Ironlog.xcdatamodeld in Sources */,
-				05116C8B29BB6A6D0020ED1E /* FslAmrapWorkout+CoreDataProperties.swift in Sources */,
 				053FDDDA272F2DC5002D6D9D /* IronlogApp.swift in Sources */,
 				058B1B82281DD0EF00FD87C2 /* ExerciseDetailsView.swift in Sources */,
 				0551DF5A2969B07800250CE0 /* ActiveWarmupView.swift in Sources */,
-				05116C8F29BB6A6D0020ED1E /* Lift+CoreDataProperties.swift in Sources */,
 				0551DF582969AD3300250CE0 /* ActiveFslAmrapView.swift in Sources */,
-				05116C9729BB6A6D0020ED1E /* Workout+CoreDataProperties.swift in Sources */,
 				054FEB1F28BA3B0A00506316 /* LiftDetailView.swift in Sources */,
-				05116C9529BB6A6D0020ED1E /* Exercise+CoreDataProperties.swift in Sources */,
 				052E6302295C99F300D0B79F /* ExerciseHeaderView.swift in Sources */,
 				05A6E7B527C17EF000B3113E /* LiftsView.swift in Sources */,
 				05E9B014296F02E00004EC20 /* ActiveAssistanceView.swift in Sources */,
 				052E6306295C9DEC00D0B79F /* ExerciseRowView.swift in Sources */,
 				057D97102985621A001509CF /* WorkoutTimer.swift in Sources */,
 				0554AAE2281485A2001E8A58 /* AddExerciseView.swift in Sources */,
-				05116C8C29BB6A6D0020ED1E /* AssistanceExercise+CoreDataClass.swift in Sources */,
-				05116C9329BB6A6D0020ED1E /* SupplementalExercise+CoreDataProperties.swift in Sources */,
+				05116C8C29BB6A6D0020ED1E /* AssistanceExercise.swift in Sources */,
 				052E62F9295C8EE200D0B79F /* WarmUpView.swift in Sources */,
 				050009C8295491B200FCBEF6 /* EditWorkoutView.swift in Sources */,
-				05116C8D29BB6A6D0020ED1E /* AssistanceExercise+CoreDataProperties.swift in Sources */,
 				05E3991928EEFB87009E1125 /* ExerciseCompletionRowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

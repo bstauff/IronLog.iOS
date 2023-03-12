@@ -69,6 +69,7 @@ struct AddWorkoutView: View {
             errorString = "You must select a main lift"
             return
         }
+        
         let newWorkout = FslAmrapWorkout(context: viewContext)
         newWorkout.id = UUID()
         newWorkout.isComplete = false
