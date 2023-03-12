@@ -11,6 +11,13 @@ import CoreData
 
 @objc(Workout)
 public class Workout: NSManagedObject {
+    public override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
+        self.id = UUID()
+        self.date = Date().timeIntervalSince1970
+        self.isComplete = false
+    }
+    
     func planForWeek(lift: Lift, week: CycleWeek) {
         let warmup = planWarmupExercise(warmupLift: lift, cycleWeek: week)
         self.addToWarmupExercises(warmup)

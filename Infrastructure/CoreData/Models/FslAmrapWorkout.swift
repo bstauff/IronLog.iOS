@@ -11,5 +11,4 @@ import CoreData
 
 @objc(FslAmrapWorkout)
 public class FslAmrapWorkout: Workout {
-
 }

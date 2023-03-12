@@ -70,10 +70,10 @@ struct AddWorkoutView: View {
             return
         }
         
-        let newWorkout = FslAmrapWorkout(context: viewContext)
-        newWorkout.id = UUID()
-        newWorkout.isComplete = false
-        newWorkout.date = selectedDate
+        let newWorkout = FslAmrapWorkout(entity: FslAmrapWorkout.entity(), insertInto: viewContext)
+//        newWorkout.id = UUID()
+//        newWorkout.isComplete = false
+//        newWorkout.date = selectedDate.timeIntervalSince1970
         
         newWorkout.warmupExercises = NSOrderedSet(array: [buildWarmupWork()])
         newWorkout.mainExercise = buildMainWork()
