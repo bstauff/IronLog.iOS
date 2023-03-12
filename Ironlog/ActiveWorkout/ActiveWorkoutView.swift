@@ -27,12 +27,9 @@ struct ActiveWorkoutView: View {
     }
     
     func getWorkoutDate(workout: Workout) -> String{
-        guard workout.date != nil else  {
-            return ""
-        }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/YY"
-        return dateFormatter.string(from: workout.date!)
+        return dateFormatter.string(from: Date(timeIntervalSince1970: workout.date))
     }
 }
 

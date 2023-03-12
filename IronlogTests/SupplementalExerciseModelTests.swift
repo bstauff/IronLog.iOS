@@ -7,67 +7,87 @@
 
 import Foundation
 import XCTest
+import CoreData
 @testable import Ironlog
 
 class SupplementalExerciseModelTests: XCTestCase {
     
+    private var supplementalExercise: SupplementalExercise?
+    private var context: NSManagedObjectContext?
+    
+    override func setUp() async throws {
+        self.context =
+            PersistenceController.testController.container.viewContext
+        
+        self.supplementalExercise = SupplementalExercise(context: self.context!)
+        
+        let lift = Lift(context: self.context!)
+        lift.name = "Squat"
+        lift.trainingMax = 225
+        
+        supplementalExercise!.lift = lift
+    }
+    
     func testPlanSetsForWeekShouldPlanCorrectlyForFirstWeek() {
-        let lift = LiftModel(name: "Squat", trainingMax: 225, isMainLift: true)
-        let supplementalExercise = SupplementalExerciseModel(lift: lift)
+        supplementalExercise!.planSetsForWeek(week: CycleWeek.firstWeek)
         
-        supplementalExercise.planSetsForWeek(week: CycleWeek.firstWeek)
+        XCTAssertNotNil(supplementalExercise?.exerciseSets)
         
-        XCTAssertEqual(5, supplementalExercise.sets.count)
+        let sets = supplementalExercise?.exerciseSets?.array as! [ExerciseSet]
         
-        XCTAssertEqual(145, supplementalExercise.sets[0].weight)
-        XCTAssertEqual(5, supplementalExercise.sets[0].reps)
-        XCTAssertEqual(145, supplementalExercise.sets[1].weight)
-        XCTAssertEqual(5, supplementalExercise.sets[1].reps)
-        XCTAssertEqual(145, supplementalExercise.sets[2].weight)
-        XCTAssertEqual(5, supplementalExercise.sets[2].reps)
-        XCTAssertEqual(145, supplementalExercise.sets[3].weight)
-        XCTAssertEqual(5, supplementalExercise.sets[3].reps)
-        XCTAssertEqual(145, supplementalExercise.sets[4].weight)
-        XCTAssertEqual(5, supplementalExercise.sets[4].reps)
+        XCTAssertEqual(5, sets.count)
+        
+        XCTAssertEqual(145, sets[0].weight)
+        XCTAssertEqual(5, sets[0].reps)
+        XCTAssertEqual(145, sets[1].weight)
+        XCTAssertEqual(5, sets[1].reps)
+        XCTAssertEqual(145, sets[2].weight)
+        XCTAssertEqual(5, sets[2].reps)
+        XCTAssertEqual(145, sets[3].weight)
+        XCTAssertEqual(5, sets[3].reps)
+        XCTAssertEqual(145, sets[4].weight)
+        XCTAssertEqual(5, sets[4].reps)
     }
     
     func testPlanSetsForWeekShouldPlanCorrectlyForSecondWeek() {
-        let lift = LiftModel(name: "Squat", trainingMax: 225, isMainLift: true)
-        let supplementalExercise = SupplementalExerciseModel(lift: lift)
+        supplementalExercise!.planSetsForWeek(week: CycleWeek.secondWeek)
         
-        supplementalExercise.planSetsForWeek(week: CycleWeek.secondWeek)
+        XCTAssertNotNil(supplementalExercise?.exerciseSets)
+        
+        let sets = supplementalExercise?.exerciseSets?.array as! [ExerciseSet]
 
-        XCTAssertEqual(5, supplementalExercise.sets.count)
+        XCTAssertEqual(5, sets.count)
         
-        XCTAssertEqual(160, supplementalExercise.sets[0].weight)
-        XCTAssertEqual(5, supplementalExercise.sets[0].reps)
-        XCTAssertEqual(160, supplementalExercise.sets[1].weight)
-        XCTAssertEqual(5, supplementalExercise.sets[1].reps)
-        XCTAssertEqual(160, supplementalExercise.sets[2].weight)
-        XCTAssertEqual(5, supplementalExercise.sets[2].reps)
-        XCTAssertEqual(160, supplementalExercise.sets[3].weight)
-        XCTAssertEqual(5, supplementalExercise.sets[3].reps)
-        XCTAssertEqual(160, supplementalExercise.sets[4].weight)
-        XCTAssertEqual(5, supplementalExercise.sets[4].reps)
+        XCTAssertEqual(160, sets[0].weight)
+        XCTAssertEqual(5, sets[0].reps)
+        XCTAssertEqual(160, sets[1].weight)
+        XCTAssertEqual(5, sets[1].reps)
+        XCTAssertEqual(160, sets[2].weight)
+        XCTAssertEqual(5, sets[2].reps)
+        XCTAssertEqual(160, sets[3].weight)
+        XCTAssertEqual(5, sets[3].reps)
+        XCTAssertEqual(160, sets[4].weight)
+        XCTAssertEqual(5, sets[4].reps)
     }
     
     func testPlanSetsForWeekShouldPlanCorrectlyForThirdWeek() {
-        let lift = LiftModel(name: "Squat", trainingMax: 225, isMainLift: true)
-        let supplementalExercise = SupplementalExerciseModel(lift: lift)
+        supplementalExercise!.planSetsForWeek(week: CycleWeek.thirdWeek)
         
-        supplementalExercise.planSetsForWeek(week: CycleWeek.thirdWeek)
+        XCTAssertNotNil(supplementalExercise?.exerciseSets)
         
-        XCTAssertEqual(5, supplementalExercise.sets.count)
+        let sets = supplementalExercise?.exerciseSets?.array as! [ExerciseSet]
         
-        XCTAssertEqual(170, supplementalExercise.sets[0].weight)
-        XCTAssertEqual(5, supplementalExercise.sets[0].reps)
-        XCTAssertEqual(170, supplementalExercise.sets[1].weight)
-        XCTAssertEqual(5, supplementalExercise.sets[1].reps)
-        XCTAssertEqual(170, supplementalExercise.sets[2].weight)
-        XCTAssertEqual(5, supplementalExercise.sets[2].reps)
-        XCTAssertEqual(170, supplementalExercise.sets[3].weight)
-        XCTAssertEqual(5, supplementalExercise.sets[3].reps)
-        XCTAssertEqual(170, supplementalExercise.sets[4].weight)
-        XCTAssertEqual(5, supplementalExercise.sets[4].reps)
+        XCTAssertEqual(5, sets.count)
+        
+        XCTAssertEqual(170, sets[0].weight)
+        XCTAssertEqual(5, sets[0].reps)
+        XCTAssertEqual(170, sets[1].weight)
+        XCTAssertEqual(5, sets[1].reps)
+        XCTAssertEqual(170, sets[2].weight)
+        XCTAssertEqual(5, sets[2].reps)
+        XCTAssertEqual(170, sets[3].weight)
+        XCTAssertEqual(5, sets[3].reps)
+        XCTAssertEqual(170, sets[4].weight)
+        XCTAssertEqual(5, sets[4].reps)
     }
 }

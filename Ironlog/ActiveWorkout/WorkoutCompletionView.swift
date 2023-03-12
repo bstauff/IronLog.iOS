@@ -60,16 +60,12 @@ struct WorkoutCompletionView: View {
     }
     
     private func getFormattedDate() -> String {
-        guard self.workout.date != nil else {
-           return ""
-        }
-        
         let dateFormatter = DateFormatter()
         
         dateFormatter.locale = Locale(identifier: "en_US")
         dateFormatter.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
         
-        return dateFormatter.string(from: self.workout.date!)
+        return dateFormatter.string(from: Date(timeIntervalSince1970: workout.date))
     }
     
     private func getExercises() -> [Exercise] {

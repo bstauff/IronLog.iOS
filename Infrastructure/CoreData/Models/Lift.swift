@@ -1,23 +1,16 @@
 //
-//  LiftModel.swift
+//  Lift+CoreDataClass.swift
 //  Ironlog
 //
-//  Created by Brian Stauff on 2/25/23.
+//  Created by Brian Stauff on 3/10/23.
+//
 //
 
 import Foundation
+import CoreData
 
-struct LiftModel {
-    var name: String
-    var trainingMax: Int
-    var isMainLift: Bool
-    
-    init(name: String, trainingMax: Int, isMainLift: Bool) {
-        self.name = name
-        self.trainingMax = trainingMax
-        self.isMainLift = isMainLift
-    }
-    
+@objc(Lift)
+public class Lift: NSManagedObject {
     func getAdjustedTrainingMax(multiplier: Double) -> Int {
         let liftTrainingMax = Double(self.trainingMax)
         

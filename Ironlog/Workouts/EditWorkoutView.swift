@@ -30,13 +30,13 @@ struct EditWorkoutView: View {
             .buttonStyle(.borderedProminent)
         }
         .onAppear {
-            self.selectedDate = workout.date ?? Date()
+            self.selectedDate = Date(timeIntervalSince1970: workout.date)
         }
     }
     
     private func saveClicked() -> Void {
         do {
-            workout.date = self.selectedDate
+            workout.date = self.selectedDate.timeIntervalSince1970
             try self.viewContext.save()
         } catch {
             self.isError = true

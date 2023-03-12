@@ -41,7 +41,7 @@ struct PersistenceController {
         let workout = FslAmrapWorkout(context: viewContext)
         workout.id = UUID()
         workout.isComplete = false
-        workout.date = Date()
+        workout.date = Date().timeIntervalSince1970
         
         let squatWarmup = WarmupExercise(context: viewContext)
         squatWarmup.isComplete = false
@@ -110,6 +110,10 @@ struct PersistenceController {
         
         return controller
     }()
+    
+    static var testController: PersistenceController {
+        return PersistenceController(inMemory: true)
+    }
     
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "Ironlog")
