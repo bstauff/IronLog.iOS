@@ -54,4 +54,10 @@ class WorkoutTests: XCTestCase {
         let assistanceSets: NSOrderedSet! = assistanceExercise.exerciseSets
         XCTAssertTrue(assistanceSets.count > 0)
     }
+    
+    func testInitWithEntityDescriptorDoesNotOverrideDate() {
+        let workout = Workout(entity: Workout.entity(), insertInto: self.context)
+        
+        XCTAssertEqual(TimeInterval(), workout.date)
+    }
 }
