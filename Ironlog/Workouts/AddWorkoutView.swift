@@ -75,6 +75,9 @@ struct AddWorkoutView: View {
             FslAmrapWorkout(
                 entity: FslAmrapWorkout.entity(),
                 insertInto: viewContext)
+        newWorkout.id = UUID()
+        newWorkout.date = selectedDate.timeIntervalSince1970
+        newWorkout.isComplete = false
         
         newWorkout.planForWeek(
             lift: selectedLift,

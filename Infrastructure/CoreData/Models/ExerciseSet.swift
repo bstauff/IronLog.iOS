@@ -11,9 +11,4 @@ import CoreData
 
 @objc(ExerciseSet)
 public class ExerciseSet: NSManagedObject {
-    public override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
-        super.init(entity: entity, insertInto: context)
-        self.id = UUID()
-        self.isComplete = false
-    }
 }
