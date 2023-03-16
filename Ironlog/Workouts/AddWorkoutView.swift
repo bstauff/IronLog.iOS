@@ -87,8 +87,7 @@ struct AddWorkoutView: View {
             try viewContext.save()
         } catch {
             isError = true
-            errorString = error.localizedDescription
-//            errorString = "Failed to add new workout"
+            errorString = "Failed to add new workout"
             return
         }
         presentationMode.wrappedValue.dismiss()

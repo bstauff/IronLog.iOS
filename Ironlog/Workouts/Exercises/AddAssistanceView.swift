@@ -21,7 +21,6 @@ struct AddAssistanceView: View {
     var workout: Workout
     
     @State private var selectedLift: Lift?
-    @State private var sets: [ExerciseSet] = []
     
     @State private var isError = false
     @State private var errorMessage = ""
@@ -34,9 +33,6 @@ struct AddAssistanceView: View {
                         ForEach(lifts) { lift in
                             Text(lift.name ?? "").tag(lift as Lift?)
                         }
-                    }
-                    Section {
-                        EditSetsView(updatedSets: $sets)
                     }
                     Section {
                         HStack {
@@ -62,28 +58,13 @@ struct AddAssistanceView: View {
     }
     
     func createNewExercise() -> Void {
-        guard selectedLift != nil else {
+        guard let selectedLift = self.selectedLift else {
             isError = true
             errorMessage = "Must select a lift"
             return
         }
-                        
-        guard !sets.isEmpty else {
-            isError = true
-            errorMessage = "Must add sets"
-            return
-        }
         
-        let newExercise = AssistanceExercise(context: viewContext)
-        let orderedSet = NSOrderedSet(array:sets)
-        newExercise.addToExerciseSets(orderedSet)
-        newExercise.lift = self.selectedLift
-        newExercise.id = UUID()
-        newExercise.isComplete = false
-        
-        newExercise.workout = self.workout
-        
-        workout.addToAssistanceExercises(newExercise)
+        self.workout.planAssistance(assistanceLift: selectedLift)
         
         do {
             try viewContext.save()
