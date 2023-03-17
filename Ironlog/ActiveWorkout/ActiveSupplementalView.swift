@@ -28,17 +28,6 @@ struct ActiveSupplementalView: View {
                     Spacer()
                 }
             }
-            Section ("rest") {
-                VStack {
-                    if self.restTimer.timerRunning {
-                        Text("Resting " + String(self.restTimer.secondsRemaining) + " seconds")
-                    } else {
-                        Button("Rest"){
-                            self.restTimer.startTimer()
-                        }
-                    }
-                }
-            }
         }
         .navigationTitle("Supplemental")
     }

@@ -24,13 +24,6 @@ struct ActiveAssistanceView: View {
                 Section {
                     VStack {
                         ExerciseCompletionView(exercise: exercise)
-                        if self.restTimer.timerRunning {
-                            Text("Resting " + String(self.restTimer.secondsRemaining) + " seconds")
-                        } else {
-                            Button("Rest"){
-                                self.restTimer.startTimer()
-                            }
-                        }
                     }
                 }
             }
