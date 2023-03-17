@@ -46,17 +46,6 @@ struct ActiveMainView: View {
                     Spacer()
                 }
             }
-            Section ("rest") {
-                VStack {
-                    if self.restTimer.timerRunning {
-                        Text("Resting " + String(self.restTimer.secondsRemaining) + " seconds")
-                    } else {
-                        Button("Rest"){
-                            self.restTimer.startTimer()
-                        }
-                    }
-                }
-            }
         }
         .alert("Oops", isPresented: $isError) {
             Button("OK") { }
