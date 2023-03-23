@@ -73,3 +73,7 @@ workflows:
       - release-appstore:
           requires:
             - hold
+          filters:
+            branches:
+              only:
+                - main
