@@ -68,6 +68,8 @@ workflows:
                 - main
   appstore-release:
     jobs:
+      - hold:
+          type: approval
       - release-appstore:
           requires:
             - hold
