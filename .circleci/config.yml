@@ -70,14 +70,14 @@ workflows:
     jobs:
       - hold:
           type: approval
-          filters:
-            branches:
-              only:
-                - main
+          # filters:
+          #   branches:
+          #     only:
+          #       - main
       - release-appstore:
           requires:
             - hold
-          filters:
-            branches:
-              only:
-                - main
+          # filters:
+          #   branches:
+          #     only:
+          #       - main
