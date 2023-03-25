@@ -50,6 +50,8 @@ platform :ios do
     build_number: "$CIRCLE_BUILD_NUM")
   capture_screenshots
   build_app(scheme: "Ironlog", export_method: "app-store")
-  upload_to_app_store
+  upload_to_app_store(
+    force: true
+  )
   end
 end
