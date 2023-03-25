@@ -40,4 +40,19 @@ platform :ios do
     groups: ["Dev testing"],
     distribute_external: false)
   end
+
+  desc "Push a new release to public AppStore"
+  lane :release_appstore do
+  app_store_connect_api_key
+  match(type: "appstore", git_url: "git@github.com:bstauff/Ironlog.certs.git")
+  increment_build_number(
+    xcodeproj: "Ironlog.xcodeproj",
+    build_number: "$CIRCLE_BUILD_NUM")
+  capture_screenshots
+  build_app(scheme: "Ironlog", export_method: "app-store")
+  upload_to_app_store(
+    force: true,
+    precheck_include_in_app_purchases: false
+  )
+  end
 end

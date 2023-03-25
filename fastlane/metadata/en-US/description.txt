@@ -1,1 +1,2 @@
-
+Ironlog is a workout tracking application geared towards strength training.  
+It will help you plan, track, and review workouts.
