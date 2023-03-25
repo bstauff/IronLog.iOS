@@ -51,7 +51,8 @@ platform :ios do
   capture_screenshots
   build_app(scheme: "Ironlog", export_method: "app-store")
   upload_to_app_store(
-    force: true
+    force: true,
+    precheck_include_in_app_purchases: false
   )
   end
 end
