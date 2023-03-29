@@ -56,8 +56,6 @@ jobs:
     steps:
       - attach_workspace:
           at: /tmp/workspace
-      - run: |
-          ls -la /tmp/workspace/gym
       - checkout
       - ruby/install-deps
       - run:
