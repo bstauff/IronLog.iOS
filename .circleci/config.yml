@@ -41,7 +41,7 @@ jobs:
       - store_artifacts:
           path: output
       - persist_to_workspace:
-          root: workspace
+          root: gym
           paths:
             - "output"
 
