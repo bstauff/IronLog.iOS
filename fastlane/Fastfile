@@ -41,8 +41,8 @@ platform :ios do
   lane :release_testflight do
   app_store_connect_api_key
   upload_to_testflight(
-    ipa: "./output/gym/Ironlog.ipa"
-    skip_waiting_for_build_processing: true, 
+    ipa: "./output/gym/Ironlog.ipa",
+    skip_waiting_for_build_processing: true,
     groups: ["Dev testing"],
     distribute_external: false)
   end
@@ -51,7 +51,7 @@ platform :ios do
   lane :release_appstore do
   app_store_connect_api_key
   upload_to_app_store(
-    ipa: "./output/gym/Ironlog.ipa"
+    ipa: "./output/gym/Ironlog.ipa",
     force: true,
     precheck_include_in_app_purchases: false
   )
