@@ -90,7 +90,7 @@ workflows:
       - run-tests
       - build-for-appstore:
           requires:
-            - build-and-run-tests
+            - run-tests
           filters:
             branches:
               only:
