@@ -57,7 +57,7 @@ jobs:
       - attach_workspace:
           at: /tmp/workspace
       - run: |
-          ls -la /tmp/workspace/distiller/project
+          ls -la /tmp/workspace/distiller/
       - checkout
       - ruby/install-deps
       - run:
