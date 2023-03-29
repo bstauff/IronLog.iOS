@@ -105,6 +105,8 @@ workflows:
                 - main
 
       - release-appstore:
+          requires:
+            - build-for-appstore
           filters:
             branches:
               only:
