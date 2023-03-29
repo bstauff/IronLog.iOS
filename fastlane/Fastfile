@@ -23,7 +23,8 @@ platform :ios do
   desc "Build and run tests"
   lane :test do
     scan(
-      include_simulator_logs: false
+      include_simulator_logs: false,
+      scheme: "Ironlog"
     )
   end
 
