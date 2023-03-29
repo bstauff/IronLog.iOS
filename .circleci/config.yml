@@ -4,7 +4,8 @@ orbs:
   ruby: circleci/ruby@1.2.0
 
 jobs:
-  build-and-test:
+
+  build-and-run-tests:
     macos: 
       xcode: 14.0.1
     working_directory: /Users/distiller/project
@@ -22,13 +23,14 @@ jobs:
           path: output
       - store_test_results:
           path: output/scan
-  release-beta:
+
+  build-for-appstore:
     macos: 
       xcode: 14.0.1
     working_directory: /Users/distiller/project
     environment:
       FL_OUTPUT_DIR: output
-      FASTLANE_LANE: release_internal_beta
+      FASTLANE_LANE: build_for_appstore
     shell: /bin/bash --login -o pipefail
     steps:
       - checkout
@@ -38,6 +40,24 @@ jobs:
           command: bundle exec fastlane $FASTLANE_LANE
       - store_artifacts:
           path: output
+
+  release-testflight:
+    macos: 
+      xcode: 14.0.1
+    working_directory: /Users/distiller/project
+    environment:
+      FL_OUTPUT_DIR: output
+      FASTLANE_LANE: release_testflight
+    shell: /bin/bash --login -o pipefail
+    steps:
+      - checkout
+      - ruby/install-deps
+      - run:
+          name: fastlane
+          command: bundle exec fastlane $FASTLANE_LANE
+      - store_artifacts:
+          path: output
+
   release-appstore:
     macos: 
       xcode: 14.0.1
@@ -54,29 +74,25 @@ jobs:
           command: bundle exec fastlane $FASTLANE_LANE
       - store_artifacts:
           path: output
+
 workflows:
   version: 2
   build-test:
     jobs:
-      - build-and-test
-  testflight-release:
-    jobs:
-      - release-beta:
-          filters:
-            branches:
-              only:
-                - main
-  appstore-release:
-    jobs:
-      - hold:
-          type: approval
-          filters:
-            branches:
-              only:
-                - main
+      - build-and-run-tests
+      - build-for-appstore
+          # filters:
+          #   branches:
+          #     only:
+          #       - main
+
+      - release-testflight
+          # filters:
+          #   branches:
+          #     only:
+          #       - main
+
       - release-appstore:
-          requires:
-            - hold
           filters:
             branches:
               only:
