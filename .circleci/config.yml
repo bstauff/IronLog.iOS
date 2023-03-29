@@ -41,9 +41,9 @@ jobs:
       - store_artifacts:
           path: output
       - persist_to_workspace:
-          root: gym
+          root: output
           paths:
-            - "output"
+            - "gym"
 
   release-testflight:
     macos: 
