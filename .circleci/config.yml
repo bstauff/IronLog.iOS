@@ -5,7 +5,7 @@ orbs:
 
 jobs:
 
-  build-and-run-tests:
+  run-tests:
     macos: 
       xcode: 14.0.1
     working_directory: /Users/distiller/project
@@ -73,6 +73,8 @@ jobs:
       FASTLANE_LANE: release_appstore
     shell: /bin/bash --login -o pipefail
     steps:
+      - attach_workspace:
+          at: /tmp/workspace
       - checkout
       - ruby/install-deps
       - run:
@@ -85,22 +87,22 @@ workflows:
   version: 2
   build-test:
     jobs:
-      - build-and-run-tests
+      - run-tests
       - build-for-appstore:
           requires:
             - build-and-run-tests
-          # filters:
-          #   branches:
-          #     only:
-          #       - main
+          filters:
+            branches:
+              only:
+                - main
 
       - release-testflight:
           requires:
             - build-for-appstore
-          # filters:
-          #   branches:
-          #     only:
-          #       - main
+          filters:
+            branches:
+              only:
+                - main
 
       - release-appstore:
           filters:
