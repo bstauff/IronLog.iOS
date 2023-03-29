@@ -80,13 +80,17 @@ workflows:
   build-test:
     jobs:
       - build-and-run-tests
-      - build-for-appstore
+      - build-for-appstore:
+          requires:
+            - build-and-run-tests
           # filters:
           #   branches:
           #     only:
           #       - main
 
-      - release-testflight
+      - release-testflight:
+          requires:
+            - build-for-appstore
           # filters:
           #   branches:
           #     only:
