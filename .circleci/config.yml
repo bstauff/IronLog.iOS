@@ -106,7 +106,7 @@ workflows:
 
       - release-appstore:
           requires:
-            - build-for-appstore
+            - release-testflight
           filters:
             branches:
               only:
