@@ -20,7 +20,7 @@ platform :ios do
     setup_circle_ci
   end
 
-  desc "Build and run tests"
+  desc "run tests"
   lane :test do
     scan(
       include_simulator_logs: false,
@@ -28,30 +28,30 @@ platform :ios do
     )
   end
 
-  desc "Push a new release to Testflight internal beta"
-  lane :release_internal_beta do
+  desc "build for appstore"
+  lane :build_for_appstore do
+    match(type: "appstore", git_url: "git@github.com:bstauff/Ironlog.certs.git")
+    increment_build_number(
+      xcodeproj: "Ironlog.xcodeproj",
+      build_number: "$CIRCLE_BUILD_NUM")
+    build_app(scheme: "Ironlog", export_method: "app-store")
+  end
+
+  desc "release to Testflight"
+  lane :release_testflight do
   app_store_connect_api_key
-  match(type: "appstore", git_url: "git@github.com:bstauff/Ironlog.certs.git")
-  increment_build_number(
-    xcodeproj: "Ironlog.xcodeproj",
-    build_number: "$CIRCLE_BUILD_NUM")
-  build_app(scheme: "Ironlog", export_method: "app-store")
   upload_to_testflight(
-    skip_waiting_for_build_processing: true, 
+    ipa: "/tmp/workspace/gym/Ironlog.ipa",
+    skip_waiting_for_build_processing: true,
     groups: ["Dev testing"],
     distribute_external: false)
   end
 
-  desc "Push a new release to public AppStore"
+  desc "release to AppStore"
   lane :release_appstore do
   app_store_connect_api_key
-  match(type: "appstore", git_url: "git@github.com:bstauff/Ironlog.certs.git")
-  increment_build_number(
-    xcodeproj: "Ironlog.xcodeproj",
-    build_number: "$CIRCLE_BUILD_NUM")
-  capture_screenshots
-  build_app(scheme: "Ironlog", export_method: "app-store")
   upload_to_app_store(
+    ipa: "/tmp/workspace/gym/Ironlog.ipa",
     force: true,
     precheck_include_in_app_purchases: false
   )
