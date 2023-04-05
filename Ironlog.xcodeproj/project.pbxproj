@@ -32,7 +32,6 @@
 		053FDDDE272F2DC5002D6D9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 053FDDDD272F2DC5002D6D9D /* Assets.xcassets */; };
 		053FDDE1272F2DC5002D6D9D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 053FDDE0272F2DC5002D6D9D /* Preview Assets.xcassets */; };
 		053FDDF5272F2DC5002D6D9D /* IronlogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053FDDF4272F2DC5002D6D9D /* IronlogUITests.swift */; };
-		053FDDF7272F2DC5002D6D9D /* IronlogUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053FDDF6272F2DC5002D6D9D /* IronlogUITestsLaunchTests.swift */; };
 		054FEB1F28BA3B0A00506316 /* LiftDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FEB1E28BA3B0A00506316 /* LiftDetailView.swift */; };
 		0551DF582969AD3300250CE0 /* ActiveFslAmrapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0551DF572969AD3300250CE0 /* ActiveFslAmrapView.swift */; };
 		0551DF5A2969B07800250CE0 /* ActiveWarmupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0551DF592969B07800250CE0 /* ActiveWarmupView.swift */; };
@@ -114,7 +113,6 @@
 		053FDDE6272F2DC5002D6D9D /* IronlogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IronlogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		053FDDF0272F2DC5002D6D9D /* IronlogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IronlogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		053FDDF4272F2DC5002D6D9D /* IronlogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronlogUITests.swift; sourceTree = "<group>"; };
-		053FDDF6272F2DC5002D6D9D /* IronlogUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronlogUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		054FEB1E28BA3B0A00506316 /* LiftDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftDetailView.swift; sourceTree = "<group>"; };
 		0551DF572969AD3300250CE0 /* ActiveFslAmrapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveFslAmrapView.swift; sourceTree = "<group>"; };
 		0551DF592969B07800250CE0 /* ActiveWarmupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveWarmupView.swift; sourceTree = "<group>"; };
@@ -265,7 +263,6 @@
 			children = (
 				05B9153529AA48E100BFD492 /* SnapshotHelper.swift */,
 				053FDDF4272F2DC5002D6D9D /* IronlogUITests.swift */,
-				053FDDF6272F2DC5002D6D9D /* IronlogUITestsLaunchTests.swift */,
 			);
 			path = IronlogUITests;
 			sourceTree = "<group>";
@@ -560,7 +557,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				053FDDF5272F2DC5002D6D9D /* IronlogUITests.swift in Sources */,
-				053FDDF7272F2DC5002D6D9D /* IronlogUITestsLaunchTests.swift in Sources */,
 				05B9153629AA48E100BFD492 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
