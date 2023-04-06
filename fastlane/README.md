@@ -21,15 +21,23 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 [bundle exec] fastlane ios test
 ```
 
-Build and run tests
+run tests
 
-### ios release_internal_beta
+### ios build_for_appstore
 
 ```sh
-[bundle exec] fastlane ios release_internal_beta
+[bundle exec] fastlane ios build_for_appstore
 ```
 
-Push a new release to Testflight internal beta
+build for appstore
+
+### ios release_testflight
+
+```sh
+[bundle exec] fastlane ios release_testflight
+```
+
+release to Testflight
 
 ### ios release_appstore
 
@@ -37,7 +45,7 @@ Push a new release to Testflight internal beta
 [bundle exec] fastlane ios release_appstore
 ```
 
-Push a new release to public AppStore
+release to AppStore
 
 ----
 
