@@ -7,7 +7,7 @@
 
 import XCTest
 
-class IronlogUITests: XCTestCase {
+class IronlogSnapshotUITests: XCTestCase {
     func testLiftsView() throws {
         let app = XCUIApplication()
         setupSnapshot(app)

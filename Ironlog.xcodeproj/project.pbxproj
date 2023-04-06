@@ -43,6 +43,7 @@
 		058060D8295B2E7000F86A9F /* AddAssistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058060D7295B2E7000F86A9F /* AddAssistanceView.swift */; };
 		058060DA295B2F1800F86A9F /* AddMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058060D9295B2F1800F86A9F /* AddMainView.swift */; };
 		058060DC295B323800F86A9F /* AddSupplementalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058060DB295B323800F86A9F /* AddSupplementalView.swift */; };
+		0586920729DEEED800F19144 /* IronlogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0586920629DEEED800F19144 /* IronlogUITests.swift */; };
 		058B1B82281DD0EF00FD87C2 /* ExerciseDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058B1B81281DD0EF00FD87C2 /* ExerciseDetailsView.swift */; };
 		058F24982938E3AE00111074 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058F24972938E3AE00111074 /* PersistenceController.swift */; };
 		059BACCF29DEE8A1005AEE8E /* IronlogSnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053FDDF4272F2DC5002D6D9D /* IronlogSnapshotUITests.swift */; };
@@ -132,6 +133,7 @@
 		058060D7295B2E7000F86A9F /* AddAssistanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssistanceView.swift; sourceTree = "<group>"; };
 		058060D9295B2F1800F86A9F /* AddMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMainView.swift; sourceTree = "<group>"; };
 		058060DB295B323800F86A9F /* AddSupplementalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSupplementalView.swift; sourceTree = "<group>"; };
+		0586920629DEEED800F19144 /* IronlogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IronlogUITests.swift; sourceTree = "<group>"; };
 		058B1B81281DD0EF00FD87C2 /* ExerciseDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailsView.swift; sourceTree = "<group>"; };
 		058F24972938E3AE00111074 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		059BACD629DEE8A1005AEE8E /* IronlogSnapshotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IronlogSnapshotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -278,6 +280,7 @@
 		053FDDF3272F2DC5002D6D9D /* IronlogUITests */ = {
 			isa = PBXGroup;
 			children = (
+				0586920629DEEED800F19144 /* IronlogUITests.swift */,
 			);
 			path = IronlogUITests;
 			sourceTree = "<group>";
@@ -309,8 +312,8 @@
 		059BACCA29DEE85F005AEE8E /* IronlogSnapshotTests */ = {
 			isa = PBXGroup;
 			children = (
-				05B9153529AA48E100BFD492 /* SnapshotHelper.swift */,
 				053FDDF4272F2DC5002D6D9D /* IronlogSnapshotUITests.swift */,
+				05B9153529AA48E100BFD492 /* SnapshotHelper.swift */,
 			);
 			path = IronlogSnapshotTests;
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 					};
 					053FDDEF272F2DC5002D6D9D = {
 						CreatedOnToolsVersion = 13.1;
+						LastSwiftMigration = 1430;
 						TestTargetID = 053FDDD5272F2DC5002D6D9D;
 					};
 					059BACCB29DEE8A1005AEE8E = {
@@ -609,6 +613,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0586920729DEEED800F19144 /* IronlogUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -897,6 +902,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 21;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -912,6 +918,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				TEST_TARGET_NAME = Ironlog;
@@ -922,6 +929,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 21;
 				GENERATE_INFOPLIST_FILE = YES;
