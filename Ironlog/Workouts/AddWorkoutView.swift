@@ -44,6 +44,7 @@ struct AddWorkoutView: View {
                         Text("Select Lift").tag(Optional<Lift>(nil))
                         ForEach(lifts) { lift in
                             Text(lift.name ?? "").tag(lift as Lift?)
+                                .accessibilityLabel(Text(lift.name ?? "lift options"))
                         }
                     }
                 }
